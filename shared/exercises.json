@@ -34,7 +34,10 @@
    "id": "slalom",
    "title": "Slalom-estafette",
    "cat": "Dribbelen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "pionnenbos",
@@ -46,7 +49,10 @@
    "id": "tijdrace",
    "title": "Tijdrace",
    "cat": "Dribbelen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "fruitsalade",
@@ -70,19 +76,28 @@
    "id": "tweetallen",
    "title": "Passen in tweetallen",
    "cat": "Passen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "driehoek",
    "title": "Driehoekpass",
    "cat": "Passen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "sternpassen",
    "title": "Sterpassen",
    "cat": "Passen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "aanspeelstations",
@@ -100,7 +115,10 @@
    "id": "dribbel-schiet",
    "title": "Dribbel en schiet",
    "cat": "Schieten",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "lunapark",
@@ -130,13 +148,19 @@
    "id": "carrousel",
    "title": "Carrousel",
    "cat": "Schieten",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "penaltyspel",
    "title": "Penaltyspel",
    "cat": "Schieten",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "koning-vak",
@@ -148,7 +172,10 @@
    "id": "uitdagen-finten",
    "title": "Uitdagen met schijnbeweging",
    "cat": "Balbeheersing",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "een-tegen-een",
@@ -196,7 +223,10 @@
    "id": "hoepelritme",
    "title": "Hoepelritme en reactiestart",
    "cat": "Snelheid & coördinatie",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   }
  ],
  "o12": [
@@ -210,7 +240,10 @@
    "id": "vierkant",
    "title": "Pass en volg in het vierkant",
    "cat": "Warming-up",
-   "phase": "Warming-up"
+   "phase": "Warming-up",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "rondo",
@@ -228,37 +261,55 @@
    "id": "minuut-passen",
    "title": "Passen in een minuut",
    "cat": "Passen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "pionnen-stick",
    "title": "Passen en stickhandling bij de pionnen",
    "cat": "Passen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "dribbel-estafette",
    "title": "Dribbelestafette",
    "cat": "Dribbelen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "hinderbaan",
    "title": "Hindernisbaan met bal",
    "cat": "Vaardigheid",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "vaardigheidsproef",
    "title": "Drie vaardigheden",
    "cat": "Vaardigheid",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "schot-beweging",
    "title": "Dribbelen, passen, schieten",
    "cat": "Schieten",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "een-een-poortjes",
@@ -270,7 +321,10 @@
    "id": "twee-een",
    "title": "2 tegen 1",
    "cat": "Omschakelen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "drie-drie",
@@ -294,7 +348,10 @@
    "id": "partij-klein",
    "title": "Kleinveldpartij 3 tegen 3",
    "cat": "Spel",
-   "phase": "Afsluiting"
+   "phase": "Afsluiting",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "koningsbal",
@@ -312,37 +369,79 @@
    "id": "keeper-muur",
    "title": "Keeper: muurballen",
    "cat": "Keeper",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "keeper-werpen",
    "title": "Keeper: vangen en werpen",
    "cat": "Keeper",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "getrokken-schot",
    "title": "Getrokken schot leren",
    "cat": "Schieten",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "schuifslag",
    "title": "Schuifslagschot op doel",
    "cat": "Schieten",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "aanname-fh-bh",
    "title": "Aannemen op forehand en backhand",
    "cat": "Passen",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "reactiestart",
    "title": "Reactiestart met bal",
    "cat": "Snelheid & coördinatie",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
+  },
+  {
+   "id": "poortjesjacht",
+   "title": "Poortjesjacht",
+   "cat": "Warming-up",
+   "phase": "Warming-up"
+  },
+  {
+   "id": "bankbal",
+   "title": "Bankbal",
+   "cat": "Spel",
+   "phase": "Afsluiting",
+   "apps": [
+    "gymzaal"
+   ]
+  },
+  {
+   "id": "schatrovers-verdedigers",
+   "title": "Schatrovers met verdedigers",
+   "cat": "Warming-up",
+   "phase": "Warming-up",
+   "apps": [
+    "gymzaal"
+   ]
   }
  ],
  "o14": [

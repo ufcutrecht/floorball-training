@@ -46,6 +46,57 @@ Alles wat op `main` komt, staat binnen een paar minuten live.
 
 Er is geen build-stap: gewone html, css en javascript.
 
+## Twee apps, één verzameling oefeningen
+
+De trainersapp en de gymzaal-app hebben een ander doel, dus niet elke oefening hoort in beide.
+De oefeningen staan maar op één plek (de programmapagina, bijvoorbeeld `gymles/` of `o12/`);
+een label bepaalt in welke app een oefening te zien is.
+
+| Label in `EX` en `shared/exercises.json` | Zichtbaar in |
+| --- | --- |
+| geen `apps` | beide apps |
+| `apps:["training"]` | alleen de trainersapp |
+| `apps:["gymzaal"]` | alleen de gymzaal-app |
+
+Het filter staat in `gymles/index.html` en `o12/index.html`, vlak voor `const CAT_ORDER`
+(`APP_ID` is `"gymzaal"` als de pagina via `gymzaal/loader.js` is geladen). De startpagina's
+tellen per app, en het overzicht toont per app alleen de oefeningen van die app (plus oefeningen
+die in die app al scores hebben). De voorbeeldles (`VB`) heeft voor de gymzaal-app een eigen
+selectie (`if(APP_ID==="gymzaal")Object.assign(VB,…)`); gebruik daar alleen oefeningen die in de
+gymzaal-app zichtbaar zijn.
+
+### Wanneer hoort een oefening in de trainersapp?
+
+Als ze past in het opleidingsplan van de club voor die leeftijd: techniek, tactiek en
+wedstrijdvormen die spelers stap voor stap beter maken. Rijen, technische herhaling en
+keeperstraining mogen hier.
+
+### Wanneer hoort een oefening in de gymzaal-app?
+
+Op basis van feedback van vakleerkrachten bewegingsonderwijs (primair onderwijs). Een gymoefening:
+
+1. **Laat iedereen tegelijk meedoen**, ook bij grote niveauverschillen. Liefst met iets dat
+   verschillen vanzelf opvangt: zelf kiezen hoe moeilijk (breed of smal poortje), een joker of
+   extra speler voor het team dat achterstaat, opschuiven naar een veldje van je eigen niveau.
+2. **Laat veel bewegen**: geen lange wachtrijen, iedereen is bijna steeds bezig.
+3. **Is vooral leuk**: een spel, een wedstrijdje of een opdracht met punten.
+4. **Verwerkt de techniek in het spel**: veel balcontacten, keuzes maken, samenspelen, mikken en
+   bewegen, zonder dat het lang een technische oefening wordt.
+5. **Past in een gymzaal met schoolmateriaal**: banken, kasten, hoepels, pionnen, sticks met twee
+   platte kanten.
+
+Past een oefening hier niet bij (estafettes in rijen, passen in vaste vormen, schiettechniek,
+keepers, wedstrijdregels van de club), geef haar dan `apps:["training"]`.
+
+### Regels
+
+- Elke nieuwe oefening krijgt bewust een label. Twijfel je, vraag het Remco.
+- Een oefening die in beide apps staat, verander je maar op één plek; beide apps zien dat meteen.
+- Het `id` blijft altijd hetzelfde, ook als je het label verandert. Scores hangen aan programma + id.
+- Pas bij een nieuw of gewijzigd label zowel `EX` in de pagina als `shared/exercises.json` aan.
+- Groep 3–6 in de gymzaal-app = programma `gymles`, groep 7–8 = programma `o12`. Een oefening
+  alleen voor groep 7–8 zet je dus in `o12/` met `apps:["gymzaal"]`.
+
 ## Belangrijke regels
 
 - **Alle programmapagina's houden dezelfde knoppen en opmaak.** Iets dat voor alle programma's

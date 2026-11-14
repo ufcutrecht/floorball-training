@@ -13,9 +13,10 @@
     home: abs("./"),
     words: { unit: "gymles", Unit: "Gymles", title: "Mijn gymles", inLabel: "In de gymles", btnLabel: "Gymles" },
     texts: ({
-      gymles: { title: "Gymles groep 3–6 · Floorball in de gymzaal", eyebrow: "Gymles · groep 3–6", h1: "Floorball in de gymzaal" },
+      gymles: { title: "Gymles groep 3–6 · Floorball in de gymzaal", eyebrow: "Gymles · groep 3–6", h1: "Floorball in de gymzaal",
+                lead: "Spel- en oefenvormen waarin iedereen tegelijk meedoet, ongeacht niveau: veel bewegen, veel balcontacten en plezier." },
       o12:    { title: "Gymles groep 7–8 · Floorball in de gymzaal", eyebrow: "Gymles · groep 7–8", h1: "Floorball in de gymzaal",
-                lead: "Twintig oefeningen voor groep 7 en 8, kinderen tot 12 jaar: veel balcontacten, korte uitleg en spelvormen met een winnaar, passend in de gymzaal. Zeven vormen komen uit Zweden en Zwitserland en zijn gemarkeerd." }
+                lead: "Spel- en oefenvormen voor groep 7 en 8 waarin iedereen tegelijk meedoet, ongeacht niveau: veel bewegen, keuzes maken, samenspelen en mikken. Een paar vormen komen uit Zweden en Zwitserland en zijn gemarkeerd." }
     })[PROGRAM] || {}
   };
   var inject = '<base href="' + abs("../" + PROGRAM + "/") + '">' +

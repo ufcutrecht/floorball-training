@@ -90,7 +90,7 @@ document.getElementById("progs").innerHTML=PROGRAMS.map(p=>p.soon
 fetch("shared/exercises.json").then(r=>r.ok?r.json():null).then(data=>{
   if(!data)return;
   document.querySelectorAll(".count[data-prog]").forEach(el=>{
-    const n=(data[el.dataset.prog]||[]).length;
+    const n=(data[el.dataset.prog]||[]).filter(e=>!e.apps||e.apps.includes("training")).length;
     if(n)el.textContent=n+(n===1?" oefening":" oefeningen");
   });
 }).catch(()=>{});
