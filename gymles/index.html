@@ -230,7 +230,13 @@ svg.hall{width:100%;height:auto;display:block}
 .mv-h{font:800 24px/1 var(--display);text-transform:uppercase;margin:8px 0 -6px;padding-top:12px;border-top:1px solid var(--line)}
 .les-actions+.mv-h{border-top:none;padding-top:0}
 .zaal-row input{width:78px}
-.presets{display:flex;flex-wrap:wrap;gap:8px;align-self:end}
+.presets{display:flex;flex-direction:column;gap:8px;flex:0 0 auto}
+.zaal-row{flex-wrap:nowrap;align-items:end}
+.zaal-steps{display:flex;flex-wrap:wrap;gap:8px 16px;flex:1 1 auto;min-width:0}
+.zaal-row .stepper button{width:40px}
+.zaal-chip{display:grid;text-align:left;line-height:1.25;border-radius:12px;padding:6px 12px}
+.zaal-chip small{font-size:13px;opacity:.8}
+@media (min-width:640px){.presets{flex-direction:row}}
 @media print{
   @page{margin:14mm}
   body{background:#fff;color:#000;padding:0}
@@ -324,7 +330,7 @@ svg.hall{width:100%;height:auto;display:block}
     </div>
     <div class="tiles" id="tiles"></div>
     <p class="note">Materiaal gaat mee van oefening naar oefening. Je ziet dus wat de zwaarste oefening tegelijk nodig heeft. Neem 2–3 reserveballen mee.</p>
-  </div><h3 class="mv-h">Veld en ombouw</h3><div class="wissel-row"><div class="stepwrap"><label for="wissel">Wisseltijd per ombouw (minuten)</label><div class="stepper"><button type="button" id="w-min" aria-label="Eén minuut minder">−</button><input id="wissel" type="number" inputmode="numeric" min="0" max="30" value="4"><button type="button" id="w-plus" aria-label="Eén minuut meer">+</button></div></div><p class="note" style="margin:0;flex:1 1 180px">Telt tussen elke twee oefeningen mee in de totale duur.</p></div><div class="wissel-row zaal-row"><div class="stepwrap"><label for="zw">Lengte zaal (m)</label><div class="stepper"><button type="button" id="zw-min" aria-label="Eén meter korter">−</button><input id="zw" type="number" inputmode="decimal" min="10" max="60" step="0.5"><button type="button" id="zw-plus" aria-label="Eén meter langer">+</button></div></div><div class="stepwrap"><label for="zh">Breedte zaal (m)</label><div class="stepper"><button type="button" id="zh-min" aria-label="Eén meter smaller">−</button><input id="zh" type="number" inputmode="decimal" min="6" max="40" step="0.5"><button type="button" id="zh-plus" aria-label="Eén meter breder">+</button></div></div><button type="button" class="linkbtn" id="zaal-reset"></button><div class="presets" id="presets" role="group" aria-label="Snelkeuze zaal"></div></div><div id="ob-body" style="display:grid;gap:16px"></div></div>
+  </div><h3 class="mv-h">Veld en ombouw</h3><div class="wissel-row"><div class="stepwrap"><label for="wissel">Wisseltijd per ombouw (minuten)</label><div class="stepper"><button type="button" id="w-min" aria-label="Eén minuut minder">−</button><input id="wissel" type="number" inputmode="numeric" min="0" max="30" value="4"><button type="button" id="w-plus" aria-label="Eén minuut meer">+</button></div></div><p class="note" style="margin:0;flex:1 1 180px">Telt tussen elke twee oefeningen mee in de totale duur.</p></div><div class="wissel-row zaal-row"><div class="zaal-steps"><div class="stepwrap"><label for="zw">Lengte zaal (m)</label><div class="stepper"><button type="button" id="zw-min" aria-label="Eén meter korter">−</button><input id="zw" type="number" inputmode="decimal" min="10" max="60" step="0.5"><button type="button" id="zw-plus" aria-label="Eén meter langer">+</button></div></div><div class="stepwrap"><label for="zh">Breedte zaal (m)</label><div class="stepper"><button type="button" id="zh-min" aria-label="Eén meter smaller">−</button><input id="zh" type="number" inputmode="decimal" min="6" max="40" step="0.5"><button type="button" id="zh-plus" aria-label="Eén meter breder">+</button></div></div></div><div class="presets" id="presets" role="group" aria-label="Snelkeuze veld"></div></div><div id="ob-body" style="display:grid;gap:16px"></div></div>
 </dialog>
 
 <dialog id="bib" aria-labelledby="bib-title">
@@ -785,7 +791,7 @@ EX.forEach(e=>e.maat=MAAT[e.id]);
 const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
 /* zaalindeling in meters, gymzaal 22 × 14 m */
-const HW=22,HH=14,SC=10,HP=16;const PRESETS=[["Gymzaal",24,14],["Sporthal",44,28]];
+const HW=22,HH=14,SC=10,HP=16;const PRESETS=(window.FB_APP&&FB_APP.id)==="gymzaal"?[["Gymzaal",24,14],["Sporthal",44,28]]:[["Kleinveld",24,14,"12 × 5"],["Grootveld",40,20,"20 × 10"]];
 let ZW=HW,ZH=HH;try{const z=JSON.parse(localStorage.getItem("fb-zaal")||"null");if(Array.isArray(z)&&z[0]>=10&&z[0]<=60&&z[1]>=6&&z[1]<=40){ZW=z[0];ZH=z[1]}}catch(e){}
 const zoneL=(w,h,extra=[])=>{const x=(HW-w)/2,y=(HH-h)/2;return{items:[{t:"zone",x,y,w,h},{t:"cone",x,y},{t:"cone",x:x+w,y},{t:"cone",x,y:y+h},{t:"cone",x:x+w,y:y+h},...extra],note:`1 vak van ${w} × ${h} m`}};
 const gridC=(k,cols)=>{const rows=Math.ceil(k/cols),cw=HW/cols,ch=HH/rows;return Array.from({length:k},(_,i)=>({cx:(i%cols+.5)*cw,cy:(Math.floor(i/cols)+.5)*ch,cw,ch}))};
@@ -1563,7 +1569,7 @@ C.hallName="zaal";
 const kitDlg=document.getElementById("ob");
 function syncZaal(){["zw","zh"].forEach((k,i)=>{const el=document.getElementById(k);if(el&&document.activeElement!==el)el.value=i?ZH:ZW});
   const r=document.getElementById("zaal-reset");if(r){r.textContent=`Standaard (${HW} × ${HH} m)`;r.hidden=ZW===HW&&ZH===HH}
-  const p=document.getElementById("presets");if(p)p.innerHTML=PRESETS.map(([l,w,h])=>`<button type="button" class="chip" data-preset="${w},${h}" aria-pressed="${ZW===w&&ZH===h}">${l} ${w} × ${h} m</button>`).join("")}
+  const p=document.getElementById("presets");if(p)p.innerHTML=PRESETS.map(([l,w,h,bd])=>`<button type="button" class="chip zaal-chip" data-preset="${w},${h}" aria-pressed="${ZW===w&&ZH===h}"><b>${l}</b><small>${w} × ${h} m</small>${bd?`<small>${bd} boarding</small>`:""}</button>`).join("")}
 function setZaal(w,hh){const c=(v,lo,hi,d)=>{v=Math.round(Number(v)*2)/2;return isFinite(v)&&v?Math.max(lo,Math.min(hi,v)):d};
   ZW=c(w,10,60,HW);ZH=c(hh,6,40,HH);try{localStorage.setItem("fb-zaal",JSON.stringify([ZW,ZH]))}catch(e){}
   syncZaal();if(obDlg.open)renderOmbouw()}
