@@ -709,9 +709,9 @@ const HALL={
     note:"halve veld: 2 startrijen bij de middenlijn, passgevers in de hoeken"}),
   "rebound":()=>({items:[GOALS[1],{t:"line",x1:26,y1:1,x2:26,y2:19},{t:"spot",x:27,y:10},{t:"spot",x:34.2,y:9.5},{t:"lbl",x:26,y:19.9,s:"schietlijn"}],
     note:"1 doel, schutters op ongeveer 10 m, screen voor de keeper"}),
-  "mikko-2":()=>({items:[GOALS[0],{t:"cone",x:19,y:1.6},{t:"cone",x:19,y:18.4},{t:"cone",x:6,y:1.6},{t:"cone",x:6,y:18.4},{t:"lbl",x:16.5,y:3.4,s:"1"},{t:"lbl",x:16.5,y:17.4,s:"2"},{t:"lbl",x:8.5,y:3.4,s:"3"},{t:"lbl",x:8.5,y:17.4,s:"5"}],note:"1 doel met keeper, rijen op de middenlijn aan beide zijkanten, aanspelers langs de boarding ter hoogte van het doel"}),
+  "mikko-2":()=>({items:[GOALS[0],{t:"cone",x:19,y:1.6},{t:"cone",x:19,y:18.4},{t:"cone",x:10,y:1.6},{t:"cone",x:10,y:18.4},{t:"lbl",x:16.5,y:3.4,s:"1"},{t:"lbl",x:16.5,y:17.4,s:"2"},{t:"lbl",x:12.5,y:3.4,s:"3"},{t:"lbl",x:12.5,y:17.4,s:"5"}],note:"1 doel met keeper, rijen op de middenlijn aan beide zijkanten, aanspelers langs de boarding halverwege de helft"}),
   "mikko-3":()=>HALL["mikko-2"](),
-  "mikko-1":()=>({items:[GOALS[0],{t:"cone",x:19,y:1.6},{t:"cone",x:19,y:18.4},{t:"cone",x:6,y:1.6},{t:"cone",x:6,y:18.4},{t:"lbl",x:16.5,y:3.4,s:"1"},{t:"lbl",x:16.5,y:17.4,s:"2"},{t:"lbl",x:8.5,y:17.4,s:"3"},{t:"lbl",x:8.5,y:3.4,s:"3"}],note:"1 doel met keeper, rijen op de middenlijn aan beide zijkanten, aanspelers langs de boarding ter hoogte van het doel"}),
+  "mikko-1":()=>({items:[GOALS[0],{t:"cone",x:19,y:1.6},{t:"cone",x:19,y:18.4},{t:"cone",x:10,y:1.6},{t:"cone",x:10,y:18.4},{t:"lbl",x:16.5,y:3.4,s:"1"},{t:"lbl",x:16.5,y:17.4,s:"2"},{t:"lbl",x:12.5,y:17.4,s:"3"},{t:"lbl",x:12.5,y:3.4,s:"3"}],note:"1 doel met keeper, rijen op de middenlijn aan beide zijkanten, aanspelers langs de boarding halverwege de helft"}),
   "twee-een":()=>({items:[...GOALS,{t:"spot",x:20,y:1.5},{t:"spot",x:20,y:18.5},{t:"lbl",x:20,y:19.9,s:"rijen"}],note:"heel veld, rijen aan beide kanten van de middenlijn"}),
   "drie-twee":()=>({items:[...GOALS,{t:"spot",x:20,y:1.5},{t:"spot",x:20,y:18.5},{t:"lbl",x:20,y:19.9,s:"wissels"}],note:"heel veld, wissels bij de middenlijn"}),
   "drie-drie":n=>{const f=Math.min(4,Math.max(1,Math.floor(n/8))),pos=[[0,0],[20,0],[0,10],[20,10]],it=[];
