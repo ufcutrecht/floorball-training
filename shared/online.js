@@ -332,8 +332,8 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
 :root[data-theme="dark"] .lesbar{background:var(--surface);color:var(--ink);border-top:1px solid var(--line)}
 :root[data-theme="dark"] .lesbar .btn{border-color:var(--ink);color:var(--ink)}
 :root[data-theme="dark"] .lesbar .btn.light{background:var(--ink);color:var(--surface)}
-@media (max-width:700px){
-  /* telefoon: alleen de onderdeel-chips blijven bovenin staan, zoeken en sterren scrollen mee */
+@media (max-width:700px),(max-height:500px) and (orientation:landscape){
+  /* telefoon (staand, of liggend met een laag scherm): alleen de onderdeel-chips blijven bovenin staan, zoeken en sterren scrollen mee */
   div.filters{display:contents}
   .filters .fchips{position:sticky;top:env(safe-area-inset-top,0px);z-index:4;background:var(--bg);padding-block:10px;box-shadow:0 1px 0 var(--line)}
   .filters .fb-tools{flex-wrap:wrap;margin-block:10px}
@@ -342,6 +342,8 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
   .fchips>*{flex:none}
   .filters .fb-tools{flex:1 1 100%;margin-left:0;flex-wrap:wrap;justify-content:flex-start;row-gap:8px}
   .filters .fb-search{max-width:none;flex:1 1 100%}
+}
+@media (max-width:700px){
   .lesbar{padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}
   body .lesbar .in{display:grid;grid-template-columns:1fr;gap:6px}
   .lesbar strong{font-size:18px}
