@@ -714,7 +714,7 @@ const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
 /* veldindeling in meters, floorballveld 40 × 20 m */
 const HW=40,HH=20,SC=7,HP=16;
-const DW=24,DH=14,PRESETS=[["Kleinveld",24,14]];let ZW=DW,ZH=DH;try{const z=JSON.parse(localStorage.getItem("o12-zaal")||"null");if(Array.isArray(z)&&z[0]>=10&&z[0]<=60&&z[1]>=6&&z[1]<=40){ZW=z[0];ZH=z[1]}}catch(e){}
+const DW=24,DH=14,PRESETS=[["Kleinveld",24,14],["Gymzaal",24,14],["Sporthal",44,28]];let ZW=DW,ZH=DH;try{const z=JSON.parse(localStorage.getItem("o12-zaal")||"null");if(Array.isArray(z)&&z[0]>=10&&z[0]<=60&&z[1]>=6&&z[1]<=40){ZW=z[0];ZH=z[1]}}catch(e){}
 const gridC=(k,cols)=>{const rows=Math.ceil(k/cols),cw=HW/cols,ch=HH/rows;return Array.from({length:k},(_,i)=>({cx:(i%cols+.5)*cw,cy:(Math.floor(i/cols)+.5)*ch,cw,ch}))};
 const r1=v=>String(Math.round(v*10)/10).replace(".",",");
 const sq=(c,z)=>{const x=c.cx-z/2,y=c.cy-z/2;return[{t:"zone",x,y,w:z,h:z},{t:"cone",x,y},{t:"cone",x:x+z,y},{t:"cone",x,y:y+z},{t:"cone",x:x+z,y:y+z}]};
