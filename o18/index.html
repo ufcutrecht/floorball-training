@@ -288,7 +288,7 @@ svg.hall{width:100%;height:auto;display:block}
     <a class="fb-home" href="../">← Terug naar startpagina</a>
     <div class="eyebrow">Jeugdtraining · 16–18 jaar</div>
     <h1>Floorball training onder 18</h1>
-    <p class="lead">Zevenentwintig oefeningen voor spelers van 16 tot 18, gericht op tempo, beslissen onder druk en samenspel.</p>
+    <p class="lead">Achtentwintig oefeningen voor spelers van 16 tot 18, gericht op tempo, beslissen onder druk en samenspel.</p>
     <button type="button" class="linkbtn" id="open-afs">Accenten voor deze leeftijd</button>
   </header>
 
@@ -664,6 +664,18 @@ const EX = [
   fig:[{t:"goal",x:278,y:90},{t:"p",x:266,y:90,team:"j"},{t:"p",x:150,y:152,ball:1},{t:"p",x:266,y:148},{t:"p",x:286,y:154},{t:"p",x:258,y:114,team:"b"},
    {t:"a",k:"pass",d:"M158 152 L254 148"},{t:"a",k:"run",d:"M256 120 Q236 140 214 134"},{t:"a",k:"dribble",d:"M258 142 Q214 136 196 116"},{t:"a",k:"dribble",d:"M194 116 Q196 94 222 88"},{t:"a",k:"shot",d:"M228 88 L262 88"},
    {t:"txt",x:8,y:14,s:"max. 8 seconden"},{t:"txt",x:146,y:140,s:"T"}]},
+ {id:"een-een-schot",cat:"Balvoering",title:"1 tegen 1 met schot op goal",int:"hoog",min:12,kids:"rij aanvallers + verdediger + keeper",
+  mat:["stick per speler","bal per aanvaller","1 doel met keeper","4 pionnen","hesje voor de verdediger"],
+  doel:"Een verdediger passeren met een actie en daarna direct afronden op doel.",
+  stappen:["Speel op een kleinveld of half veld met doel en keeper. Zet op ongeveer 8 meter voor het doel met 4 pionnen een vak van 4 bij 4 meter uit. Daarin staat een verdediger.","De aanvallers staan in een rij op ongeveer 15 meter van het doel, iedereen met een bal.","De voorste aanvaller dribbelt op het vak af en gaat er dwars doorheen. Met een actie passeert hij de verdediger: een schijnbeweging, tempowissel of draai. De verdediger mag het vak niet uit.","Voorbij het vak schiet de aanvaller meteen op doel.","Daarna wordt de aanvaller verdediger en sluit de verdediger achter in de rij aan."],
+  tips:["Ga er met tempo op af, vertraag vlak voor de verdediger en versnel erlangs.","Houd je lichaam tussen verdediger en bal en kijk na het passeren meteen naar het doel.","Verdediger: stick laag, voeten bewegen en niet slaan."],
+  makkelijker:["Groter vak.","De verdediger zet alleen zijn stick neer en loopt niet mee."],
+  moeilijker:["Kleiner vak.","Na het passeren mag de verdediger het vak uit en terugjagen tot het schot."],
+  fig:[{t:"zone",x:168,y:70,w:40,h:40},{t:"cone",x:168,y:70},{t:"cone",x:208,y:70},{t:"cone",x:168,y:110},{t:"cone",x:208,y:110},
+   {t:"goal",x:278,y:90},{t:"p",x:266,y:90,team:"j"},{t:"p",x:188,y:90,team:"b"},
+   {t:"p",x:60,y:90,ball:1},{t:"p",x:42,y:90},{t:"p",x:24,y:90},
+   {t:"a",k:"dribble",d:"M68 90 Q110 92 158 92"},{t:"a",k:"run",d:"M188 90 L186 100"},{t:"a",k:"dribble",d:"M162 92 Q172 112 196 106 Q214 98 222 92"},{t:"a",k:"shot",d:"M226 90 L262 90"},
+   {t:"txt",x:8,y:14,s:"de verdediger blijft in het vak"},{t:"txt",x:170,y:62,s:"4 × 4 m"}]},
  {id:"sprint-bal",cat:"Snelheid & coördinatie",title:"Sprints met stick en bal",int:"zeer hoog, kort",min:12,kids:"2 rijen + keeper",
   mat:["stick per speler","bal per speler","1 doel met keeper"],
   doel:"Korte, maximale sprints met de bal en een afronding, met volledige rust ertussen.",
@@ -685,6 +697,7 @@ const PH_LABEL={warm:"Warming-up",kern:"Kern",partij:"Afsluiting"};
 
 /* materiaal per oefening, afhankelijk van aantal spelers n */
 const NEED={
+  "een-een-schot":n=>{const f=n>=12?2:1;return{stick:n,bal:Math.max(10,n),doel:f,pion:4*f,hesje:f}},
   "forechecking":n=>({stick:n,bal:10,doel:1,hesje:3}),
   "hoek-een-een":n=>({stick:n,bal:Math.max(12,n),doel:1,hesje:Math.ceil(n/2)}),
   "sprint-bal":n=>({stick:n,bal:Math.max(12,n),doel:1}),
@@ -718,7 +731,7 @@ let N=16;
 try{const v=parseInt(localStorage.getItem("u18-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
-const MAAT={"forechecking":"20 × 20 m","hoek-een-een":"20 × 20 m","sprint-bal":"20 × 20 m","keeper-rondspelen":"boog op 6–9 m","keeper-achter-doel":"half veld, ruimte achter het doel","keeper-rebound":"4–5 m voor het doel","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","draai-180":"40 × 20 m","halve-cirkel":"20 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m"};
+const MAAT={"een-een-schot":"20 × 20 m, vak 4 × 4 m","forechecking":"20 × 20 m","hoek-een-een":"20 × 20 m","sprint-bal":"20 × 20 m","keeper-rondspelen":"boog op 6–9 m","keeper-achter-doel":"half veld, ruimte achter het doel","keeper-rebound":"4–5 m voor het doel","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","draai-180":"40 × 20 m","halve-cirkel":"20 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m"};
 EX.forEach(e=>e.maat=MAAT[e.id]);
 const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
@@ -730,6 +743,9 @@ const r1=v=>String(Math.round(v*10)/10).replace(".",",");
 const sq=(c,z)=>{const x=c.cx-z/2,y=c.cy-z/2;return[{t:"zone",x,y,w:z,h:z},{t:"cone",x,y},{t:"cone",x:x+z,y},{t:"cone",x,y:y+z},{t:"cone",x:x+z,y:y+z}]};
 const GOALS=[{t:"goal",x:3.5,y:10,side:"l"},{t:"goal",x:36.5,y:10,side:"r"}];
 const HALL={
+  "een-een-schot":n=>{const f=n>=12?2:1,it=[];
+    [1,-1].slice(0,f).forEach(s=>{const bx=s>0?26.5:9.5;it.push(s>0?GOALS[1]:GOALS[0],{t:"zone",x:bx,y:8,w:4,h:4},{t:"cone",x:bx,y:8},{t:"cone",x:bx+4,y:8},{t:"cone",x:bx,y:12},{t:"cone",x:bx+4,y:12},{t:"spot",x:s>0?21.5:18.5,y:10},{t:"lbl",x:bx+2,y:7.2,s:"verdediger"})});
+    return{items:it,note:`${f===1?"halve veld":"beide helften"}: vak van 4 × 4 m op ongeveer 8 m voor het doel, rij aanvallers op 15 m`}},
   "forechecking":()=>({items:[GOALS[0],{t:"line",x1:20,y1:1,x2:20,y2:19},{t:"spot",x:4.5,y:17},{t:"spot",x:4.5,y:3},{t:"spot",x:10,y:10},{t:"spot",x:13,y:14},{t:"spot",x:15,y:18},{t:"spot",x:16,y:8},{t:"lbl",x:20,y:19.9,s:"middenlijn"}],
     note:"halve veld met doel en keeper; opbouwers starten bij het eigen doel, over de middenlijn is een punt"}),
   "hoek-een-een":()=>({items:[GOALS[1],{t:"spot",x:38.4,y:18.4},{t:"spot",x:35.5,y:12.5},{t:"spot",x:22,y:18.5},{t:"lbl",x:36,y:19.9,s:"aanvallers"},{t:"lbl",x:22,y:17.2,s:"trainer"}],
@@ -865,6 +881,7 @@ function setN(v){v=Math.max(4,Math.min(40,v||0));N=v;try{localStorage.setItem("u
 
 /* animatie per pijl, in volgorde van de pijlen in de tekening: starttijd in seconden */
 const ANIM={
+  "een-een-schot":[{at:0},{at:1.6},{at:2.2},{at:4.4}],
   "forechecking":[{at:0},{at:.4},{at:.6}],
   "hoek-een-een":[{at:0},{at:.9},{at:.8},{at:3},{at:5.2}],
   "sprint-bal":[{at:0},{at:2.3}],
@@ -895,6 +912,7 @@ const ANIM={
 };
 /* vervolgacties: alleen in de animatie, zodat de oefening doorloopt zonder de tekening vol te zetten */
 const EXTRA={
+  "een-een-schot":[["run","M222 94 Q206 96 192 92",5.2],["run","M186 100 Q120 140 18 100",5.2]],
   "rondo":[["pass","M144 144 L96 97",2],["run","M162 104 L118 96",2.2],["pass","M96 82 L144 37",3],["run","M160 100 Q150 72 146 58",3.2],["pass","M157 36 L203 83",4.1],["pass","M203 97 L157 143",5.1]],
   "vierkant":[["pass","M232 56 L232 136",2.2],["run","M240 54 Q252 100 240 138",2.4],["pass","M222 146 L78 146",3.4],["run","M226 154 Q150 168 80 156",3.6]],
   "schot-beweging":[["run","M186 98 Q120 70 40 120",5],["dribble","M34 150 Q90 166 118 150 Q132 134 148 126",4.4],["pass","M152 128 L240 148",6.7],["run","M152 122 L185 108",6.8],["pass","M242 146 L190 114",7.6],["shot","M190 106 L268 94",8.5]],

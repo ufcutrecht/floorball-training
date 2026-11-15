@@ -578,6 +578,12 @@
    "phase": "Kern"
   },
   {
+   "id": "een-een-schot",
+   "title": "1 tegen 1 met schot op goal",
+   "cat": "Duels",
+   "phase": "Kern"
+  },
+  {
    "id": "ladder-sprint",
    "title": "Voetenwerk en wegsprinten",
    "cat": "Snelheid & coördinatie",
@@ -738,6 +744,12 @@
   {
    "id": "hoek-een-een",
    "title": "1 tegen 1 uit de hoek",
+   "cat": "Balvoering",
+   "phase": "Kern"
+  },
+  {
+   "id": "een-een-schot",
+   "title": "1 tegen 1 met schot op goal",
    "cat": "Balvoering",
    "phase": "Kern"
   },
