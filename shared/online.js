@@ -333,8 +333,11 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
 :root[data-theme="dark"] .lesbar .btn{border-color:var(--ink);color:var(--ink)}
 :root[data-theme="dark"] .lesbar .btn.light{background:var(--ink);color:var(--surface)}
 @media (max-width:700px){
-  .filters{flex-wrap:wrap;row-gap:8px}
-  .fchips{display:flex;gap:8px;flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding-inline:16px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+  /* telefoon: alleen de onderdeel-chips blijven bovenin staan, zoeken en sterren scrollen mee */
+  div.filters{display:contents}
+  .filters .fchips{position:sticky;top:env(safe-area-inset-top,0px);z-index:4;background:var(--bg);padding-block:10px;box-shadow:0 1px 0 var(--line)}
+  .filters .fb-tools{flex-wrap:wrap;margin-block:10px}
+  .fchips{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding-inline:16px;scrollbar-width:none}
   .fchips::-webkit-scrollbar{display:none}
   .fchips>*{flex:none}
   .filters .fb-tools{flex:1 1 100%;margin-left:0;flex-wrap:wrap;justify-content:flex-start;row-gap:8px}
