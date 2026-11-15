@@ -14,9 +14,9 @@
     words: { unit: "gymles", Unit: "Gymles", title: "Mijn gymles", inLabel: "In de gymles", btnLabel: "Gymles" },
     texts: ({
       gymles: { title: "Gymles groep 3–6 · Floorball in de gymzaal", eyebrow: "Gymles · groep 3–6", h1: "Floorball in de gymzaal",
-                lead: "Spel- en oefenvormen waarin iedereen tegelijk meedoet, ongeacht niveau: veel bewegen, veel balcontacten en plezier." },
+                lead: "Spel- en oefenvormen waarin iedereen tegelijk meedoet, ongeacht niveau: veel bewegen, veel balcontacten en plezier. Accent op deze leeftijd (6–9 jaar): veel verschillende bewegingen leren, voordoen – nadoen en veel succeservaringen." },
       o12:    { title: "Gymles groep 7–8 · Floorball in de gymzaal", eyebrow: "Gymles · groep 7–8", h1: "Floorball in de gymzaal",
-                lead: "Spel- en oefenvormen voor groep 7 en 8 waarin iedereen tegelijk meedoet, ongeacht niveau: veel bewegen, keuzes maken, samenspelen en mikken. Een paar vormen komen uit Zweden en Zwitserland en zijn gemarkeerd." }
+                lead: "Spel- en oefenvormen voor groep 7 en 8 waarin iedereen tegelijk meedoet, ongeacht niveau: veel bewegen, keuzes maken, samenspelen en mikken. Accent op deze leeftijd (9–12 jaar): de basistechniek goed aanleren en samenspelen als team." }
     })[PROGRAM] || {}
   };
   var inject = '<base href="' + abs("../" + PROGRAM + "/") + '">' +

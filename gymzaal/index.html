@@ -53,6 +53,15 @@ a.prog:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .about p{margin:0;max-width:68ch}
 .about ul{margin:0;padding-left:1.2em;max-width:68ch;display:grid;gap:2px}
 .about a{color:var(--accent);font-weight:700}
+.ages{margin-top:28px;display:grid;gap:12px}
+.ages>h2{font:800 clamp(24px,3.2vw,30px)/1 var(--display);text-transform:uppercase;margin:0}
+.ages .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:560px){.ages .cols{grid-template-columns:1fr}}
+.age-card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:12px;padding:16px;display:grid;gap:6px;align-content:start}
+.age-card .age{font:800 15px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.age-card h3{font:800 clamp(22px,3vw,28px)/1 var(--display);text-transform:uppercase;margin:0}
+.age-card ul{margin:0;padding-left:1.2em;display:grid;gap:4px;font-size:15px}
+.age-card .key{margin:4px 0 0;font-weight:700}
 footer{margin-top:28px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:8px 18px}
 footer a{color:var(--muted)}
 #install{display:none;font:inherit;font-weight:700;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:8px;padding:8px 14px;cursor:pointer;justify-self:start}
@@ -69,6 +78,35 @@ footer a{color:var(--muted)}
     <button type="button" id="install">Zet op je beginscherm</button>
   </header>
   <div class="grid" id="progs"></div>
+  <section class="ages" aria-labelledby="ages-h">
+    <h2 id="ages-h">Accenten per leeftijd</h2>
+    <div class="cols">
+      <div class="age-card" style="--c:#2f6fdb">
+        <span class="age">Groep 3–6 · 6 tot 9 jaar</span>
+        <h3>Spelenderwijs bewegen</h3>
+        <ul>
+          <li>Ideale leeftijd om veel verschillende bewegingen te leren. Jongens en meisjes ontwikkelen zich hierin gelijk.</li>
+          <li>Leg weinig uit, doe het voor: voordoen – nadoen, met eenvoudige opdrachten.</li>
+          <li>Bewegingen zitten er nog niet vast: herhaal veel, steeds in een andere, speelse vorm.</li>
+          <li>Teamspelletjes kunnen al, maar kinderen zijn vooral met zichzelf en de bal bezig.</li>
+          <li>Zorg voor veel succeservaringen: dat legt de basis voor een leven lang sporten.</li>
+        </ul>
+        <p class="key">Kern: veelzijdig bewegen, floorball als één van vele sporten.</p>
+      </div>
+      <div class="age-card" style="--c:#b8325a">
+        <span class="age">Groep 7–8 · 9 tot 12 jaar</span>
+        <h3>Basistechniek leren</h3>
+        <ul>
+          <li>Uitstekende leerleeftijd: met gevarieerd, doelgericht oefenen leren kinderen de basistechnieken van floorball.</li>
+          <li>Let vanaf het begin op een goede uitvoering: een verkeerd aangeleerde beweging afleren is moeilijker dan een nieuwe leren.</li>
+          <li>Breid het bewegingsrepertoire breed uit.</li>
+          <li>Kinderen willen bij de groep horen: samenspelen en teamgevoel worden belangrijk.</li>
+          <li>Ze kijken kritischer naar de leerkracht en verwachten een eerlijke beoordeling.</li>
+        </ul>
+        <p class="key">Kern: ideale leeftijd om de basistechniek aan te leren.</p>
+      </div>
+    </div>
+  </section>
   <section class="about" aria-labelledby="about-h">
     <h2 id="about-h">Waarom deze oefeningen?</h2>
     <p>In deze app staan spel- en oefenvormen waar alle kinderen aan mee kunnen doen, ongeacht hun beweegniveau. Ze bewegen veel, raken vaak de bal en hebben vooral plezier. De techniek leren ze spelenderwijs: door te passen, te mikken, samen te spelen en keuzes te maken. Lange technische oefeningen hebben we bewust weggelaten.</p>

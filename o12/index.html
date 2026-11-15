@@ -515,7 +515,7 @@ const EX = [
    {t:"txt",x:8,y:14,s:"rood scoort onder, blauw boven"},{t:"txt",x:8,y:176,s:"tweede duo wacht"}]},
  {id:"twee-twee-dwars",bron:"uit Zweden",cat:"Partijvorm",title:"2 tegen 2 dwars over het veld",int:"hoog",min:12,kids:"teams van 2",
   mat:["stick per speler","ballen bij elk veldje","2 kleine doeltjes per veldje","hesjes"],
-  doel:"Veel balcontacten en samenspelen in kleine teams, zoals de Zweedse bond voor deze leeftijd aanraadt.",
+  doel:"Veel balcontacten en samenspelen in kleine teams, zoals past bij deze leeftijd.",
   stappen:["Verdeel het veld dwars in smalle veldjes met elk twee kleine doeltjes zonder keeper.","Speel 2 tegen 2. Een doelpunt telt alleen als beide spelers de bal hebben geraakt.","Wissel na 2 minuten van tegenstander: winnaars schuiven een veldje op.","Iedereen speelt even lang en speelt een keer voorin en achterin."],
   tips:["Zonder bal: loop vrij, zodat je medespeler je kan aanspelen.","Bal kwijt? Allebei terug naar je eigen doeltje."],
   makkelijker:["Doelpunt telt ook zonder pass.","Grotere doeltjes."],
@@ -661,6 +661,8 @@ const EX = [
    ["gymzaal"] = alleen gymzaal-app. Spelregels voor de keuze staan in CLAUDE.md. */
 const APP_ID=(window.FB_APP&&FB_APP.id)||"training";
 for(let i=EX.length-1;i>=0;i--)if(EX[i].apps&&!EX[i].apps.includes(APP_ID))EX.splice(i,1);
+/* In de gymzaal-app geen herkomst (land) bij de oefeningen. */
+if(APP_ID==="gymzaal")EX.forEach(e=>{delete e.bron});
 const CAT_ORDER=["Warming-up","Snelheid & coördinatie","Dribbelen","Passen","Vaardigheid","Schieten","Keeper","Duels","Omschakelen","Partijvorm","Spel"];
 EX.sort((a,b)=>CAT_ORDER.indexOf(a.cat)-CAT_ORDER.indexOf(b.cat));
 const CATS=["Alles",...new Set(EX.map(e=>e.cat))];
