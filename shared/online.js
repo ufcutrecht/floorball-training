@@ -301,7 +301,8 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
 .fb-search input{font:inherit;font-size:15px;border:none;outline:none;background:none;color:var(--ink);padding:6px 4px;width:100%;min-width:0}
 header.fb-has-logo{position:relative}
 header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,110px);text-align:left}
-.fb-logo-a{position:absolute;top:18px;right:0}
+.fb-logo-a{position:absolute;top:18px;right:0;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:var(--ink)}
+.fb-logo-label{font:800 clamp(14px,3vw,18px)/1 var(--display,inherit);text-transform:uppercase;letter-spacing:.08em}
 .fb-logo{display:block;width:auto;height:clamp(84px,19vw,130px)}
 @media print{.fb-form,.fb-rate,.fb-dlg-rate,.fb-home,.fb-search{display:none!important}.fb-logo{height:70px}}
 /* UI-herziening nov 2026: rustiger kaarten, compacte balken op mobiel, grotere tikvlakken */
@@ -370,10 +371,10 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
       }
       head.querySelectorAll(".fb-home").forEach(a => a.remove());
       if (APP.home) head.insertAdjacentHTML("afterbegin", `<a class="fb-home" href="${APP.home}">← Terug naar startpagina</a>`);
-      if (!head.querySelector(".fb-logo")) { head.classList.add("fb-has-logo"); head.insertAdjacentHTML("afterbegin", `<a href="${APP.home || "#"}" class="fb-logo-a" aria-label="Naar de startpagina"><img class="fb-logo" src="${APP.logo}" alt="${esc(APP.logoAlt || "")}"></a>`); }
+      if (!head.querySelector(".fb-logo")) { head.classList.add("fb-has-logo"); head.insertAdjacentHTML("afterbegin", `<a href="${APP.home || "#"}" class="fb-logo-a" aria-label="Naar de startpagina"><img class="fb-logo" src="${APP.logo}" alt="${esc(APP.logoAlt || "")}"><span class="fb-logo-label">${esc(APP.logoLabel || "training")}</span></a>`); }
     }
     if (HOSTED && !APP && head && !head.querySelector(".fb-home")) head.insertAdjacentHTML("afterbegin", `<a class="fb-home" href="../">← Terug naar startpagina</a>`);
-    if (HOSTED && !APP && head && !head.querySelector(".fb-logo")) { head.classList.add("fb-has-logo"); head.insertAdjacentHTML("afterbegin", `<a href="../" class="fb-logo-a" aria-label="Naar de startpagina"><img class="fb-logo" src="../icons/ufc-logo.png" alt="UFC Utrecht" width="155" height="224"></a>`); }
+    if (HOSTED && !APP && head && !head.querySelector(".fb-logo")) { head.classList.add("fb-has-logo"); head.insertAdjacentHTML("afterbegin", `<a href="../" class="fb-logo-a" aria-label="Naar de startpagina"><img class="fb-logo" src="../icons/ufc-logo.png" alt="UFC Utrecht" width="155" height="224"><span class="fb-logo-label">training</span></a>`); }
     decorate();
     const mo = new MutationObserver(decorate);
     ["grid", "dlg-body", "filters"].forEach(id => { const el = document.getElementById(id); if (el) mo.observe(el, { childList: true }); });

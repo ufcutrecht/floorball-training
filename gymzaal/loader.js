@@ -10,6 +10,8 @@
     id: "gymzaal",
     logo: abs("../icons/ufc-logo.png"),
     logoAlt: "UFC Utrecht",
+    logoLabel: "gymles",                                             // tekst onder het logo
+    appName: "Floorball gymles",                                     // naam op het beginscherm
     home: abs("./"),
     words: { unit: "gymles", Unit: "Gymles", title: "Mijn gymles", inLabel: "In de gymles", btnLabel: "Gymles" },
     texts: ({
@@ -26,6 +28,7 @@
     .then(function (html) {
       html = html
         .replace(/<head>/i, "<head>" + inject)
+        .replace('content="Floorball training"', 'content="' + APP.appName + '"')
         .replace('href="../manifest.webmanifest"', 'href="' + abs("manifest.webmanifest") + '"')
         .replace('href="../icons/icon-192.png"', 'href="' + abs("../icons/icon-192.png") + '"')
         .replace('href="../icons/apple-touch-icon.png"', 'href="' + abs("../icons/apple-touch-icon.png") + '"');
