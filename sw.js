@@ -1,14 +1,14 @@
 /* Offline-app: eerst het netwerk (zodat iedereen de nieuwste versie krijgt), anders de bewaarde kopie. */
-const CACHE = "floorball-v41";
-const CORE = ["./", "index.html", "manifest.webmanifest", "o18/", "gymles/", "gymles/index.html", "gymzaal/", "gymzaal/manifest.webmanifest", "gymzaal/loader.js", "gymzaal/gymles/", "gymzaal/o12/", "o12/index.html", "icons/ufc-logo.png", "icons/gymles-192.png", "o12/", "o14/", "overzicht/",
+const CACHE = "floorball-v42";
+const CORE = ["./", "index.html", "manifest.webmanifest", "o18/", "gymles/", "gymles/index.html", "o12/index.html", "icons/ufc-logo.png", "o12/", "o14/", "overzicht/",
   "shared/shim.js", "shared/config.js", "shared/online.js", "shared/exercises.json",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
 });
-self.addEventListener("activate", e => {
-  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+self.addEventListener("activate", e => {   // alleen eigen caches opruimen; de gymles-app (floorball-gymles) deelt hetzelfde domein
+  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith("floorball-") && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 self.addEventListener("fetch", e => {
   const req = e.request, url = new URL(req.url);

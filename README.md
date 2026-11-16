@@ -2,7 +2,9 @@
 
 Floorball-oefeningen met animaties voor trainers en leerkrachten. Kies een programma, stel een training samen, print hem als pdf en geef oefeningen een score van 1 tot 5 sterren.
 
-Open de app: **https://remcovoort.github.io/floorball-training/**
+Open de app: **https://ufcutrecht.github.io/floorball-training/**
+
+De gymles-app voor leerkrachten (groep 3–8) staat in [ufcutrecht/floorball-gymles](https://github.com/ufcutrecht/floorball-gymles) en gebruikt de oefeningen uit deze repository: **https://ufcutrecht.github.io/floorball-gymles/**
 
 ## Programma's
 
@@ -18,7 +20,7 @@ Een nieuw programma toevoegen: maak een map met de pagina en zet een regel bij `
 
 - Sterren en keuzes gaan naar Supabase. De instellingen staan in `shared/config.js`.
 - De database maak je aan met `supabase/setup.sql` (SQL Editor in Supabase).
-- Het overzicht met per oefening de gemiddelde score, het aantal stemmen en hoe vaak hij is gekozen staat op `overzicht/`. Je kunt daar kiezen tussen alle apps, de trainersapp en de gymzaal-app (kolom `app` in Supabase; scores van vóór 14 november 2026 tellen bij de trainersapp).
+- Het overzicht met per oefening de gemiddelde score, het aantal stemmen en hoe vaak hij is gekozen staat op `overzicht/`. Je kunt daar kiezen tussen alle apps, de trainersapp en de gymles-app (kolom `app` in Supabase; scores van vóór 14 november 2026 tellen bij de trainersapp).
 - Elk apparaat telt één keer per oefening. Opnieuw scoren vervangt de oude score.
 
 ## Overig

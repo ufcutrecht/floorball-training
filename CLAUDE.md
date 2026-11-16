@@ -1,7 +1,7 @@
 # Floorball training — werkafspraken voor Claude
 
 Floorball-oefeningen met animaties voor trainers en leerkrachten. Live op
-https://remcovoort.github.io/floorball-training/ (GitHub Pages, branch `main`, map root).
+https://ufcutrecht.github.io/floorball-training/ (GitHub Pages, branch `main`, map root).
 Alles wat op `main` komt, staat binnen een paar minuten live.
 
 ## Zo werk je in dit repository
@@ -34,21 +34,21 @@ Alles wat op `main` komt, staat binnen een paar minuten live.
 | --- | --- |
 | `index.html` | Startpagina. Programma's staan in de lijst `PROGRAMS`. |
 | `gymles/`, `o12/`, `o14/`, `o18/` | Eén programma per map, elk één groot `index.html` met de oefeningen in `const EX = [...]`. |
-| `gymzaal/` | Losse app "Floorball in de gymzaal" met eigen startpagina (`gymzaal/index.html`, lijst `PROGRAMS`) en de programma's Gymles en O12. `gymzaal/<programma>/` laadt via `gymzaal/loader.js` de pagina van dat programma uit de training-app in, met het UFC Utrecht-logo (`icons/ufc-logo.png`) en eigen app-iconen met het UFC-logo en het woord "GYMLES" eronder (`icons/gymles-*.png`), eigen manifest en zonder terugknop. Onder het logo staat "gymles" (trainersapp: "training"); op het beginscherm heet de app "Floorball gymles" (trainersapp: "Floorball training"), via de manifesten en `apple-mobile-web-app-title`. De startpagina verwijst kinderen die meer willen naar UFC Utrecht (ufcutrecht.nl); geen NeFUB-logo of -verwijzing meer. Bevat zelf geen oefeningen; wijzig die altijd in `gymles/` of `o12/`. Programma toevoegen: map `gymzaal/<id>/` met dezelfde laadpagina, regel in `PROGRAMS` en in `CORE` van `sw.js`. In de hoofdapp heet dit programma O10; de gymzaal-app gebruikt overal "gymles" in plaats van "training" en eigen kopteksten (instellingen in `gymzaal/loader.js`, toegepast via `FB_APP.words` in de pagina's en `shared/online.js`). De map en de programma-id blijven `gymles`, anders zijn scores en opgeslagen lessen weg. |
+| `gymzaal/` | Alleen doorverwijzingen naar de gymles-app op het nieuwe adres. De gymles-app ("Floorball gymles", groep 3–6 = programma `gymles`, groep 7–8 = `o12`) staat in de eigen repository **`ufcutrecht/floorball-gymles`** (https://ufcutrecht.github.io/floorball-gymles/). Die bevat geen oefeningen: haar `loader.js` laadt de programmapagina's uit deze repository in (`../floorball-training/<programma>/`), met `window.FB_APP` (id `"gymzaal"`, logo, tekst "gymles" onder het logo, woorden, kopteksten, eigen manifest, iconen en service worker). Oefeningen voor de gymles-app wijzig je dus hier, in `gymles/` of `o12/`. In de hoofdapp heet het programma `gymles` O10; map en programma-id blijven `gymles`, anders zijn scores en opgeslagen lessen weg. Wijzig je iets in `shared/online.js` of de programmapagina's, test dan ook de gymles-app (beide repositories naast elkaar in één map serveren). |
 | `overzicht/` | Scores en toelichtingen van alle gebruikers, uit Supabase. |
 | `shared/online.js` | Gedeeld voor alle programmapagina's: sterren, toelichting, zoeken, sterrenfilter, logo, terug-knop, service worker. |
 | `shared/shim.js` | Pdf opslaan in de browser (vervangt de Claude-artifactfunctie). |
 | `shared/config.js` | Supabase-adres en publishable key (mag openbaar). |
 | `shared/exercises.json` | Lijst van alle oefeningen per programma (id, titel, onderdeel, fase). Gebruikt door de startpagina en het overzicht. |
 | `supabase/setup.sql` | Database-opzet voor scores. |
-| `sw.js`, `manifest.webmanifest` | Offline-app en "zet op beginscherm". |
-| `icons/` | App-iconen: UFC-logo met "TRAINING" (`icon-*.png`, `apple-touch-icon.png`, trainersapp) of "GYMLES" (`gymles-*.png`, gymzaal-app) eronder en het UFC Utrecht-logo (`ufc-logo.png`). |
+| `sw.js`, `manifest.webmanifest` | Offline-app en "zet op beginscherm". `sw.js` ruimt alleen eigen caches (`floorball-…`) op, want de gymles-app gebruikt hetzelfde domein. |
+| `icons/` | App-iconen met het UFC-logo en "TRAINING" eronder (`icon-*.png`, `apple-touch-icon.png`) en het UFC Utrecht-logo (`ufc-logo.png`). De gymles-iconen staan in `floorball-gymles`. |
 
 Er is geen build-stap: gewone html, css en javascript.
 
 ## Twee apps, één verzameling oefeningen
 
-De trainersapp en de gymzaal-app hebben een ander doel, dus niet elke oefening hoort in beide.
+De trainersapp en de gymles-app (app-id en label `gymzaal`) hebben een ander doel, dus niet elke oefening hoort in beide.
 De oefeningen staan maar op één plek (de programmapagina, bijvoorbeeld `gymles/` of `o12/`);
 een label bepaalt in welke app een oefening te zien is.
 
@@ -56,14 +56,14 @@ een label bepaalt in welke app een oefening te zien is.
 | --- | --- |
 | geen `apps` | beide apps |
 | `apps:["training"]` | alleen de trainersapp |
-| `apps:["gymzaal"]` | alleen de gymzaal-app |
+| `apps:["gymzaal"]` | alleen de gymles-app |
 
 Het filter staat in `gymles/index.html` en `o12/index.html`, vlak voor `const CAT_ORDER`
-(`APP_ID` is `"gymzaal"` als de pagina via `gymzaal/loader.js` is geladen). De startpagina's
+(`APP_ID` is `"gymzaal"` als de pagina via de gymles-app, `floorball-gymles/loader.js`, is geladen). De startpagina's
 tellen per app, en het overzicht toont per app alleen de oefeningen van die app (plus oefeningen
-die in die app al scores hebben). De voorbeeldles (`VB`) heeft voor de gymzaal-app een eigen
+die in die app al scores hebben). De voorbeeldles (`VB`) heeft voor de gymles-app een eigen
 selectie (`if(APP_ID==="gymzaal")Object.assign(VB,…)`); gebruik daar alleen oefeningen die in de
-gymzaal-app zichtbaar zijn.
+gymles-app zichtbaar zijn.
 
 ### Wanneer hoort een oefening in de trainersapp?
 
@@ -71,7 +71,7 @@ Als ze past in het opleidingsplan van de club voor die leeftijd: techniek, tacti
 wedstrijdvormen die spelers stap voor stap beter maken. Rijen, technische herhaling en
 keeperstraining mogen hier.
 
-### Wanneer hoort een oefening in de gymzaal-app?
+### Wanneer hoort een oefening in de gymles-app?
 
 Op basis van feedback van vakleerkrachten bewegingsonderwijs (primair onderwijs). Een gymoefening:
 
@@ -94,7 +94,7 @@ keepers, wedstrijdregels van de club), geef haar dan `apps:["training"]`.
 - Een oefening die in beide apps staat, verander je maar op één plek; beide apps zien dat meteen.
 - Het `id` blijft altijd hetzelfde, ook als je het label verandert. Scores hangen aan programma + id.
 - Pas bij een nieuw of gewijzigd label zowel `EX` in de pagina als `shared/exercises.json` aan.
-- Groep 3–6 in de gymzaal-app = programma `gymles`, groep 7–8 = programma `o12`. Een oefening
+- Groep 3–6 in de gymles-app = programma `gymles`, groep 7–8 = programma `o12`. Een oefening
   alleen voor groep 7–8 zet je dus in `o12/` met `apps:["gymzaal"]`.
 
 ## Belangrijke regels

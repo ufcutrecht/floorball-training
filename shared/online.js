@@ -7,7 +7,7 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
    - link terug naar het startscherm en de offline-app (service worker) */
 (function () {
   const PROGRAM = window.FB_PROGRAM;
-  /* Uit welke app: de gymzaal-app (gymzaal/loader.js) zet FB_APP.id = "gymzaal"; anders de trainersapp. */
+  /* Uit welke app: de gymles-app (repository floorball-gymles, loader.js) zet FB_APP.id = "gymzaal"; anders de trainersapp. */
   const APP = (window.FB_APP && window.FB_APP.id) || "training";
   const withApp = b => (APP === "training" ? b : Object.assign(b, { p_app: APP }));
   const CFG = window.FB_CONFIG || {};
@@ -358,7 +358,7 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
 
   function start() {
     const head = document.querySelector("header");
-    /* Losse app (bijv. gymzaal/): eigen logo, geen terugknop naar de startpagina. */
+    /* Losse app (floorball-gymles): eigen logo, eigen kopteksten en woorden, terugknop naar de eigen startpagina. */
     const APP = window.FB_APP;
     if (APP && head) {
       const T = APP.texts || {}, W = APP.words, set = (sel, t) => { const el = document.querySelector(sel); if (el && t) el.textContent = t; };
@@ -385,7 +385,7 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
         head.insertAdjacentHTML("beforeend", `<button type="button" class="linkbtn" id="fb-report-open">Scores en toelichtingen van alle gebruikers</button>`);
       refreshAll(); loadStats(); flush();
     })();
-    if (HOSTED && "serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("../sw.js", { scope: "../" }).catch(() => {});
+    if (HOSTED && "serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register((window.FB_APP && window.FB_APP.sw) || "../sw.js", { scope: (window.FB_APP && window.FB_APP.swScope) || "../" }).catch(() => {});
   }
 
   /* Eén printknop in het trainingsoverzicht: opent de keuze tussen alleen oefeningen of alles. */
