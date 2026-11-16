@@ -1,5 +1,5 @@
 /* Gymzaal-app: laadt een programmapagina uit de training-app (bijv. ../../gymles/index.html)
-   en toont die met het gymzaal-logo, de gymzaal-iconen en een terugknop naar de gymzaal-startpagina.
+   en toont die met het UFC Utrecht-logo, de UFC-iconen en een terugknop naar de gymzaal-startpagina.
    De oefeningen staan dus maar op één plek; wijzig ze altijd in de map van het programma zelf.
    Woorden (gymles i.p.v. training) en kopteksten per programma staan hieronder in APP.
    Gebruik: <script src="../loader.js" data-program="gymles"></script> */
@@ -8,8 +8,8 @@
   var abs = function (rel) { return new URL(rel, me.src).href; };      // ten opzichte van gymzaal/
   var APP = {
     id: "gymzaal",
-    logo: abs("../icons/gymzaal-logo.png"),
-    logoAlt: "Floorball in de gymzaal",
+    logo: abs("../icons/ufc-logo.png"),
+    logoAlt: "UFC Utrecht",
     home: abs("./"),
     words: { unit: "gymles", Unit: "Gymles", title: "Mijn gymles", inLabel: "In de gymles", btnLabel: "Gymles" },
     texts: ({
@@ -27,8 +27,8 @@
       html = html
         .replace(/<head>/i, "<head>" + inject)
         .replace('href="../manifest.webmanifest"', 'href="' + abs("manifest.webmanifest") + '"')
-        .replace('href="../icons/icon-192.png"', 'href="' + abs("../icons/gymzaal-192.png") + '"')
-        .replace('href="../icons/apple-touch-icon.png"', 'href="' + abs("../icons/gymzaal-apple-touch.png") + '"');
+        .replace('href="../icons/icon-192.png"', 'href="' + abs("../icons/icon-192.png") + '"')
+        .replace('href="../icons/apple-touch-icon.png"', 'href="' + abs("../icons/apple-touch-icon.png") + '"');
       document.open(); document.write(html); document.close();
     })
     .catch(function () {
