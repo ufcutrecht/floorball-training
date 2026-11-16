@@ -42,7 +42,7 @@ Alles wat op `main` komt, staat binnen een paar minuten live.
 | `shared/exercises.json` | Lijst van alle oefeningen per programma (id, titel, onderdeel, fase). Gebruikt door de startpagina en het overzicht. |
 | `supabase/setup.sql` | Database-opzet voor scores. |
 | `sw.js`, `manifest.webmanifest` | Offline-app en "zet op beginscherm". |
-| `icons/` | App-iconen (`icon-*.png` trainersapp, `gymles-*.png` gymzaal-app) en het UFC Utrecht-logo (`ufc-logo.png`). |
+| `icons/` | App-iconen: UFC-logo met "TRAINING" (`icon-*.png`, `apple-touch-icon.png`, trainersapp) of "GYMLES" (`gymles-*.png`, gymzaal-app) eronder en het UFC Utrecht-logo (`ufc-logo.png`). |
 
 Er is geen build-stap: gewone html, css en javascript.
 
