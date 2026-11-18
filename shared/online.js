@@ -207,7 +207,7 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
     starMin = ev.target.value; ls.set("fb-starfilter-" + PROGRAM, starMin); applyStarFilter();
   });
   function decorate() {
-    ensureStarFilter();
+    ensureStarFilter(); decorateShare();
     document.querySelectorAll("#grid article.card").forEach(card => {
       if (card.querySelector(".fb-rate")) return;
       const b = card.querySelector("[data-open]"); if (!b) return;
@@ -217,8 +217,40 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
     applyStarFilter();
   }
 
+  /* ---------- oefening delen via een link (#oefening=<id>) ---------- */
+  const SHARE_KEY = "oefening";
+  const exById = id => typeof EX !== "undefined" ? EX.find(e => e.id === id) : null;
+  const shareUrl = id => location.href.split("#")[0] + "#" + SHARE_KEY + "=" + encodeURIComponent(id);
+  function decorateShare() {
+    const d = document.getElementById("dlg"), body = document.getElementById("dlg-body");
+    if (!d || !body || !d.dataset.id || body.querySelector(".fb-share")) return;
+    const act = body.querySelector(":scope > .actions:last-child"); if (!act) return;
+    act.insertAdjacentHTML("beforeend", `<button type="button" class="btn fb-share" data-share="${esc(d.dataset.id)}" aria-label="Deel deze oefening via een link">Delen</button><span class="msg fb-share-msg" role="status" aria-live="polite"></span>`);
+  }
+  async function share(id, btn) {
+    const ex = exById(id), url = shareUrl(id), title = ex ? ex.title : "Floorball-oefening";
+    const msg = btn.parentElement.querySelector(".fb-share-msg"), say = t => { if (msg) msg.textContent = t; };
+    if (navigator.share) {
+      try { await navigator.share({ title, text: "Floorball-oefening: " + title, url }); return; }
+      catch (e) { if (e && e.name === "AbortError") return; }
+    }
+    try { await navigator.clipboard.writeText(url); say("Link gekopieerd. Plak hem in een bericht of mail."); return; } catch (e) {}
+    if (msg) { msg.innerHTML = `Kopieer deze link: <input class="fb-share-url" readonly value="${esc(url)}">`; const i = msg.querySelector("input"); i.focus(); i.select(); }
+  }
+  /* geopend via een gedeelde link: oefening meteen tonen */
+  function openShared() {
+    const m = location.hash.match(new RegExp("^#" + SHARE_KEY + "=([^&]+)")); if (!m) return;
+    let id; try { id = decodeURIComponent(m[1]); } catch (e) { return; }
+    if (typeof openEx !== "function" || !exById(id)) return;
+    openEx(id);
+    const d = document.getElementById("dlg");
+    if (d) d.addEventListener("close", () => { if (location.hash.startsWith("#" + SHARE_KEY + "=")) history.replaceState(null, "", location.href.split("#")[0]); }, { once: true });
+  }
+
   /* ---------- klikken ---------- */
   document.addEventListener("click", ev => {
+    const sh = ev.target.closest("[data-share]");
+    if (sh) { share(sh.dataset.share, sh); return; }
     const star = ev.target.closest("[data-rate]");
     if (star) {
       const id = star.dataset.ex, n = +star.dataset.rate;
@@ -284,6 +316,10 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
 .fb-dlg-rate h4{margin:0 0 2px}
 .fb-sf{display:inline-flex;align-items:center;gap:6px;font-size:15px;margin-left:auto}
 .fb-sf select{font:inherit;font-size:15px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;border-radius:999px;cursor:pointer}
+#dlg .dlg-body>.actions:last-child{flex-wrap:wrap;align-items:center}
+.fb-share{margin-left:auto;flex:none;white-space:nowrap}
+.fb-share-msg{flex-basis:100%;text-align:right}.fb-share-msg:empty{display:none}
+.fb-share-url{font:inherit;font-size:14px;width:100%;margin-top:4px;padding:6px 8px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
 .fb-home{display:inline-flex;align-items:center;gap:6px;font:700 15px var(--body,system-ui);color:var(--ink);text-decoration:none;border:1.5px solid var(--line);border-radius:999px;padding:5px 12px;justify-self:start;background:var(--surface)}
 .fb-home:hover{border-color:var(--ink)}
 .fb-rep{display:grid;gap:8px}
@@ -304,7 +340,7 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
 .fb-logo-a{position:absolute;top:18px;right:0;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:var(--ink)}
 .fb-logo-label{font:800 clamp(14px,3vw,18px)/1 var(--display,inherit);text-transform:uppercase;letter-spacing:.08em}
 .fb-logo{display:block;width:auto;height:clamp(84px,19vw,130px)}
-@media print{.fb-form,.fb-rate,.fb-dlg-rate,.fb-home,.fb-search{display:none!important}.fb-logo{height:70px}}
+@media print{.fb-share,.fb-share-msg,.fb-form,.fb-rate,.fb-dlg-rate,.fb-home,.fb-search{display:none!important}.fb-logo{height:70px}}
 /* UI-herziening nov 2026: rustiger kaarten, compacte balken op mobiel, grotere tikvlakken */
 .legrow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 16px;margin-block:0 12px}
 .legwrap{flex:1 1 0;min-width:0}
@@ -385,6 +421,8 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
         head.insertAdjacentHTML("beforeend", `<button type="button" class="linkbtn" id="fb-report-open">Scores en toelichtingen van alle gebruikers</button>`);
       refreshAll(); loadStats(); flush();
     })();
+    openShared();
+    addEventListener("hashchange", openShared);
     if (HOSTED && "serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register((window.FB_APP && window.FB_APP.sw) || "../sw.js", { scope: (window.FB_APP && window.FB_APP.swScope) || "../" }).catch(() => {});
   }
 
