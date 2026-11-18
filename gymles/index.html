@@ -1039,7 +1039,7 @@ const EXTRA={
 };
 EX.forEach(e=>(EXTRA[e.id]||[]).forEach(([k,d,at])=>{e.fig.push({t:"a",k,d,x:1});(ANIM[e.id]=ANIM[e.id]||[]).push({at})}));
 const SPAN={dribble:2.2,run:1.8,pass:.8,shot:.6};
-const HOLD=1.8;
+const HOLD=.3;
 const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const r3=x=>Math.round(x*1000)/1000;
 let _mp=null;

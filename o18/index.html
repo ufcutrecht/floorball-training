@@ -542,7 +542,7 @@ const EX = [
    {t:"p",x:40,y:140,ball:1},{t:"p",x:26,y:150},{t:"p",x:248,y:150,team:"b"},
    {t:"a",k:"dribble",d:"M48 140 Q95 154 118 140 Q132 126 148 120"},{t:"a",k:"pass",d:"M152 122 L240 146"},{t:"a",k:"run",d:"M152 116 L185 104"},{t:"a",k:"pass",d:"M242 146 L190 112"},{t:"a",k:"shot",d:"M190 104 L268 92"},
    {t:"txt",x:160,y:30,s:"afronden vanuit de slot"}]},
- {id:"kruis-schieten",cat:"Schieten",title:"Kruis schieten",int:"middel–hoog",min:10,hold:.3,kids:"2 rijen + 2 passgevers + keeper",
+ {id:"kruis-schieten",cat:"Schieten",title:"Kruis schieten",int:"middel–hoog",min:10,kids:"2 rijen + 2 passgevers + keeper",
   mat:["stick per speler","een emmer ballen in elke hoek","2 pionnen","1 doel met keeper"],
   doel:"Een pass in de loop direct afronden (one-timer), na een looplijn dwars door de slot.",
   stappen:["Twee rijen schuin voor het doel, links en rechts van de slot. In beide hoeken naast het doel staat een passgever met ballen.","Om en om start een speler: hij loopt schuin door de slot naar de andere kant.","De passgever in de hoek waar hij naartoe loopt speelt de bal in zijn loop; hij schiet direct op doel.","De speler uit de andere rij start zodra de vorige halverwege is, zodat de looplijnen elkaar kruisen.","Doordraaien: de schutter sluit aan bij de passgever schuin tegenover zijn startrij. De passgever loopt recht langs de zijlijn naar de rij aan zijn kant."],
@@ -978,7 +978,7 @@ const EXTRA={
 };
 EX.forEach(e=>(EXTRA[e.id]||[]).forEach(([k,d,at])=>{e.fig.push({t:"a",k,d,x:1});(ANIM[e.id]=ANIM[e.id]||[]).push({at})}));
 const SPAN={dribble:2.2,run:1.8,pass:.8,shot:.6};
-const HOLD=1.8;
+const HOLD=.3;
 const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const r3=x=>Math.round(x*1000)/1000;
 let _mp=null;
@@ -992,7 +992,7 @@ function plan(ex){
   const tf=ex.tempo||1;
   const ev=ex.fig.filter(f=>f.t==="a").map((a,i)=>{const at=(cfg[i]?cfg[i].at:i*1.2)*tf,len=plen(a.d);
     return{a,i,at,end:at+SPAN[a.k]*tf,len,start:pAt(a.d,0),stop:pAt(a.d,len)}});
-  const cyc=Math.max(...ev.map(e=>e.end),1)+(ex.hold??HOLD);
+  const cyc=Math.max(...ev.map(e=>e.end),1)+HOLD;
   ev.forEach(e=>{e.at=r3(e.at/cyc);e.end=r3(e.end/cyc)});
   const order=[...ev].sort((x,y)=>x.at-y.at||x.i-y.i);order.filter(e=>!e.a.x).forEach((e,n)=>e.n=n+1);
   const pl=ex.fig.filter(f=>f.t==="p").map(f=>({f,x:f.x,y:f.y,moves:[],has:!!f.ball,tl:[]}));
