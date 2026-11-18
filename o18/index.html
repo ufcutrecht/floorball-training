@@ -422,6 +422,18 @@ const EX = [
    {t:"p",x:100,y:24,team:"b"},{t:"p",x:100,y:156,team:"b"},
    {t:"a",k:"pass",d:"M256 34 Q244 90 256 146"},{t:"a",k:"run",d:"M256 34 Q206 110 152 118"},{t:"a",k:"pass",d:"M254 148 L108 30"},{t:"a",k:"pass",d:"M106 32 L146 112"},{t:"a",k:"shot",d:"M146 122 L48 92"},
    {t:"txt",x:200,y:12,s:"speler 1, 4"},{t:"txt",x:116,y:12,s:"speler 3"},{t:"txt",x:180,y:176,s:"speler 2"},{t:"txt",x:116,y:176,s:"speler 5"}]},
+ {id:"mark-123",cat:"Warming-up",title:"Mark 123",int:"middel–hoog",min:8,kids:"4 spelers per ronde + keeper",
+  mat:["stick per speler","ballen bij pion 1","1 doel met keeper","4 pionnen"],
+  doel:"Snel doorpassen rond het vierkant en de loopactie zo timen dat je de laatste pass in de loop krijgt en afrondt.",
+  stappen:["Zet vier pionnen in een vierkant van ongeveer 10 × 10 meter: twee naast het doel en twee in het veld. In het doel staat een keeper. Bij elke pion staat een speler: speler 1 en 2 bij de pionnen in het veld, speler 3 en 4 bij de pionnen naast het doel. Speler 3 staat aan de kant van speler 2.","Speler 1 speelt de bal naar speler 2, loopt achter zijn bal aan en loopt om speler 2 heen.","Intussen passt speler 2 door naar speler 3, en speler 3 passt naar speler 4 aan de andere kant van het doel.","Speler 4 speelt de bal terug op speler 1, die om speler 2 heen is gelopen en vrij voor het doel komt. Speler 1 schiet op doel.","Daarna schuift iedereen een plek door: 1 naar 2, 2 naar 3, 3 naar 4 en 4 naar pion 1. Speler 4 begint met een nieuwe bal de volgende ronde. Zijn er meer spelers, dan wachten zij met ballen bij pion 1 en sluit speler 4 daar achteraan aan."],
+  tips:["Speler 1: loop strak om speler 2 heen en dan richting de slot, zodat je de pass in de loop krijgt.","Speler 2, 3 en 4: speel snel door en pass op de stick van je ontvanger.","Speler 4: speel de bal voor speler 1 uit, niet op zijn voeten."],
+  makkelijker:["Bal eerst aannemen, dan doorpassen.","Speler 1 neemt de laatste pass eerst aan en schiet daarna."],
+  moeilijker:["Alles direct doorpassen, zonder aannemen.","Speler 1 schiet direct, zonder aannemen."],
+  fig:[{t:"goal",x:278,y:90},{t:"cone",x:140,y:52},{t:"cone",x:140,y:128},{t:"cone",x:274,y:50},{t:"cone",x:274,y:130},
+   {t:"p",x:266,y:90,team:"j"},
+   {t:"p",x:128,y:40,ball:1},{t:"p",x:128,y:140},{t:"p",x:260,y:140,team:"b"},{t:"p",x:260,y:40,team:"b"},
+   {t:"a",k:"pass",d:"M128 48 L128 132"},{t:"a",k:"run",d:"M120 48 Q92 120 118 158 Q150 172 168 140 Q178 118 196 100"},{t:"a",k:"pass",d:"M136 140 L252 140"},{t:"a",k:"pass",d:"M254 132 Q234 90 254 48"},{t:"a",k:"pass",d:"M254 46 L202 94"},{t:"a",k:"shot",d:"M200 98 L268 90"},
+   {t:"txt",x:128,y:18,s:"speler 1"},{t:"txt",x:128,y:176,s:"speler 2"},{t:"txt",x:214,y:162,s:"speler 3"},{t:"txt",x:226,y:14,s:"speler 4"}]},
  {id:"duel",cat:"Warming-up",title:"Duel",int:"hoog",min:8,kids:"duo's",
   mat:["stick per speler","1 bal per duo","fluitje"],
   doel:"Intervaltraining: passen als medespelers en op het fluitsignaal een duel als tegenstanders.",
@@ -711,6 +723,7 @@ const NEED={
   "rebound":n=>({stick:n,bal:Math.max(12,n),doel:1,hesje:Math.ceil(n/4)}),
   "mikko-2":n=>({stick:n,bal:Math.max(12,n),pion:4,doel:1}),
   "mikko-3":n=>({stick:n,bal:Math.max(12,n),pion:4,doel:1}),
+  "mark-123":n=>({stick:n,bal:Math.max(12,n),pion:4,doel:1}),
   "mikko-1":n=>({stick:n,bal:Math.max(12,n),pion:4,doel:1}),
   "twee-een":n=>({stick:n,bal:Math.max(10,Math.ceil(n/2)),doel:2,hesje:Math.ceil(n/2)}),
   "drie-twee":n=>({stick:n,bal:Math.max(10,Math.ceil(n/2)),doel:2,hesje:Math.ceil(n/2)}),
@@ -732,7 +745,7 @@ let N=16;
 try{const v=parseInt(localStorage.getItem("u18-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
-const MAAT={"een-een-schot":"24 × 14 m, vak 5 × 5 m","forechecking":"20 × 20 m","hoek-een-een":"20 × 20 m","sprint-bal":"20 × 20 m","keeper-rondspelen":"boog op 6–9 m","keeper-achter-doel":"half veld, ruimte achter het doel","keeper-rebound":"4–5 m voor het doel","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","draai-180":"40 × 20 m","halve-cirkel":"20 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m"};
+const MAAT={"een-een-schot":"24 × 14 m, vak 5 × 5 m","forechecking":"20 × 20 m","hoek-een-een":"20 × 20 m","sprint-bal":"20 × 20 m","keeper-rondspelen":"boog op 6–9 m","keeper-achter-doel":"half veld, ruimte achter het doel","keeper-rebound":"4–5 m voor het doel","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","mark-123":"10 × 10 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","draai-180":"40 × 20 m","halve-cirkel":"20 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m"};
 EX.forEach(e=>e.maat=MAAT[e.id]);
 const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
@@ -766,6 +779,7 @@ const HALL={
     note:"1 doel, schutters op ongeveer 10 m, screen voor de keeper"}),
   "mikko-2":()=>({items:[GOALS[0],{t:"cone",x:19,y:1.6},{t:"cone",x:19,y:18.4},{t:"cone",x:10,y:1.6},{t:"cone",x:10,y:18.4},{t:"lbl",x:16.5,y:3.4,s:"1"},{t:"lbl",x:16.5,y:17.4,s:"2"},{t:"lbl",x:12.5,y:3.4,s:"3"},{t:"lbl",x:12.5,y:17.4,s:"5"}],note:"1 doel met keeper, rijen op de middenlijn aan beide zijkanten, aanspelers langs de boarding halverwege de helft"}),
   "mikko-3":()=>HALL["mikko-2"](),
+  "mark-123":()=>({items:[GOALS[1],{t:"cone",x:26.5,y:5},{t:"cone",x:26.5,y:15},{t:"cone",x:36.5,y:5},{t:"cone",x:36.5,y:15},{t:"lbl",x:26.5,y:3.6,s:"1"},{t:"lbl",x:26.5,y:17.4,s:"2"},{t:"lbl",x:36.5,y:17.4,s:"3"},{t:"lbl",x:36.5,y:3.6,s:"4"}],note:"1 doel met keeper; 2 pionnen naast het doel en 2 op 10 m in het veld, wachtende spelers met ballen bij pion 1"}),
   "mikko-1":()=>({items:[GOALS[0],{t:"cone",x:19,y:1.6},{t:"cone",x:19,y:18.4},{t:"cone",x:10,y:1.6},{t:"cone",x:10,y:18.4},{t:"lbl",x:16.5,y:3.4,s:"1"},{t:"lbl",x:16.5,y:17.4,s:"2"},{t:"lbl",x:12.5,y:17.4,s:"3"},{t:"lbl",x:12.5,y:3.4,s:"3"}],note:"1 doel met keeper, rijen op de middenlijn aan beide zijkanten, aanspelers langs de boarding halverwege de helft"}),
   "twee-een":()=>({items:[...GOALS,{t:"spot",x:20,y:1.5},{t:"spot",x:20,y:18.5},{t:"lbl",x:20,y:19.9,s:"rijen"}],note:"heel veld, rijen aan beide kanten van de middenlijn"}),
   "drie-twee":()=>({items:[...GOALS,{t:"spot",x:20,y:1.5},{t:"spot",x:20,y:18.5},{t:"lbl",x:20,y:19.9,s:"wissels"}],note:"heel veld, wissels bij de middenlijn"}),
@@ -895,6 +909,7 @@ const ANIM={
   "rebound":[{at:0},{at:.2},{at:1}],
   "mikko-2":[{at:0},{at:1.2},{at:2.4},{at:2.6},{at:3.8},{at:4.8}],
   "mikko-3":[{at:0},{at:.4},{at:1.2},{at:2.4},{at:3.4}],
+  "mark-123":[{at:0},{at:.3},{at:1},{at:1.9},{at:2.8},{at:3.8}],
   "mikko-1":[{at:0},{at:.4},{at:1.2},{at:2.4},{at:3.4}],
   "twee-een":[{at:0},{at:2.2},{at:.3},{at:3.2},{at:3.8},{at:4}],
   "drie-twee":[{at:0},{at:1},{at:.6},{at:2.1},{at:3.1},{at:1.9},{at:2.2}],
@@ -920,6 +935,7 @@ const EXTRA={
   "rebound":[["dribble","M70 90 L84 98",2.4],["run","M250 108 L244 92",2.8],["shot","M92 98 L232 104",4.7],["shot","M246 98 L268 90",5.6]],
   "mikko-2":[["run","M146 92 Q100 130 86 166",5.8],["run","M106 16 Q190 4 266 18",5.8],["pass","M262 146 L276 34",6.6],["pass","M276 34 L268 146",7.6],["pass","M254 156 L108 156",8.6],["run","M256 150 Q200 110 150 96",8.8],["pass","M106 150 L146 98",9.8],["shot","M146 94 L48 90",10.8],["run","M106 164 Q190 178 266 164",10.6],["run","M146 88 Q100 50 86 14",11.8]],
   "mikko-3":[["run","M146 122 Q100 150 86 166",4.4],["run","M106 16 Q190 4 266 18",4.4],["pass","M268 146 Q286 90 274 32",5.2],["run","M256 146 Q200 80 152 72",5.6],["pass","M276 34 L108 152",6.4],["pass","M106 148 L146 76",7.6],["run","M106 164 Q190 178 266 164",8.4],["shot","M146 72 L48 88",8.6],["run","M146 70 Q100 40 86 14",9.6]],
+  "mark-123":[["run","M190 104 Q150 124 132 136",5],["run","M134 146 Q200 166 256 146",5],["run","M254 134 Q232 90 254 46",5],["run","M254 40 Q190 24 134 40",5]],
   "mikko-1":[["run","M144 86 Q112 128 112 148",4.4],["run","M106 162 Q190 174 266 166",4.4],["pass","M264 146 L276 34",5.2],["run","M256 146 Q190 120 150 100",5.6],["pass","M276 26 L108 24",6.6],["pass","M106 30 L148 94",7.8],["shot","M144 98 L48 92",8.8],["run","M144 94 Q110 56 106 32",9.8],["run","M106 18 Q190 4 266 18",9.8]],
   "twee-een":[["dribble","M86 98 L56 70",5.8],["run","M92 124 L54 120",5.9],["pass","M58 74 L54 112",8.1],["shot","M48 116 L26 98",9]],
   "drie-twee":[["dribble","M210 70 Q160 70 120 80",4],["run","M222 126 Q170 130 130 128",4.1],["run","M180 96 L140 100",4.3],["pass","M118 84 L130 120",6.4],["shot","M126 128 L28 96",7.4]],
