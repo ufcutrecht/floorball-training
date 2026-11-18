@@ -207,7 +207,7 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
     starMin = ev.target.value; ls.set("fb-starfilter-" + PROGRAM, starMin); applyStarFilter();
   });
   function decorate() {
-    ensureStarFilter(); decorateShare();
+    ensureStarFilter(); decorateShare(); decorateTrainingShare();
     document.querySelectorAll("#grid article.card").forEach(card => {
       if (card.querySelector(".fb-rate")) return;
       const b = card.querySelector("[data-open]"); if (!b) return;
@@ -237,8 +237,72 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
     try { await navigator.clipboard.writeText(url); say("Link gekopieerd. Plak hem in een bericht of mail."); return; } catch (e) {}
     if (msg) { msg.innerHTML = `Kopieer deze link: <input class="fb-share-url" readonly value="${esc(url)}">`; const i = msg.querySelector("input"); i.focus(); i.select(); }
   }
-  /* geopend via een gedeelde link: oefening meteen tonen */
+  /* hele training delen: #training=<id>.<min>[+|-],…&w=<wissel>&n=<aantal>&z=<b>x<l>&t=<naam>
+     (+ = moeilijker, - = makkelijker, niets = basis) */
+  const LVL_CODE = { moeilijker: "+", makkelijker: "-", basis: "" };
+  const unitWord = () => (window.FB_APP && FB_APP.words && FB_APP.words.unit) || "training";
+  const has = n => { try { return typeof eval(n) !== "undefined"; } catch (e) { return false; } };
+  function trainingUrl() {
+    const q = new URLSearchParams();
+    q.set("training", sel.map(x => x.id + "." + x.min + (LVL_CODE[x.lvl] || "")).join(","));
+    if (has("WISSEL")) q.set("w", WISSEL);
+    if (has("N")) q.set("n", N);
+    if (has("ZW") && has("ZH")) q.set("z", ZW + "x" + ZH);
+    const name = has("sheetTitle") ? sheetTitle() : "";
+    if (name && !(has("C") && name === C.title)) q.set("t", name);
+    return location.href.split("#")[0] + "#" + q.toString().replace(/%2C/g, ",");
+  }
+  function decorateTrainingShare() {
+    const save = document.getElementById("do-save");
+    if (!save || document.getElementById("fb-share-les")) return;
+    save.insertAdjacentHTML("afterend", `<button type="button" class="btn" id="fb-share-les" aria-label="Deel deze ${unitWord()} via een link">Delen</button>`);
+  }
+  async function shareTraining() {
+    const say = t => { if (typeof setMsg === "function") setMsg(t); };
+    if (!has("sel") || !sel.length) { say(`Kies eerst oefeningen, dan kun je de ${unitWord()} delen.`); return; }
+    const url = trainingUrl(), name = (has("sheetTitle") && sheetTitle()) || "Floorball-" + unitWord();
+    const min = sel.reduce((t, x) => t + x.min, 0);
+    if (navigator.share) {
+      try { await navigator.share({ title: name, text: `${name}: ${sel.length} oefeningen, ${min} minuten`, url }); return; }
+      catch (e) { if (e && e.name === "AbortError") return; }
+    }
+    try { await navigator.clipboard.writeText(url); say(`Link naar deze ${unitWord()} gekopieerd. Plak hem in een bericht of mail.`); return; } catch (e) {}
+    const m = document.getElementById("les-msg");
+    if (m) { m.innerHTML = `Kopieer deze link: <input class="fb-share-url" readonly value="${esc(url)}">`; const i = m.querySelector("input"); i.focus(); i.select(); }
+  }
+  document.addEventListener("click", ev => { if (ev.target.closest("#fb-share-les")) shareTraining(); });
+  function openSharedTraining(q) {
+    if (!has("sel") || !has("normSel") || typeof EX === "undefined") return;
+    const items = String(q.get("training") || "").split(",").map(t => {
+      const m = t.match(/^(.+)\.(\d+)([+-]?)$/); if (!m) return null;
+      return { id: m[1], min: +m[2], lvl: m[3] === "+" ? "moeilijker" : m[3] === "-" ? "makkelijker" : "basis" };
+    }).filter(v => v && EX.some(e => e.id === v.id)).map(normSel);
+    if (!items.length) return;
+    const same = JSON.stringify(sel) === JSON.stringify(items);
+    if (sel.length && !same && !confirm(`Je hebt al oefeningen gekozen. Wil je die vervangen door de gedeelde ${unitWord()}?`)) return;
+    sel = items;
+    const w = parseInt(q.get("w"), 10); if (w >= 0 && w <= 30 && has("WISSEL")) { WISSEL = w; try { localStorage.setItem(C.key + "-wissel", w); } catch (e) {} if (typeof syncWissel === "function") syncWissel(); }
+    const n = parseInt(q.get("n"), 10); if (n >= 4 && n <= 40 && has("N")) { N = n; try { localStorage.setItem("fb-n", n); } catch (e) {} const ki = document.getElementById("kids"); if (ki) ki.value = n; }
+    const z = String(q.get("z") || "").split("x").map(Number); if (z.length === 2 && typeof setZaal === "function") setZaal(z[0], z[1]);
+    if (has("curNr")) curNr = null;
+    if (typeof saveLes === "function") saveLes();
+    if (typeof renderGrid === "function") renderGrid();
+    if (typeof renderBar === "function") renderBar();
+    const d = document.getElementById("mat");
+    if (typeof renderKit === "function") renderKit();
+    if (typeof renderSum === "function") renderSum();
+    const t = q.get("t");
+    if (typeof setMsg === "function") setMsg(`Gedeelde ${unitWord()}${t ? " “" + t + "”" : ""} geladen. Klik op Bewaren om hem in je bibliotheek te zetten.`);
+    if (d && !d.open) d.showModal();
+  }
+
+  /* geopend via een gedeelde link: oefening of training meteen tonen */
   function openShared() {
+    if (location.hash.startsWith("#training=")) {
+      openSharedTraining(new URLSearchParams(location.hash.slice(1)));
+      history.replaceState(null, "", location.href.split("#")[0]);
+      return;
+    }
     const m = location.hash.match(new RegExp("^#" + SHARE_KEY + "=([^&]+)")); if (!m) return;
     let id; try { id = decodeURIComponent(m[1]); } catch (e) { return; }
     if (typeof openEx !== "function" || !exById(id)) return;
