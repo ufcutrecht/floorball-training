@@ -676,6 +676,12 @@
    "phase": "Kern"
   },
   {
+   "id": "kruis-schieten",
+   "title": "Kruis schieten",
+   "cat": "Schieten",
+   "phase": "Kern"
+  },
+  {
    "id": "rebound",
    "title": "Screen en rebound",
    "cat": "Schieten",

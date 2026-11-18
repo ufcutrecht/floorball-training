@@ -542,6 +542,17 @@ const EX = [
    {t:"p",x:40,y:140,ball:1},{t:"p",x:26,y:150},{t:"p",x:248,y:150,team:"b"},
    {t:"a",k:"dribble",d:"M48 140 Q95 154 118 140 Q132 126 148 120"},{t:"a",k:"pass",d:"M152 122 L240 146"},{t:"a",k:"run",d:"M152 116 L185 104"},{t:"a",k:"pass",d:"M242 146 L190 112"},{t:"a",k:"shot",d:"M190 104 L268 92"},
    {t:"txt",x:160,y:30,s:"afronden vanuit de slot"}]},
+ {id:"kruis-schieten",cat:"Schieten",title:"Kruis schieten",int:"middel–hoog",min:12,kids:"2 rijen + keeper",
+  mat:["stick per speler","een emmer ballen","2 pionnen","1 doel met keeper"],
+  doel:"Schieten uit de beweging na een dribbel dwars door de slot, met verkeer om je heen.",
+  stappen:["Twee rijen schuin voor het doel, links en rechts van de slot. Elke speler heeft een bal.","Om en om start een speler: hij dribbelt schuin door de slot naar de andere kant en schiet uit de loop.","De speler uit de andere rij start zodra de vorige halverwege is, zodat de looplijnen elkaar kruisen.","Na het schot sluit je aan in de andere rij, zodat iedereen vanaf beide kanten schiet."],
+  tips:["Kijk op bij het kruisen en houd je stick laag: om elkaar heen, niet tegen elkaar aan.","Schiet zonder in te houden. De keeper moet meeschuiven, dus de hoek waar je vandaan komt is vaak open."],
+  makkelijker:["Rustiger tempo en meer tijd tussen de spelers.","Bal kort aannemen en dan pas schieten."],
+  moeilijker:["De bal komt als pass uit de hoek naast het doel; aannemen in de loop.","Schieten binnen 3 seconden na de start, of na het schot de rebound van de volgende afmaken."],
+  fig:[{t:"goal",x:278,y:90},{t:"cone",x:156,y:22},{t:"cone",x:156,y:158},
+   {t:"p",x:266,y:90,team:"j"},{t:"p",x:140,y:34,ball:1},{t:"p",x:124,y:30},{t:"p",x:108,y:26},{t:"p",x:140,y:146,team:"b",ball:1},{t:"p",x:124,y:150,team:"b"},{t:"p",x:108,y:154,team:"b"},
+   {t:"a",k:"dribble",d:"M146 38 Q192 62 214 112"},{t:"a",k:"shot",d:"M218 114 L268 96"},{t:"a",k:"dribble",d:"M146 142 Q192 118 214 68"},{t:"a",k:"shot",d:"M218 66 L268 84"},
+   {t:"txt",x:8,y:94,s:"om en om, de looplijnen kruisen"}]},
  {id:"rebound",cat:"Schieten",title:"Screen en rebound",int:"middel",min:12,kids:"groepjes van 4",
   mat:["stick per speler","een emmer ballen","1 doel met keeper","hesjes"],
   doel:"Voor het doel werken: zicht ontnemen, tippen en rebounds afmaken.",
@@ -720,6 +731,7 @@ const NEED={
   "rondo":n=>{const g=Math.ceil(n/6);return{stick:n,bal:3*g,pion:4*g,hesje:2*g}},
   "vierkant":n=>{const g=Math.ceil(n/5);return{stick:n,bal:2*g,pion:4*g}},
   "schot-beweging":n=>({stick:n,bal:Math.max(15,n),pion:2,doel:1}),
+  "kruis-schieten":n=>({stick:n,bal:Math.max(15,n),pion:2,doel:1}),
   "rebound":n=>({stick:n,bal:Math.max(12,n),doel:1,hesje:Math.ceil(n/4)}),
   "mikko-2":n=>({stick:n,bal:Math.max(12,n),pion:4,doel:1}),
   "mikko-3":n=>({stick:n,bal:Math.max(12,n),pion:4,doel:1}),
@@ -745,7 +757,7 @@ let N=16;
 try{const v=parseInt(localStorage.getItem("u18-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
-const MAAT={"een-een-schot":"24 × 14 m, vak 5 × 5 m","forechecking":"20 × 20 m","hoek-een-een":"20 × 20 m","sprint-bal":"20 × 20 m","keeper-rondspelen":"boog op 6–9 m","keeper-achter-doel":"half veld, ruimte achter het doel","keeper-rebound":"4–5 m voor het doel","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","mark-123":"10 × 10 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","draai-180":"40 × 20 m","halve-cirkel":"20 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m"};
+const MAAT={"een-een-schot":"24 × 14 m, vak 5 × 5 m","forechecking":"20 × 20 m","hoek-een-een":"20 × 20 m","sprint-bal":"20 × 20 m","keeper-rondspelen":"boog op 6–9 m","keeper-achter-doel":"half veld, ruimte achter het doel","keeper-rebound":"4–5 m voor het doel","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","kruis-schieten":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","mark-123":"10 × 10 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","draai-180":"40 × 20 m","halve-cirkel":"20 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m"};
 EX.forEach(e=>e.maat=MAAT[e.id]);
 const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
@@ -775,6 +787,8 @@ const HALL={
     gridC(g,cols).forEach(c=>{z=Math.min(8,c.cw-2,c.ch-2);it.push(...sq(c,z))});return{items:it,note:`${g} ${g===1?"vierkant":"vierkanten"} van ${r1(z)} × ${r1(z)} m`}},
   "schot-beweging":()=>({items:[GOALS[1],{t:"cone",x:26,y:15},{t:"cone",x:26,y:5},{t:"spot",x:21,y:17.5},{t:"spot",x:21,y:2.5},{t:"spot",x:38,y:18.5},{t:"spot",x:38,y:1.5},{t:"lbl",x:21,y:19.6,s:"start"},{t:"lbl",x:37,y:16.8,s:"passgever"}],
     note:"halve veld: 2 startrijen bij de middenlijn, passgevers in de hoeken"}),
+  "kruis-schieten":()=>({items:[{t:"zone",x:20,y:.4,w:19.6,h:19.2},GOALS[1],{t:"cone",x:24,y:4},{t:"cone",x:24,y:16},{t:"spot",x:22.5,y:3},{t:"spot",x:22.5,y:17},{t:"lbl",x:22.5,y:1.7,s:"rij"},{t:"lbl",x:22.5,y:19.4,s:"rij"}],
+    note:"halve veld, doel met keeper, 2 rijen op ongeveer 13 m van het doel, links en rechts van de slot"}),
   "rebound":()=>({items:[GOALS[1],{t:"line",x1:26,y1:1,x2:26,y2:19},{t:"spot",x:27,y:10},{t:"spot",x:34.2,y:9.5},{t:"lbl",x:26,y:19.9,s:"schietlijn"}],
     note:"1 doel, schutters op ongeveer 10 m, screen voor de keeper"}),
   "mikko-2":()=>({items:[GOALS[0],{t:"cone",x:19,y:1.6},{t:"cone",x:19,y:18.4},{t:"cone",x:10,y:1.6},{t:"cone",x:10,y:18.4},{t:"lbl",x:16.5,y:3.4,s:"1"},{t:"lbl",x:16.5,y:17.4,s:"2"},{t:"lbl",x:12.5,y:3.4,s:"3"},{t:"lbl",x:12.5,y:17.4,s:"5"}],note:"1 doel met keeper, rijen op de middenlijn aan beide zijkanten, aanspelers langs de boarding halverwege de helft"}),
@@ -906,6 +920,7 @@ const ANIM={
   "rondo":[{at:0},{at:1},{at:.3}],
   "vierkant":[{at:0},{at:.2},{at:1}],
   "schot-beweging":[{at:0},{at:2.3},{at:2.4},{at:3.3},{at:4.3}],
+  "kruis-schieten":[{at:0},{at:2.3},{at:1.1},{at:3.4}],
   "rebound":[{at:0},{at:.2},{at:1}],
   "mikko-2":[{at:0},{at:1.2},{at:2.4},{at:2.6},{at:3.8},{at:4.8}],
   "mikko-3":[{at:0},{at:.4},{at:1.2},{at:2.4},{at:3.4}],
@@ -932,6 +947,7 @@ const EXTRA={
   "rondo":[["pass","M144 144 L96 97",2],["run","M162 104 L118 96",2.2],["pass","M96 82 L144 37",3],["run","M160 100 Q150 72 146 58",3.2],["pass","M157 36 L203 83",4.1],["pass","M203 97 L157 143",5.1]],
   "vierkant":[["pass","M232 56 L232 136",2.2],["run","M240 54 Q252 100 240 138",2.4],["pass","M222 146 L78 146",3.4],["run","M226 154 Q150 168 80 156",3.6]],
   "schot-beweging":[["run","M186 98 Q120 70 40 120",5],["dribble","M34 150 Q90 166 118 150 Q132 134 148 126",4.4],["pass","M152 128 L240 148",6.7],["run","M152 122 L185 108",6.8],["pass","M242 146 L190 114",7.6],["shot","M190 106 L268 94",8.5]],
+  "kruis-schieten":[["run","M124 30 L140 34",2.6],["run","M108 26 L124 30",2.8],["run","M214 118 Q170 176 76 162",3.1],["run","M124 150 L140 146",3.7],["run","M108 154 L124 150",3.9],["run","M214 62 Q170 4 76 18",4.2]],
   "rebound":[["dribble","M70 90 L84 98",2.4],["run","M250 108 L244 92",2.8],["shot","M92 98 L232 104",4.7],["shot","M246 98 L268 90",5.6]],
   "mikko-2":[["run","M146 92 Q100 130 86 166",5.8],["run","M106 16 Q190 4 266 18",5.8],["pass","M262 146 L276 34",6.6],["pass","M276 34 L268 146",7.6],["pass","M254 156 L108 156",8.6],["run","M256 150 Q200 110 150 96",8.8],["pass","M106 150 L146 98",9.8],["shot","M146 94 L48 90",10.8],["run","M106 164 Q190 178 266 164",10.6],["run","M146 88 Q100 50 86 14",11.8]],
   "mikko-3":[["run","M146 122 Q100 150 86 166",4.4],["run","M106 16 Q190 4 266 18",4.4],["pass","M268 146 Q286 90 274 32",5.2],["run","M256 146 Q200 80 152 72",5.6],["pass","M276 34 L108 152",6.4],["pass","M106 148 L146 76",7.6],["run","M106 164 Q190 178 266 164",8.4],["shot","M146 72 L48 88",8.6],["run","M146 70 Q100 40 86 14",9.6]],
