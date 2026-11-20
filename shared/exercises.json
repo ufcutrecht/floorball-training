@@ -303,6 +303,15 @@
    ]
   },
   {
+   "id": "paal-dribbel",
+   "title": "Vooruit en achteruit dribbelen met actie bij de paal",
+   "cat": "Dribbelen",
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
+  },
+  {
    "id": "schot-beweging",
    "title": "Dribbelen, passen, schieten",
    "cat": "Schieten",
