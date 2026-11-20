@@ -417,15 +417,15 @@ const EX = [
  {id:"paal-dribbel",apps:["training"],cat:"Dribbelen",title:"Vooruit en achteruit dribbelen met actie bij de paal",int:"middel",min:10,kids:"1 rij per doel + keeper",
   mat:["stick per speler","bal per speler","4 pionnen per baan","2 palen per baan","1 doel met keeper per baan"],
   doel:"De bal dicht bij de stick houden bij vooruit en achteruit dribbelen, en na een draai om de paal op doel schieten.",
-  stappen:["Zet op de halve zaal 4 pionnen in een vierkant van ongeveer 3 bij 3 meter. Daarachter, richting de middenlijn, staat de startpaal en op 6 tot 8 meter van het doel een tweede paal. In het doel staat een keeper.","Speler 1 dribbelt vooruit aan de buitenkant langs de linker pionnen.","Daarna dribbelt hij achteruit tussen de pionnen door terug, met zijn gezicht naar het doel. Op dat moment start speler 2.","Dan dribbelt hij vooruit aan de buitenkant langs de rechter pionnen naar de paal, draait om de paal en schiet op de keeper.","Hij haalt zijn bal op en sluit achteraan aan. Staan er meer dan 6 in de rij, maak dan een tweede baan op de andere helft."],
+  stappen:["Zet op de halve zaal 4 pionnen in een vierkant van ongeveer 3 bij 3 meter. Daarachter, richting de middenlijn, staat de startpaal en een tweede paal net voorbij het vierkant, op ongeveer 4 meter van het doel. In het doel staat een keeper.","Speler 1 dribbelt vooruit aan de buitenkant langs de linker pionnen.","Daarna dribbelt hij achteruit tussen de pionnen door terug, met zijn gezicht naar het doel. Op dat moment start speler 2.","Dan dribbelt hij vooruit aan de buitenkant langs de rechter pionnen naar de paal, draait om de paal en schiet op de keeper.","Hij haalt zijn bal op en sluit achteraan aan. Staan er meer dan 6 in de rij, maak dan een tweede baan op de andere helft."],
   tips:["Kleine tikjes: de bal blijft dicht bij je stick.","Achteruit: kleine pasjes en de bal recht voor je.","Kijk na de paal eerst naar het doel en schiet dan."],
   makkelijker:["Achteruit weglaten: twee keer vooruit langs de pionnen.","Schieten op een leeg doel of op pionnen in de hoeken."],
   moeilijker:["Bij de paal een schijnbeweging maken voordat je erom draait.","Wie het eerst scoort: twee rijen tegelijk, elk op een eigen doel."],
   fig:[{t:"goal",x:278,y:90},{t:"p",x:266,y:90,team:"j"},
-   {t:"paal",x:40,y:76},{t:"cone",x:96,y:62},{t:"cone",x:156,y:62},{t:"cone",x:96,y:122},{t:"cone",x:156,y:122},{t:"paal",x:220,y:100},
+   {t:"paal",x:40,y:76},{t:"cone",x:96,y:62},{t:"cone",x:156,y:62},{t:"cone",x:96,y:122},{t:"cone",x:156,y:122},{t:"paal",x:194,y:100},
    {t:"p",x:44,y:92,ball:1},{t:"p",x:30,y:100,ball:1},{t:"p",x:16,y:108,ball:1},
-   {t:"a",k:"dribble",d:"M52 88 Q64 48 96 46 L158 46 Q178 50 166 86"},{t:"a",k:"dribble",d:"M160 92 L102 92"},{t:"a",k:"dribble",d:"M94 98 Q82 138 100 138 L160 138 Q196 136 206 112 Q222 98 216 88 Q222 76 236 80"},{t:"a",k:"shot",d:"M240 82 L262 88"},
-   {t:"txt",x:108,y:36,s:"vooruit"},{t:"txt",x:104,y:86,s:"achteruit"},{t:"txt",x:108,y:154,s:"vooruit"},{t:"txt",x:186,y:66,s:"actie om de paal"}]},
+   {t:"a",k:"dribble",d:"M52 88 Q64 48 96 46 L158 46 Q178 50 166 86"},{t:"a",k:"dribble",d:"M160 92 L102 92"},{t:"a",k:"dribble",d:"M94 98 Q82 138 100 138 L156 138 Q178 136 182 112 Q196 98 190 88 Q196 76 212 80"},{t:"a",k:"shot",d:"M216 82 L262 88"},
+   {t:"txt",x:108,y:36,s:"vooruit"},{t:"txt",x:104,y:86,s:"achteruit"},{t:"txt",x:108,y:154,s:"vooruit"},{t:"txt",x:202,y:60,s:"actie om de paal"}]},
  {id:"schot-beweging",apps:["training"],cat:"Schieten",title:"Dribbelen, passen, schieten",int:"middel",min:12,kids:"2 rijen",
   mat:["stick per speler","een emmer ballen","2 pionnen","1 doel met keeper"],
   doel:"Een terugpass aannemen en raak schieten.",
@@ -744,7 +744,7 @@ const sq=(c,z)=>{const x=c.cx-z/2,y=c.cy-z/2;return[{t:"zone",x,y,w:z,h:z},{t:"c
 const GOALS=[{t:"goal",x:3.5,y:10,side:"l"},{t:"goal",x:36.5,y:10,side:"r"}];
 const HALL={
   "paal-dribbel":n=>{const f=n>7?2:1,it=[GOALS[1]],P=(x,y,k)=>k?{x:40-x,y:20-y}:{x,y};
-    for(let k=0;k<f;k++){if(k)it.push(GOALS[0]);[[24,8],[28,8],[24,12],[28,12]].forEach(([x,y])=>it.push({t:"cone",...P(x,y,k)}));it.push({t:"paal",...P(21,10,k)},{t:"paal",...P(31.5,11,k)},{t:"lbl",...P(21,8.4,k),s:"start"},{t:"lbl",...P(31.5,13,k),s:"paal"})}
+    for(let k=0;k<f;k++){if(k)it.push(GOALS[0]);[[24,8],[28,8],[24,12],[28,12]].forEach(([x,y])=>it.push({t:"cone",...P(x,y,k)}));it.push({t:"paal",...P(21,10,k)},{t:"paal",...P(30,11,k)},{t:"lbl",...P(21,8.4,k),s:"start"},{t:"lbl",...P(30,13,k),s:"paal"})}
     return{items:it,note:`${f===1?"halve veld":"beide helften"}: start bij de middenlijn, vierkant van pionnen en een paal voor het doel`}},
   "getrokken-schot":()=>({items:[GOALS[1],{t:"line",x1:20,y1:1,x2:20,y2:19},{t:"cone",x:28,y:6},{t:"cone",x:28,y:14},{t:"spot",x:21.5,y:6},{t:"spot",x:21.5,y:14},{t:"lbl",x:20,y:19.9,s:"middenlijn"}],
     note:"halve veld: 2 rijen, pionnen op ongeveer 8 m van het doel"}),

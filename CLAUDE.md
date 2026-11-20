@@ -28,6 +28,32 @@ Alles wat op `main` komt, staat binnen een paar minuten live.
    (`const CACHE = "floorball-vN"` → `vN+1`). Anders blijven telefoons met de offline-app de
    oude versie zien.
 
+## Bij elke nieuwe of gewijzigde oefening
+
+1. **Maak altijd meteen een tekening.** Maak bij elk voorstel en na elke wijziging van een
+   opstelling, looplijn of figuur een screenshot van de figuur en stuur die mee, zonder dat erom
+   gevraagd wordt. Zo ziet de gebruiker meteen of de oefening klopt. Werkwijze: Playwright op
+   telefoonbreedte (≈400 px) met `reduced_motion="reduce"` (dan staan alle pijlen in één beeld) en
+   `device_scale_factor=2`, en dan `card.locator(".field").screenshot(...)` van de kaart van die
+   oefening. Twijfel je over de bedoeling, stuur de tekening dan eerst en vraag of het klopt.
+2. **Zet elke nieuwe oefening in de reviewlijst** van haar programma. De reviewlijsten
+   ("Reviewlijsten oefeningen") zijn Claude Sheets, één per programma:
+
+   | Programma | Reviewlijst |
+   | --- | --- |
+   | O10 (`gymles`) | https://claude.ai/artifact/Tn7h7YA2W5BCmy29Rm3EHY |
+   | O12 | https://claude.ai/artifact/JX12XEqjDfdDaPnF1wH1ZR |
+   | O14 | https://claude.ai/artifact/65562QJpu6LDD8ycxWLAVV |
+   | O18 | https://claude.ai/artifact/CuWV28Mef6xuPLkSsE5Uwe |
+
+   Voeg onderaan de tabel een rij toe met het volgende nummer en vul de kolommen zoals bij de
+   andere rijen: naam, tijdsduur, of de oefening ook in een ander programma staat, een link naar
+   de animatie (de deellink `https://ufcutrecht.github.io/floorball-training/<programma>/#oefening=<id>`),
+   korte tekst (doel), lange tekst (stappen en aandachtspunten), makkelijker en moeilijker. Zet in
+   "Mijn feedback" en "Mijn voorstel" dat de oefening nieuw is en nog beoordeeld moet worden, met
+   de datum. Laat "Feedback Remco" leeg. Kun je niet bij de reviewlijsten (bijvoorbeeld als
+   meebouwer), noem de nieuwe oefening dan in je pull request, zodat Remco haar toevoegt.
+
 ## Opbouw
 
 | Pad | Wat |
