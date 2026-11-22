@@ -1378,7 +1378,7 @@ const GEN_TAGS={
 };
 const GEN_INT=["laag","laag–middel","middel","middel–hoog","hoog","zeer hoog"];
 const genRole=e=>e.cat==="Keeper"?null:e.cat==="Warming-up"?"warm":["Partijvorm","Spel","Speciale situaties"].includes(e.cat)?"partij":"kern";
-let GEN={thema:"Passen",min:75,open:false,res:null,msg:""};
+let GEN={thema:"Passen",min:60,open:false,res:null,msg:""};
 try{const g=JSON.parse(localStorage.getItem(C.key+"-gen")||"null");if(g){if(GEN_THEMES.includes(g.thema))GEN.thema=g.thema;if(g.min>=30&&g.min<=150)GEN.min=g.min}}catch(e){}
 const genSave=()=>{try{localStorage.setItem(C.key+"-gen",JSON.stringify({thema:GEN.thema,min:GEN.min}))}catch(e){}};
 /* kies n oefeningen voor een rol: eerst die bij het thema passen (hoofdthema 3× zoveel kans), daarna aanvullen */
