@@ -353,7 +353,7 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
 <div class="lesbar">
   <div class="in">
     <div><strong id="les-sum">0 oefeningen · 0 min</strong><div class="bar-sub" id="les-sub"></div></div>
-    <div class="barbtns"><button class="btn light" id="open-mat" type="button">Maak zelf een training</button><button class="btn" id="open-gen" type="button">Bedenk een training voor me</button><button class="btn" id="open-bib" type="button">Bibliotheek</button></div>
+    <div class="barbtns"><button class="btn light" id="open-mat" type="button">Maak een training</button><button class="btn" id="open-gen" type="button">Suggestie voor een training</button><button class="btn" id="open-bib" type="button">Bibliotheek</button></div>
   </div>
 </div>
 
@@ -386,7 +386,7 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
 </dialog>
 
 <dialog id="gen" aria-labelledby="gen-title">
-  <div class="dlg-head"><div><div class="num">Kies een thema en de tijd</div><h2 id="gen-title">Bedenk een training</h2></div><button class="close" type="button" data-close aria-label="Sluiten">×</button></div>
+  <div class="dlg-head"><div><div class="num">Kies een thema en de tijd</div><h2 id="gen-title">Suggestie voor een training</h2></div><button class="close" type="button" data-close aria-label="Sluiten">×</button></div>
   <div class="dlg-body" id="gen-body"></div>
 </dialog>
 
@@ -946,7 +946,7 @@ function renderSum(){
   const el=document.getElementById("sum-list");
   document.getElementById("mat-title").textContent=sheetTitle();
   const ex=document.getElementById("mat-extra");if(ex)ex.hidden=!sel.length;
-  if(!sel.length){el.innerHTML=`<p class="empty">Nog geen oefeningen gekozen. Tik op + ${C.inLabel} bij een oefening in het hoofdscherm, of tik op Bedenk een training voor me.</p>`;return}
+  if(!sel.length){el.innerHTML=`<p class="empty">Nog geen oefeningen gekozen. Tik op + ${C.inLabel} bij een oefening in het hoofdscherm, of tik op Suggestie voor een training.</p>`;return}
   renderTiles();
   el.innerHTML=`<div class="sum-head"><b>${totMin()} min</b> ${nOef(sel.length)} · ${exMin()} min oefenen${sel.length>1?` + ${wisselTot()} min wisselen (${WISSEL} min per ombouw)`:""}</div>
     <p class="note" style="margin:4px 0 10px">${C.extra} Veld en ombouw zijn voor ${N} ${C.people} op ${r1(ZW)} × ${r1(ZH)} m; aan te passen bij Instellingen.</p>
