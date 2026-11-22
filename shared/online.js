@@ -514,6 +514,12 @@ button,a,input,select,textarea,summary,label,.chip{touch-action:manipulation}
   body:has(.lesbar.fb-empty){padding-bottom:70px}
 }
 /* UI-review 22 nov 2026 */
+/* gekozen oefening in groen ("✓ In de training"), los van de blauwe teamkleur en de blauwe hoofdknop */
+:root{--sel:#1e8a5a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sel:#4cc795}}
+:root[data-theme="dark"]{--sel:#4cc795}
+body .btn.added{background:var(--sel);border-color:var(--sel);color:var(--surface)}
+body .card.sel{box-shadow:0 0 0 3px var(--sel)}
 /* knoppen op een kaart blijven op hun plek als een buurkaart hoger wordt (tijdknop na "In de training") */
 body #grid .card .body .actions{margin-top:0}
 /* legenda ook in het Uitleg-venster */
