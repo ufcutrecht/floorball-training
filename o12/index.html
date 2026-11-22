@@ -876,7 +876,22 @@ const EX = [
   fig:[{t:"zone",x:30,y:30,w:110,h:120},{t:"zone",x:160,y:30,w:110,h:120},
    {t:"p",x:75,y:90,ball:1},{t:"p",x:102,y:68,team:"b"},{t:"p",x:205,y:92,ball:1},{t:"p",x:232,y:108,team:"b"},
    {t:"a",k:"dribble",d:"M70 96 Q55 112 66 126"},{t:"a",k:"run",d:"M100 76 Q100 104 82 122"},{t:"a",k:"dribble",d:"M210 86 Q222 62 240 60"},{t:"a",k:"run",d:"M234 100 Q252 84 250 70"},
-   {t:"txt",x:30,y:24,s:"vakje 3 × 3 m per duo"},{t:"txt",x:24,y:176,s:"20 seconden de bal houden, dan wisselen"}]}
+   {t:"txt",x:30,y:24,s:"vakje 3 × 3 m per duo"},{t:"txt",x:24,y:176,s:"20 seconden de bal houden, dan wisselen"}]},
+ {id:"brandbal",cat:"Schieten",title:"Brandbal-schieten",int:"hoog",min:12,kids:"2 teams",
+  mat:["stick en bal per speler","8 kegels of pionnen als doelen","1 lange bank achter de kegels","4 pionnen voor de looproute"],
+  doel:"Snel en raak schieten, terwijl het andere team zoveel mogelijk rondjes dribbelt.",
+  stappen:["Twee teams. Het schietteam staat achter de schietlijn, op ongeveer 8 meter van 8 kegels met een bank erachter. Iedereen heeft een bal.","Het loopteam staat bij een hoekpion, ook iedereen met een bal, en dribbelt rondjes langs de 4 pionnen aan de rand van de zaal.","Op het signaal begint iedereen: het schietteam schiet zo snel mogelijk alle kegels om, het loopteam telt zijn rondjes.","Is de laatste kegel om? Dan stopt het dribbelen. Tel alle rondjes van het loopteam bij elkaar.","Kegels terugzetten en wisselen van rol. Welk team haalde meer rondjes?"],
+  kern:"Rustig mikken: een misser kost meer tijd dan een rustig schot.",
+  tips:["Rustig mikken: een misser kost meer tijd dan een rustig schot.","Lopers: bal dicht bij de stick in de bochten. Bal kwijt? Eerst ophalen, dan verder."],
+  makkelijker:["Schietlijn dichter bij de kegels.","Het loopteam loopt zonder bal."],
+  moeilijker:["Alleen backhand schieten.","Elke schutter heeft maar 2 ballen: raak mikken telt."],
+  fig:[{t:"cone",x:24,y:18},{t:"cone",x:276,y:18},{t:"cone",x:276,y:162},{t:"cone",x:24,y:162},{t:"line",d:"M110 34 L110 146"},
+   {t:"zone",x:236,y:50,w:12,h:80},{t:"cone",x:205,y:62},{t:"cone",x:222,y:76},{t:"cone",x:205,y:90},{t:"cone",x:222,y:104},{t:"cone",x:205,y:118},{t:"cone",x:222,y:62},{t:"cone",x:222,y:90},{t:"cone",x:222,y:118},
+   {t:"p",x:90,y:62,ball:1},{t:"p",x:90,y:90,ball:1},{t:"p",x:90,y:118,ball:1},
+   {t:"p",x:70,y:162,team:"b",ball:1},{t:"p",x:276,y:110,team:"b",ball:1},{t:"p",x:200,y:18,team:"b",ball:1},
+   {t:"a",k:"shot",d:"M98 62 L198 62"},{t:"a",k:"shot",d:"M98 90 L198 90"},{t:"a",k:"shot",d:"M98 118 L198 118"},
+   {t:"a",k:"dribble",d:"M78 162 L250 162"},{t:"a",k:"dribble",d:"M276 102 L276 40"},{t:"a",k:"dribble",d:"M192 18 L50 18"},
+   {t:"txt",x:86,y:156,s:"schietlijn"},{t:"txt",x:40,y:176,s:"loopteam dribbelt rondjes"}]}
 ];
 
 /* Welke oefeningen in welke app. Geen "apps" = in beide apps; ["training"] = alleen trainersapp,
@@ -914,6 +929,7 @@ const NEED={
   "nummerpassen":n=>({stick:n,bal:Math.ceil(n/4),pion:4}),
   "passen-duel":n=>({stick:n,bal:Math.ceil(n/2)}),
   "afschermen":n=>({stick:n,bal:Math.ceil(n/2),pion:4*Math.ceil(n/2)}),
+  "brandbal":n=>({stick:n,bal:n,pion:12}),
   "bankbal":n=>({stick:n,bal:3,hesje:Math.ceil(n/2)}),
   "schatrovers-verdedigers":n=>({stick:n,bal:Math.max(12,n),pion:16,hesje:4}),
   "doelen-verzamelen":n=>({stick:n,bal:n,pion:8}),
@@ -947,7 +963,7 @@ let N=12;
 try{const v=parseInt(localStorage.getItem("o12-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
-const MAAT={"ligadribbel":"hele zaal","chaosspel":"hele zaal","schiettent":"hele zaal","zonebal":"20 × 10 m per veld","nummerpassen":"20 × 15 m","passen-duel":"hele zaal","afschermen":"3 × 3 m per duo","baas-en-hond":"20 × 10 m langs de boarding","krokodillen":"hele zaal","twee-ballen":"20 × 10 m per veld","paal-dribbel":"halve veld per baan, vierkant 3 × 3 m","poortjesjacht":"hele zaal","bankbal":"40 × 20 m","schatrovers-verdedigers":"hele zaal","getrokken-schot":"20 × 20 m","schuifslag":"10 × 6 m per drietal","aanname-fh-bh":"12 m per drietal","reactiestart":"12 m per rij","keeper-muur":"1–3 m van de muur","keeper-werpen":"10 m tussen de keepers","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m","tikspel":"heel veld","rondo":"8 × 8 m per vak","vierkant":"6 × 6 m per groepje","minuut-passen":"4 m tussen de pionnen","pionnen-stick":"5 m tussen werker en aanspeler","dribbel-estafette":"rij van ca. 15 m","schot-beweging":"half veld","twee-een":"heel kleinveld","drie-drie":"half kleinveld per veldje","lijnteam":"half kleinveld","partij-klein":"heel kleinveld","koningsbal":"heel kleinveld","muurbal":"heel veld","doelen-verzamelen":"hele zaal","een-een-poortjes":"klein veldje per 4 spelers","hinderbaan":"baan van ca. 15 m","twee-twee-dwars":"dwars over het veld","vaardigheidsproef":"3 stations"};
+const MAAT={"brandbal":"heel veld","ligadribbel":"hele zaal","chaosspel":"hele zaal","schiettent":"hele zaal","zonebal":"20 × 10 m per veld","nummerpassen":"20 × 15 m","passen-duel":"hele zaal","afschermen":"3 × 3 m per duo","baas-en-hond":"20 × 10 m langs de boarding","krokodillen":"hele zaal","twee-ballen":"20 × 10 m per veld","paal-dribbel":"halve veld per baan, vierkant 3 × 3 m","poortjesjacht":"hele zaal","bankbal":"40 × 20 m","schatrovers-verdedigers":"hele zaal","getrokken-schot":"20 × 20 m","schuifslag":"10 × 6 m per drietal","aanname-fh-bh":"12 m per drietal","reactiestart":"12 m per rij","keeper-muur":"1–3 m van de muur","keeper-werpen":"10 m tussen de keepers","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m","tikspel":"heel veld","rondo":"8 × 8 m per vak","vierkant":"6 × 6 m per groepje","minuut-passen":"4 m tussen de pionnen","pionnen-stick":"5 m tussen werker en aanspeler","dribbel-estafette":"rij van ca. 15 m","schot-beweging":"half veld","twee-een":"heel kleinveld","drie-drie":"half kleinveld per veldje","lijnteam":"half kleinveld","partij-klein":"heel kleinveld","koningsbal":"heel kleinveld","muurbal":"heel veld","doelen-verzamelen":"hele zaal","een-een-poortjes":"klein veldje per 4 spelers","hinderbaan":"baan van ca. 15 m","twee-twee-dwars":"dwars over het veld","vaardigheidsproef":"3 stations"};
 EX.forEach(e=>e.maat=MAAT[e.id]);
 const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
@@ -959,6 +975,7 @@ const r1=v=>String(Math.round(v*10)/10).replace(".",",");
 const sq=(c,z)=>{const x=c.cx-z/2,y=c.cy-z/2;return[{t:"zone",x,y,w:z,h:z},{t:"cone",x,y},{t:"cone",x:x+z,y},{t:"cone",x,y:y+z},{t:"cone",x:x+z,y:y+z}]};
 const GOALS=[{t:"goal",x:3.5,y:10,side:"l"},{t:"goal",x:36.5,y:10,side:"r"}];
 const HALL={
+  "brandbal":()=>({items:[{t:"cone",x:1,y:1},{t:"cone",x:39,y:1},{t:"cone",x:39,y:19},{t:"cone",x:1,y:19},{t:"line",x1:22,y1:4,x2:22,y2:16},{t:"zone",x:33,y:5.5,w:.5,h:8},{t:"cone",x:30,y:6.5},{t:"cone",x:30,y:8.5},{t:"cone",x:30,y:10.5},{t:"cone",x:30,y:12.5},{t:"cone",x:31.5,y:6.5},{t:"cone",x:31.5,y:8.5},{t:"cone",x:31.5,y:10.5},{t:"cone",x:31.5,y:12.5},{t:"lbl",x:22,y:16.9,s:"schietlijn"},{t:"lbl",x:30.8,y:5,s:"kegels"}],note:"heel veld: looproute langs 4 hoekpionnen, schietlijn op ongeveer 8 m van de kegels, bank erachter"}),
   "ligadribbel":()=>({items:[{t:"zone",x:.5,y:.5,w:12.6,h:19},{t:"zone",x:13.7,y:.5,w:12.6,h:19},{t:"zone",x:26.9,y:.5,w:12.6,h:19},{t:"lbl",x:6.8,y:10.4,s:"brons"},{t:"lbl",x:20,y:10.4,s:"zilver"},{t:"lbl",x:33.2,y:10.4,s:"goud"}],note:"3 vakken naast elkaar over het hele veld, met pionnen gemarkeerd"}),
   "chaosspel":()=>({items:[{t:"goal",x:1,y:5,side:"l"},{t:"goal",x:1,y:15,side:"l"},{t:"goal",x:39,y:5,side:"r"},{t:"goal",x:39,y:15,side:"r"}],note:"heel veld, 4 doeltjes langs de korte kanten, bij elk doeltje 8 pionnen als punten"}),
   "schiettent":()=>({items:[{t:"line",x1:10,y1:1,x2:10,y2:19},{t:"line",x1:30,y1:1,x2:30,y2:19},{t:"cone",x:1.5,y:4},{t:"cone",x:1.5,y:8},{t:"cone",x:1.5,y:12},{t:"cone",x:1.5,y:16},{t:"cone",x:38.5,y:4},{t:"cone",x:38.5,y:8},{t:"cone",x:38.5,y:12},{t:"cone",x:38.5,y:16},{t:"lbl",x:20,y:19.9,s:"schieten tussen de lijnen"}],note:"heel veld: 4 pionnen met een bal erop bij elke korte kant, 2 schietlijnen op ongeveer 8 m"}),
@@ -1145,6 +1162,7 @@ const ANIM={
   "nummerpassen":[{at:0},{at:.4},{at:1.2},{at:.2},{at:1.3}],
   "passen-duel":[{at:0},{at:.3},{at:1.2},{at:1.2}],
   "afschermen":[{at:0},{at:0},{at:.2},{at:.2}],
+  "brandbal":[{at:0},{at:.6},{at:1.2},{at:0},{at:.3},{at:.6}],
   "paal-dribbel":[{at:0},{at:2.4},{at:4.8},{at:7.1}],
   "getrokken-schot":[{at:1},{at:3.3},{at:0}],
   "schuifslag":[{at:0},{at:1},{at:.6},{at:1.6}],
@@ -1564,6 +1582,7 @@ function exampleHtml(){const s=VB.sel.filter(v=>EX.some(e=>e.id===v.id)),m=s.red
    Eerste thema in de lijst = hoofdthema van de oefening (krijgt meer kans). Keeperoefeningen doen niet mee. */
 const GEN_THEMES=["Dribbelen","Passen","Schieten","Samenspelen","Duels"];
 const GEN_TAGS={
+  "brandbal":["Schieten","Dribbelen"],
   "ligadribbel":["Dribbelen","Duels"],
   "chaosspel":["Samenspelen","Schieten"],
   "schiettent":["Schieten"],

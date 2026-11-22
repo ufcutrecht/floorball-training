@@ -547,6 +547,12 @@
    "apps": [
     "training"
    ]
+  },
+  {
+   "id": "brandbal",
+   "title": "Brandbal-schieten",
+   "cat": "Schieten",
+   "phase": "Kern"
   }
  ],
  "o14": [
