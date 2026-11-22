@@ -206,6 +206,30 @@
    "title": "Partij met twee ballen",
    "cat": "Spel",
    "phase": "Partij"
+  },
+  {
+   "id": "ligadribbel",
+   "title": "Ligadribbel",
+   "cat": "Dribbelen",
+   "phase": "Kern"
+  },
+  {
+   "id": "ballensmokkel",
+   "title": "Ballensmokkel",
+   "cat": "Dribbelen",
+   "phase": "Kern"
+  },
+  {
+   "id": "chaosspel",
+   "title": "Chaosspel",
+   "cat": "Spel",
+   "phase": "Partij"
+  },
+  {
+   "id": "formule1",
+   "title": "Formule 1",
+   "cat": "Warming-up",
+   "phase": "Warming-up"
   }
  ],
  "o12": [
