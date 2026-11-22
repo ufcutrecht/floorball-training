@@ -924,7 +924,8 @@ function hallSvg(id,n){
 const VERB={paal:["paal","palen","erbij zetten","weghalen"],pion:["pion","pionnen","erbij zetten","weghalen"],doel:["doel","doelen","erbij zetten","weghalen"],bal:["bal","ballen","erbij pakken","terug in de ballenbak"],hesje:["hesje","hesjes","uitdelen","inleveren"]};
 function diffLines(prev,next){
   const A=prev?NEED[prev](N):{},B=NEED[next](N),out=[];
-  ["pion","paal","doel","bal","hesje"].forEach(k=>{const x=A[k]||0,y=B[k]||0,d=y-x,[s,p,plus,min]=VERB[k],w=v=>Math.abs(v)===1?s:p;
+  /* ballen niet: die staan in de materiaallijst */
+  ["pion","paal","doel","hesje"].forEach(k=>{const x=A[k]||0,y=B[k]||0,d=y-x,[s,p,plus,min]=VERB[k],w=v=>Math.abs(v)===1?s:p;
     if(!prev){if(y)out.push(["plus",`${y} ${w(y)} klaarzetten`]);return}
     if(d>0)out.push(["plus",`${d} ${w(d)} ${plus}`]);else if(d<0)out.push(["min",`${-d} ${w(d)} ${min}`])});
   if(prev){const m=Math.min(A.pion||0,B.pion||0);if(m)out.unshift(["move",`${m} ${m===1?"pion":"pionnen"} verplaatsen naar de nieuwe opstelling`])}
