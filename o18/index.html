@@ -70,7 +70,7 @@ svg.court{width:100%;height:auto;display:block}
 .c-paal{fill:var(--surface);stroke:var(--ink);stroke-width:1.3}
 .c-paal-dot{fill:var(--ink)}
 .c-pa{fill:var(--team-a)} .c-pb{fill:var(--team-b)} .c-pj{fill:var(--ink)} .c-pl{fill:var(--surface);stroke:var(--ink);stroke-width:1.6} .c-plabel{fill:var(--surface);font:700 8px var(--body);text-anchor:middle}
-.c-ball{fill:var(--surface);stroke:var(--ink);stroke-width:.8}
+.c-ball{fill:var(--surface);stroke:var(--ink);stroke-width:.8} .c-ball-a{fill:var(--team-a)} .c-ball-b{fill:var(--team-b)}
 .c-goal{fill:none;stroke:var(--ink);stroke-width:2.5}
 .a-pass{stroke:var(--ink);stroke-width:1.4;fill:none}
 .a-run{stroke:var(--muted);stroke-width:1.4;fill:none;stroke-dasharray:5 4}
@@ -1158,7 +1158,7 @@ function svg(ex,uid,still){
   });
   out+=ex.fig.filter(f=>f.t==="cone").map(f=>`<path d="M${f.x} ${f.y-5} L${f.x+4.5} ${f.y+4} L${f.x-4.5} ${f.y+4}Z" class="c-cone"/>`).join("");
   out+=ex.fig.filter(f=>f.t==="paal").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="4.6" class="c-paal"/><circle cx="${f.x}" cy="${f.y}" r="1.5" class="c-paal-dot"/>`).join("");
-  out+=ex.fig.filter(f=>f.t==="ball").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="3" class="c-ball"/>`).join("");
+  out+=ex.fig.filter(f=>f.t==="ball").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="${f.team?4:3}" class="c-ball${f.team?" c-ball-"+f.team:""}"/>`).join("");
   out+=badges;
   /* spelers */
   const pls=P?P.pl:ex.fig.filter(f=>f.t==="p").map(f=>({f,x:f.x,y:f.y,moves:[],tl:[]}));

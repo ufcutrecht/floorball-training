@@ -70,7 +70,7 @@ svg.court{width:100%;height:auto;display:block}
 .c-paal{fill:var(--surface);stroke:var(--ink);stroke-width:1.3}
 .c-paal-dot{fill:var(--ink)}
 .c-pa{fill:var(--team-a)} .c-pb{fill:var(--team-b)} .c-pj{fill:var(--ink)} .c-pl{fill:var(--surface);stroke:var(--ink);stroke-width:1.6} .c-plabel{fill:var(--surface);font:700 8px var(--body);text-anchor:middle}
-.c-ball{fill:var(--surface);stroke:var(--ink);stroke-width:.8}
+.c-ball{fill:var(--surface);stroke:var(--ink);stroke-width:.8} .c-ball-a{fill:var(--team-a)} .c-ball-b{fill:var(--team-b)}
 .c-big{fill:var(--cone);stroke:var(--ink);stroke-width:.8} .c-big-l{fill:none;stroke:var(--ink);stroke-width:.7}
 .c-kast{fill:var(--cone);fill-opacity:.6;stroke:var(--ink);stroke-width:.7}
 .c-hoop{fill:none;stroke:var(--ph-partij);stroke-width:2}
@@ -622,7 +622,7 @@ const EX = [
    {t:"p",x:180,y:80,team:"b"},{t:"p",x:210,y:130,team:"b"},{t:"p",x:230,y:50,team:"b"},
    {t:"a",k:"pass",d:"M98 86 L134 56"},{t:"a",k:"dribble",d:"M146 46 Q180 28 205 30"},{t:"a",k:"run",d:"M156 128 Q200 150 235 140"},{t:"a",k:"shot",d:"M210 32 L264 40"},
    {t:"txt",x:60,y:174,s:"niet in het vak voor de pionnen"}]},
- {id:"lunapark",cat:"Schieten",title:"Lunapark",groep:"3–8",min:10,kids:"groepjes van 4–5",
+ {id:"lunapark",apps:["training"],cat:"Schieten",title:"Lunapark",groep:"3–8",min:10,kids:"groepjes van 4–5",
   mat:["stick en bal per kind","1 lange bank per groepje","3–4 doelwitten per bank: pionnen, kegels of volleyballen"],
   doel:"Gericht schieten en treffen, zoals op de kermis.",
   stappen:["Zet de banken tegen de muur, met de doelwitten erop.","Elk groepje staat achter een schietlijn op ongeveer 6 meter van de eigen bank.","Iedereen schiet tegelijk vanaf de schietlijn, elk met een eigen bal, en probeert een doelwit van de bank te schieten.","Ballen ophalen en doelwitten terugzetten doe je alleen op het fluitsignaal.","Welk groepje heeft na 3 minuten de meeste doelwitten geraakt?"],
@@ -860,7 +860,35 @@ const EX = [
    {t:"hoop",x:150,y:96},{t:"hoop",x:112,y:72},{t:"hoop",x:190,y:128},
    {t:"p",x:152,y:40,ball:1},{t:"p",x:96,y:112,ball:1},{t:"p",x:205,y:80,ball:1},{t:"p",x:140,y:140,ball:1},{t:"p",x:258,y:96,ball:1},
    {t:"a",k:"dribble",d:"M144 42 Q100 40 48 49"},{t:"a",k:"dribble",d:"M92 104 Q86 66 46 52"},{t:"a",k:"dribble",d:"M198 76 Q160 62 128 50"},
-   {t:"txt",x:40,y:34,s:"rood"},{t:"txt",x:226,y:25,s:"blauw"},{t:"txt",x:50,y:162,s:"geel"},{t:"txt",x:222,y:115,s:"groen"},{t:"txt",x:110,y:11,s:"trainer: \"Rood!\""}]}
+   {t:"txt",x:40,y:34,s:"rood"},{t:"txt",x:226,y:25,s:"blauw"},{t:"txt",x:50,y:162,s:"geel"},{t:"txt",x:222,y:115,s:"groen"},{t:"txt",x:110,y:11,s:"trainer: \"Rood!\""}]},
+ {id:"schiettent",cat:"Schieten",title:"Schiettent",groep:"3–8",min:10,kids:"2 teams",
+  mat:["stick en bal per kind","8 pionnen met elk een zachte bal erop, in de kleuren van de twee teams","4 pionnen voor de schietlijnen"],
+  doel:"Mikken op een klein doel en daarna snel kiezen waar je heen gaat.",
+  stappen:["Zet aan beide korte kanten 4 pionnen met een zachte bal erop: 2 in de kleur van elk team.","Iedereen heeft een bal en begint in het midden.","Je schiet alleen tussen de twee schietlijnen, en alleen op de ballen in de kleur van je eigen team.","Na elk schot haal je je bal op en ga je naar de andere kant van de zaal.","Welk team heeft na 3 minuten de meeste ballen van de pionnen geschoten? Een afgeschoten bal leg je meteen terug."],
+  kern:"Eerst naar het doel kijken, dan schieten.",
+  tips:["Eerst naar het doel kijken, dan schieten.","Stick na het schot niet hoger dan je heup."],
+  makkelijker:["Schietlijnen dichter bij de doelen.","Grotere ballen op de pionnen."],
+  moeilijker:["Schietlijnen verder weg.","Alleen backhand schieten."],
+  fig:[{t:"line",d:"M20 14 L280 14 L280 166 L20 166 Z"},{t:"line",d:"M95 14 L95 166"},{t:"line",d:"M205 14 L205 166"},
+   {t:"cone",x:36,y:40},{t:"ball",x:36,y:32,team:"a"},{t:"cone",x:36,y:75},{t:"ball",x:36,y:67,team:"b"},{t:"cone",x:36,y:110},{t:"ball",x:36,y:102,team:"a"},{t:"cone",x:36,y:145},{t:"ball",x:36,y:137,team:"b"},{t:"cone",x:264,y:40},{t:"ball",x:264,y:32,team:"a"},{t:"cone",x:264,y:75},{t:"ball",x:264,y:67,team:"b"},{t:"cone",x:264,y:110},{t:"ball",x:264,y:102,team:"a"},{t:"cone",x:264,y:145},{t:"ball",x:264,y:137,team:"b"},
+   {t:"p",x:115,y:72,ball:1},{t:"p",x:185,y:80,team:"b",ball:1},{t:"p",x:110,y:135,team:"b",ball:1},{t:"p",x:160,y:45},{t:"p",x:150,y:110},
+   {t:"a",k:"shot",d:"M107 68 L46 44"},{t:"a",k:"shot",d:"M193 80 L254 77"},{t:"a",k:"shot",d:"M102 137 L46 146"},{t:"a",k:"run",d:"M168 44 Q190 50 196 76"},
+   {t:"txt",x:98,y:10,s:"schieten tussen de lijnen"},{t:"txt",x:22,y:176,s:"na elk schot naar de andere kant"}]},
+ {id:"brandbal",apps:["gymzaal"],cat:"Schieten",title:"Brandbal-schieten",groep:"3–8",min:12,kids:"2 teams",
+  mat:["stick per kind","1 bal per kind van het schietteam","8 kegels of PET-flessen","1 lange bank achter de kegels","4 pionnen voor de looproute"],
+  doel:"Snel en raak schieten, terwijl het andere team zoveel mogelijk rondjes loopt.",
+  stappen:["Twee teams. Het schietteam staat achter de schietlijn, iedereen met een bal. Verderop staan 8 kegels, met een bank erachter.","Het loopteam staat bij een hoekpion en loopt rondjes langs de 4 pionnen aan de rand van de zaal.","Op het signaal begint iedereen: het schietteam schiet zo snel mogelijk alle kegels om, het loopteam telt zijn rondjes.","Is de laatste kegel om? Dan stopt het lopen. Tel alle rondjes van het loopteam bij elkaar.","Kegels terugzetten en wisselen van rol. Welk team haalde meer rondjes?"],
+  kern:"Rustig mikken: een misser kost meer tijd dan een rustig schot.",
+  tips:["Rustig mikken: een misser kost meer tijd dan een rustig schot.","Schutters: haal je bal pas op als hij stilligt en blijf uit de looproute."],
+  makkelijker:["Schietlijn dichter bij de kegels.","Grotere doelen, bijvoorbeeld kegels naast elkaar."],
+  moeilijker:["Schietlijn verder weg.","Het loopteam dribbelt de rondjes met een bal."],
+  fig:[{t:"cone",x:24,y:18},{t:"cone",x:276,y:18},{t:"cone",x:276,y:162},{t:"cone",x:24,y:162},{t:"line",d:"M120 34 L120 146"},
+   {t:"bank",x:236,y:50,w:12,h:80},{t:"fles",x:205,y:62,hit:1.6},{t:"fles",x:222,y:76},{t:"fles",x:205,y:90,hit:2.2},{t:"fles",x:222,y:104},{t:"fles",x:205,y:118,hit:2.8},{t:"fles",x:222,y:62},{t:"fles",x:222,y:90},{t:"fles",x:222,y:118},
+   {t:"p",x:100,y:62,ball:1},{t:"p",x:100,y:90,ball:1},{t:"p",x:100,y:118,ball:1},
+   {t:"p",x:70,y:162,team:"b"},{t:"p",x:276,y:110,team:"b"},{t:"p",x:200,y:18,team:"b"},
+   {t:"a",k:"shot",d:"M108 62 L198 62"},{t:"a",k:"shot",d:"M108 90 L198 90"},{t:"a",k:"shot",d:"M108 118 L198 118"},
+   {t:"a",k:"run",d:"M78 162 L250 162"},{t:"a",k:"run",d:"M276 102 L276 40"},{t:"a",k:"run",d:"M192 18 L50 18"},
+   {t:"txt",x:96,y:156,s:"schietlijn"},{t:"txt",x:40,y:176,s:"loopteam: rondjes langs de pionnen"}]}
 ];
 
 /* Welke oefeningen in welke app. Geen "apps" = in beide apps; ["training"] = alleen trainersapp,
@@ -910,14 +938,16 @@ const NEED={
   "ligadribbel":n=>({stick:n,bal:n,pion:8}),
   "ballensmokkel":n=>{const d=Math.ceil(n/2);return{stick:n,bal:Math.max(10,n),hoepel:d,hesje:d,pion:8}},
   "chaosspel":n=>({stick:n,bal:5,doel:4,hesje:3*Math.ceil(n/4),pion:32}),
-  "formule1":n=>({stick:n,bal:n,pion:8,hoepel:4})
+  "formule1":n=>({stick:n,bal:n,pion:8,hoepel:4}),
+  "schiettent":n=>({stick:n,bal:n+8,pion:12}),
+  "brandbal":n=>({stick:n,bal:Math.ceil(n/2),fles:8,bank:1,pion:4})
 };
 const ITEMS=[["stick","Sticks","stick","sticks"],["bal","Ballen","bal","ballen"],["pion","Pionnen","pion","pionnen"],["hesje","Hesjes","hesje","hesjes"],["doel","Doeltjes","doeltje","doeltjes"],["bank","Lange banken","lange bank","lange banken",1],["fles","PET-flessen","PET-fles","PET-flessen",1],["grootbal","Grote ballen","grote bal","grote ballen",1],["hoepel","Hoepels","hoepel","hoepels",1],["kast","Zweedse kasten","Zweedse kast","Zweedse kasten",1]];
 let N=26;
 try{const v=parseInt(localStorage.getItem("fb-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
-const MAAT={"formule1":"hele zaal","ligadribbel":"hele zaal","ballensmokkel":"hele zaal","chaosspel":"hele zaal","stoplicht":"15 × 10 m","balletje-tik":"15 × 10 m","schaduw":"15 × 10 m","schatrovers":"20 × 12 m","tweetallen":"6 m per tweetal","driehoek":"zijde 6 m","pionnen-omschieten":"12 × 12 m","dribbel-schiet":"18 × 10 m","koning-vak":"10 × 8 m","een-tegen-een":"10 × 3,5 m per baan","drie-drie":"10 × 6 m per veldje","tikkertje-opdracht":"15 × 10 m","pionnenbos":"11 × 14 m","uitdagen-finten":"8 m per tweetal","lijnbal":"halve of kwart zaal","vier-doeltjes":"halve of kwart zaal","joker-partij":"halve of kwart zaal","pionnen-omver":"halve of kwart zaal","lunapark":"6 m tot de bank","rollmops":"16 × 10 m","fruitsalade":"hele zaal","annemaria":"hele zaal","nest-zoeken":"hele zaal","aanspeelstations":"hele zaal","kegels":"hele zaal","penaltyspel":"veldjes van 14 × 5 m","kast-afbouwen":"hele of halve zaal","staartjes":"15 × 10 m","krokodillen":"hele zaal","poortjes-tellen":"hele zaal","opruimen":"hele zaal","twee-ballen":"halve of kwart zaal"};
+const MAAT={"schiettent":"hele zaal","brandbal":"hele zaal","formule1":"hele zaal","ligadribbel":"hele zaal","ballensmokkel":"hele zaal","chaosspel":"hele zaal","stoplicht":"15 × 10 m","balletje-tik":"15 × 10 m","schaduw":"15 × 10 m","schatrovers":"20 × 12 m","tweetallen":"6 m per tweetal","driehoek":"zijde 6 m","pionnen-omschieten":"12 × 12 m","dribbel-schiet":"18 × 10 m","koning-vak":"10 × 8 m","een-tegen-een":"10 × 3,5 m per baan","drie-drie":"10 × 6 m per veldje","tikkertje-opdracht":"15 × 10 m","pionnenbos":"11 × 14 m","uitdagen-finten":"8 m per tweetal","lijnbal":"halve of kwart zaal","vier-doeltjes":"halve of kwart zaal","joker-partij":"halve of kwart zaal","pionnen-omver":"halve of kwart zaal","lunapark":"6 m tot de bank","rollmops":"16 × 10 m","fruitsalade":"hele zaal","annemaria":"hele zaal","nest-zoeken":"hele zaal","aanspeelstations":"hele zaal","kegels":"hele zaal","penaltyspel":"veldjes van 14 × 5 m","kast-afbouwen":"hele of halve zaal","staartjes":"15 × 10 m","krokodillen":"hele zaal","poortjes-tellen":"hele zaal","opruimen":"hele zaal","twee-ballen":"halve of kwart zaal"};
 EX.forEach(e=>e.maat=MAAT[e.id]);
 const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
@@ -942,6 +972,8 @@ const HALL={
   "ballensmokkel":n=>{const d=Math.ceil(n/2),it=[{t:"zone",x:.5,y:.5,w:3.5,h:13},{t:"zone",x:18,y:.5,w:3.5,h:13},{t:"lbl",x:2.25,y:7.3,s:"voorraad"},{t:"lbl",x:19.75,y:7.3,s:"eigen zone"}];
     const cols=Math.ceil(d/3);for(let k=0;k<d;k++){const c=k%cols,r=Math.floor(k/cols);it.push({t:"hoop",x:6+(cols>1?c*10/(cols-1):5),y:2.5+r*4.5+(c%2)*1.5})}
     return{items:it,note:`voorraad en eigen zone bij de korte kanten, ${d} hoepels voor de douane in het midden`}},
+  "schiettent":()=>({items:[{t:"line",x1:7,y1:.5,x2:7,y2:13.5},{t:"line",x1:15,y1:.5,x2:15,y2:13.5},{t:"cone",x:1,y:2.5},{t:"cone",x:1,y:5.5},{t:"cone",x:1,y:8.5},{t:"cone",x:1,y:11.5},{t:"cone",x:21,y:2.5},{t:"cone",x:21,y:5.5},{t:"cone",x:21,y:8.5},{t:"cone",x:21,y:11.5},{t:"lbl",x:11,y:13.9,s:"schieten tussen de lijnen"}],note:"hele zaal: 4 pionnen met een bal erop bij elke korte kant, 2 schietlijnen op 6 m"}),
+  "brandbal":()=>({items:[{t:"cone",x:1,y:1},{t:"cone",x:21,y:1},{t:"cone",x:21,y:13},{t:"cone",x:1,y:13},{t:"line",x1:9,y1:3,x2:9,y2:11},{t:"zone",x:18,y:4,w:.5,h:6},{t:"fles",x:16.4,y:4.8},{t:"fles",x:16.4,y:6.2},{t:"fles",x:16.4,y:7.6},{t:"fles",x:16.4,y:9},{t:"fles",x:17.3,y:4.8},{t:"fles",x:17.3,y:6.2},{t:"fles",x:17.3,y:7.6},{t:"fles",x:17.3,y:9},{t:"lbl",x:9,y:11.8,s:"schietlijn"},{t:"lbl",x:16.8,y:3.6,s:"kegels"}],note:"hele zaal: looproute langs 4 hoekpionnen, schietlijn op 6 m van de kegels, bank erachter"}),
   "formule1":()=>({items:[{t:"cone",x:3,y:2.5},{t:"cone",x:3,y:4},{t:"cone",x:19,y:2.5},{t:"cone",x:19,y:4},{t:"cone",x:3,y:10},{t:"cone",x:3,y:11.5},{t:"cone",x:19,y:10},{t:"cone",x:19,y:11.5},{t:"hoop",x:8,y:5},{t:"hoop",x:14,y:5},{t:"hoop",x:8,y:9},{t:"hoop",x:14,y:9},{t:"lbl",x:3,y:1.6,s:"rood"},{t:"lbl",x:19,y:1.6,s:"blauw"},{t:"lbl",x:3,y:12.9,s:"geel"},{t:"lbl",x:19,y:12.9,s:"groen"}],note:"hele zaal, 4 gekleurde poortjes bij de hoeken en 4 hoepels in het midden"}),
   "chaosspel":()=>({items:[{t:"goal",x:.5,y:3.5,side:"l"},{t:"goal",x:.5,y:10.5,side:"l"},{t:"goal",x:21.5,y:3.5,side:"r"},{t:"goal",x:21.5,y:10.5,side:"r"}],note:"hele zaal, 4 doeltjes langs de korte kanten, bij elk doeltje 8 pionnen als punten"}),
   "twee-ballen":n=>halves(n,8,(x,y,w,h)=>[{t:"goal",x:x+.3,y:y+h/2,side:"l"},{t:"goal",x:x+w-.3,y:y+h/2,side:"r"}]),
@@ -1117,7 +1149,9 @@ const ANIM={
   "ligadribbel":[{at:0},{at:.3},{at:.6}],
   "ballensmokkel":[{at:0},{at:.6},{at:.2}],
   "chaosspel":[{at:0},{at:2.4},{at:.5},{at:.3},{at:2.7},{at:.8}],
-  "formule1":[{at:0},{at:.2},{at:.4}]
+  "formule1":[{at:0},{at:.2},{at:.4}],
+  "schiettent":[{at:0},{at:.3},{at:.6},{at:.9}],
+  "brandbal":[{at:0},{at:.6},{at:1.2},{at:0},{at:.3},{at:.6}]
 };
 /* vervolgacties: alleen in de animatie, zodat de oefening doorloopt zonder de tekening vol te zetten */
 const EXTRA={
@@ -1262,7 +1296,7 @@ function svg(ex,uid,still){
     if(P&&f.hit!=null){const s=steps([[0,1],[Math.min(.98,f.hit/P.cyc),.2]]);an=`<animate attributeName="opacity" ${anim(P.cyc,`calcMode="discrete" values="${s.v}" keyTimes="${s.t}"`)}/>`}
     return `<rect x="${f.x-2.5}" y="${f.y-5}" width="5" height="10" rx="1.5" class="c-fles">${an}</rect>`}).join("");
   out+=ex.fig.filter(f=>f.t==="paal").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="4.6" class="c-paal"/><circle cx="${f.x}" cy="${f.y}" r="1.5" class="c-paal-dot"/>`).join("");
-  out+=ex.fig.filter(f=>f.t==="ball").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="3" class="c-ball"/>`).join("");
+  out+=ex.fig.filter(f=>f.t==="ball").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="${f.team?4:3}" class="c-ball${f.team?" c-ball-"+f.team:""}"/>`).join("");
   out+=badges;
   /* spelers */
   const pls=P?P.pl:ex.fig.filter(f=>f.t==="p").map(f=>({f,x:f.x,y:f.y,moves:[],tl:[]}));
@@ -1509,6 +1543,8 @@ function exampleHtml(){const s=VB.sel.filter(v=>EX.some(e=>e.id===v.id)),m=s.red
    Eerste thema in de lijst = hoofdthema van de oefening (krijgt meer kans). Keeperoefeningen doen niet mee. */
 const GEN_THEMES=["Dribbelen","Passen","Schieten","Samenspelen"];
 const GEN_TAGS={
+  "schiettent":["Schieten"],
+  "brandbal":["Schieten"],
   "stoplicht":["Dribbelen"],
   "balletje-tik":["Dribbelen"],
   "schaduw":["Dribbelen"],

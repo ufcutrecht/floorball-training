@@ -97,7 +97,10 @@
    "id": "lunapark",
    "title": "Lunapark",
    "cat": "Schieten",
-   "phase": "Kern"
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   },
   {
    "id": "rollmops",
@@ -230,6 +233,21 @@
    "title": "Formule 1",
    "cat": "Warming-up",
    "phase": "Warming-up"
+  },
+  {
+   "id": "schiettent",
+   "title": "Schiettent",
+   "cat": "Schieten",
+   "phase": "Kern"
+  },
+  {
+   "id": "brandbal",
+   "title": "Brandbal-schieten",
+   "cat": "Schieten",
+   "phase": "Kern",
+   "apps": [
+    "gymzaal"
+   ]
   }
  ],
  "o12": [
@@ -475,6 +493,60 @@
    "title": "Partij met twee ballen",
    "cat": "Spel",
    "phase": "Afsluiting"
+  },
+  {
+   "id": "ligadribbel",
+   "title": "Ligadribbel",
+   "cat": "Dribbelen",
+   "phase": "Kern"
+  },
+  {
+   "id": "chaosspel",
+   "title": "Chaosspel",
+   "cat": "Spel",
+   "phase": "Afsluiting"
+  },
+  {
+   "id": "schiettent",
+   "title": "Schiettent",
+   "cat": "Schieten",
+   "phase": "Kern"
+  },
+  {
+   "id": "zonebal",
+   "title": "Zonebal",
+   "cat": "Partijvorm",
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
+  },
+  {
+   "id": "nummerpassen",
+   "title": "Nummerpassen",
+   "cat": "Passen",
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
+  },
+  {
+   "id": "passen-duel",
+   "title": "Passen en duelleren",
+   "cat": "Duels",
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
+  },
+  {
+   "id": "afschermen",
+   "title": "Bal afschermen",
+   "cat": "Duels",
+   "phase": "Kern",
+   "apps": [
+    "training"
+   ]
   }
  ],
  "o14": [
