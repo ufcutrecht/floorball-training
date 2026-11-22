@@ -227,6 +227,36 @@
    "apps": [
     "training"
    ]
+  },
+  {
+   "id": "staartjes",
+   "title": "Staartjestikkertje",
+   "cat": "Warming-up",
+   "phase": "Warming-up"
+  },
+  {
+   "id": "krokodillen",
+   "title": "Krokodillenrivier",
+   "cat": "Dribbelen",
+   "phase": "Kern"
+  },
+  {
+   "id": "poortjes-tellen",
+   "title": "Poortjes tellen",
+   "cat": "Passen",
+   "phase": "Kern"
+  },
+  {
+   "id": "opruimen",
+   "title": "Opruimen",
+   "cat": "Schieten",
+   "phase": "Kern"
+  },
+  {
+   "id": "twee-ballen",
+   "title": "Partij met twee ballen",
+   "cat": "Spel",
+   "phase": "Partij"
   }
  ],
  "o12": [
