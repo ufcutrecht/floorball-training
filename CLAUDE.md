@@ -24,6 +24,11 @@ Alles wat op `main` komt, staat binnen een paar minuten live.
    **Blokkeer bij het testen alle verzoeken naar Supabase** (bijvoorbeeld in Playwright:
    `page.route("**/*.supabase.co/**", lambda r: r.abort())`), anders tellen testklikken mee als
    echte keuzes en scores in het overzicht.
+   **Draai daarna altijd de test van beide apps:** zet `floorball-gymles` naast deze repository in
+   één map en start `node floorball-training/tools/test-apps.js` (Playwright, geen webserver nodig,
+   Supabase wordt geblokkeerd). De test opent alle programmapagina's van beide apps op telefoon en
+   desktop, opent de vensters en meldt javascriptfouten, te brede pagina's en het woord "training"
+   in de gymles-app. Push pas als er "Alles in orde." staat.
 5. Hoog bij elke wijziging aan html, js of json de cacheversie op in `sw.js`
    (`const CACHE = "floorball-vN"` → `vN+1`). Anders blijven telefoons met de offline-app de
    oude versie zien.
@@ -68,6 +73,7 @@ Alles wat op `main` komt, staat binnen een paar minuten live.
 | `shared/config.js` | Supabase-adres en publishable key (mag openbaar). |
 | `shared/exercises.json` | Lijst van alle oefeningen per programma (id, titel, onderdeel, fase). Gebruikt door de startpagina en het overzicht. |
 | `supabase/setup.sql` | Database-opzet voor scores. |
+| `tools/test-apps.js` | Test van beide apps (zie "Zo werk je", punt 4). Geen onderdeel van de app zelf. |
 | `sw.js`, `manifest.webmanifest` | Offline-app en "zet op beginscherm". `sw.js` ruimt alleen eigen caches (`floorball-…`) op, want de gymles-app gebruikt hetzelfde domein. |
 | `icons/` | App-iconen met het UFC-logo en "TRAINING" eronder (`icon-*.png`, `apple-touch-icon.png`) en het UFC Utrecht-logo (`ufc-logo.png`). De gymles-iconen staan in `floorball-gymles`. |
 
@@ -141,6 +147,9 @@ keepers, wedstrijdregels van de club), geef haar dan `apps:["training"]`.
 - De programmapagina's zijn groot. Wijzig ze met gerichte vervangingen, niet door het hele
   bestand opnieuw uit te schrijven.
 - Taal van de app is Nederlands: kort, duidelijk, voor trainers en leerkrachten.
+- Nieuwe tekst met "training" erin die ook in de gymles-app te zien is? Gebruik dan de woorden uit
+  `C` (`C.unit`, `C.Unit`, `C.title`, `C.btnLabel`, `C.libName`, `C.units`), die de gymles-app via
+  `FB_APP.words` vervangt door "gymles". De test vangt het op als je dit vergeet.
 - Licht en donker thema werken via de CSS-variabelen in `:root`; gebruik die in plaats van vaste kleuren.
 
 ## Niet doen
