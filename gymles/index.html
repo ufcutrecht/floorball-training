@@ -1,4 +1,4 @@
-<!doctype html><html lang="nl"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#141a24"><link rel="icon" href="../icons/icon-192.png"><link rel="apple-touch-icon" href="../icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Floorball training"><meta name="mobile-web-app-capable" content="yes"><script>window.FB_PROGRAM="gymles"</script><script src="../shared/shim.js"></script><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="nl"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#262935"><link rel="icon" href="../icons/icon-192.png"><link rel="apple-touch-icon" href="../icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Floorball training"><meta name="mobile-web-app-capable" content="yes"><script>window.FB_PROGRAM="gymles"</script><script src="../shared/shim.js"></script><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!-- © 2026 UFC Utrecht. Alle rechten voorbehouden. Niet kopiëren zonder toestemming. -->
 <title>Floorball O10 Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -6,21 +6,21 @@
 <style>
 /* Layout: gymzaal-kaarten met veldtekening, filterbalk bovenin, lesbalk onderin vastgezet */
 :root{
-  --bg:#eef1ec; --surface:#ffffff; --ink:#1b2430; --muted:#5b6672; --line:#d5dbd3;
+  --bg:#e8e8e8; --surface:#ffffff; --ink:#262935; --muted:#55596a; --line:#d2d4da;
   --court:#2f5d8a; --court-line:#ffffff; --court-floor:#e7eef5;
-  --accent:#f26a21; --accent-ink:#ffffff; --team-b:#1f9d6b; --cone:#f2b705;
+  --accent:#2b6db4; --accent-ink:#ffffff; --team-a:#f26a21; --team-b:#1f9d6b; --cone:#f2b705;
   --ph-warm:#d6336c; --ph-kern:#2f6fdb; --ph-partij:#7c4dbd; --ph-ink:#ffffff;
   --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#12171d; --surface:#1b222b; --ink:#e8edf2; --muted:#9aa6b2; --line:#2c3642;
+  --bg:#1a1c24; --surface:#262935; --ink:#ececef; --muted:#a3a7b6; --line:#383c4d;
   --court:#7fb0de; --court-line:#d8e4ee; --court-floor:#1f2a36;
-  --accent:#ff8547; --accent-ink:#1a0f08; --team-b:#4cc795; --cone:#f2c43a; --ph-warm:#f06595; --ph-kern:#6b9df0; --ph-partij:#b18ae6; --ph-ink:#14181d; color-scheme:dark}}
+  --accent:#6fa6e4; --accent-ink:#12141b; --team-a:#ff8547; --team-b:#4cc795; --cone:#f2c43a; --ph-warm:#f06595; --ph-kern:#6b9df0; --ph-partij:#b18ae6; --ph-ink:#14181d; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#12171d; --surface:#1b222b; --ink:#e8edf2; --muted:#9aa6b2; --line:#2c3642;
+  --bg:#1a1c24; --surface:#262935; --ink:#ececef; --muted:#a3a7b6; --line:#383c4d;
   --court:#7fb0de; --court-line:#d8e4ee; --court-floor:#1f2a36;
-  --accent:#ff8547; --accent-ink:#1a0f08; --team-b:#4cc795; --cone:#f2c43a; --ph-warm:#f06595; --ph-kern:#6b9df0; --ph-partij:#b18ae6; --ph-ink:#14181d; color-scheme:dark}
+  --accent:#6fa6e4; --accent-ink:#12141b; --team-a:#ff8547; --team-b:#4cc795; --cone:#f2c43a; --ph-warm:#f06595; --ph-kern:#6b9df0; --ph-partij:#b18ae6; --ph-ink:#14181d; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
@@ -69,7 +69,7 @@ svg.court{width:100%;height:auto;display:block}
 .c-cone{fill:var(--cone);stroke:var(--ink);stroke-width:.6}
 .c-paal{fill:var(--surface);stroke:var(--ink);stroke-width:1.3}
 .c-paal-dot{fill:var(--ink)}
-.c-pa{fill:var(--accent)} .c-pb{fill:var(--team-b)} .c-pj{fill:var(--ink)} .c-pl{fill:var(--surface);stroke:var(--ink);stroke-width:1.6} .c-plabel{fill:var(--surface);font:700 8px var(--body);text-anchor:middle}
+.c-pa{fill:var(--team-a)} .c-pb{fill:var(--team-b)} .c-pj{fill:var(--ink)} .c-pl{fill:var(--surface);stroke:var(--ink);stroke-width:1.6} .c-plabel{fill:var(--surface);font:700 8px var(--body);text-anchor:middle}
 .c-ball{fill:var(--surface);stroke:var(--ink);stroke-width:.8}
 .c-big{fill:var(--cone);stroke:var(--ink);stroke-width:.8} .c-big-l{fill:none;stroke:var(--ink);stroke-width:.7}
 .c-kast{fill:var(--cone);fill-opacity:.6;stroke:var(--ink);stroke-width:.7}
@@ -78,9 +78,9 @@ svg.court{width:100%;height:auto;display:block}
 .c-goal{fill:none;stroke:var(--ink);stroke-width:2.5}
 .a-pass{stroke:var(--ink);stroke-width:1.4;fill:none}
 .a-run{stroke:var(--muted);stroke-width:1.4;fill:none;stroke-dasharray:5 4}
-.a-dribble{stroke:var(--accent);stroke-width:1.6;fill:none;stroke-dasharray:1.5 3;stroke-linecap:round}
-.a-shot{stroke:var(--accent);stroke-width:2.6;fill:none}
-.c-head{fill:var(--ink)} .c-head-acc{fill:var(--accent)} .c-head-mut{fill:var(--muted)}
+.a-dribble{stroke:var(--team-a);stroke-width:1.6;fill:none;stroke-dasharray:1.5 3;stroke-linecap:round}
+.a-shot{stroke:var(--team-a);stroke-width:2.6;fill:none}
+.c-head{fill:var(--ink)} .c-head-acc{fill:var(--team-a)} .c-head-mut{fill:var(--muted)}
 .c-text{fill:var(--muted);font:700 9px var(--body)}
 
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin-block:0 16px}
@@ -221,14 +221,14 @@ svg.hall{width:100%;height:auto;display:block}
 .bib-list li{border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:6px}
 .bib-list li.vast{border:1.5px dashed var(--court);background:var(--bg)}
 .vast-tag{justify-self:start;background:var(--court);color:var(--surface);font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:5px}
-.btn.warn{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.warn{background:var(--team-a);border-color:var(--team-a);color:var(--accent-ink)}
 #print{display:none}
 .sum-fig{background:var(--court-floor);border-radius:10px;padding:8px}
 .pr-fig svg{width:100%;height:auto}
 .save-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%;background:var(--bg);border-radius:10px;padding:10px 12px}
 .save-row input{flex:1 1 180px;min-width:0;font:inherit;font-size:16px;padding:9px 12px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
 .save-row .hint{flex-basis:100%;margin:0;font-size:14px;color:var(--muted)}
-.save-row .hint.over{color:var(--accent)}
+.save-row .hint.over{color:var(--team-a)}
 .barbtns{flex-wrap:wrap}
 #ob .kit{border:none;padding:0;margin:0;background:none}
 .mv-h{font:800 24px/1 var(--display);text-transform:uppercase;margin:8px 0 -6px;padding-top:12px;border-top:1px solid var(--line)}
