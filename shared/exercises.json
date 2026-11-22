@@ -705,6 +705,48 @@
    "title": "Voetenwerk en wegsprinten",
    "cat": "Snelheid & coördinatie",
    "phase": "Kern"
+  },
+  {
+   "id": "rechthoek-passen",
+   "title": "Passen rond de rechthoek",
+   "cat": "Warming-up",
+   "phase": "Warming-up"
+  },
+  {
+   "id": "balbezit-half",
+   "title": "Balbezit op een half veld",
+   "cat": "Warming-up",
+   "phase": "Warming-up"
+  },
+  {
+   "id": "vier-twee-over",
+   "title": "4 tegen 2 met overspelen",
+   "cat": "Warming-up",
+   "phase": "Warming-up"
+  },
+  {
+   "id": "roep-duel",
+   "title": "Duel op roepnaam",
+   "cat": "Duels",
+   "phase": "Kern"
+  },
+  {
+   "id": "zones-dekken",
+   "title": "Dekken in vier zones",
+   "cat": "Verdedigen",
+   "phase": "Kern"
+  },
+  {
+   "id": "hoek-doel",
+   "title": "1 tegen 1 bij het doel in de hoek",
+   "cat": "Duels",
+   "phase": "Kern"
+  },
+  {
+   "id": "boarding-duel",
+   "title": "Duel langs de boarding",
+   "cat": "Duels",
+   "phase": "Kern"
   }
  ],
  "o18": [
@@ -886,6 +928,42 @@
    "id": "sprint-bal",
    "title": "Sprints met stick en bal",
    "cat": "Snelheid & coördinatie",
+   "phase": "Kern"
+  },
+  {
+   "id": "hoek-doel",
+   "title": "1 tegen 1 bij het doel in de hoek",
+   "cat": "Verdedigen",
+   "phase": "Kern"
+  },
+  {
+   "id": "boarding-duel",
+   "title": "Duel langs de boarding",
+   "cat": "Verdedigen",
+   "phase": "Kern"
+  },
+  {
+   "id": "zone-exit",
+   "title": "Uit de zone spelen onder druk",
+   "cat": "Omschakelen",
+   "phase": "Kern"
+  },
+  {
+   "id": "nazetten",
+   "title": "Aanvallen en direct nazetten",
+   "cat": "Partijvorm",
+   "phase": "Kern"
+  },
+  {
+   "id": "vijf-drie",
+   "title": "5 tegen 3 per kant",
+   "cat": "Verdedigen",
+   "phase": "Kern"
+  },
+  {
+   "id": "counter-overtal",
+   "title": "Counter met overtal: van 4 tegen 3 naar 5 tegen 4",
+   "cat": "Omschakelen",
    "phase": "Kern"
   }
  ]
