@@ -937,7 +937,7 @@ function renderOmbouw(){
   sel.forEach((x,i)=>{const e=EX[idx(x.id)],info=HALL[e.id](N),ph=phaseOf(e.cat);
     h+=`<div class="ob-step"><h4>${prev?`Ombouwen naar ${e.title}<span class="mins"> · ${WISSEL} min</span>`:`Klaarzetten voor de ${C.unit}`}</h4>
       <ul>${diffLines(prev,e.id).map(([c,t])=>`<li class="${c}"><span class="sign" aria-hidden="true">${SIGN[c]}</span>${t}</li>`).join("")}</ul></div>
-      <section class="ob ph-${ph}"><div class="slot-head"><span class="phase">${i+1} · ${PH_LABEL[ph]}</span><span class="mins">${e.title} · ${x.min} min</span></div>
+      <section class="ob ph-${ph}"><div class="slot-head"><span class="phase">${i+1} · ${e.title}</span><span class="mins">${x.min} min</span></div>
       <div class="hallwrap">${hallSvg(e.id,N)}</div><p class="note">${hallNote(e.id,N)}</p></section>`;
     prev=e.id});
   el.innerHTML=h;
