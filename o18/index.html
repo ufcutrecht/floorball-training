@@ -66,7 +66,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 svg.court{width:100%;height:auto;display:block}
 .c-floor{fill:var(--court-floor)} .c-line{stroke:var(--court);fill:none;stroke-width:1.5}
 .c-zone{fill:var(--court);fill-opacity:.08;stroke:var(--court);stroke-dasharray:4 3;stroke-width:1}
-.c-cone{fill:var(--cone);stroke:var(--ink);stroke-width:.6}
+.c-cone{fill:var(--cone);stroke:var(--ink);stroke-width:.6}.c-cone-r{fill:#e5484d}.c-cone-b{fill:#3b82f6}.c-cone-g{fill:#22a35a}
 .c-paal{fill:var(--surface);stroke:var(--ink);stroke-width:1.3}
 .c-paal-dot{fill:var(--ink)}
 .c-pa{fill:var(--team-a)} .c-pb{fill:var(--team-b)} .c-pj{fill:var(--ink)} .c-pl{fill:var(--surface);stroke:var(--ink);stroke-width:1.6} .c-plabel{fill:var(--surface);font:700 8px var(--body);text-anchor:middle}
@@ -797,16 +797,16 @@ const EX = [
   mat:["stick per speler","ballen bij de trainer","2 doelen met keeper","8 pionnen","hesjes"],
   doel:"Een aanvaller in de hoek vasthouden: de ruimte klein maken en hem tegen de boarding isoleren.",
   stappen:["Zet een doel in een hoek van het veld, gedraaid met de opening naar de hoek. Zet met pionnen een vak van ongeveer 8 bij 8 meter uit tussen het doel en de hoek.","Een aanvaller en een verdediger staan in het vak. De trainer speelt een bal de hoek in: de aanvaller probeert te scoren, de verdediger verdedigt.","Gaat de bal uit het vak of wordt er gescoord, dan speelt de trainer meteen een nieuwe bal de hoek in.","Na 20 tot 30 seconden komt het volgende duo erin, via de buitenkant van het vak. Na een ronde wisselen aanvallers en verdedigers van rol."],
-  kern:"Maak de aanvaller langzaam en zet hem vast tegen de boarding.",
+  kern:"Maak de aanvaller langzaam en stuur hem naar de boarding.",
   tips:["Verdediger: kom niet te fel. Met een te harde duw maak je een overtreding en verlies je zelf je evenwicht.","Blijf tussen aanvaller en doel en stuur hem naar de boarding.","Alleen schouder tegen schouder; niet op de stick slaan."],
   makkelijker:["Groter vak.","De trainer speelt de bal naar de verdediger in plaats van de hoek in."],
   moeilijker:["Kleiner vak.","2 tegen 2 in hetzelfde vak."],
-  fig:[{t:"zone",x:150,y:8,w:140,h:112},{t:"goal",x:176,y:64,flip:1},{t:"p",x:188,y:64,team:"j"},{t:"p",x:282,y:150,ball:1},{t:"p",x:236,y:92},{t:"p",x:218,y:80,team:"b"},{t:"p",x:124,y:40},{t:"p",x:124,y:90,team:"b"},{t:"a",k:"pass",d:"M282 144 L284 20"},{t:"a",k:"run",d:"M240 86 Q262 50 274 30"},{t:"a",k:"run",d:"M222 74 Q240 50 254 38"},{t:"a",k:"dribble",d:"M276 26 Q292 70 270 104"},{t:"a",k:"run",d:"M256 42 Q252 76 254 98"},{t:"txt",x:8,y:14,s:"doel gedraaid naar de hoek"},{t:"txt",x:8,y:174,s:"zet de aanvaller vast tegen de boarding"},{t:"txt",x:266,y:166,s:"T"}]},
+  fig:[{t:"zone",x:150,y:8,w:140,h:112},{t:"goal",x:176,y:64,flip:1},{t:"p",x:188,y:64,team:"j"},{t:"p",x:282,y:150,team:"l",ball:1},{t:"p",x:236,y:92},{t:"p",x:218,y:80,team:"b"},{t:"p",x:124,y:40},{t:"p",x:124,y:90,team:"b"},{t:"a",k:"pass",d:"M282 144 L284 20"},{t:"a",k:"run",d:"M240 86 Q262 50 274 30"},{t:"a",k:"run",d:"M222 74 Q240 50 254 38"},{t:"a",k:"dribble",d:"M276 26 Q250 16 226 22"},{t:"a",k:"run",d:"M254 40 Q240 36 230 34"},{t:"txt",x:8,y:14,s:"doel gedraaid naar de hoek"},{t:"txt",x:8,y:174,s:"stuur de aanvaller naar de boarding"},{t:"txt",x:266,y:166,s:"T"}]},
  {id:"boarding-duel",cat:"Verdedigen",title:"Duel langs de boarding",int:"hoog",min:10,kids:"duo's in 2 rijen + keepers",
   mat:["stick per speler","1 bal per duo","2 doelen met keeper","hesjes"],
   doel:"Een aanvaller langs de boarding begeleiden en het duel winnen zonder overtreding.",
-  stappen:["De duo's staan bij de middenlijn naast elkaar, allebei met het gezicht naar de boarding. Wie het dichtst bij de boarding staat, heeft de bal en is aanvaller.","De aanvaller bepaalt zelf wanneer hij start en sprint met de bal langs de boarding richting doel.","De verdediger reageert, loopt aan de binnenkant mee en probeert het duel tegen de boarding te winnen. Komt de aanvaller los, dan schiet hij op doel.","Terug langs de zijkant van het veld, niet door het veld. Na elke beurt wisselen van rol."],
-  kern:"Loop aan de binnenkant mee, schouder tegen schouder, en houd de aanvaller tegen de boarding.",
+  stappen:["De duo's staan bij de middenlijn naast elkaar, allebei met het gezicht naar de boarding. Wie het dichtst bij de boarding staat, heeft de bal en is aanvaller.","De aanvaller bepaalt zelf wanneer hij start en sprint met de bal langs de boarding richting doel.","De verdediger reageert, loopt aan de binnenkant mee en probeert langs de boarding de bal te winnen. Komt de aanvaller los, dan schiet hij op doel.","Terug langs de zijkant van het veld, niet door het veld. Na elke beurt wisselen van rol."],
+  kern:"Loop aan de binnenkant mee, schouder tegen schouder, en stuur de aanvaller naar de boarding.",
   tips:["Kom met je schouder, niet met je arm of stick: niet in de rug duwen.","Aanvaller: houd de bal aan de boardingkant, weg van de verdediger.","Verdediger: kijk naar de heupen van de aanvaller, niet naar de bal."],
   makkelijker:["Kortere sprint: start dichter bij het doel.","De verdediger mag al starten als de aanvaller beweegt."],
   moeilijker:["De verdediger start een meter verder van de boarding.","Wint de verdediger de bal, dan mag hij meteen aanvallen op een klein doel bij de middenlijn."],
@@ -814,16 +814,16 @@ const EX = [
  {id:"zone-exit",cat:"Omschakelen",title:"Uit de zone spelen onder druk",int:"hoog",min:15,kids:"5 tegen 5 + keepers",
   mat:["stick per speler","10 ballen bij de trainer","2 doelen met keeper","hesjes"],
   doel:"Na balverovering diep in de eigen zone direct vooruit spelen, ook als de tegenstander meteen druk zet.",
-  stappen:["Beide teams stellen zich op in één helft, alsof team B net heeft aangevallen. Team A staat rond het eigen doel.","De trainer speelt een bal achter het doel of in een hoek: team A heeft de bal veroverd.","Team A probeert onder druk over de middenlijn te komen, met een pass of met de bal aan de stick. Team B zet meteen druk om de bal terug te winnen.","Na 8 tot 10 seconden fluit de trainer af. Opnieuw beginnen; na een paar keer wisselen de teams van rol."],
+  stappen:["Speel 5 tegen 5 met keepers. Beide teams stellen zich op in één helft, alsof team B net heeft aangevallen. Team A staat rond het eigen doel.","De trainer speelt een bal achter het doel of in een hoek: team A heeft de bal veroverd.","Team A probeert onder druk over de middenlijn te komen, met een pass of met de bal aan de stick. Team B zet meteen druk om de bal terug te winnen.","Na 8 tot 10 seconden fluit de trainer af. Opnieuw beginnen; na een paar keer wisselen de teams van rol."],
   kern:"Eerste gedachte vooruit; lukt dat niet, dan rustig de bal houden.",
   tips:["Kijk al voor je de bal aanneemt waar een vrije medespeler staat.","Roep en wijs: bied je aan langs de boarding en in het midden.","Druk zetten: de eerste gaat op de bal, de rest sluit de passlijnen naar voren."],
   makkelijker:["Team B zet met maar 3 spelers druk.","Team A mag de bal 2 seconden ongestoord aannemen."],
   moeilijker:["Een punt alleen bij een pass over de middenlijn binnen 5 seconden.","Verovert team B de bal, dan mag het meteen scoren."],
-  fig:[{t:"line",d:"M150 12 L150 168"},{t:"goal",x:22,y:90,flip:1},{t:"p",x:34,y:90,team:"j"},{t:"p",x:112,y:162,team:"l",ball:1},{t:"p",x:36,y:148},{t:"p",x:58,y:40},{t:"p",x:96,y:110},{t:"p",x:108,y:58},{t:"p",x:128,y:138},{t:"p",x:70,y:150,team:"b"},{t:"p",x:84,y:96,team:"b"},{t:"p",x:88,y:34,team:"b"},{t:"p",x:126,y:84,team:"b"},{t:"p",x:144,y:116,team:"b"},{t:"a",k:"pass",d:"M106 162 L18 160"},{t:"a",k:"dribble",d:"M22 156 Q36 142 44 128"},{t:"a",k:"run",d:"M66 146 Q56 138 50 132"},{t:"a",k:"run",d:"M132 134 Q154 120 174 112"},{t:"a",k:"pass",d:"M48 124 L166 112"},{t:"txt",x:8,y:14,s:"bal achter het doel: team A wint de bal"},{t:"txt",x:156,y:28,s:"over de middenlijn = punt"},{t:"txt",x:122,y:166,s:"T"}]},
+  fig:[{t:"line",d:"M150 22 L150 168"},{t:"goal",x:22,y:90,flip:1},{t:"p",x:34,y:90,team:"j"},{t:"p",x:112,y:162,team:"l",ball:1},{t:"p",x:30,y:144},{t:"p",x:58,y:40},{t:"p",x:96,y:110},{t:"p",x:108,y:58},{t:"p",x:128,y:138},{t:"p",x:80,y:150,team:"b"},{t:"p",x:84,y:96,team:"b"},{t:"p",x:88,y:34,team:"b"},{t:"p",x:126,y:84,team:"b"},{t:"p",x:144,y:116,team:"b"},{t:"a",k:"pass",d:"M106 162 L18 160"},{t:"a",k:"dribble",d:"M24 156 Q62 162 70 126"},{t:"a",k:"run",d:"M84 146 Q92 138 84 130"},{t:"a",k:"run",d:"M132 134 Q154 120 174 112"},{t:"a",k:"pass",d:"M74 122 L166 112"},{t:"txt",x:8,y:14,s:"bal achter het doel: team A wint de bal"},{t:"txt",x:156,y:34,s:"over de middenlijn = punt"},{t:"txt",x:122,y:166,s:"T"}]},
  {id:"nazetten",cat:"Partijvorm",title:"Aanvallen en direct nazetten",int:"hoog",min:20,kids:"5 tegen 5 + keepers",
   mat:["stick per speler","10 ballen","2 doelen met keeper","hesjes"],
   doel:"Je vastzetten in de aanval, kansen uitspelen en na een schot of balverlies meteen nazetten om de bal terug te winnen.",
-  stappen:["Speel 5 tegen 5 op het hele veld. Team B verdedigt teruggetrokken in de eigen helft, op halve kracht.","Team A zet zich vast in de aanvalshelft en speelt kansen uit. Na elk schot of balverlies zet team A meteen druk.","Wint team A de bal terug, dan gaat hij naar een verdediger en begint de aanval opnieuw. Wint team B de bal, dan mag het countern. Een grote kans uit de counter wisselt de rollen.","Punten: grote kans 2, doelpunt 3, bal terug door nazetten 1, grote kans uit de counter 2. Wie heeft als eerste 10 punten?"],
+  stappen:["Speel 5 tegen 5 op het hele veld. Team B verdedigt teruggetrokken in de eigen helft, op halve kracht.","Team A zet zich vast in de aanvalshelft en speelt kansen uit. Na elk schot of balverlies zet team A meteen druk.","Wint team A de bal terug, dan gaat hij naar een verdediger en begint de aanval opnieuw. Wint team B de bal, dan mag het countern. Een grote kans uit de counter wisselt de rollen.","Punten: grote kans 2, doelpunt 3 (de kans telt dan niet ook nog mee), bal terug door nazetten 1, grote kans uit de counter 2. Wie heeft als eerste 10 punten?","Wissel in shifts van 1 minuut, zoals in een wedstrijd."],
   kern:"Eerste gedachte na balverlies: nazetten.",
   tips:["Zet de forehandkant van de balbezitter dicht, dan kan hij niet snel vooruit spelen.","Roep wie op de bal gaat; de anderen sluiten de passlijnen.","Licht op je voeten blijven, niet doorrennen."],
   makkelijker:["4 tegen 4.","Team B moet de bal na verovering eerst één keer rondspelen voordat het mag countern."],
@@ -1228,7 +1228,7 @@ function svg(ex,uid,still){
     if(multi&&!f.x){const n=P?ev[i].n:i+1, l=P?ev[i].len:plen(f.d), q=pAt(f.d,Math.min(l*.5,l-6));
       badges+=`<g class="c-step"${P?' opacity="0"':""}><circle cx="${r3(q.x)}" cy="${r3(q.y)}" r="5.6"/><text x="${r3(q.x)}" y="${r3(q.y+2.6)}">${n}</text>${an}</g>`}
   });
-  out+=ex.fig.filter(f=>f.t==="cone").map(f=>`<path d="M${f.x} ${f.y-5} L${f.x+4.5} ${f.y+4} L${f.x-4.5} ${f.y+4}Z" class="c-cone"/>`).join("");
+  out+=ex.fig.filter(f=>f.t==="cone").map(f=>`<path d="M${f.x} ${f.y-5} L${f.x+4.5} ${f.y+4} L${f.x-4.5} ${f.y+4}Z" class="c-cone${f.c?" c-cone-"+f.c:""}"/>`).join("");
   out+=ex.fig.filter(f=>f.t==="paal").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="4.6" class="c-paal"/><circle cx="${f.x}" cy="${f.y}" r="1.5" class="c-paal-dot"/>`).join("");
   out+=ex.fig.filter(f=>f.t==="ball").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="${f.team?4:3}" class="c-ball${f.team?" c-ball-"+f.team:""}"/>`).join("");
   out+=badges;

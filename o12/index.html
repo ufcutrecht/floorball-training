@@ -66,7 +66,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 svg.court{width:100%;height:auto;display:block}
 .c-floor{fill:var(--court-floor)} .c-line{stroke:var(--court);fill:none;stroke-width:1.5}
 .c-zone{fill:var(--court);fill-opacity:.08;stroke:var(--court);stroke-dasharray:4 3;stroke-width:1}
-.c-cone{fill:var(--cone);stroke:var(--ink);stroke-width:.6}
+.c-cone{fill:var(--cone);stroke:var(--ink);stroke-width:.6}.c-cone-r{fill:#e5484d}.c-cone-b{fill:#3b82f6}.c-cone-g{fill:#22a35a}
 .c-paal{fill:var(--surface);stroke:var(--ink);stroke-width:1.3}
 .c-paal-dot{fill:var(--ink)}
 .c-pa{fill:var(--team-a)} .c-pb{fill:var(--team-b)} .c-pj{fill:var(--ink)} .c-pl{fill:var(--surface);stroke:var(--ink);stroke-width:1.6} .c-plabel{fill:var(--surface);font:700 8px var(--body);text-anchor:middle}
@@ -491,7 +491,7 @@ const EX = [
    {t:"paal",x:40,y:76},{t:"cone",x:96,y:62},{t:"cone",x:156,y:62},{t:"cone",x:96,y:122},{t:"cone",x:156,y:122},{t:"paal",x:194,y:100},
    {t:"p",x:44,y:92,ball:1},{t:"p",x:30,y:100,ball:1},{t:"p",x:16,y:108,ball:1},
    {t:"a",k:"dribble",d:"M52 88 Q64 48 96 46 L158 46 Q178 50 166 86"},{t:"a",k:"dribble",d:"M160 92 L102 92"},{t:"a",k:"dribble",d:"M94 98 Q82 138 100 138 L156 138 Q178 136 182 112 Q196 98 190 88 Q196 76 212 80"},{t:"a",k:"shot",d:"M216 82 L262 88"},
-   {t:"txt",x:108,y:36,s:"vooruit"},{t:"txt",x:104,y:86,s:"achteruit"},{t:"txt",x:108,y:154,s:"vooruit"},{t:"txt",x:202,y:60,s:"actie om de paal"}]},
+   {t:"txt",x:108,y:36,s:"vooruit"},{t:"txt",x:104,y:86,s:"achteruit"},{t:"txt",x:108,y:154,s:"vooruit"},{t:"txt",x:202,y:60,s:"draai om de paal"}]},
  {id:"schot-beweging",apps:["training"],cat:"Schieten",title:"Dribbelen, passen, schieten",int:"middel",min:12,kids:"2 rijen",
   mat:["stick per speler","een emmer ballen","2 pionnen","1 doel met keeper"],
   doel:"Een terugpass aannemen en raak schieten.",
@@ -807,6 +807,7 @@ const EX = [
   moeilijker:["Eerst een pass naar een teamgenoot, dan pas scoren.","Minder ballen."],
   fig:[{t:"line",d:"M20 14 L280 14 L280 166 L20 166 Z"},
    {t:"goal",x:26,y:50,flip:1},{t:"goal",x:26,y:130,flip:1},{t:"goal",x:274,y:50},{t:"goal",x:274,y:130},
+   {t:"cone",x:34,y:28},{t:"cone",x:44,y:28},{t:"cone",x:34,y:154},{t:"cone",x:44,y:154},{t:"cone",x:256,y:28},{t:"cone",x:266,y:28},{t:"cone",x:256,y:154},{t:"cone",x:266,y:154},
    {t:"p",x:60,y:40,ball:1},{t:"p",x:150,y:40},{t:"p",x:130,y:120,team:"b",ball:1},{t:"p",x:240,y:45,team:"b"},
    {t:"p",x:110,y:150,team:"j",ball:1},{t:"p",x:170,y:135,team:"j"},{t:"p",x:205,y:150,team:"l",ball:1},{t:"p",x:250,y:95,team:"l"},
    {t:"a",k:"dribble",d:"M68 42 Q150 62 220 118"},{t:"a",k:"shot",d:"M226 122 L266 130"},{t:"a",k:"shot",d:"M122 122 L34 130"},{t:"a",k:"dribble",d:"M116 144 Q132 100 104 72"},{t:"a",k:"shot",d:"M98 67 L34 52"},{t:"a",k:"pass",d:"M211 145 L245 102"},
@@ -816,7 +817,7 @@ const EX = [
   doel:"Mikken op een klein doel en daarna snel kiezen waar je heen gaat.",
   stappen:["Zet aan beide korte kanten 4 pionnen met een zachte bal erop: 2 in de kleur van elk team.","Iedereen heeft een bal en begint in het midden.","Je schiet alleen tussen de twee schietlijnen, en alleen op de ballen in de kleur van je eigen team.","Na elk schot haal je je bal op en ga je naar de andere kant van de zaal.","Welk team heeft na 3 minuten de meeste ballen van de pionnen geschoten? Een afgeschoten bal leg je meteen terug."],
   kern:"Eerst naar het doel kijken, dan schieten.",
-  tips:["Eerst naar het doel kijken, dan schieten.","Stick na het schot niet hoger dan je heup."],
+  tips:["Eerst naar het doel kijken, dan schieten.","Stick na het schot niet hoger dan je heup.","Schiet alleen als er niemand bij de pionnen staat."],
   makkelijker:["Schietlijnen dichter bij de doelen.","Grotere ballen op de pionnen."],
   moeilijker:["Schietlijnen verder weg.","Alleen backhand schieten."],
   fig:[{t:"line",d:"M20 14 L280 14 L280 166 L20 166 Z"},{t:"line",d:"M95 14 L95 166"},{t:"line",d:"M205 14 L205 166"},
@@ -857,7 +858,7 @@ const EX = [
   doel:"Passen in beweging en meteen omschakelen naar een duel om de bal.",
   stappen:["Duo's met één bal lopen kriskras door de zaal en passen elkaar de bal toe.","Na 20 à 30 seconden fluit de trainer: wie de bal heeft, houdt hem bij zich en de ander probeert hem af te pakken.","Na 20 seconden fluit de trainer weer: samen verder passen.","Herhaal dit een paar keer en wissel dan van duo."],
   kern:"Bij de fluit: lichaam tussen de ander en de bal.",
-  tips:["Bij de fluit: lichaam tussen de ander en de bal.","Passen: kijk eerst of je partner klaar is."],
+  tips:["Bij de fluit: lichaam tussen de ander en de bal.","Alleen op de bal spelen, niet op de stick slaan.","Passen: kijk eerst of je partner klaar is."],
   makkelijker:["Passen op de plaats.","Korter duelleren, 10 seconden."],
   moeilijker:["De ontvanger wijst met de stick aan waar hij de bal wil hebben.","1 à 2 jagers zonder partner proberen ook ballen af te pakken."],
   fig:[{t:"zone",x:20,y:16,w:260,h:150},
@@ -871,18 +872,18 @@ const EX = [
   stappen:["Duo's staan in een vakje van ongeveer 3 bij 3 meter, met één bal per duo.","De aanvaller houdt de bal bij zich en schermt hem af met het lichaam.","De verdediger probeert de bal met de stick te raken.","Na 20 seconden wisselen van rol. Lukt het je om de bal 20 seconden te houden?"],
   kern:"Laag zitten en je lichaam tussen de ander en de bal.",
   tips:["Laag zitten en je lichaam tussen de ander en de bal.","Verdediger: alleen op de bal spelen, niet op de stick slaan."],
-  makkelijker:["De verdediger speelt zonder stick en mag alleen met de voet tikken.","Groter vakje."],
+  makkelijker:["De verdediger houdt alleen zijn stick in de weg en tikt niet.","Groter vakje."],
   moeilijker:["Kleiner vakje.","Allebei een bal: bescherm je eigen bal en tik die van de ander weg."],
   fig:[{t:"zone",x:30,y:30,w:110,h:120},{t:"zone",x:160,y:30,w:110,h:120},
    {t:"p",x:75,y:90,ball:1},{t:"p",x:102,y:68,team:"b"},{t:"p",x:205,y:92,ball:1},{t:"p",x:232,y:108,team:"b"},
    {t:"a",k:"dribble",d:"M70 96 Q55 112 66 126"},{t:"a",k:"run",d:"M100 76 Q100 104 82 122"},{t:"a",k:"dribble",d:"M210 86 Q222 62 240 60"},{t:"a",k:"run",d:"M234 100 Q252 84 250 70"},
-   {t:"txt",x:30,y:24,s:"vakje 3 × 3 m per duo"},{t:"txt",x:24,y:176,s:"20 seconden de bal houden, dan wisselen"}]},
+   {t:"txt",x:30,y:24,s:"vakje 3 × 3 m per duo"},{t:"txt",x:24,y:176,s:"20 s houden, dan wisselen"}]},
  {id:"brandbal",cat:"Schieten",title:"Brandbal-schieten",int:"hoog",min:12,kids:"2 teams",
   mat:["stick en bal per speler","8 kegels of pionnen als doelen","1 lange bank achter de kegels","4 pionnen voor de looproute"],
   doel:"Snel en raak schieten, terwijl het andere team zoveel mogelijk rondjes dribbelt.",
   stappen:["Twee teams. Het schietteam staat achter de schietlijn, op ongeveer 8 meter van 8 kegels met een bank erachter. Iedereen heeft een bal.","Het loopteam staat bij een hoekpion, ook iedereen met een bal, en dribbelt rondjes langs de 4 pionnen aan de rand van de zaal.","Op het signaal begint iedereen: het schietteam schiet zo snel mogelijk alle kegels om, het loopteam telt zijn rondjes.","Is de laatste kegel om? Dan stopt het dribbelen. Tel alle rondjes van het loopteam bij elkaar.","Kegels terugzetten en wisselen van rol. Welk team haalde meer rondjes?"],
   kern:"Rustig mikken: een misser kost meer tijd dan een rustig schot.",
-  tips:["Rustig mikken: een misser kost meer tijd dan een rustig schot.","Lopers: bal dicht bij de stick in de bochten. Bal kwijt? Eerst ophalen, dan verder."],
+  tips:["Rustig mikken: een misser kost meer tijd dan een rustig schot.","Lopers: bal dicht bij de stick in de bochten. Bal kwijt? Eerst ophalen, dan verder.","Lopers: blijf ruim achter de bank, daar komen de missers."],
   makkelijker:["Schietlijn dichter bij de kegels.","Het loopteam loopt zonder bal."],
   moeilijker:["Alleen backhand schieten.","Elke schutter heeft maar 2 ballen: raak mikken telt."],
   fig:[{t:"cone",x:24,y:18},{t:"cone",x:276,y:18},{t:"cone",x:276,y:162},{t:"cone",x:24,y:162},{t:"line",d:"M110 34 L110 146"},
@@ -891,7 +892,7 @@ const EX = [
    {t:"p",x:70,y:162,team:"b",ball:1},{t:"p",x:276,y:110,team:"b",ball:1},{t:"p",x:200,y:18,team:"b",ball:1},
    {t:"a",k:"shot",d:"M98 62 L198 62"},{t:"a",k:"shot",d:"M98 90 L198 90"},{t:"a",k:"shot",d:"M98 118 L198 118"},
    {t:"a",k:"dribble",d:"M78 162 L250 162"},{t:"a",k:"dribble",d:"M276 102 L276 40"},{t:"a",k:"dribble",d:"M192 18 L50 18"},
-   {t:"txt",x:86,y:156,s:"schietlijn"},{t:"txt",x:40,y:176,s:"loopteam dribbelt rondjes"}]}
+   {t:"txt",x:86,y:156,s:"schietlijn"},{t:"txt",x:100,y:176,s:"loopteam"}]}
 ];
 
 /* Welke oefeningen in welke app. Geen "apps" = in beide apps; ["training"] = alleen trainersapp,
@@ -1338,7 +1339,7 @@ function svg(ex,uid,still){
     if(multi&&!f.x){const n=P?ev[i].n:i+1, l=P?ev[i].len:plen(f.d), q=pAt(f.d,Math.min(l*.5,l-6));
       badges+=`<g class="c-step"${P?' opacity="0"':""}><circle cx="${r3(q.x)}" cy="${r3(q.y)}" r="5.6"/><text x="${r3(q.x)}" y="${r3(q.y+2.6)}">${n}</text>${an}</g>`}
   });
-  out+=ex.fig.filter(f=>f.t==="cone").map(f=>`<path d="M${f.x} ${f.y-5} L${f.x+4.5} ${f.y+4} L${f.x-4.5} ${f.y+4}Z" class="c-cone"/>`).join("");
+  out+=ex.fig.filter(f=>f.t==="cone").map(f=>`<path d="M${f.x} ${f.y-5} L${f.x+4.5} ${f.y+4} L${f.x-4.5} ${f.y+4}Z" class="c-cone${f.c?" c-cone-"+f.c:""}"/>`).join("");
   out+=ex.fig.filter(f=>f.t==="paal").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="4.6" class="c-paal"/><circle cx="${f.x}" cy="${f.y}" r="1.5" class="c-paal-dot"/>`).join("");
   out+=ex.fig.filter(f=>f.t==="ball").map(f=>`<circle cx="${f.x}" cy="${f.y}" r="${f.team?4:3}" class="c-ball${f.team?" c-ball-"+f.team:""}"/>`).join("");
   out+=badges;
