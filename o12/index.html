@@ -356,6 +356,17 @@ const EX = [
    {t:"p",x:140,y:80,team:"b"},{t:"p",x:190,y:108,team:"b"},
    {t:"a",k:"dribble",d:"M86 56 Q110 32 150 38"},{t:"a",k:"run",d:"M134 76 Q112 58 106 48"},{t:"a",k:"dribble",d:"M236 126 Q258 100 254 72"},{t:"a",k:"run",d:"M196 104 Q220 96 236 86"},
    {t:"txt",x:24,y:13,s:"blauw tikt, rood dribbelt weg"}]},
+ {id:"baas-en-hond",apps:["training"],cat:"Warming-up",title:"Baas en hond",int:"laag–middel",min:8,kids:"tweetallen",
+  mat:["stick en bal per speler","4 pionnen","boarding of muur aan één kant"],
+  doel:"Rondkijken tijdens het dribbelen: je volgt je medespeler en doet alles na.",
+  stappen:["Maak tweetallen, allebei met stick en bal. De baas gaat voorop, de hond volgt op twee meter.","De baas dribbelt door het veld en wisselt af: draaien, stoppen, versnellen, links en rechts dribbelen, de bal door de benen spelen.","Af en toe speelt de baas de bal tegen de boarding en neemt hem in de loop weer aan. De hond doet het meteen na.","Na 1 minuut wisselen jullie van rol. Na twee rondes zoek je een nieuw tweetal."],
+  tips:["Hond: kijk naar de baas, niet naar je bal. Vraag na afloop: hoe goed zag je wat er om je heen gebeurde?","Vraag: wanneer houd je de bal ver van je lichaam en wanneer dichtbij? Ver als je ruimte hebt, dichtbij als het druk is.","Blijf in beweging, ook als je de bal na de boarding weer aanneemt."],
+  makkelijker:["Rustig tempo, alleen wandelen.","De baas kiest maar twee bewegingen."],
+  moeilijker:["Hoger tempo en vaker van richting wisselen.","De trainer roept welke beweging de baas moet doen."],
+  fig:[{t:"line",d:"M20 16 L280 16"},{t:"txt",x:24,y:12,s:"boarding"},{t:"txt",x:170,y:12,s:"rood = baas, blauw = hond"},
+   {t:"p",x:150,y:62,ball:1},{t:"p",x:95,y:72,team:"b",ball:1},{t:"p",x:180,y:120,ball:1},{t:"p",x:152,y:132,team:"b",ball:1},
+   {t:"a",k:"pass",self:1,d:"M154 57 L166 19 L178 58"},{t:"a",k:"pass",self:1,d:"M99 67 L111 19 L123 68"},
+   {t:"a",k:"dribble",d:"M188 118 Q222 96 252 118"},{t:"a",k:"dribble",d:"M160 130 Q196 110 228 130"}]},
  {id:"vierkant",apps:["training"],cat:"Warming-up",title:"Pass en volg in het vierkant",int:"laag–middel",min:8,kids:"groepjes van 4–5",
   mat:["stick per speler","1 bal per groepje","4 pionnen per groepje"],
   doel:"Rustig opwarmen en leren passen en aannemen.",
@@ -719,6 +730,7 @@ const NEED={
   "keeper-werpen":n=>({bal:1,pion:4}),
   "opbouw":n=>({stick:n,bal:10,doel:2,hesje:Math.ceil(n/2)}),
   "tikspel":n=>({stick:n,bal:Math.max(1,n-2),pion:4,hesje:2}),
+  "baas-en-hond":n=>({stick:n,bal:n,pion:4}),
   "dribbel-estafette":n=>{const g=Math.ceil(n/4);return{stick:n,bal:g,pion:5*g}},
   "koningsbal":n=>({stick:n,bal:4,doel:2,hesje:Math.ceil(n/2)+2}),
   "muurbal":n=>({stick:n,bal:3,pion:4,hesje:Math.ceil(n/2)}),
@@ -758,7 +770,7 @@ let N=12;
 try{const v=parseInt(localStorage.getItem("o12-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
-const MAAT={"krokodillen":"hele zaal","twee-ballen":"20 × 10 m per veld","paal-dribbel":"halve veld per baan, vierkant 3 × 3 m","poortjesjacht":"hele zaal","bankbal":"40 × 20 m","schatrovers-verdedigers":"hele zaal","getrokken-schot":"20 × 20 m","schuifslag":"10 × 6 m per drietal","aanname-fh-bh":"12 m per drietal","reactiestart":"12 m per rij","keeper-muur":"1–3 m van de muur","keeper-werpen":"10 m tussen de keepers","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m","tikspel":"heel veld","rondo":"8 × 8 m per vak","vierkant":"6 × 6 m per groepje","minuut-passen":"4 m tussen de pionnen","pionnen-stick":"5 m tussen werker en aanspeler","dribbel-estafette":"rij van ca. 15 m","schot-beweging":"half veld","twee-een":"heel kleinveld","drie-drie":"half kleinveld per veldje","lijnteam":"half kleinveld","partij-klein":"heel kleinveld","koningsbal":"heel kleinveld","muurbal":"heel veld","doelen-verzamelen":"hele zaal","een-een-poortjes":"klein veldje per 4 spelers","hinderbaan":"baan van ca. 15 m","twee-twee-dwars":"dwars over het veld","vaardigheidsproef":"3 stations"};
+const MAAT={"baas-en-hond":"20 × 10 m langs de boarding","krokodillen":"hele zaal","twee-ballen":"20 × 10 m per veld","paal-dribbel":"halve veld per baan, vierkant 3 × 3 m","poortjesjacht":"hele zaal","bankbal":"40 × 20 m","schatrovers-verdedigers":"hele zaal","getrokken-schot":"20 × 20 m","schuifslag":"10 × 6 m per drietal","aanname-fh-bh":"12 m per drietal","reactiestart":"12 m per rij","keeper-muur":"1–3 m van de muur","keeper-werpen":"10 m tussen de keepers","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m","tikspel":"heel veld","rondo":"8 × 8 m per vak","vierkant":"6 × 6 m per groepje","minuut-passen":"4 m tussen de pionnen","pionnen-stick":"5 m tussen werker en aanspeler","dribbel-estafette":"rij van ca. 15 m","schot-beweging":"half veld","twee-een":"heel kleinveld","drie-drie":"half kleinveld per veldje","lijnteam":"half kleinveld","partij-klein":"heel kleinveld","koningsbal":"heel kleinveld","muurbal":"heel veld","doelen-verzamelen":"hele zaal","een-een-poortjes":"klein veldje per 4 spelers","hinderbaan":"baan van ca. 15 m","twee-twee-dwars":"dwars over het veld","vaardigheidsproef":"3 stations"};
 EX.forEach(e=>e.maat=MAAT[e.id]);
 const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
@@ -794,6 +806,7 @@ const HALL={
   "keeper-werpen":()=>({items:[{t:"spot",x:14,y:10},{t:"spot",x:26,y:10},{t:"cone",x:16,y:8.8},{t:"cone",x:16,y:11.2},{t:"cone",x:24,y:8.8},{t:"cone",x:24,y:11.2}],note:"2 keepers op 10 m van elkaar, elk met een poortje van 2 pionnen voor zich"}),
   "opbouw":()=>({items:[...GOALS,{t:"line",x1:20,y1:1,x2:20,y2:19},{t:"spot",x:7,y:3},{t:"spot",x:7,y:17},{t:"spot",x:12,y:10},{t:"spot",x:16,y:6},{t:"spot",x:16,y:14},{t:"lbl",x:20,y:19.9,s:"middenlijn"}],
     note:"heel veld: keeper en 3 spelers bouwen op vanaf eigen doel, 2 verdedigers zetten druk; over de middenlijn is een punt"}),
+  "baas-en-hond":()=>({items:[{t:"zone",x:1,y:1,w:19,h:18},{t:"cone",x:1,y:19},{t:"cone",x:20,y:19}],note:"halve veld langs de boarding, tweetallen verspreid"}),
   "tikspel":()=>({items:[{t:"zone",x:1,y:1,w:38,h:18},{t:"cone",x:1,y:1},{t:"cone",x:39,y:1},{t:"cone",x:1,y:19},{t:"cone",x:39,y:19}],note:"heel veld, pionnen in de hoeken als grens, 2 tikkers met hesje"}),
   "dribbel-estafette":n=>{const g=Math.ceil(n/4),it=[];
     for(let i=0;i<g;i++){const y=(i+1)*20/(g+1);it.push({t:"spot",x:3,y},{t:"cone",x:10,y},{t:"cone",x:15,y},{t:"cone",x:20,y},{t:"cone",x:25,y},{t:"cone",x:33,y})}
@@ -953,6 +966,7 @@ const ANIM={
   "keeper-werpen":[{at:0},{at:1.2}],
   "opbouw":[{at:0},{at:.3},{at:.5},{at:2.2},{at:3.2}],
   "tikspel":[{at:0},{at:.4},{at:.2},{at:.6}],
+  "baas-en-hond":[{at:.3},{at:2.1},{at:.1},{at:.4}],
   "dribbel-estafette":[{at:0},{at:.3},{at:2.5},{at:2.8}],
   "partij-klein":[{at:0},{at:.4},{at:1.4},{at:2.4}],
   "koningsbal":[{at:0},{at:.3},{at:1.3},{at:1.4},{at:2.4},{at:3.4}],
@@ -987,6 +1001,7 @@ const ANIM={
 };
 /* vervolgacties: alleen in de animatie, zodat de oefening doorloopt zonder de tekening vol te zetten */
 const EXTRA={
+  "baas-en-hond":[["run","M152 64 L176 63",0],["run","M97 74 L121 73",1.8],["dribble","M178 61 Q220 45 258 74",2.5],["dribble","M123 71 Q175 56 230 84",3.7],["dribble","M255 122 Q210 152 150 142",2.7],["dribble","M232 133 Q195 156 140 152",3]],
   "paal-dribbel":[["dribble","M38 98 Q44 84 52 74",2.6]],
   "rondo":[["pass","M144 144 L96 97",2],["pass","M96 82 L144 37",3],["run","M160 100 Q150 72 146 58",3.2],["pass","M157 36 L203 83",4.1],["pass","M203 97 L157 143",5.1]],
   "vierkant":[["pass","M232 56 L232 136",2.2],["run","M240 54 Q252 100 240 138",2.4],["pass","M222 146 L78 146",3.4],["run","M226 154 Q150 168 80 156",3.6]],
@@ -1043,7 +1058,7 @@ function plan(ex){
     }else{
       const from=near(e.start,e.at,p=>p.has);
       if(from){from.has=false;from.tl.push([e.at,0])}
-      const to=near(e.stop,e.end,p=>p!==from);let hide=1;
+      const to=near(e.stop,e.end,p=>e.a.self||p!==from);let hide=1;
       if(to&&dist(posAt(to,e.end),e.stop)<16){to.has=true;to.tl.push([e.end,1]);hide=e.end}
       else if(e.a.k==="shot")hide=Math.min(1,r3(e.end+.08));
       balls.push({d:e.a.d,at:e.at,end:e.end,hide});

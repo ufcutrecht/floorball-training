@@ -371,15 +371,15 @@ const EX = [
    {t:"a",k:"run",d:"M156 85 L190 58"},{t:"a",k:"run",d:"M96 66 L115 125"},
    {t:"a",k:"dribble",d:"M205 45 Q240 30 255 55"},{t:"a",k:"dribble",d:"M55 125 Q45 95 60 70"}]},
  {id:"schaduw",cat:"Warming-up",title:"Schaduwdribbel",groep:"3–8",min:8,kids:"tweetallen",
-  mat:["stick en bal per kind","4 pionnen voor het vak"],
+  mat:["stick en bal per kind","4 pionnen voor het vak","lange bank tegen de muur (of de muur zelf)"],
   doel:"Rondkijken tijdens het dribbelen en bewegingen nadoen.",
-  stappen:["Maak tweetallen, allebei met stick en bal.","De voorste dribbelt door het vak en kiest route en tempo.","De schaduw volgt op twee meter en doet alles na: draaien, stoppen, versnellen.","Op het fluitsignaal wisselen jullie van rol."],
-  tips:["Schaduw kijkt naar de voorganger, niet naar de bal.","Voorganger: begin rustig en maak het daarna lastiger."],
+  stappen:["Maak tweetallen, allebei met stick en bal.","De voorste dribbelt door het vak en kiest route en tempo.","De schaduw volgt op twee meter en doet alles na: draaien, stoppen, versnellen.","De voorste doet ook eens iets anders voor: de bal tegen de bank spelen en weer aannemen, de bal door de benen spelen, of links en rechts van het lichaam dribbelen.","Op het fluitsignaal wisselen jullie van rol. Na twee rondes zoek je een nieuw tweetal."],
+  tips:["Schaduw kijkt naar de voorganger, niet naar de bal.","Voorganger: begin rustig en maak het daarna lastiger.","Veel ruimte? Bal wat verder voor je uit. Druk om je heen? Bal dicht bij je."],
   makkelijker:["Zonder bal, alleen met de stick laag aan de grond.","Alleen wandelen in plaats van rennen."],
-  moeilijker:["Voorganger wisselt tussen forehand en backhand.","Schaduw roept hardop wat de voorganger doet."],
-  fig:[{t:"zone",x:30,y:20,w:240,h:140},
-   {t:"p",x:110,y:60,ball:1},{t:"p",x:85,y:72,team:"b",ball:1},{t:"p",x:170,y:122,ball:1},{t:"p",x:145,y:134,team:"b",ball:1},
-   {t:"a",k:"dribble",d:"M118 58 Q160 30 205 52"},{t:"a",k:"dribble",d:"M93 70 Q140 46 188 66"},
+  moeilijker:["Voorganger wisselt tussen forehand en backhand.","Schaduw roept hardop wat de voorganger doet.","Jij roept welke beweging de voorgangers moeten doen."],
+  fig:[{t:"zone",x:30,y:20,w:240,h:140},{t:"bank",x:90,y:22,w:80,h:9},
+   {t:"p",x:140,y:62,ball:1},{t:"p",x:85,y:72,team:"b",ball:1},{t:"p",x:170,y:122,ball:1},{t:"p",x:145,y:134,team:"b",ball:1},
+   {t:"a",k:"pass",self:1,d:"M144 57 L156 34 L168 58"},{t:"a",k:"pass",self:1,d:"M89 67 L101 34 L113 68"},
    {t:"a",k:"dribble",d:"M178 120 Q210 98 245 116"},{t:"a",k:"dribble",d:"M153 132 Q190 112 228 130"}]},
  {id:"schatrovers",cat:"Warming-up",title:"Schatrovers",groep:"3–8",min:8,kids:"4 teams",
   mat:["stick per kind","12–16 ballen in het midden","pionnen voor 4 hoekvakken"],
@@ -820,7 +820,7 @@ const NEED={
   "pionnen-omschieten":n=>({stick:n,bal:n,pion:Math.max(8,Math.ceil(n/3))}),
   "dribbel-schiet":n=>({stick:n,bal:Math.ceil(n/2),pion:6,doel:2}),
   "koning-vak":n=>({stick:n,bal:n,pion:6}),
-  "schaduw":n=>({stick:n,bal:n,pion:4}),
+  "schaduw":n=>({stick:n,bal:n,pion:4,bank:1}),
   "schatrovers":n=>({stick:n,bal:Math.max(12,Math.ceil(n/2)),pion:20}),
   "een-tegen-een":n=>{const b=Math.ceil(n/4);return{stick:n,bal:Math.ceil(n/2),pion:4*b}},
   "drie-drie":n=>{const f=Math.max(1,Math.floor(n/6));return{stick:n,bal:f,doel:2*f,hesje:3*f}},
@@ -1039,7 +1039,7 @@ const ANIM={
   "hoepelritme":[{at:0},{at:2},{at:.4},{at:2.8}],
   "stoplicht":[{at:0},{at:.3},{at:.6}],
   "balletje-tik":[{at:0},{at:.2},{at:.4},{at:.6}],
-  "schaduw":[{at:0},{at:.3},{at:.1},{at:.4}],
+  "schaduw":[{at:.3},{at:2.1},{at:.1},{at:.4}],
   "schatrovers":[{at:0},{at:2},{at:.1},{at:2.1}],
   "tikkertje-opdracht":[{at:0},{at:.2},{at:.4}],
   "slalom":[{at:0},{at:2.4}],
@@ -1080,7 +1080,7 @@ const EXTRA={
   "poortjes-tellen":[["pass","M112 52 L46 52",1.1],["pass","M200 122 L200 60",1.4]],
   "stoplicht":[["dribble","M230 76 Q250 100 222 112",.2],["dribble","M186 128 Q215 150 250 150",.4],["dribble","M135 70 Q120 40 80 40",3],["dribble","M210 62 Q200 95 170 100",3.1],["dribble","M165 130 Q120 100 70 100",3.2]],
   "balletje-tik":[["run","M190 64 Q215 100 226 114",2],["run","M115 125 Q150 110 180 132",2.2],["dribble","M236 126 Q255 150 210 152",2.2],["dribble","M196 134 Q215 110 240 96",2.6]],
-  "schaduw":[["dribble","M205 52 Q245 40 250 80",2.6],["dribble","M188 66 Q228 54 234 90",2.9],["dribble","M245 116 Q200 150 140 140",2.7],["dribble","M228 130 Q190 155 130 150",3]],
+  "schaduw":[["run","M142 64 L166 63",0],["run","M87 74 L111 73",1.8],["dribble","M168 61 Q210 45 248 74",2.5],["dribble","M113 71 Q165 56 220 84",3.7],["dribble","M245 116 Q200 150 140 140",2.7],["dribble","M228 130 Q190 155 130 150",3]],
   "schatrovers":[["run","M44 138 L134 100",1],["run","M256 138 L166 100",1.1],["dribble","M136 96 Q90 110 48 136",3],["dribble","M164 96 Q210 110 252 136",3.1]],
   "tikkertje-opdracht":[["dribble","M206 46 Q240 30 262 50",.6],["dribble","M214 114 Q235 95 244 90",1],["dribble","M188 58 Q170 70 156 48",3]],
   "slalom":[["dribble","M36 90 Q72 75 90 83 Q108 103 125 97 Q142 77 160 83 Q178 103 195 97 Q212 77 230 83 Q250 90 262 90",.5],["run","M262 97 Q150 115 40 97",2.9],
@@ -1145,7 +1145,7 @@ function plan(ex){
     }else{
       const from=near(e.start,e.at,p=>p.has);
       if(from){from.has=false;from.tl.push([e.at,0])}
-      const to=near(e.stop,e.end,p=>p!==from);let hide=1;
+      const to=near(e.stop,e.end,p=>e.a.self||p!==from);let hide=1;
       if(to&&dist(posAt(to,e.end),e.stop)<16){to.has=true;to.tl.push([e.end,1]);hide=e.end}
       else if(e.a.k==="shot")hide=Math.min(1,r3(e.end+.08));
       balls.push({d:e.a.d,at:e.at,end:e.end,hide});

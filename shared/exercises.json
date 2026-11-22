@@ -267,6 +267,15 @@
    "phase": "Warming-up"
   },
   {
+   "id": "baas-en-hond",
+   "title": "Baas en hond",
+   "cat": "Warming-up",
+   "phase": "Warming-up",
+   "apps": [
+    "training"
+   ]
+  },
+  {
    "id": "vierkant",
    "title": "Pass en volg in het vierkant",
    "cat": "Warming-up",
