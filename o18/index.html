@@ -217,6 +217,15 @@ svg.hall{width:100%;height:auto;display:block}
 .bib-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .bib-list li{border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:6px}
 .bib-list li.vast{border:1.5px dashed var(--court);background:var(--bg)}
+.gen-card{border-style:solid!important;border-color:var(--accent)!important}
+.gen-card .vast-tag{background:var(--accent);color:var(--accent-ink)}
+.gen-f{display:grid;gap:6px}.gen-l{font-weight:700;font-size:14px;color:var(--muted)}
+.gen-themes{display:flex;flex-wrap:wrap;gap:8px}
+.gen-res{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
+.gen-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.bib-list .gen-list li{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 8px;border:none;border-left:4px solid var(--ph);border-radius:0;padding:2px 0 2px 10px;background:none}
+.gen-list .phase-tag{grid-column:1/-1;font-size:11px;padding:4px 6px}
+.gen-t{font:inherit;font-weight:700;text-align:left;background:none;border:none;color:var(--ink);padding:2px 0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .vast-tag{justify-self:start;background:var(--court);color:var(--surface);font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:5px}
 .btn.warn{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 #print{display:none}
@@ -1312,6 +1321,7 @@ function renderLib(){
         <div class="actions"><button type="button" class="btn primary" data-load="${it.nr}">Laden</button><button type="button" class="btn" data-del="${it.nr}">Verwijderen</button></div></li>`}).join("")}</ul>`
     :`<p class="empty">Nog niets bewaard. Kies oefeningen, open ${C.btnLabel} en tik op Bewaren. De eerste wordt ${C.libName} 1.</p>`)
     +exampleHtml()+`<p class="note">${where}</p>`;
+  el.insertAdjacentHTML("afterbegin",genHtml());
 }
 const itemName=it=>(it.naam&&String(it.naam).trim())||`${C.libName} ${it.nr}`;
 const normName=s=>String(s||"").trim().replace(/\s+/g," ").toLowerCase();
@@ -1343,7 +1353,7 @@ document.getElementById("save-row").addEventListener("submit",ev=>{ev.preventDef
 document.getElementById("save-name").addEventListener("input",saveHint);
 document.getElementById("save-cancel").addEventListener("click",()=>{document.getElementById("save-row").hidden=true});
 function loadTraining(nr){
-  const it=nr===VB.nr?VB:LIB.items.find(x=>x.nr===nr);if(!it)return;
+  const it=nr===VB.nr?VB:nr===GT_NR?(GEN.res&&{...GEN.res,nr:GT_NR}):LIB.items.find(x=>x.nr===nr);if(!it)return;
   sel=(it.sel||[]).filter(v=>v&&EX.some(e=>e.id===v.id)).map(normSel);
   if(typeof it.wissel==="number")WISSEL=Math.max(0,Math.min(30,it.wissel));
   try{localStorage.setItem(C.key+"-wissel",WISSEL)}catch(e){}
@@ -1369,8 +1379,90 @@ function exampleHtml(){const s=VB.sel.filter(v=>EX.some(e=>e.id===v.id)),m=s.red
     <p class="adj" style="margin:0">${s.map(v=>EX[idx(v.id)].title).join(" · ")}</p><p class="note" style="margin:0">${VB.uitleg} Laad hem en pas hem aan; bewaar je hem, dan komt er een eigen ${C.unit} bij.</p>
     <div class="actions"><button type="button" class="btn primary" data-load="${VB.nr}">Laden</button></div></li></ul>`}
 
+/* training maken: thema + tijd → 1 of 2 warming-ups, 2 kernoefeningen en een partijvorm.
+   Eerste thema in de lijst = hoofdthema van de oefening (krijgt meer kans). Keeperoefeningen doen niet mee. */
+const GEN_THEMES=["Dribbelen","Passen","Schieten","Omschakelen","Verdedigen"];
+const GEN_TAGS={
+  "rondo":["Passen","Verdedigen","Omschakelen"],"vierkant":["Passen"],
+  "mikko-1":["Passen","Schieten"],"mikko-2":["Passen","Schieten"],"mikko-3":["Passen","Schieten"],"mark-123":["Passen","Schieten"],
+  "duel":["Dribbelen","Verdedigen"],
+  "nummer-passen":["Passen"],"minuut-passen":["Passen"],"pionnen-stick":["Passen","Dribbelen"],"draai-180":["Passen","Dribbelen"],"parcours":["Passen","Schieten"],
+  "halve-cirkel":["Schieten","Dribbelen"],"schot-beweging":["Schieten"],"kruis-schieten":["Schieten"],"rebound":["Schieten"],
+  "twee-een":["Omschakelen","Schieten"],"drie-twee":["Omschakelen","Verdedigen"],"drie-doelen":["Omschakelen","Verdedigen"],
+  "forechecking":["Verdedigen","Omschakelen"],
+  "hoek-een-een":["Dribbelen","Verdedigen"],"een-een-schot":["Dribbelen","Schieten"],"sprint-bal":["Dribbelen","Schieten"],
+  "drie-drie":["Verdedigen","Passen","Omschakelen","Dribbelen"],"lijnteam":["Schieten","Verdedigen","Omschakelen"],
+  "powerplay":["Passen","Schieten","Verdedigen"],"partij-thema":GEN_THEMES
+};
+const GEN_INT=["laag","laag–middel","middel","middel–hoog","hoog","zeer hoog"];
+const genRole=e=>e.cat==="Keeper"?null:e.cat==="Warming-up"?"warm":["Partijvorm","Spel","Speciale situaties"].includes(e.cat)?"partij":"kern";
+let GEN={thema:"Passen",min:75,open:false,res:null,msg:""};
+try{const g=JSON.parse(localStorage.getItem(C.key+"-gen")||"null");if(g){if(GEN_THEMES.includes(g.thema))GEN.thema=g.thema;if(g.min>=30&&g.min<=150)GEN.min=g.min}}catch(e){}
+const genSave=()=>{try{localStorage.setItem(C.key+"-gen",JSON.stringify({thema:GEN.thema,min:GEN.min}))}catch(e){}};
+/* kies n oefeningen voor een rol: eerst die bij het thema passen (hoofdthema 3× zoveel kans), daarna aanvullen */
+function genPick(role,thema,n,used){
+  const pool=EX.filter(e=>genRole(e)===role&&!used.has(e.id)),out=[];
+  const w=e=>{const t=GEN_TAGS[e.id]||[];return t[0]===thema?3:t.includes(thema)?1:0};
+  for(const fit of [true,false]){
+    let c=pool.filter(e=>(w(e)>0)===fit&&!out.includes(e));
+    while(out.length<n&&c.length){const tot=c.reduce((s,e)=>s+(w(e)||1),0);let r=Math.random()*tot,k=0;
+      for(;k<c.length-1;k++){r-=w(c[k])||1;if(r<=0)break}
+      out.push(c[k]);c.splice(k,1)}
+  }
+  out.forEach(e=>used.add(e.id));return out;
+}
+function genMake(){
+  const T=GEN.min,r5=v=>Math.max(5,Math.round(v/5)*5);
+  for(const nw of (T>=75?[2,1]:[1])){
+    const n=nw+3,E=T-(n-1)*WISSEL;if(E<n*6)continue;
+    const used=new Set(),warm=genPick("warm",GEN.thema,nw,used),
+      kern=genPick("kern",GEN.thema,2,used).sort((a,b)=>GEN_INT.indexOf(a.int.split(",")[0])-GEN_INT.indexOf(b.int.split(",")[0])),
+      partij=genPick("partij",GEN.thema,1,used);
+    if(warm.length<nw||kern.length<2||!partij.length)return null;
+    const wm=Math.max(5,Math.round(E*.2/nw)),km=E>=70?r5(E*.25):Math.max(6,Math.round(E*.25)),pm=E-nw*wm-2*km;
+    if(pm<6)continue;
+    return{naam:`${C.Unit} ${GEN.thema.toLowerCase()}`,thema:GEN.thema,wissel:WISSEL,
+      sel:[...warm.map(e=>({id:e.id,lvl:"basis",min:wm})),...kern.map(e=>({id:e.id,lvl:"basis",min:km})),{id:partij[0].id,lvl:"basis",min:pm}]};
+  }
+  return null;
+}
+const GT_NR=-2;
+function genHtml(){
+  const g=GEN,res=g.res;
+  let h=`<ul class="bib-list gen"><li class="vast gen-card"><span class="vast-tag">Nieuw</span>
+    <div class="slot-head"><strong class="sum-t">Maak een ${C.unit}</strong></div>
+    <p class="note" style="margin:0">Kies een thema en de tijd. Je krijgt warming-up, twee kernoefeningen en een partijvorm die bij het thema passen.</p>`;
+  if(!g.open)return h+`<div class="actions"><button type="button" class="btn primary" id="gen-open">Maak een ${C.unit}</button></div></li></ul>`;
+  h+=`<div class="gen-f"><span class="gen-l" id="gen-th-l">Thema</span><div class="gen-themes" role="group" aria-labelledby="gen-th-l">${GEN_THEMES.map(t=>`<button type="button" class="chip" data-gthema="${t}" aria-pressed="${t===g.thema}">${t}</button>`).join("")}</div></div>
+    <div class="stepwrap"><label for="gen-min">Tijd in minuten</label><div class="stepper"><button type="button" id="gen-mmin" aria-label="5 minuten minder">−</button><input id="gen-min" type="number" inputmode="numeric" min="30" max="150" step="5" value="${g.min}"><button type="button" id="gen-mplus" aria-label="5 minuten meer">+</button></div></div>
+    <p class="note" style="margin:0">Inclusief ${WISSEL} min wisselen tussen de oefeningen (aan te passen bij Materiaal en veld).</p>
+    <div class="actions"><button type="button" class="btn primary" id="gen-go">${res?"Andere oefeningen":`Maak ${C.unit}`}</button></div>
+    <p class="note" role="status" aria-live="polite" style="margin:0">${g.msg}</p>`;
+  if(res){const ex=res.sel.reduce((t,v)=>t+v.min,0),ws=(res.sel.length-1)*res.wissel;
+    h+=`<div class="gen-res"><div class="slot-head"><strong class="sum-t">${res.naam}</strong><span class="mins">${ex+ws} min</span></div>
+      <span class="meta"><span>${nOef(res.sel.length)}</span><span>${ex} min oefenen</span><span>${ws} min wisselen</span></span>
+      <ol class="gen-list">${res.sel.map(v=>{const e=EX[idx(v.id)],ph=phaseOf(e.cat),lab=genRole(e)==="partij"?"Partijvorm":PH_LABEL[ph];
+        return `<li class="ph-${ph}"><span class="phase-tag">${lab}</span><button type="button" class="gen-t" data-open="${e.id}">${e.title}</button><span class="mins">${v.min} min</span></li>`}).join("")}</ol>
+      <div class="actions"><button type="button" class="btn primary" data-load="${GT_NR}">Laden</button></div></div>`}
+  return h+`</li></ul>`;
+}
+function genRun(){
+  const inp=document.getElementById("gen-min");if(inp)GEN.min=Math.max(30,Math.min(150,Math.round(Number(inp.value)/5)*5||GEN.min));
+  genSave();const r=genMake();GEN.res=r;
+  GEN.msg=r?"":`Te weinig tijd voor vier oefeningen met ${WISSEL} min wisselen. Kies meer minuten.`;
+  renderLib();
+}
+document.addEventListener("click",ev=>{
+  const b=ev.target.closest("button");if(!b||!b.closest("#bib"))return;
+  if(b.id==="gen-open"){GEN.open=true;renderLib();const f=document.querySelector(".gen-themes .chip[aria-pressed='true']");if(f)f.focus()}
+  if(b.dataset.gthema){GEN.thema=b.dataset.gthema;genSave();if(GEN.res)genRun();else renderLib()}
+  if(b.id==="gen-mmin"||b.id==="gen-mplus"){GEN.min=Math.max(30,Math.min(150,GEN.min+(b.id==="gen-mplus"?5:-5)));genSave();if(GEN.res)genRun();else renderLib()}
+  if(b.id==="gen-go")genRun();
+});
+document.addEventListener("change",ev=>{if(ev.target.id==="gen-min"){GEN.min=Math.max(30,Math.min(150,Math.round(Number(ev.target.value)/5)*5||75));genSave();if(GEN.res)genRun();else renderLib()}});
+
 /* print als PDF */
-const sheetTitle=()=>{const it=curNr===VB.nr?VB:curNr&&LIB.items.find(x=>x.nr===curNr);return it?itemName(it):C.title};
+const sheetTitle=()=>{const it=curNr===VB.nr?VB:curNr===GT_NR&&GEN.res?GEN.res:curNr&&LIB.items.find(x=>x.nr===curNr);return it?itemName(it):C.title};
 const metaLine=()=>`${new Date().toLocaleDateString("nl-NL",{weekday:"long",day:"numeric",month:"long",year:"numeric"})} · ${N} ${C.people} · ${C.hallName} ${r1(ZW)} × ${r1(ZH)} m · ${nOef(sel.length)} · ${totMin()} min (${exMin()} min oefenen${sel.length>1?` + ${wisselTot()} min wisselen`:""})`;
 const ombText=(a,b)=>diffLines(a,b).map(([,t])=>t).join("; ");
 function sheetHtml(){
