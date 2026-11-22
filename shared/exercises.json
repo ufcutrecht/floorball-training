@@ -481,6 +481,18 @@
    "apps": [
     "gymzaal"
    ]
+  },
+  {
+   "id": "krokodillen",
+   "title": "Krokodillenrivier",
+   "cat": "Dribbelen",
+   "phase": "Kern"
+  },
+  {
+   "id": "twee-ballen",
+   "title": "Partij met twee ballen",
+   "cat": "Spel",
+   "phase": "Afsluiting"
   }
  ],
  "o14": [

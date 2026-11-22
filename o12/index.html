@@ -638,7 +638,7 @@ const EX = [
   stappen:["Zet 8 poortjes van twee pionnen verspreid door de zaal, ongeveer 1,5 meter breed.","Duo's hebben samen één bal en bewegen vrij door de zaal.","Je scoort door de bal door een poortje naar je partner te spelen. Die neemt aan en jullie zoeken samen het volgende poortje.","Niet twee keer achter elkaar hetzelfde poortje. Welk duo heeft na 2 minuten de meeste punten?"],
   tips:["Zonder bal loop je alvast naar de andere kant van een vrij poortje.","Kijk op: staat er al een duo bij dit poortje? Zoek dan een ander."],
   makkelijker:["Bredere poortjes.","Bal eerst stilleggen voor je passt."],
-  moeilijker:["Maak een paar smalle poortjes die dubbel tellen: elk duo kiest zelf hoe moeilijk.","Twee duo's zijn bewakers zonder bal en mogen een poortje dichtzetten."],
+  moeilijker:["Maak een paar smalle poortjes die dubbel tellen: elk duo kiest zelf hoe moeilijk.","Twee duo's zijn bewakers zonder bal en mogen een poortje dichtzetten.","Twee spelers zonder bal zijn verdediger en onderscheppen passes. Wie de bal onderschept, ruilt van rol."],
   fig:[{t:"zone",x:20,y:12,w:260,h:150},
    {t:"cone",x:90,y:50},{t:"cone",x:90,y:70},{t:"cone",x:196,y:40},{t:"cone",x:220,y:40},{t:"cone",x:156,y:110},{t:"cone",x:156,y:130},{t:"cone",x:250,y:116},{t:"cone",x:250,y:140},{t:"cone",x:56,y:140},{t:"cone",x:80,y:140},
    {t:"p",x:58,y:60,ball:1},{t:"p",x:122,y:62},{t:"p",x:208,y:72,ball:1},{t:"p",x:208,y:20},{t:"p",x:126,y:120,ball:1},{t:"p",x:186,y:122},
@@ -670,7 +670,32 @@ const EX = [
    {t:"p",x:52,y:38,team:"b"},{t:"p",x:248,y:44,team:"b"},{t:"p",x:52,y:142,team:"b"},{t:"p",x:248,y:142,team:"b"},
    {t:"p",x:128,y:100,ball:1},{t:"p",x:222,y:58,ball:1},
    {t:"a",k:"dribble",d:"M124 106 Q100 128 76 136"},{t:"a",k:"dribble",d:"M216 54 Q160 30 88 36"},
-   {t:"txt",x:134,y:72,s:"schat"},{t:"txt",x:8,y:176,s:"roof een bal en dribbel hem naar je eigen vak"}]}
+   {t:"txt",x:134,y:72,s:"schat"},{t:"txt",x:8,y:176,s:"roof een bal en dribbel hem naar je eigen vak"}]},
+ {id:"krokodillen",cat:"Dribbelen",title:"Krokodillenrivier",int:"hoog",min:8,kids:"hele groep",
+  mat:["stick per speler","bal per speler (behalve de krokodillen)","4 pionnen voor de rivier","hesjes voor de krokodillen"],
+  doel:"Met de bal aan de stick langs een tegenstander komen.",
+  stappen:["Maak in het midden van de zaal een rivier van ongeveer 6 meter breed.","Twee of drie krokodillen (hesje, stick, geen bal) staan in de rivier.","De rest staat met een bal op een oever. Op \"Oversteken!\" dribbelt iedereen naar de overkant.","De krokodillen tikken met hun stick de bal weg. Ben je je bal kwijt? Dan word je ook krokodil.","Wie als laatste nog een bal heeft, wint. Dan kies je nieuwe krokodillen."],
+  tips:["Zoek het gat tussen de krokodillen en versnel daar.","Krokodillen: alleen op de bal spelen, niet op de stick of de benen."],
+  makkelijker:["Krokodillen mogen alleen zijwaarts lopen.","Wie de bal kwijt is, mag één keer opnieuw beginnen."],
+  moeilijker:["Bredere rivier.","Meteen terug oversteken op het volgende signaal."],
+  fig:[{t:"zone",x:115,y:15,w:70,h:150},{t:"cone",x:115,y:15},{t:"cone",x:185,y:15},{t:"cone",x:115,y:165},{t:"cone",x:185,y:165},
+   {t:"p",x:45,y:35,ball:1},{t:"p",x:45,y:75,ball:1},{t:"p",x:45,y:115,ball:1},{t:"p",x:45,y:150,ball:1},
+   {t:"p",x:140,y:62,team:"b"},{t:"p",x:162,y:118,team:"b"},
+   {t:"a",k:"dribble",d:"M53 35 Q150 16 255 38"},{t:"a",k:"dribble",d:"M53 150 Q150 170 255 146"},{t:"a",k:"run",d:"M166 126 Q172 142 166 156"},
+   {t:"txt",x:132,y:11,s:"rivier"},{t:"txt",x:24,y:11,s:"oever"},{t:"txt",x:240,y:11,s:"oever"}]},
+ {id:"twee-ballen",cat:"Spel",title:"Partij met twee ballen",int:"hoog",min:12,kids:"teams van 4",
+  mat:["stick per speler","2 ballen per veld (liefst in twee kleuren)","2 doeltjes per veld","hesjes"],
+  doel:"Opletten en meedoen: met twee ballen is er overal actie.",
+  stappen:["Vier tegen vier op twee doeltjes, zonder keeper.","Er zijn twee ballen tegelijk in het spel.","Elk doelpunt telt, met welke bal ook. Na een doelpunt speelt de verdediger die bal meteen in vanaf de eigen achterlijn.","Het spel stopt niet: let steeds op allebei de ballen.","Elke 3 minuten wisselen van tegenstander of met de wissels."],
+  tips:["Kijk op: waar is de andere bal en wie staat er vrij?","Heeft de tegenstander allebei de ballen? Snel terug naar je eigen doel."],
+  makkelijker:["Drie tegen drie, dan is er meer ruimte.","Grotere doeltjes of brede poortjes van pionnen."],
+  moeilijker:["Een doelpunt telt alleen na een pass.","Drie ballen tegelijk in het spel."],
+  fig:[{t:"line",d:"M20 20 L280 20 L280 160 L20 160 Z"},{t:"line",d:"M150 20 L150 160"},
+   {t:"goal",x:28,y:90,flip:1},{t:"goal",x:272,y:90},
+   {t:"p",x:100,y:50,ball:1},{t:"p",x:170,y:70},{t:"p",x:55,y:70},{t:"p",x:215,y:150},
+   {t:"p",x:205,y:115,team:"b",ball:1},{t:"p",x:120,y:140,team:"b"},{t:"p",x:230,y:45,team:"b"},{t:"p",x:150,y:105,team:"b"},
+   {t:"a",k:"pass",d:"M108 52 L162 67"},{t:"a",k:"pass",d:"M197 118 L128 137"},{t:"a",k:"dribble",d:"M178 72 Q210 76 224 86"},{t:"a",k:"shot",d:"M230 88 L266 90"},{t:"a",k:"shot",d:"M113 135 L36 96"},
+   {t:"txt",x:24,y:14,s:"2 ballen tegelijk in het spel"}]}
 ];
 
 /* Welke oefeningen in welke app. Geen "apps" = in beide apps; ["training"] = alleen trainersapp,
@@ -698,6 +723,8 @@ const NEED={
   "koningsbal":n=>({stick:n,bal:4,doel:2,hesje:Math.ceil(n/2)+2}),
   "muurbal":n=>({stick:n,bal:3,pion:4,hesje:Math.ceil(n/2)}),
   "poortjesjacht":n=>({stick:n,bal:Math.ceil(n/2),pion:16}),
+  "krokodillen":n=>{const k=n<14?2:3;return{stick:n,bal:n-k,pion:4,hesje:k}},
+  "twee-ballen":n=>{const f=Math.min(4,Math.max(1,Math.floor(n/8)));return{stick:n,bal:2*f,doel:2*f,hesje:4*f}},
   "bankbal":n=>({stick:n,bal:3,hesje:Math.ceil(n/2)}),
   "schatrovers-verdedigers":n=>({stick:n,bal:Math.max(12,n),pion:16,hesje:4}),
   "doelen-verzamelen":n=>({stick:n,bal:n,pion:8}),
@@ -731,7 +758,7 @@ let N=12;
 try{const v=parseInt(localStorage.getItem("o12-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
-const MAAT={"paal-dribbel":"halve veld per baan, vierkant 3 × 3 m","poortjesjacht":"hele zaal","bankbal":"40 × 20 m","schatrovers-verdedigers":"hele zaal","getrokken-schot":"20 × 20 m","schuifslag":"10 × 6 m per drietal","aanname-fh-bh":"12 m per drietal","reactiestart":"12 m per rij","keeper-muur":"1–3 m van de muur","keeper-werpen":"10 m tussen de keepers","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m","tikspel":"heel veld","rondo":"8 × 8 m per vak","vierkant":"6 × 6 m per groepje","minuut-passen":"4 m tussen de pionnen","pionnen-stick":"5 m tussen werker en aanspeler","dribbel-estafette":"rij van ca. 15 m","schot-beweging":"half veld","twee-een":"heel kleinveld","drie-drie":"half kleinveld per veldje","lijnteam":"half kleinveld","partij-klein":"heel kleinveld","koningsbal":"heel kleinveld","muurbal":"heel veld","doelen-verzamelen":"hele zaal","een-een-poortjes":"klein veldje per 4 spelers","hinderbaan":"baan van ca. 15 m","twee-twee-dwars":"dwars over het veld","vaardigheidsproef":"3 stations"};
+const MAAT={"krokodillen":"hele zaal","twee-ballen":"20 × 10 m per veld","paal-dribbel":"halve veld per baan, vierkant 3 × 3 m","poortjesjacht":"hele zaal","bankbal":"40 × 20 m","schatrovers-verdedigers":"hele zaal","getrokken-schot":"20 × 20 m","schuifslag":"10 × 6 m per drietal","aanname-fh-bh":"12 m per drietal","reactiestart":"12 m per rij","keeper-muur":"1–3 m van de muur","keeper-werpen":"10 m tussen de keepers","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m","tikspel":"heel veld","rondo":"8 × 8 m per vak","vierkant":"6 × 6 m per groepje","minuut-passen":"4 m tussen de pionnen","pionnen-stick":"5 m tussen werker en aanspeler","dribbel-estafette":"rij van ca. 15 m","schot-beweging":"half veld","twee-een":"heel kleinveld","drie-drie":"half kleinveld per veldje","lijnteam":"half kleinveld","partij-klein":"heel kleinveld","koningsbal":"heel kleinveld","muurbal":"heel veld","doelen-verzamelen":"hele zaal","een-een-poortjes":"klein veldje per 4 spelers","hinderbaan":"baan van ca. 15 m","twee-twee-dwars":"dwars over het veld","vaardigheidsproef":"3 stations"};
 EX.forEach(e=>e.maat=MAAT[e.id]);
 const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
@@ -743,6 +770,10 @@ const r1=v=>String(Math.round(v*10)/10).replace(".",",");
 const sq=(c,z)=>{const x=c.cx-z/2,y=c.cy-z/2;return[{t:"zone",x,y,w:z,h:z},{t:"cone",x,y},{t:"cone",x:x+z,y},{t:"cone",x,y:y+z},{t:"cone",x:x+z,y:y+z}]};
 const GOALS=[{t:"goal",x:3.5,y:10,side:"l"},{t:"goal",x:36.5,y:10,side:"r"}];
 const HALL={
+  "krokodillen":()=>({items:[{t:"zone",x:17,y:1,w:6,h:18},{t:"cone",x:17,y:1},{t:"cone",x:23,y:1},{t:"cone",x:17,y:19},{t:"cone",x:23,y:19},{t:"line",x1:2,y1:1,x2:2,y2:19},{t:"line",x1:38,y1:1,x2:38,y2:19},{t:"lbl",x:20,y:10.4,s:"rivier"},{t:"lbl",x:2,y:19.9,s:"oever"},{t:"lbl",x:38,y:19.9,s:"oever"}],note:"rivier van 6 m breed in het midden, oevers bij de korte kanten"}),
+  "twee-ballen":n=>{const f=Math.min(4,Math.max(1,Math.floor(n/8))),pos=[[0,0],[20,0],[0,10],[20,10]],it=[];
+    pos.slice(0,f).forEach(([x,y])=>it.push({t:"zone",x:x+.4,y:y+.4,w:19.2,h:9.2},{t:"goal",x:x+1.2,y:y+5,side:"l"},{t:"goal",x:x+18.8,y:y+5,side:"r"}));
+    const rest=n-8*f;return{items:it,note:`${f} ${f===1?"veldje":"veldjes"} van 20 × 10 m, 4 tegen 4${rest>0?`, ${rest} ${rest===1?"wissel":"wissels"}: wissel elke 2 minuten`:""}`}},
   "paal-dribbel":n=>{const f=n>7?2:1,it=[GOALS[1]],P=(x,y,k)=>k?{x:40-x,y:20-y}:{x,y};
     for(let k=0;k<f;k++){if(k)it.push(GOALS[0]);[[24,8],[28,8],[24,12],[28,12]].forEach(([x,y])=>it.push({t:"cone",...P(x,y,k)}));it.push({t:"paal",...P(21,10,k)},{t:"paal",...P(30,11,k)},{t:"lbl",...P(21,8.4,k),s:"start"},{t:"lbl",...P(30,13,k),s:"paal"})}
     return{items:it,note:`${f===1?"halve veld":"beide helften"}: start bij de middenlijn, vierkant van pionnen en een paal voor het doel`}},
@@ -911,6 +942,8 @@ function setN(v){v=Math.max(4,Math.min(40,v||0));N=v;try{localStorage.setItem("o
 
 /* animatie per pijl, in volgorde van de pijlen in de tekening: starttijd in seconden */
 const ANIM={
+  "krokodillen":[{at:0},{at:.2},{at:.7}],
+  "twee-ballen":[{at:0},{at:.3},{at:1},{at:3.4},{at:1.3}],
   "paal-dribbel":[{at:0},{at:2.4},{at:4.8},{at:7.1}],
   "getrokken-schot":[{at:0},{at:2.2},{at:3.4}],
   "schuifslag":[{at:0},{at:1},{at:.6},{at:1.6}],
