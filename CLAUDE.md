@@ -51,7 +51,7 @@ Alles wat op `main` komt, staat binnen een paar minuten live.
    de animatie (de deellink `https://ufcutrecht.github.io/floorball-training/<programma>/#oefening=<id>`),
    korte tekst (doel), lange tekst (stappen en aandachtspunten), makkelijker en moeilijker. Zet in
    "Mijn feedback" en "Mijn voorstel" dat de oefening nieuw is en nog beoordeeld moet worden, met
-   de datum. Laat "Feedback Remco" leeg. Kun je niet bij de reviewlijsten (bijvoorbeeld als
+   de datum. Laat "Feedback trainers" leeg. Kun je niet bij de reviewlijsten (bijvoorbeeld als
    meebouwer), noem de nieuwe oefening dan in je pull request, zodat Remco haar toevoegt.
 
 ## Opbouw
