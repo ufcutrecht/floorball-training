@@ -296,6 +296,10 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
   .pr-it ol{margin:0 0 4pt;padding-left:16pt}
   .pr-wis{grid-column:1/-1;color:#444}
   .pr-break{break-before:page}
+  .pr-row{break-inside:avoid;display:grid;grid-template-columns:1fr 1fr;gap:0 16pt;border-top:2px solid #000;padding:8pt 0}
+  .pr-row .pr-it,.pr-row .pr-ob{display:block;border:none;padding:0}
+  .pr-row .pr-ob{border-left:1px solid #bbb;padding-left:12pt}
+  .pr-row svg{width:100%;height:auto}
   .pr-kit{width:100%;border-collapse:collapse;margin:6pt 0 10pt}
   .pr-kit th,.pr-kit td{border-bottom:1px solid #999;padding:4pt 6pt;text-align:left}
   .pr-kit td.n{font-weight:700;text-align:right;width:3em}
@@ -1670,40 +1674,55 @@ const allTitle=()=>`${sheetTitle()} · oefeningen, ombouw, materiaal`;
 /* alles in de volgorde van het scherm: klaarzetten, oefening 1, ombouwen, oefening 2, …, en als laatste het materiaal */
 function allHtml(){const st=obSteps();
   return `<h1>${sheetTitle()}</h1><p class="pr-meta">${metaLine()}</p>`+sel.map((x,i)=>{const e=EX[idx(x.id)],ph=phaseOf(e.cat),s=st[i];
-    return `<section class="pr-ob ph-${ph}"><h3>${s.head}</h3><ul>${s.lines.map(l=>`<li>${l}</li>`).join("")}</ul>${hallSvg(e.id,N)}<p>${hallNote(e.id,N)}</p></section>
-     <section class="pr-it ph-${ph}"><h3>${i+1}. ${e.title}<small>${x.min} min · ${PH_LABEL[ph]} · ${lvlLabel(x.lvl)}</small></h3>
+    return `<div class="pr-row"><section class="pr-it ph-${ph}"><h3>${i+1}. ${e.title}<small>${x.min} min · ${PH_LABEL[ph]} · ${lvlLabel(x.lvl)}</small></h3>
      <div class="pr-fig">${svg(e,"pa"+i,true)}</div>
      <div><p><b>Doel:</b> ${e.doel}</p><p><b>Groep:</b> ${e.kids} · veld ${e.maat}</p><ol>${e.stappen.map(t=>`<li>${t}</li>`).join("")}</ol>
-     ${x.lvl!=="basis"?`<p><b>${lvlLabel(x.lvl)}:</b> ${e[x.lvl].join(" ")}</p>`:""}<p><b>Materiaal voor ${N} ${C.people}:</b> ${needText(e.id)}</p></div></section>`}).join("")
+     ${x.lvl!=="basis"?`<p><b>${lvlLabel(x.lvl)}:</b> ${e[x.lvl].join(" ")}</p>`:""}<p><b>Materiaal voor ${N} ${C.people}:</b> ${needText(e.id)}</p></div></section>
+     <section class="pr-ob ph-${ph}"><h3>${s.head}</h3><ul>${s.lines.map(l=>`<li>${l}</li>`).join("")}</ul>${hallSvg(e.id,N)}<p>${hallNote(e.id,N)}</p></section></div>`}).join("")
    +`<div class="pr-break">${kitHtml()}</div>`;
 }
+/* pdf: per oefening één rij met twee kolommen, links de oefening, rechts het klaarzetten of ombouwen */
 async function buildAllPdf(pr){
   if(!(window.jspdf&&window.jspdf.jsPDF))await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
-  const doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"}),W=210,M=15,CW=W-2*M,BOT=297-M;let y=M;
+  const doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"}),W=210,M=15,CW=W-2*M,G=8,COL=(CW-G)/2,BOT=297-M;let y=M;
   const T=s=>String(s).replace(/−/g,"-").replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[^\x20-\x7E\xA0-\xFF–—•…]/g,"").replace(/\s+/g," ").trim();
-  const need=hh=>{if(y+hh>BOT){doc.addPage();y=M}};
-  const txt=(s,o={})=>{const size=o.size||10,lh=size*.43;doc.setFont("helvetica",o.bold?"bold":"normal");doc.setFontSize(size);doc.setTextColor(...(o.color||[20,20,20]));
-    doc.splitTextToSize(T(s),CW-(o.indent||0)).forEach(l=>{need(lh);doc.text(l,M+(o.indent||0),y+lh*.8);y+=lh});y+=(o.gap??1.5)};
-  const grey=[95,95,95],halls=[...pr.querySelectorAll("svg.hall")],figs=[...pr.querySelectorAll("svg.court")],st=obSteps();
-  txt(sheetTitle(),{size:22,bold:true,gap:1});
-  txt(metaLine(),{size:9.5,color:grey,gap:4});
+  const grey=[95,95,95];
+  /* tekst op de hele breedte (titel en kop) */
+  const full=(t,o={})=>{const size=o.size||10,lh=size*.43;doc.setFont("helvetica",o.bold?"bold":"normal");doc.setFontSize(size);doc.setTextColor(...(o.color||[20,20,20]));
+    doc.splitTextToSize(T(t),CW).forEach(l=>{doc.text(l,M,y+lh*.8);y+=lh});y+=(o.gap??1.5)};
+  /* een kolom is een lijst blokken: tekst of afbeelding; eerst meten, dan tekenen */
+  const colH=(blocks,k)=>blocks.reduce((h,bl)=>{if(bl.img)return h+bl.h+(bl.gap??2);
+    const size=(bl.size||9.5)*k,lh=size*.43;doc.setFont("helvetica",bl.bold?"bold":"normal");doc.setFontSize(size);
+    return h+doc.splitTextToSize(T(bl.t),COL-(bl.indent||0)).length*lh+(bl.gap??1.2)},0);
+  const colDraw=(blocks,x,y0,k)=>{let yy=y0;for(const bl of blocks){
+    if(bl.img){if(bl.data)doc.addImage(bl.data,"JPEG",x,yy,COL,bl.h);yy+=bl.h+(bl.gap??2);continue}
+    const size=(bl.size||9.5)*k,lh=size*.43;doc.setFont("helvetica",bl.bold?"bold":"normal");doc.setFontSize(size);doc.setTextColor(...(bl.color||[20,20,20]));
+    doc.splitTextToSize(T(bl.t),COL-(bl.indent||0)).forEach(l=>{doc.text(l,x+(bl.indent||0),yy+lh*.8);yy+=lh});yy+=(bl.gap??1.2)}};
+  const halls=[...pr.querySelectorAll("svg.hall")],figs=[...pr.querySelectorAll("svg.court")],st=obSteps();
+  full(sheetTitle(),{size:22,bold:true,gap:1});
+  full(metaLine(),{size:9.5,color:grey,gap:4});
   for(let i=0;i<sel.length;i++){const x=sel[i],e=EX[idx(x.id)],s=st[i];
-    /* ombouw */
-    const iw=Math.min(CW,110),ih=iw*svgRatio(halls[i]);
-    need(14+s.lines.length*4.8+ih);doc.setDrawColor(150);doc.setLineWidth(.3);doc.setLineDashPattern([1.5,1.2],0);doc.line(M,y,W-M,y);doc.setLineDashPattern([],0);y+=3;
-    txt(s.head,{size:12,bold:true,gap:1});
-    s.lines.forEach(l=>txt(l,{indent:3,gap:.5}));y+=1.5;
-    try{const img=await svgPng(halls[i]);need(ih+2);doc.addImage(img,"JPEG",M,y,iw,ih);y+=ih+2}catch(err){}
-    txt(hallNote(e.id,N),{size:9,color:grey,gap:5});
-    /* oefening */
-    need(78);doc.setDrawColor(20);doc.setLineWidth(.5);doc.line(M,y,W-M,y);y+=3;
-    txt(`${i+1}. ${e.title}`,{size:14,bold:true,gap:.5});
-    txt(`${x.min} min · ${PH_LABEL[phaseOf(e.cat)]} · ${lvlLabel(x.lvl)} · ${e.kids} · veld ${e.maat}`,{size:9,color:grey,gap:2});
-    try{const png=await svgPng(figs[i]);need(55);doc.addImage(png,"JPEG",M,y,90,54);y+=57}catch(err){}
-    txt(`Doel: ${e.doel}`,{gap:1.5});
-    e.stappen.forEach((t,k)=>txt(`${k+1}. ${t}`,{indent:3,gap:.5}));y+=1.5;
-    if(x.lvl!=="basis")txt(`${lvlLabel(x.lvl)}: ${e[x.lvl].join(" ")}`,{gap:1.5});
-    txt(`Materiaal voor ${N} ${C.people}: ${needText(e.id)}`,{gap:6});
+    let fig=null,hall=null;try{fig=await svgPng(figs[i])}catch(err){}try{hall=await svgPng(halls[i])}catch(err){}
+    const left=[{t:`${i+1}. ${e.title}`,size:13,bold:true,gap:.5},
+      {t:`${x.min} min · ${PH_LABEL[phaseOf(e.cat)]} · ${lvlLabel(x.lvl)} · ${e.kids} · veld ${e.maat}`,size:8.5,color:grey,gap:2},
+      {img:1,data:fig,h:COL*svgRatio(figs[i]),gap:3},
+      {t:`Doel: ${e.doel}`,gap:1.5},
+      ...e.stappen.map((t,k)=>({t:`${k+1}. ${t}`,indent:3,gap:.4})),
+      ...(x.lvl!=="basis"?[{t:`${lvlLabel(x.lvl)}: ${e[x.lvl].join(" ")}`,gap:1.2}]:[]),
+      {t:`Materiaal voor ${N} ${C.people}: ${needText(e.id)}`,size:9,color:grey,gap:0}];
+    const right=[{t:s.head,size:11.5,bold:true,gap:1},
+      ...s.lines.map(l=>({t:l,indent:2,gap:.4})),
+      {img:1,data:hall,h:COL*svgRatio(halls[i]),gap:2,top:2},
+      {t:hallNote(e.id,N),size:8.5,color:grey,gap:0}];
+    right[s.lines.length].gap=3;
+    /* past de rij niet op een lege pagina, maak de tekst iets kleiner */
+    let k=1,h=()=>Math.max(colH(left,k),colH(right,k))+4;
+    while(h()>BOT-M&&k>.75)k-=.05;
+    if(y+h()>BOT){doc.addPage();y=M}
+    doc.setDrawColor(20);doc.setLineWidth(.5);doc.line(M,y,W-M,y);
+    doc.setDrawColor(190);doc.setLineWidth(.2);const rh=h()-4;doc.line(M+COL+G/2,y+3,M+COL+G/2,y+3+rh);
+    colDraw(left,M,y+3,k);colDraw(right,M+COL+G,y+3,k);
+    y+=h()+3;
   }
   buildKitPdf(doc);
   return doc.output("blob");
