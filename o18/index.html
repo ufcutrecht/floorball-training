@@ -226,6 +226,7 @@ svg.hall{width:100%;height:auto;display:block}
 .gen-f{display:grid;gap:6px}.gen-l{font-weight:700;font-size:14px;color:var(--muted)}
 .gen-themes{display:flex;flex-wrap:wrap;gap:8px}
 .gen-wrap{display:grid;gap:12px}
+.gen-over{color:var(--accent);font-weight:800}
 .gen-res{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
 .hdr-links{display:flex;flex-wrap:wrap;gap:6px 22px}
 @media (max-width:440px){.hdr-links{gap:6px 14px}.hdr-links .linkbtn{font-size:15px}}
@@ -1456,7 +1457,7 @@ function genHtml(){
     <div class="actions"><button type="button" class="btn primary" id="gen-go">${res?"Andere oefeningen":`Maak ${C.unit}`}</button></div>
     <p class="note" role="status" aria-live="polite" style="margin:0">${g.msg}</p>`;
   if(res){const ex=res.sel.reduce((t,v)=>t+v.min,0),ws=(res.sel.length-1)*res.wissel;
-    h+=`<div class="gen-res"><div class="slot-head"><strong class="sum-t">${res.naam}</strong><span class="mins">${ex+ws} min</span></div>
+    h+=`<div class="gen-res"><div class="slot-head"><strong class="sum-t">${res.naam}</strong><span class="mins${ex+ws>g.min?" gen-over":""}">${ex+ws} min${ex+ws>g.min?` · ${ex+ws-g.min} min te lang`:""}</span></div>
       <span class="meta"><span>${nOef(res.sel.length)}</span><span>${ex} min oefenen</span><span>${ws} min wisselen</span></span>
       <ol class="gen-list">${res.sel.map((v,i)=>{const e=EX[idx(v.id)],ph=genRole(e)==="partij"?"partij":phaseOf(e.cat),lab=genRole(e)==="partij"?"Partijvorm":PH_LABEL[ph],alts=genAlts(i),alt=alts.length,
         same=j=>j>=0&&j<res.sel.length&&genRole(EX[idx(res.sel[j].id)])===genRole(e),open=GEN.menu===i&&alt;
