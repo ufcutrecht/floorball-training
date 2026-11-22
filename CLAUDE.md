@@ -60,6 +60,11 @@ Alles wat op `main` komt, staat binnen een paar minuten live.
    de datum. Laat "Feedback trainers" leeg. Kun je niet bij de reviewlijsten (bijvoorbeeld als
    meebouwer), noem de nieuwe oefening dan in je pull request, zodat Remco haar toevoegt.
 
+3. **Geef elke nieuwe oefening thema's voor "Suggestie voor een training"**: zet haar id in
+   `GEN_TAGS` van de programmapagina (het eerste thema is het hoofdthema; de thema's staan in
+   `GEN_THEMES`). Zonder thema's kiest de generator haar alleen als aanvulling. De rol
+   (warming-up, kern of partijvorm/spel) volgt uit `cat`; keeperoefeningen doen niet mee.
+
 ## Opbouw
 
 | Pad | Wat |
