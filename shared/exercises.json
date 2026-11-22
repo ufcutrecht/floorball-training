@@ -31,28 +31,10 @@
    "phase": "Warming-up"
   },
   {
-   "id": "slalom",
-   "title": "Slalom-estafette",
-   "cat": "Dribbelen",
-   "phase": "Kern",
-   "apps": [
-    "training"
-   ]
-  },
-  {
    "id": "pionnenbos",
    "title": "Pionnenbos",
    "cat": "Dribbelen",
    "phase": "Kern"
-  },
-  {
-   "id": "tijdrace",
-   "title": "Tijdrace",
-   "cat": "Dribbelen",
-   "phase": "Kern",
-   "apps": [
-    "training"
-   ]
   },
   {
    "id": "fruitsalade",
@@ -84,15 +66,6 @@
   {
    "id": "driehoek",
    "title": "Driehoekpass",
-   "cat": "Passen",
-   "phase": "Kern",
-   "apps": [
-    "training"
-   ]
-  },
-  {
-   "id": "sternpassen",
-   "title": "Sterpassen",
    "cat": "Passen",
    "phase": "Kern",
    "apps": [
@@ -133,25 +106,10 @@
    "phase": "Kern"
   },
   {
-   "id": "bowling",
-   "title": "Floorball-bowling",
-   "cat": "Schieten",
-   "phase": "Kern"
-  },
-  {
    "id": "kegels",
    "title": "Kegels omschieten",
    "cat": "Schieten",
    "phase": "Kern"
-  },
-  {
-   "id": "carrousel",
-   "title": "Carrousel",
-   "cat": "Schieten",
-   "phase": "Kern",
-   "apps": [
-    "training"
-   ]
   },
   {
    "id": "penaltyspel",
@@ -218,15 +176,6 @@
    "title": "Kast afbouwen",
    "cat": "Spel",
    "phase": "Partij"
-  },
-  {
-   "id": "hoepelritme",
-   "title": "Hoepelritme en reactiestart",
-   "cat": "Snelheid & coördinatie",
-   "phase": "Kern",
-   "apps": [
-    "training"
-   ]
   },
   {
    "id": "staartjes",
@@ -749,7 +698,7 @@
   },
   {
    "id": "rebound",
-   "title": "Screen en rebound",
+   "title": "Tippen en rebound",
    "cat": "Schieten",
    "phase": "Kern"
   },

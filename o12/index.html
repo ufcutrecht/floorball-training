@@ -69,7 +69,7 @@ svg.court{width:100%;height:auto;display:block}
 .c-cone{fill:var(--cone);stroke:var(--ink);stroke-width:.6}
 .c-paal{fill:var(--surface);stroke:var(--ink);stroke-width:1.3}
 .c-paal-dot{fill:var(--ink)}
-.c-pa{fill:var(--accent)} .c-pb{fill:var(--team-b)} .c-pj{fill:var(--ink)} .c-plabel{fill:var(--surface);font:700 8px var(--body);text-anchor:middle}
+.c-pa{fill:var(--accent)} .c-pb{fill:var(--team-b)} .c-pj{fill:var(--ink)} .c-pl{fill:var(--surface);stroke:var(--ink);stroke-width:1.6} .c-plabel{fill:var(--surface);font:700 8px var(--body);text-anchor:middle}
 .c-ball{fill:var(--surface);stroke:var(--ink);stroke-width:.8}
 .c-goal{fill:none;stroke:var(--ink);stroke-width:2.5}
 .a-pass{stroke:var(--ink);stroke-width:1.4;fill:none}
@@ -105,6 +105,7 @@ dialog::backdrop{background:rgb(10 15 20 / .55)}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .box{border:1px solid var(--line);border-radius:10px;padding:12px 14px}
 .box.easy h4{color:var(--team-b)} .box.hard h4{color:var(--accent)}
+.box.kern{border-color:var(--accent)} .box.kern h4{color:var(--accent);margin-top:0}
 
 .timer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--bg);border-radius:10px;padding:12px 14px}
 .timer .t{font-family:var(--display);font-weight:800;font-size:56px;line-height:1;font-variant-numeric:tabular-nums}
@@ -348,6 +349,7 @@ const EX = [
   mat:["stick per speler","bal voor iedereen behalve de tikkers","4 pionnen","2 hesjes"],
   doel:"Opwarmen met veel balcontacten: dribbelen, opkijken en wegdraaien.",
   stappen:["Iedereen heeft een bal, behalve twee tikkers met een hesje.","Iedereen dribbelt binnen de pionnen. De tikkers proberen spelers met bal aan te tikken.","Ben je getikt, dan word je tikker en geef je je bal aan de tikker die jou tikte.","Bal kwijt of buiten de pionnen? Ook dan ben je tikker."],
+  kern:"Kijk op tijdens het dribbelen, anders zie je de tikker niet.",
   tips:["Kijk op tijdens het dribbelen, anders zie je de tikker niet aankomen.","Houd de bal dicht bij je stick, dan kun je snel wegdraaien."],
   makkelijker:["Eén tikker.","Groter veld."],
   moeilijker:["Drie tikkers.","Alleen dribbelen met de backhand."],
@@ -360,6 +362,7 @@ const EX = [
   mat:["stick en bal per speler","4 pionnen","boarding of muur aan één kant"],
   doel:"Rondkijken tijdens het dribbelen: je volgt je medespeler en doet alles na.",
   stappen:["Maak tweetallen, allebei met stick en bal. De baas gaat voorop, de hond volgt op twee meter.","De baas dribbelt door het veld en wisselt af: draaien, stoppen, versnellen, links en rechts dribbelen, de bal door de benen spelen.","Af en toe speelt de baas de bal tegen de boarding en neemt hem in de loop weer aan. De hond doet het meteen na.","Na 1 minuut wisselen jullie van rol. Na twee rondes zoek je een nieuw tweetal."],
+  kern:"Hond: kijk naar de baas, niet naar je bal.",
   tips:["Hond: kijk naar de baas, niet naar je bal. Vraag na afloop: hoe goed zag je wat er om je heen gebeurde?","Vraag: wanneer houd je de bal ver van je lichaam en wanneer dichtbij? Ver als je ruimte hebt, dichtbij als het druk is.","Blijf in beweging, ook als je de bal na de boarding weer aanneemt."],
   makkelijker:["Rustig tempo, alleen wandelen.","De baas kiest maar twee bewegingen."],
   moeilijker:["Hoger tempo en vaker van richting wisselen.","De trainer roept welke beweging de baas moet doen."],
@@ -371,6 +374,7 @@ const EX = [
   mat:["stick per speler","1 bal per groepje","4 pionnen per groepje"],
   doel:"Rustig opwarmen en leren passen en aannemen.",
   stappen:["Zet vier pionnen in een vierkant van ongeveer 6 meter. Bij één pion staan twee spelers.","Pass naar de volgende pion en loop je bal achterna.","Na 1 minuut de andere kant op.","Gaat het goed? Dan een tweede bal erbij."],
+  kern:"Kijk je medespeler aan voordat je passt, en volg je pass.",
   tips:["Stick laag en met twee handen vast.","Kijk naar je medespeler voordat je passt."],
   makkelijker:["Bal eerst stilleggen, dan passen.","Kleiner vierkant."],
   moeilijker:["Twee ballen tegelijk.","Bal niet stilleggen, meteen doorspelen."],
@@ -382,39 +386,43 @@ const EX = [
   mat:["stick per speler","2 ballen per vak","4 pionnen per vak","1 hesje per vak"],
   doel:"De bal rondspelen en aanspeelbaar blijven als er iemand in het midden staat.",
   stappen:["Zet vakken uit van ongeveer 8 bij 8 meter.","Vier spelers aan de buitenkant spelen de bal rond, één speler in het midden probeert hem te pakken.","Pakt de middelste speler de bal, dan ruilt hij met wie hem kwijtraakte.","Wissel na een minuut sowieso van middenspeler."],
+  kern:"Loop opzij als de middenspeler in de passlijn staat.",
   tips:["Loop een stukje opzij als de middenspeler in de weg staat.","Pass naar de speler die het verst van de middenspeler staat."],
   makkelijker:["Groter vak.","Middenspeler mag alleen onderscheppen, niet tackelen."],
   moeilijker:["Twee spelers in het midden.","Tel de passes: wie haalt er 8 op rij?"],
   fig:[{t:"zone",x:90,y:30,w:120,h:120},{t:"p",x:150,y:30,ball:1},{t:"p",x:210,y:90},{t:"p",x:150,y:150},{t:"p",x:90,y:90},
    {t:"p",x:140,y:75,team:"b"},
    {t:"a",k:"pass",d:"M157 36 L203 83"},{t:"a",k:"pass",d:"M203 97 L157 143"},{t:"a",k:"run",d:"M146 80 L160 100"},
-   {t:"txt",x:8,y:14,s:"max. 2 balcontacten"}]},
+   {t:"txt",x:8,y:14,s:"bal kwijt? ruil met de verdediger"}]},
  {id:"minuut-passen",apps:["training"],cat:"Passen",title:"Passen in een minuut",int:"middel",min:8,kids:"duo's",
   mat:["stick per speler","1 bal per duo","2 pionnen per duo","stopwatch"],
   doel:"Zuiver passen en aannemen, met een score die je kunt verbeteren.",
   stappen:["Duo's staan tegenover elkaar, ongeveer 4 meter uit elkaar, elk achter een pion.","Op het startsignaal passen ze een minuut lang zo vaak mogelijk.","Het duo telt hardop. Een bal langs de pion telt niet.","Rust, score noemen en nog 2 keer proberen het record te breken."],
+  kern:"Stick op de vloer als de bal komt: liever zuiver dan snel.",
   tips:["Stick op de vloer als de bal aankomt.","Liever zuiver dan snel."],
   makkelijker:["Afstand 3 meter.","30 seconden in plaats van een minuut."],
   moeilijker:["Afstand 6 meter.","Om en om forehand en backhand."],
   fig:[{t:"cone",x:84,y:58},{t:"cone",x:216,y:58},{t:"cone",x:84,y:108},{t:"cone",x:216,y:108},{t:"cone",x:84,y:158},{t:"cone",x:216,y:158},
    {t:"p",x:90,y:40,ball:1},{t:"p",x:210,y:40,team:"b"},{t:"p",x:90,y:90,ball:1},{t:"p",x:210,y:90,team:"b"},{t:"p",x:90,y:140,ball:1},{t:"p",x:210,y:140,team:"b"},
    {t:"a",k:"pass",d:"M98 37 L202 37"},{t:"a",k:"pass",d:"M98 87 L202 87"},{t:"a",k:"pass",d:"M98 137 L202 137"},
-   {t:"txt",x:8,y:14,s:"1 minuut zo vaak mogelijk passen: tel mee!"},{t:"txt",x:140,y:176,s:"ca. 5 m"}]},
+   {t:"txt",x:8,y:14,s:"1 minuut zo vaak mogelijk passen: tel mee!"}]},
  {id:"pionnen-stick",apps:["training"],cat:"Passen",title:"Passen en stickhandling bij de pionnen",int:"laag–middel",min:10,kids:"duo's: werker en aanspeler",
   mat:["stick per speler","1 bal per duo","2 pionnen per duo"],
   doel:"Balcontrole: naast de pionnen aannemen en tussen de pionnen door terugpassen.",
   stappen:["Duo's staan op ongeveer 5 meter. De werker heeft twee pionnen voor zich, ruim een meter uit elkaar.","De aanspeler speelt de bal om en om links en rechts naast de pionnen.","De werker neemt aan, neemt de bal mee naar het midden en passt tussen de pionnen door terug.","Na een minuut wisselen van rol."],
+  kern:"Eerst de bal recht voor de opening, dan pas passen.",
   tips:["Kleine tikjes met de bal, niet slaan.","Eerst de bal recht voor de opening, dan pas passen."],
   makkelijker:["Pionnen verder uit elkaar.","Aanspeler speelt de bal recht op de werker."],
   moeilijker:["Opening smaller maken.","Direct terugpassen."],
   fig:[{t:"cone",x:96,y:48},{t:"cone",x:96,y:72},{t:"cone",x:204,y:118},{t:"cone",x:204,y:142},
    {t:"p",x:70,y:60},{t:"p",x:240,y:60,team:"b",ball:1},{t:"p",x:230,y:130},{t:"p",x:60,y:130,team:"b",ball:1},
    {t:"a",k:"pass",d:"M232 58 L82 38"},{t:"a",k:"dribble",d:"M76 42 Q80 52 76 60"},{t:"a",k:"pass",d:"M84 60 L232 60"},{t:"a",k:"pass",d:"M232 62 L82 82"},
-   {t:"txt",x:8,y:14,s:"aanspeelbal om en om links en rechts buiten de pionnen"},{t:"txt",x:8,y:176,s:"terugpassen tussen de pionnen door"}]},
+   {t:"txt",x:8,y:14,s:"aanspeelbal om en om links en rechts buiten de pionnen"},{t:"txt",x:8,y:26,s:"terugpassen tussen de pionnen door"}]},
  {id:"dribbel-estafette",apps:["training"],cat:"Dribbelen",title:"Dribbelestafette",int:"middel–hoog",min:10,kids:"rijen van 3–4",
   mat:["stick per speler","1 bal per rij","5 pionnen per rij"],
   doel:"Dribbelen met de bal dicht bij de stick, ook als het snel moet.",
   stappen:["Elke rij krijgt een slalom van 4 pionnen en een keerpion aan het eind.","De eerste speler dribbelt door de slalom, om de keerpion en recht terug.","Terug bij de rij geeft hij de bal aan de volgende, die meteen vertrekt.","Welke rij is als eerste klaar? Speel 3 tot 4 rondes."],
+  kern:"Bal dicht bij de stick in de bocht en een pion vooruit kijken.",
   tips:["Bal dicht bij de stick, anders verlies je hem in de bocht.","Kijk een pion vooruit, niet naar je bal."],
   makkelijker:["Pionnen verder uit elkaar.","Zonder wedstrijd, gewoon oefenen."],
   moeilijker:["Alleen met de backhand door de slalom.","Op de terugweg passen naar de volgende in de rij."],
@@ -429,6 +437,7 @@ const EX = [
   mat:["stick per speler","bal per speler","4 pionnen per baan","2 palen per baan","1 doel met keeper per baan"],
   doel:"De bal dicht bij de stick houden bij vooruit en achteruit dribbelen, en na een draai om de paal op doel schieten.",
   stappen:["Zet op de halve zaal 4 pionnen in een vierkant van ongeveer 3 bij 3 meter. Achter het vierkant, richting de middenlijn, staat de startpaal. Net voorbij het vierkant, op ongeveer 4 meter van het doel, staat een tweede paal. In het doel staat een keeper.","Speler 1 dribbelt vooruit aan de buitenkant langs de linker pionnen.","Daarna dribbelt hij achteruit tussen de pionnen door terug, met zijn gezicht naar het doel. Op dat moment start speler 2.","Dan dribbelt hij vooruit aan de buitenkant langs de rechter pionnen naar de paal, draait om de paal en schiet op de keeper.","Hij haalt zijn bal op, loopt buitenom terug (niet door het vierkant) en sluit achteraan aan. Staan er meer dan 6 in de rij, maak dan een tweede baan op de andere helft."],
+  kern:"Bal dicht bij de stick, ook bij achteruit dribbelen.",
   tips:["Kleine tikjes: de bal blijft dicht bij je stick.","Achteruit: kleine pasjes en de bal recht voor je.","Kijk na de paal eerst naar het doel en schiet dan."],
   makkelijker:["Achteruit weglaten: twee keer vooruit langs de pionnen.","Schieten op een leeg doel of op pionnen in de hoeken."],
   moeilijker:["Bij de paal een schijnbeweging maken voordat je erom draait.","Wie het eerst scoort: twee rijen tegelijk, elk op een eigen doel."],
@@ -441,10 +450,11 @@ const EX = [
   mat:["stick per speler","een emmer ballen","2 pionnen","1 doel met keeper"],
   doel:"Een terugpass aannemen en raak schieten.",
   stappen:["De speler dribbelt om de pion en speelt af naar de aanspeler in de hoek.","Hij loopt door naar voor het doel en krijgt de bal terug.","Bal aannemen en schieten.","Daarna wordt hij aanspeler; de aanspeler loopt langs de boarding terug naar de rij. Wissel elke ronde van kant."],
+  kern:"Stick klaar voordat de bal komt en laag op een hoek schieten.",
   tips:["Schiet laag, naar een hoek van het doel.","Stick meteen klaar om te schieten als de bal komt."],
   makkelijker:["Zonder keeper, mikken op pionnen in de hoeken.","Aanspeler rolt de bal zacht aan."],
   moeilijker:["Direct schieten zonder aannemen.","Een verdediger loopt mee."],
-  fig:[{t:"goal",x:278,y:90},{t:"cone",x:110,y:125},
+  fig:[{t:"goal",x:278,y:90},{t:"p",x:264,y:72,team:"j"},{t:"cone",x:110,y:125},
    {t:"p",x:40,y:140,ball:1},{t:"p",x:26,y:150},{t:"p",x:248,y:150,team:"b"},
    {t:"a",k:"dribble",d:"M48 140 Q95 154 118 140 Q132 126 148 120"},{t:"a",k:"pass",d:"M152 122 L240 146"},{t:"a",k:"run",d:"M152 116 L185 104"},{t:"a",k:"pass",d:"M242 146 L190 112"},{t:"a",k:"shot",d:"M190 104 L268 92"},
    {t:"txt",x:160,y:30,s:"afronden vanuit de slot"}]},
@@ -452,10 +462,11 @@ const EX = [
   mat:["stick per speler","ballen bij de middenlijn","2 doelen met keeper","hesjes"],
   doel:"Leren kiezen: zelf gaan of de bal afgeven als je met z'n tweeën tegen één bent.",
   stappen:["Twee aanvallers starten op de middenlijn tegen één verdediger.","Ze proberen te scoren: zelf gaan of passen.","Na het schot gaat de verdediger samen met een speler uit de rij de andere kant op.","Daar wacht een nieuwe verdediger: weer 2 tegen 1."],
+  kern:"Dribbel naar de verdediger toe; kiest hij jou, pass dan.",
   tips:["Dribbel naar de verdediger toe. Kiest hij jou, pass dan.","Na het schot meteen omdraaien en meedoen."],
   makkelijker:["Verdediger start verder weg.","Verdediger mag alleen in de weg staan, niet tackelen."],
   moeilijker:["Binnen 10 seconden schieten.","2 tegen 2."],
-  fig:[{t:"line",d:"M150 15 L150 165"},{t:"goal",x:278,y:90},{t:"goal",x:22,y:90,flip:1},
+  fig:[{t:"line",d:"M150 15 L150 165"},{t:"goal",x:278,y:90},{t:"goal",x:22,y:90,flip:1},{t:"p",x:264,y:76,team:"j"},{t:"p",x:34,y:76,team:"j"},
    {t:"p",x:150,y:55,ball:1},{t:"p",x:150,y:125},{t:"p",x:222,y:90,team:"b"},{t:"p",x:118,y:150,team:"b"},{t:"p",x:62,y:90},
    {t:"a",k:"dribble",d:"M158 58 Q190 55 205 75"},{t:"a",k:"pass",d:"M208 82 L232 122"},{t:"a",k:"run",d:"M158 128 L226 130"},{t:"a",k:"shot",d:"M238 124 L268 98"},
    {t:"a",k:"run",d:"M216 98 Q160 115 90 100"},{t:"a",k:"run",d:"M124 146 Q112 130 96 124"},{t:"txt",x:28,y:30,s:"daarna 2 tegen 1 terug"}]},
@@ -463,6 +474,7 @@ const EX = [
   mat:["stick per speler","ballen bij elk veld","2 kleine doeltjes per veld","hesjes"],
   doel:"Veel balcontacten en samenspelen, zonder keeper.",
   stappen:["Kleine veldjes met twee doeltjes zonder keeper.","Wissel elke 90 seconden. Het wisselteam staat klaar aan de zijkant.","Na een doelpunt start het andere team vanaf het eigen doeltje.","Nieuwe bal direct vanaf de zijkant."],
+  kern:"Ga vrij staan waar je medespeler je kan zien.",
   tips:["Ga ergens vrij staan waar je medespeler je kan zien.","Bal kwijt? Probeer hem meteen terug te pakken."],
   makkelijker:["2 tegen 2.","Langere wissels."],
   moeilijker:["Doelpunt telt pas na 2 passes.","Iedereen in het team moet de bal gehad hebben."],
@@ -475,20 +487,22 @@ const EX = [
   mat:["stick per speler","8 ballen bij het doel","1 doel met keeper","4 pionnen","hesjes in 2 kleuren"],
   doel:"Scoren en verdedigen op één doel, met korte rust op de lijn.",
   stappen:["Zet een veldje uit. Het doel met keeper staat midden op de lange kant.","Twee teams van 3 spelen op hetzelfde doel.","Het derde team staat op de lijn naast het doel en houdt ballen tegen die naast gaan. Die spelen ze in naar het team dat verdedigde.","Na elk doelpunt draaien de teams door."],
+  kern:"Schiet snel als je vrij staat.",
   tips:["Schiet snel als je vrij staat.","Lijnteam: stick op de vloer."],
   makkelijker:["Groter veldje.","Doordraaien om de 2 minuten."],
   moeilijker:["Doelpunt telt pas na 2 passes.","Lijnteam speelt mee met het team dat de bal heeft."],
   fig:[{t:"line",d:"M30 30 L270 30 L270 150 L30 150 Z"},{t:"goal",x:150,y:34,down:1},
    {t:"cone",x:30,y:30},{t:"cone",x:270,y:30},{t:"cone",x:30,y:150},{t:"cone",x:270,y:150},
-   {t:"p",x:150,y:50,team:"j"},{t:"p",x:108,y:22,team:"j"},{t:"p",x:150,y:20,team:"j"},{t:"p",x:192,y:22,team:"j"},
+   {t:"p",x:150,y:50,team:"j"},{t:"p",x:108,y:22,team:"l"},{t:"p",x:150,y:20,team:"l"},{t:"p",x:192,y:22,team:"l"},
    {t:"p",x:90,y:130,ball:1},{t:"p",x:210,y:128},{t:"p",x:170,y:96},
    {t:"p",x:120,y:84,team:"b"},{t:"p",x:190,y:72,team:"b"},{t:"p",x:140,y:118,team:"b"},
    {t:"a",k:"pass",d:"M98 130 L202 128"},{t:"a",k:"run",d:"M176 92 Q200 74 214 60"},{t:"a",k:"pass",d:"M210 120 L214 68"},{t:"a",k:"shot",d:"M210 54 L194 32"},
-   {t:"txt",x:8,y:12,s:"lijnteam op de lijn"}]},
+   {t:"txt",x:8,y:12,s:"wit: lijnteam op de lijn"}]},
  {id:"partij-klein",apps:["training"],cat:"Spel",title:"Kleinveldpartij 3 tegen 3",int:"hoog",min:20,kids:"2 teams van 3 + keepers, wissels klaar",
   mat:["stick per speler","4 ballen","2 doelen met keeper","hesjes"],
   doel:"Een echte wedstrijd op kleinveld, waarin iedereen veel aan de bal komt.",
   stappen:["3 tegen 3 met keepers op het kleinveld.","Wedstrijdregels: stick laag, niet slaan op de stick van een ander, niet met je voet spelen.","Wissel elke minuut, het wisselteam staat klaar aan de zijkant.","Na een doelpunt begint de keeper van het team dat tegenkreeg."],
+  kern:"Spreid je over het veld, niet alle drie bij de bal.",
   tips:["Spreid je over het veld, niet alle drie bij de bal.","Na balverlies helpt iedereen mee met verdedigen."],
   makkelijker:["Langere wissels.","Team dat achterstaat speelt met een vierde speler."],
   moeilijker:["Doelpunt telt pas na 2 passes.","Elke speler moet een keer gescoord hebben voordat een team een derde doelpunt mag maken."],
@@ -497,6 +511,7 @@ const EX = [
   mat:["stick per speler","bal per speler","banken, springkast, muur en pionnen als doelen"],
   doel:"Passen en de bal weer onder controle krijgen terwijl je beweegt.",
   stappen:["Zet overal langs de rand doelen neer: een bank op zijn kant, een springkastdeel, de muur en poortjes van twee pionnen.","Iedereen dribbelt vrij door de zaal met een eigen bal.","Pass tegen of door zoveel mogelijk verschillende doelen. Na elke treffer haal je de bal op en neem je hem netjes mee.","Wie heeft na 2 minuten de meeste treffers? Daarna nog een ronde om je score te verbeteren."],
+  kern:"Eerst de bal onder controle, dan de volgende pass.",
   tips:["Bal eerst stil onder controle, dan pas de volgende pass.","Kijk op tijdens het dribbelen: welk doel is vrij?"],
   makkelijker:["Grote doelen dichtbij.","Bal stilleggen voor elke pass."],
   moeilijker:["Om en om forehand en backhand.","In duo's: kaatsbal via het doel naar je partner."],
@@ -509,6 +524,7 @@ const EX = [
   mat:["stick per speler","2 ballen per baan","4 pionnen, een bank, een hoepel en een klein doel per baan"],
   doel:"Balbeheersing met stick en bal onderweg langs verschillende hindernissen.",
   stappen:["Zet per rij een baan uit: een slalom van pionnen, een bank, een hoepel op de grond en aan het eind een klein doel.","Dribbel door de slalom, speel de bal onder de bank door en stap er zelf overheen.","Pak de bal weer op, dribbel door de hoepel en schiet in het kleine doel.","Haal je bal op, loop langs de zijkant terug en tik de volgende aan."],
+  kern:"Bal dicht bij de stick, ook na de hindernis.",
   tips:["Bal dicht bij de stick in de slalom.","Na de bank eerst de bal onder controle, dan pas verder."],
   makkelijker:["Minder pionnen, meer ruimte ertussen.","Zonder bank."],
   moeilijker:["Alles met de backhand.","Op tijd: welke rij is het snelst klaar?"],
@@ -521,6 +537,7 @@ const EX = [
   mat:["stick per speler","ballen per station","10 pionnen","1 klein doel"],
   doel:"Drie basisvaardigheden oefenen die passen bij 10 tot 12 jaar: slalom, passen en schieten op een rollende bal.",
   stappen:["Station 1: dribbel door een slalom van 10 pionnen en weer terug.","Station 2: pass in duo's 20 keer achter elkaar zonder fout, ook met de backhand.","Station 3: een speler rolt de bal aan, de ander schiet van ongeveer 3 meter op een klein doel en mikt bij de paal.","Elke 4 minuten doordraaien naar het volgende station."],
+  kern:"Rustig en precies: controle gaat voor snelheid.",
   tips:["Slalom: kijk een pion vooruit.","Schot: stick achter de bal, laag houden en richten op een paal."],
   makkelijker:["Slalom met pionnen verder uit elkaar.","Passen: 10 keer zonder fout is ook goed."],
   moeilijker:["Slalom op tijd.","Schot direct op de rollende bal, zonder aannemen."],
@@ -533,6 +550,7 @@ const EX = [
   mat:["stick per speler","1 bal per veldje","4 pionnen per veldje"],
   doel:"Durven gaan in een duel: de bal afschermen, schijnbewegingen maken en scoren.",
   stappen:["Maak kleine veldjes met aan beide lange kanten een poortje van twee pionnen, ongeveer 1 meter breed.","Twee spelers spelen 1 tegen 1. Elk speler scoort door de bal door het poortje aan de overkant te spelen.","Na een doelpunt krijgt de ander de bal. Na een minuut is het tweede duo aan de beurt.","Speel er een competitie van: wie wint, schuift een veldje op."],
+  kern:"Lichaam tussen tegenstander en bal, en versnellen na de schijnbeweging.",
   tips:["Houd je lichaam tussen de tegenstander en de bal.","Maak een schijnbeweging en versnel dan."],
   makkelijker:["Bredere poortjes.","Verdediger mag alleen in de weg staan."],
   moeilijker:["Smallere poortjes.","2 tegen 2 op hetzelfde veldje."],
@@ -544,6 +562,7 @@ const EX = [
   mat:["stick per speler","ballen bij elk veldje","2 kleine doeltjes per veldje","hesjes"],
   doel:"Veel balcontacten en samenspelen in kleine teams, zoals past bij deze leeftijd.",
   stappen:["Verdeel het veld dwars in smalle veldjes met elk twee kleine doeltjes zonder keeper.","Speel 2 tegen 2. Een doelpunt telt alleen als beide spelers de bal hebben geraakt.","Wissel na 2 minuten van tegenstander: winnaars schuiven een veldje op.","Iedereen speelt even lang en speelt een keer voorin en achterin."],
+  kern:"Zonder bal vrijlopen, zodat je medespeler je kan aanspelen.",
   tips:["Zonder bal: loop vrij, zodat je medespeler je kan aanspelen.","Bal kwijt? Allebei terug naar je eigen doeltje."],
   makkelijker:["Doelpunt telt ook zonder pass.","Grotere doeltjes."],
   moeilijker:["Alleen scoren na een directe pass.","3 tegen 3 op dezelfde veldjes."],
@@ -556,6 +575,7 @@ const EX = [
   mat:["stick per speler","2–4 ballen","2 doelen","hesjes, plus 1 hesje in een andere kleur per team voor de koning"],
   doel:"Samenspelen en vrijlopen: de bal moet bij de koning komen, want alleen die mag scoren.",
   stappen:["Elk team kiest een koning. Die draagt een hesje in een andere kleur.","Alleen de koning mag op doel schieten. De koning moet dus steeds vrijlopen.","Een kaatsbal tussen een speler en de eigen koning levert ook een punt op.","Kies na elk doelpunt of na 3 minuten een nieuwe koning, zodat iedereen aan de beurt komt."],
+  kern:"Koning: blijf bewegen en zoek de lege ruimte.",
   tips:["Koning: blijf bewegen en zoek de lege ruimte.","Verdedigers: houd de koning van de tegenpartij in de gaten."],
   makkelijker:["De speler met de bal mag niet worden aangevallen.","Groter veld."],
   moeilijker:["Geheime koning: alleen het eigen team weet wie het is.","Twee ballen tegelijk in het spel."],
@@ -563,11 +583,12 @@ const EX = [
    {t:"p",x:90,y:60,ball:1},{t:"p",x:120,y:132},{t:"p",x:200,y:80},
    {t:"p",x:140,y:84,team:"b"},{t:"p",x:176,y:132,team:"b"},{t:"p",x:236,y:118,team:"b"},
    {t:"a",k:"pass",d:"M98 62 L192 78"},{t:"a",k:"run",d:"M92 54 Q130 30 170 40"},{t:"a",k:"pass",d:"M196 74 L174 46"},{t:"a",k:"run",d:"M204 86 Q228 74 238 70"},{t:"a",k:"pass",d:"M178 42 L232 66"},{t:"a",k:"shot",d:"M244 72 L262 86"},
-   {t:"txt",x:196,y:104,s:"koning"},{t:"txt",x:8,y:176,s:"alleen de koning scoort, kaatsbal met de koning = punt"}]},
+   {t:"txt",x:196,y:104,s:"koning"},{t:"txt",x:8,y:26,s:"alleen de koning scoort"}]},
  {id:"muurbal",cat:"Spel",title:"Muurbal",int:"hoog",min:12,kids:"2 teams van 3–5",
   mat:["stick per speler","2–3 ballen","hesjes","4 pionnen"],
   doel:"Samenspelen naar een doel zonder keeper: de muur is het doel en je medespeler maakt het af.",
   stappen:["Elk team verdedigt een korte kant van het veld: een muur of de boarding.","Je scoort door de bal tegen de muur van de tegenpartij te spelen, zodat een medespeler hem daarna als eerste raakt.","Raakt de tegenpartij de bal als eerste, dan gaat het spel gewoon door.","Na een punt begint de tegenpartij bij de eigen muur."],
+  kern:"Loop alvast naar de plek waar de bal terugkaatst.",
   tips:["Loop alvast naar de plek waar de bal terugkaatst.","Speel niet te hard tegen de muur, anders kaatst hij te ver."],
   makkelijker:["De speler met de bal mag niet worden aangevallen.","Groter veld."],
   moeilijker:["Alleen punten met een directe pass na de terugkaats.","Kleiner veld."],
@@ -575,12 +596,13 @@ const EX = [
    {t:"p",x:150,y:70,ball:1},{t:"p",x:210,y:122},{t:"p",x:100,y:120},
    {t:"p",x:190,y:66,team:"b"},{t:"p",x:240,y:96,team:"b"},{t:"p",x:130,y:100,team:"b"},
    {t:"a",k:"dribble",d:"M156 72 Q176 50 206 50"},{t:"a",k:"run",d:"M214 116 Q244 104 262 96"},{t:"a",k:"pass",d:"M212 50 L280 84"},{t:"a",k:"pass",d:"M280 88 L268 94"},
-   {t:"txt",x:8,y:14,s:"tegen de muur van blauw spelen"},{t:"txt",x:120,y:176,s:"rood raakt de bal als eerste = punt"}]}
+   {t:"txt",x:8,y:14,s:"tegen de muur van blauw spelen"},{t:"txt",x:8,y:26,s:"eerst bij de bal na de muur = punt"}]}
 ,
  {id:"keeper-muur",apps:["training"],cat:"Keeper",title:"Keeper: muurballen",int:"laag",min:8,kids:"keepers apart, naast de groep",
   mat:["1 bal per keeper","een muur of de boarding","keepershandschoenen (aanrader)"],
   doel:"Snel zien en vangen: oog-handcoördinatie en reactie voor jonge keepers.",
   stappen:["De keeper staat 1 tot 3 meter van de muur in zijn basishouding: knieën licht gebogen, handen voor het lichaam.","Gooi de bal tegen de muur en vang hem met dezelfde hand.","Daarna gooien met de ene hand en vangen met de andere, en daarna vangen met twee handen.","Gooi op ooghoogte, zodat de bal ook op ooghoogte terugkomt.","Tel hoe vaak het in 30 seconden lukt zonder dat de bal valt."],
+  kern:"Blijf in je keepershouding en kijk de bal tot in je handen.",
   tips:["Blijf in je keepershouding staan, ook tussen de worpen door.","Kijk de bal tot in je handen."],
   makkelijker:["Verder van de muur af staan.","Vangen na één stuit."],
   moeilijker:["Dichter bij de muur staan.","Een tweede keeper gooit van achteren tegen de muur; reageer pas als je de bal ziet."],
@@ -591,6 +613,7 @@ const EX = [
   mat:["1 bal","4 pionnen"],
   doel:"De bal veilig vangen en daarna snel en precies uitwerpen.",
   stappen:["Twee keepers staan op ongeveer 10 meter van elkaar. Zet voor elke keeper een poortje van twee pionnen.","Rol de bal laag over de vloer door het poortje van de ander. Die vangt in zijn basishouding en rolt terug.","Daarna stuitworpen: de bal stuit één keer voordat de ander hem vangt.","Laatste ronde: na het vangen zijwaarts op de knieën verplaatsen, opstaan en terugwerpen."],
+  kern:"Onderhands en laag werpen, naar een vrije medespeler.",
   tips:["Werp onderhands en laag, dan is de bal makkelijk aan te nemen.","In een wedstrijd werp je naar een vrije medespeler, vaak naar de zijkant. Oefen dus ook schuin werpen."],
   makkelijker:["Op 5 meter van elkaar.","Alleen rollen, geen stuitworpen."],
   moeilijker:["Op 15 meter van elkaar, met een smaller poortje.","Een speler loopt langs de zijkant; de keeper werpt de bal voor hem uit in de loop."],
@@ -602,17 +625,19 @@ const EX = [
   mat:["stick per speler","bal per speler","1 doel met keeper","2 pionnen"],
   doel:"Het getrokken schot goed aanleren: eerst vanuit stilstand, daarna vanuit de loop.",
   stappen:["Twee rijen staan elk bij een pion op ongeveer 8 meter van het doel. Iedereen heeft een bal.","Stilstaand: bal naast je achterste voet, schouder naar het doel. Trek de bal over de vloer naar voren en laat hem los ter hoogte van je voorste voet.","Loop na je schot buitenom, langs de zijkant, naar de andere rij: nooit door de schietlijn van de andere rij. De ballen haal je samen op na de serie.","Daarna vanuit de loop: dribbel vanaf de middenlijn naar je pion en trek het schot zonder te stoppen."],
+  kern:"Het blad blijft op de vloer en de bal blijft aan het blad.",
   tips:["Het blad blijft tijdens het trekken op de vloer en de bal blijft aan het blad.","Je gewicht gaat van je achterste naar je voorste voet; na het schot wijst je stick naar het doel."],
   makkelijker:["Zonder keeper, mikken op een pion in de hoek.","Dichter bij het doel."],
   moeilijker:["Vanuit de draai: om de pion heen draaien en dan schieten.","Hetzelfde met de backhand."],
   fig:[{t:"goal",x:278,y:90},{t:"p",x:266,y:90,team:"j"},{t:"cone",x:212,y:48},{t:"cone",x:212,y:132},
    {t:"p",x:130,y:52,ball:1},{t:"p",x:114,y:52},{t:"p",x:196,y:128,ball:1},{t:"p",x:180,y:128},
-   {t:"a",k:"dribble",d:"M138 52 Q176 50 200 58"},{t:"a",k:"shot",d:"M206 62 L262 84"},{t:"a",k:"shot",d:"M204 124 L262 98"},
-   {t:"txt",x:8,y:14,s:"boven: vanuit de loop · onder: stilstaand"}]},
+   {t:"a",k:"dribble",d:"M138 52 Q176 50 200 58"},{t:"a",k:"shot",d:"M206 62 L266 104"},{t:"a",k:"shot",d:"M204 124 L266 76"},
+   {t:"txt",x:8,y:14,s:"eerst stilstaand (onder), daarna vanuit de loop (boven)"}]},
  {id:"schuifslag",apps:["training"],cat:"Schieten",title:"Schuifslagschot op doel",int:"middel",min:12,kids:"groepjes van 3",
   mat:["stick per speler","5 ballen per groepje","1 klein doel per groepje"],
   doel:"Een laag en hard schuifslagschot leren, met het blad over de vloer.",
   stappen:["Elk drietal heeft een klein doel. De schutter staat op ongeveer 7 meter, de aanspeler 3 meter opzij en de derde haalt de ballen op achter het doel.","De aanspeler legt of rolt de bal zacht naar de schietplek.","De schutter haalt uit met het blad over de vloer en schiet laag op doel.","Na 5 schoten draaien de rollen door."],
+  kern:"Blad laag bij de uithaal; de stick wijst na het schot naar het doel.",
   tips:["Het blad blijft bij de uithaal op de vloer: zo blijft je stick laag en gaat de bal hard en vlak.","Zwaai uit tot heuphoogte; je stick wijst na het schot naar het doel."],
   makkelijker:["De bal ligt stil op de schietplek.","Groter doel of dichterbij."],
   moeilijker:["De aanspeler rolt de bal van opzij aan: schieten zonder aannemen.","Pionnen in de hoeken van het doel: alleen een schot langs een pion telt."],
@@ -626,6 +651,7 @@ const EX = [
   mat:["stick per speler","1 bal per drietal"],
   doel:"De bal zuiver aannemen aan beide kanten van de stick en daarna meteen doorspelen.",
   stappen:["Drie spelers staan op een rij: A en B aan de buitenkant, 12 meter van elkaar, en M in het midden.","A speelt de bal op de forehand van M. M neemt aan, draait open en speelt door naar B.","B speelt de bal op de backhand van M. M neemt aan op de backhand, draait en speelt naar A.","Na een minuut wordt iemand anders middenspeler."],
+  kern:"Stick laag en al klaar aan de kant waar de bal komt.",
   tips:["Houd je stick laag en al klaar aan de kant waar de bal komt.","Geef een beetje mee bij het aannemen, zoals een kussen: de bal mag niet wegspringen."],
   makkelijker:["Kleinere afstand.","De middenspeler mag de bal eerst stilleggen."],
   moeilijker:["Aannemen en in één beweging meenemen, zonder stilleggen.","Halfhoge pass: aannemen met je lichaam of je voet."],
@@ -636,6 +662,7 @@ const EX = [
   mat:["stick per speler","bal per speler","4 pionnen per rij"],
   doel:"Snel reageren en explosief wegsprinten met de bal aan de stick.",
   stappen:["Elke rij staat achter een startlijn, iedereen met een bal. Op ongeveer 10 meter staan twee poortjes: links en rechts.","De voorste speler begint in een andere houding: zittend, liggend of met de rug naar de poortjes.","Op het teken van de trainer (een klap of een kleur roepen) sprint je met de bal door het goede poortje.","Wandel rustig terug langs de zijkant: zo heb je genoeg rust voor de volgende sprint.","Elke ronde een andere starthouding."],
+  kern:"Kort en fel starten, met de bal dicht bij het blad.",
   tips:["Kort en fel: de sprint duurt een paar seconden, de rust erna is net zo belangrijk.","Maak je eerste passen klein en snel, met de bal dicht bij het blad."],
   makkelijker:["Zonder bal.","Maar één poortje."],
   moeilijker:["De trainer wijst een poortje aan met zijn arm: eerst kijken, dan gaan.","Eindig met een schot op een klein doel."],
@@ -647,6 +674,7 @@ const EX = [
   mat:["stick per speler","1 bal per duo","pionnen voor 8 poortjes"],
   doel:"Samen passen en vrijlopen: kies zelf een vrij poortje en speel de bal erdoor naar je partner.",
   stappen:["Zet 8 poortjes van twee pionnen verspreid door de zaal, ongeveer 1,5 meter breed.","Duo's hebben samen één bal en bewegen vrij door de zaal.","Je scoort door de bal door een poortje naar je partner te spelen. Die neemt aan en jullie zoeken samen het volgende poortje.","Niet twee keer achter elkaar hetzelfde poortje. Welk duo heeft na 2 minuten de meeste punten?"],
+  kern:"Zonder bal alvast naar een vrij poortje lopen.",
   tips:["Zonder bal loop je alvast naar de andere kant van een vrij poortje.","Kijk op: staat er al een duo bij dit poortje? Zoek dan een ander."],
   makkelijker:["Bredere poortjes.","Bal eerst stilleggen voor je passt."],
   moeilijker:["Maak een paar smalle poortjes die dubbel tellen: elk duo kiest zelf hoe moeilijk.","Twee duo's zijn bewakers zonder bal en mogen een poortje dichtzetten.","Twee spelers zonder bal zijn verdediger en onderscheppen passes. Wie de bal onderschept, ruilt van rol."],
@@ -660,6 +688,7 @@ const EX = [
   mat:["stick per speler","2–3 ballen","hesjes","2 banken"],
   doel:"Samenspelen en mikken op een groot doel, zodat iedereen kan scoren.",
   stappen:["Leg aan beide korte kanten een bank op zijn kant, met de zitting naar het veld: dat zijn de doelen.","Twee teams spelen tegen elkaar, zonder keeper. Je scoort door de bank van de tegenpartij te raken.","Voor elke bank is een vak van 2 meter waar niemand in mag, ook verdedigers niet.","Na een doelpunt begint het andere team vanaf de eigen bank.","Wissel elke 3 minuten met het wisselteam of van tegenstander."],
+  kern:"Speel de bal breed tot iemand vrij voor de bank staat.",
   tips:["Speel de bal breed: zo komt een medespeler vrij voor de bank.","Laag schieten: de bal moet de bank raken, niet eroverheen."],
   makkelijker:["Het team dat achterstaat krijgt een extra speler.","Zonder vrij vak: je mag dichter bij de bank komen."],
   moeilijker:["Een doelpunt telt pas als iedereen in je team de bal heeft geraakt.","Kleiner doel: een springkastdeel of een rechtopstaande bank."],
@@ -672,6 +701,7 @@ const EX = [
   mat:["stick per speler","12–16 ballen","16 pionnen voor 4 hoekvakken","4 hesjes voor de verdedigers"],
   doel:"Dribbelen, afschermen en kiezen waar je heen gaat: welk vak is het minst goed bewaakt?",
   stappen:["Vier teams, elk in een eigen hoekvak. In het midden liggen de ballen: de schat.","Elk team zet één verdediger in het eigen vak. Die mag de bal wegtikken bij rovers die binnenkomen, maar het vak niet uit.","De rest rooft: dribbel een bal uit het midden of uit een ander vak naar je eigen vak. Eén bal tegelijk.","Is je bal weggetikt? Laat hem liggen en probeer het opnieuw.","Na 2 minuten tellen: welk team heeft de meeste ballen? Daarna een nieuwe verdediger."],
+  kern:"Kijk eerst rond en scherm de bal af met je lichaam.",
   tips:["Kijk eerst rond: waar staat de verdediger, waar liggen nog ballen?","Scherm de bal af met je lichaam als je langs een verdediger moet."],
   makkelijker:["De verdediger mag alleen met de stick in de weg staan.","Uit het midden roven mag altijd, zonder verdediger."],
   moeilijker:["Twee verdedigers per vak.","Terug naar je eigen vak alleen met de backhand."],
@@ -686,6 +716,7 @@ const EX = [
   mat:["stick per speler","bal per speler (behalve de krokodillen)","4 pionnen voor de rivier","hesjes voor de krokodillen"],
   doel:"Met de bal aan de stick langs een tegenstander komen.",
   stappen:["Maak in het midden van de zaal een rivier van ongeveer 6 meter breed.","Twee of drie krokodillen (hesje, stick, geen bal) staan in de rivier.","De rest staat met een bal op een oever. Op \"Oversteken!\" dribbelt iedereen naar de overkant.","De krokodillen tikken met hun stick de bal weg. Ben je je bal kwijt? Dan word je ook krokodil.","Wie als laatste nog een bal heeft, wint. Dan kies je nieuwe krokodillen."],
+  kern:"Zoek het gat tussen de krokodillen en versnel daar.",
   tips:["Zoek het gat tussen de krokodillen en versnel daar.","Krokodillen: alleen op de bal spelen, niet op de stick of de benen."],
   makkelijker:["Krokodillen mogen alleen zijwaarts lopen.","Wie de bal kwijt is, mag één keer opnieuw beginnen."],
   moeilijker:["Bredere rivier.","Meteen terug oversteken op het volgende signaal."],
@@ -698,6 +729,7 @@ const EX = [
   mat:["stick per speler","2 ballen per veld (liefst in twee kleuren)","2 doeltjes per veld","hesjes"],
   doel:"Opletten en meedoen: met twee ballen is er overal actie.",
   stappen:["Vier tegen vier op twee doeltjes, zonder keeper.","Er zijn twee ballen tegelijk in het spel.","Elk doelpunt telt, met welke bal ook. Na een doelpunt speelt de verdediger die bal meteen in vanaf de eigen achterlijn.","Het spel stopt niet: let steeds op allebei de ballen.","Elke 3 minuten wisselen van tegenstander of met de wissels."],
+  kern:"Kijk op: waar is de andere bal en wie staat er vrij?",
   tips:["Kijk op: waar is de andere bal en wie staat er vrij?","Heeft de tegenstander allebei de ballen? Snel terug naar je eigen doel."],
   makkelijker:["Drie tegen drie, dan is er meer ruimte.","Grotere doeltjes of brede poortjes van pionnen."],
   moeilijker:["Een doelpunt telt alleen na een pass.","Drie ballen tegelijk in het spel."],
@@ -838,7 +870,7 @@ const HALL={
   "schot-beweging":()=>({items:[GOALS[1],{t:"cone",x:26,y:15},{t:"cone",x:26,y:5},{t:"spot",x:21,y:17.5},{t:"spot",x:21,y:2.5},{t:"spot",x:38,y:18.5},{t:"spot",x:38,y:1.5},{t:"lbl",x:21,y:19.6,s:"start"},{t:"lbl",x:37,y:16.8,s:"passgever"}],
     note:"halve veld: 2 startrijen bij de middenlijn, passgevers in de hoeken"}),
   "rebound":()=>({items:[GOALS[1],{t:"line",x1:26,y1:1,x2:26,y2:19},{t:"spot",x:27,y:10},{t:"spot",x:34.2,y:9.5},{t:"lbl",x:26,y:19.9,s:"schietlijn"}],
-    note:"1 doel, schutters op ongeveer 10 m, screen voor de keeper"}),
+    note:"1 doel, schutters op ongeveer 10 m, een aanvaller schuin voor het doel"}),
   "mikko-2":()=>({items:[GOALS[0],{t:"cone",x:19,y:1.6},{t:"cone",x:19,y:18.4},{t:"cone",x:10,y:1.6},{t:"cone",x:10,y:18.4},{t:"lbl",x:16.5,y:3.4,s:"1"},{t:"lbl",x:16.5,y:17.4,s:"2"},{t:"lbl",x:12.5,y:3.4,s:"3"},{t:"lbl",x:12.5,y:17.4,s:"5"}],note:"1 doel met keeper, rijen op de middenlijn aan beide zijkanten, aanspelers langs de boarding halverwege de helft"}),
   "mikko-3":()=>HALL["mikko-2"](),
   "mikko-1":()=>({items:[GOALS[0],{t:"cone",x:19,y:1.6},{t:"cone",x:19,y:18.4},{t:"cone",x:10,y:1.6},{t:"cone",x:10,y:18.4},{t:"lbl",x:16.5,y:3.4,s:"1"},{t:"lbl",x:16.5,y:17.4,s:"2"},{t:"lbl",x:12.5,y:17.4,s:"3"},{t:"lbl",x:12.5,y:3.4,s:"3"}],note:"1 doel met keeper, rijen op de middenlijn aan beide zijkanten, aanspelers langs de boarding halverwege de helft"}),
@@ -958,7 +990,7 @@ const ANIM={
   "krokodillen":[{at:0},{at:.2},{at:.7}],
   "twee-ballen":[{at:0},{at:.3},{at:1},{at:3.4},{at:1.3}],
   "paal-dribbel":[{at:0},{at:2.4},{at:4.8},{at:7.1}],
-  "getrokken-schot":[{at:0},{at:2.2},{at:3.4}],
+  "getrokken-schot":[{at:1},{at:3.3},{at:0}],
   "schuifslag":[{at:0},{at:1},{at:.6},{at:1.6}],
   "aanname-fh-bh":[{at:0},{at:1.2},{at:2.4},{at:3.6}],
   "reactiestart":[{at:0},{at:2.4}],
@@ -1050,18 +1082,20 @@ function plan(ex){
   const pl=ex.fig.filter(f=>f.t==="p").map(f=>({f,x:f.x,y:f.y,moves:[],has:!!f.ball,tl:[]}));
   const posAt=(p,t)=>{let c={x:p.x,y:p.y};for(const m of p.moves){if(t<=m.at)return c;if(t>=m.end){c=m.stop;continue}return pAt(m.d,m.len*(t-m.at)/(m.end-m.at))}return c};
   const near=(pt,t,ok)=>{let best=null,bd=20;pl.forEach(p=>{if(ok&&!ok(p))return;const d=dist(posAt(p,t),pt);if(d<bd){bd=d;best=p}});return best};
-  const balls=[];
+  const balls=[],free=[];
+  /* losse bal (pass zonder ontvanger) verdwijnt zodra iemand hem weer oppakt */
+  const pick=(pt,t)=>{const k=free.findIndex(f=>dist(f.stop,pt)<22&&f.B.end<=t+.01);if(k>=0){free[k].B.hide=t;free.splice(k,1)}};
   for(const e of order){
     if(e.a.k==="dribble"||e.a.k==="run"){
       const p=near(e.start,e.at,p=>!p.moves.some(m=>m.end>e.at));
-      if(p){p.moves.push({d:e.a.d,at:e.at,end:e.end,len:e.len,stop:e.stop});if(e.a.k==="dribble"&&!p.has){p.has=true;p.tl.push([e.at,1])}}
+      if(p){p.moves.push({d:e.a.d,at:e.at,end:e.end,len:e.len,stop:e.stop});if(e.a.k==="dribble"&&!p.has){pick(e.start,e.at);p.has=true;p.tl.push([e.at,1])}}
     }else{
       const from=near(e.start,e.at,p=>p.has);
-      if(from){from.has=false;from.tl.push([e.at,0])}
+      if(from){from.has=false;from.tl.push([e.at,0])}else pick(e.start,e.at);
       const to=near(e.stop,e.end,p=>e.a.self||p!==from);let hide=1;
       if(to&&dist(posAt(to,e.end),e.stop)<16){to.has=true;to.tl.push([e.end,1]);hide=e.end}
       else if(e.a.k==="shot")hide=Math.min(1,r3(e.end+.08));
-      balls.push({d:e.a.d,at:e.at,end:e.end,hide});
+      const B={d:e.a.d,at:e.at,end:e.end,hide};balls.push(B);if(hide===1&&e.a.k!=="shot")free.push({B,stop:e.stop});
     }
   }
   return{ev,pl,balls,cyc};
@@ -1137,7 +1171,7 @@ function svg(ex,uid,still){
   /* spelers */
   const pls=P?P.pl:ex.fig.filter(f=>f.t==="p").map(f=>({f,x:f.x,y:f.y,moves:[],tl:[]}));
   pls.forEach(p=>{
-    const cls=p.f.team==="b"?"c-pb":p.f.team==="j"?"c-pj":"c-pa", b0=p.f.ball?1:0;
+    const cls=p.f.team==="b"?"c-pb":p.f.team==="j"?"c-pj":p.f.team==="l"?"c-pl":"c-pa", b0=p.f.ball?1:0;
     let ball="";
     if(P&&(b0||p.tl.length)){const s=steps([[0,b0],...p.tl]);ball=`<circle cx="6" cy="6" r="2.8" class="c-ball" opacity="${b0}"><animate attributeName="opacity" ${anim(P.cyc,`calcMode="discrete" values="${s.v}" keyTimes="${s.t}"`)}/></circle>`}
     else if(b0)ball=`<circle cx="6" cy="6" r="2.8" class="c-ball"/>`;
@@ -1230,6 +1264,7 @@ function openEx(id){
       <div><h4>Groepsvorm</h4><p style="margin:0">${e.kids} · ${e.min} minuten · veld ${e.maat}${e.bron?` · ${e.bron}`:""}</p></div>
     </div>
     <div><h4>Zo werkt het</h4><ol>${e.stappen.map(x=>`<li>${x}</li>`).join("")}</ol></div>
+    ${e.kern?`<div class="box kern"><h4>Belangrijkste aandachtspunt</h4><p style="margin:0">${e.kern}</p></div>`:""}
     <div><h4>Let op</h4><ul>${e.tips.map(x=>`<li>${x}</li>`).join("")}</ul></div>
     <div class="cols">
       <div class="box easy"><h4>Makkelijker</h4><ul>${e.makkelijker.map(x=>`<li>${x}</li>`).join("")}</ul></div>
