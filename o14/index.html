@@ -861,7 +861,7 @@ const NEED={
   "parcours":n=>({stick:n,bal:Math.max(10,Math.ceil(n/2)),pion:8,doel:4,hesje:Math.ceil(n/2)})
 };
 const ITEMS=[["stick","Sticks","stick","sticks"],["bal","Ballen","bal","ballen"],["pion","Pionnen","pion","pionnen"],["hesje","Hesjes","hesje","hesjes"],["doel","Doelen","doel","doelen"],["paal","Palen","paal","palen"]];
-let N=14;
+let N=20; /* standaard 20 spelers */
 try{const v=parseInt(localStorage.getItem("o14-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 

@@ -950,8 +950,8 @@ const ITEMS=[["stick","Sticks","stick","sticks"],["bal","Ballen","bal","ballen"]
 const KEY_PRE=(window.FB_APP&&FB_APP.id==="gymzaal")?"gym-":"";
 (function(){if(!KEY_PRE)return;try{const done=KEY_PRE+"fb-moved";if(localStorage.getItem(done))return;["fb-sel","fb-sel-lib","fb-sel-wissel","fb-sel-gen","fb-n","fb-zaal"].forEach(k=>{const v=localStorage.getItem(k);if(v!=null&&localStorage.getItem(KEY_PRE+k)==null)localStorage.setItem(KEY_PRE+k,v)});localStorage.setItem(done,"1")}catch(e){}})();
 const N_KEY=KEY_PRE+"fb-n",ZAAL_KEY=KEY_PRE+"fb-zaal";
-/* standaard: clubtraining 20 kinderen, gymles een klas van 26 */
-let N=KEY_PRE?26:20;
+/* standaard: clubtraining 20 kinderen, gymles een klas van 25 */
+let N=KEY_PRE?25:20;
 try{const v=parseInt(localStorage.getItem(N_KEY),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
