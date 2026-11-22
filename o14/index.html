@@ -779,7 +779,34 @@ const EX = [
   tips:["Kom met je schouder, niet met je arm of stick: niet in de rug duwen.","Aanvaller: houd de bal aan de boardingkant, weg van de verdediger.","Verdediger: kijk naar de heupen van de aanvaller, niet naar de bal."],
   makkelijker:["Kortere sprint: start dichter bij het doel.","De verdediger mag al starten als de aanvaller beweegt."],
   moeilijker:["De verdediger start een meter verder van de boarding.","Wint de verdediger de bal, dan mag hij meteen aanvallen op een klein doel bij de middenlijn."],
-  fig:[{t:"line",d:"M150 12 L150 168"},{t:"goal",x:278,y:90},{t:"p",x:266,y:90,team:"j"},{t:"p",x:150,y:16,ball:1},{t:"p",x:150,y:36,team:"b"},{t:"p",x:126,y:16},{t:"p",x:126,y:36,team:"b"},{t:"a",k:"dribble",d:"M156 16 Q200 12 236 24"},{t:"a",k:"run",d:"M156 38 Q196 34 230 38"},{t:"a",k:"dribble",d:"M240 28 Q254 44 250 66"},{t:"a",k:"run",d:"M232 42 Q236 56 238 62"},{t:"a",k:"shot",d:"M252 72 L266 84"},{t:"txt",x:8,y:174,s:"beiden met het gezicht naar de boarding"},{t:"txt",x:156,y:160,s:"middenlijn"}]}
+  fig:[{t:"line",d:"M150 12 L150 168"},{t:"goal",x:278,y:90},{t:"p",x:266,y:90,team:"j"},{t:"p",x:150,y:16,ball:1},{t:"p",x:150,y:36,team:"b"},{t:"p",x:126,y:16},{t:"p",x:126,y:36,team:"b"},{t:"a",k:"dribble",d:"M156 16 Q200 12 236 24"},{t:"a",k:"run",d:"M156 38 Q196 34 230 38"},{t:"a",k:"dribble",d:"M240 28 Q254 44 250 66"},{t:"a",k:"run",d:"M232 42 Q236 56 238 62"},{t:"a",k:"shot",d:"M252 72 L266 84"},{t:"txt",x:8,y:174,s:"beiden met het gezicht naar de boarding"},{t:"txt",x:156,y:160,s:"middenlijn"}]},
+ {id:"rundlauf",veld:"beide",cat:"Schieten",title:"Schieten uit de loop en meteen terugverdedigen",int:"hoog",min:12,kids:"2 rijen + aanspeler + 2 keepers",
+  mat:["stick per speler","bal per speler","2 doelen met keeper","hesjes"],
+  doel:"Hard en zuiver schieten uit de loop, en na je schot meteen omschakelen naar verdedigen.",
+  stappen:["Speel op een kleinveld met twee doelen en keepers. Rij A staat met ballen in een hoek, rij B met ballen in de hoek schuin aan de overkant. In het midden staat een aanspeler.","De voorste van rij A dribbelt naar voren, speelt een één-twee met de aanspeler en schiet uit de loop op het doel aan de overkant.","Op het moment van het schot vertrekt de voorste van rij B met bal naar het andere doel. Speler A schakelt meteen om en probeert hem te stoppen: 1 tegen 1.","Daarna sluit A langs de zijkant aan bij rij B, en B bij rij A. Wissel elke paar minuten van aanspeler."],
+  kern:"Schiet uit de loop zonder af te remmen, en draai na je schot meteen om.",
+  tips:["Schiet zonder af te remmen: bal naast je voorste voet en kijk naar het doel.","Wissel af tussen polsschot en getrokken schot.","Na je schot niet blijven kijken, maar meteen terug."],
+  makkelijker:["Schieten uit een rustigere loop.","B vertrekt pas één tel na het schot."],
+  moeilijker:["Direct schieten op de terugpass, zonder aanname.","Als wedstrijd tussen de rijen: welke rij scoort het meest?"],
+  fig:[{t:"zone",x:20,y:20,w:260,h:140},{t:"goal",x:26,y:90,flip:1},{t:"goal",x:274,y:90},{t:"p",x:38,y:90,team:"j"},{t:"p",x:262,y:90,team:"j"},{t:"p",x:150,y:90,team:"l"},{t:"p",x:40,y:150,ball:1},{t:"p",x:24,y:156},{t:"p",x:258,y:30,team:"b",ball:1},{t:"p",x:274,y:24,team:"b"},{t:"a",k:"dribble",d:"M48 148 Q90 144 120 128"},{t:"a",k:"pass",d:"M124 124 L144 98"},{t:"a",k:"run",d:"M126 126 Q160 140 186 116"},{t:"a",k:"pass",d:"M156 94 L182 112"},{t:"a",k:"shot",d:"M192 112 L258 94"},{t:"a",k:"dribble",d:"M252 34 Q200 40 150 58"},{t:"a",k:"run",d:"M196 110 Q190 80 166 66"},{t:"txt",x:8,y:14,s:"één-twee, schot, meteen terug"},{t:"txt",x:126,y:74,s:"aanspeler"},{t:"txt",x:36,y:174,s:"rij A"},{t:"txt",x:226,y:14,s:"rij B"}]},
+ {id:"schijnschot",veld:"beide",cat:"Schieten",title:"Schijnschot en afleggen",int:"middel–hoog",min:12,kids:"rij bij de middenlijn + keeper",
+  mat:["stick per speler","ballen bij de rij","1 doel met keeper"],
+  doel:"Schot en pass uit dezelfde beweging: de keeper verwacht een schot, maar je legt af op een medespeler die direct afrondt.",
+  stappen:["Speel op een halve veld met doel en keeper. De rij staat met ballen bij de middenlijn, aan de kant van de boarding. Eén speler staat in de 'tas': langs de boarding, halverwege de middenlijn en het doel.","De voorste van de rij passt langs de boarding naar de speler in de tas en loopt daarna schuin door naar een schietplek voor het doel.","De speler in de tas dribbelt het veld in en maakt een schietbeweging. Hij schiet zelf, of legt de bal op het laatste moment af op de inlopende speler, die direct schiet.","De passgever gaat nu in de tas staan. De vorige speler uit de tas haalt de bal op en sluit langs de zijkant aan bij de rij."],
+  kern:"Schot en pass uit dezelfde beweging: kijk naar het doel als je afspeelt.",
+  tips:["Kijk naar het doel als je afspeelt, en naar je medespeler als je zelf schiet.","Inlopende speler: stick laag en klaar voor een direct schot.","Loop pas door als de pass naar de tas onderweg is."],
+  makkelijker:["Zonder afleggen: alleen dribbelen en schieten.","De inlopende speler mag de bal eerst aannemen."],
+  moeilijker:["Met een verdediger tussen beide aanvallers in.","Start aan de andere kant van het veld, zodat je over de backhand moet."],
+  fig:[{t:"line",d:"M150 12 L150 168"},{t:"goal",x:22,y:90,flip:1},{t:"p",x:34,y:90,team:"j"},{t:"p",x:160,y:20,ball:1},{t:"p",x:178,y:20},{t:"p",x:196,y:20},{t:"p",x:84,y:22},{t:"a",k:"pass",d:"M154 20 L92 22"},{t:"a",k:"run",d:"M158 28 Q132 62 106 96"},{t:"a",k:"dribble",d:"M84 30 Q86 52 78 68"},{t:"a",k:"pass",d:"M82 72 L100 96"},{t:"a",k:"shot",d:"M104 100 L36 92"},{t:"txt",x:62,y:44,s:"tas"},{t:"txt",x:8,y:174,s:"schietbeweging: zelf schieten of afleggen"},{t:"txt",x:186,y:42,s:"rij"}]},
+ {id:"twee-twee-buiten",veld:"beide",cat:"Partijvorm",title:"2 tegen 2 met aanspelers aan de zijkant",int:"hoog",min:15,kids:"teams van 4: 2 in het veld, 2 aan de zijkant",
+  mat:["stick per speler","ballen bij de doelen","2 kleine doelen of 2 doelen met keeper","4 pionnen","hesjes"],
+  doel:"Snel en direct samenspelen in overtal en scoren: de aanspelers aan de zijkant maken er 4 tegen 2 van.",
+  stappen:["Zet een veld uit van ongeveer 20 bij 12 meter met een doel op beide korte kanten. In het veld speelt 2 tegen 2.","Elk team heeft twee aanspelers buiten het veld, één aan elke lange kant, op de helft waar het team aanvalt. Wie de bal heeft, kan zijn eigen aanspelers inspelen: 4 tegen 2.","Aanspelers spelen direct terug of schieten zelf op doel. Ze mogen het veld niet in.","Na 1 minuut wisselen: de aanspelers gaan het veld in en de veldspelers worden aanspeler."],
+  kern:"Kijk op voordat de bal komt en zoek de directe pass of het directe schot.",
+  tips:["Kijk voor de aanname al waar je aanspelers staan.","Draai je lichaam zo dat je direct kunt schieten of doorspelen.","Maak een schijnschot voordat je afspeelt."],
+  makkelijker:["Aanspelers mogen niet aangevallen worden.","Aanspelers mogen ook naar elkaar passen."],
+  moeilijker:["Alleen de veldspelers mogen scoren.","Een doelpunt telt alleen uit een direct schot."],
+  fig:[{t:"zone",x:30,y:34,w:240,h:112},{t:"goal",x:36,y:90,flip:1},{t:"goal",x:264,y:90},{t:"p",x:210,y:24},{t:"p",x:210,y:156},{t:"p",x:90,y:24,team:"b"},{t:"p",x:90,y:156,team:"b"},{t:"p",x:140,y:70,ball:1},{t:"p",x:166,y:122},{t:"p",x:186,y:78,team:"b"},{t:"p",x:150,y:104,team:"b"},{t:"a",k:"pass",d:"M146 66 L203 30"},{t:"a",k:"run",d:"M172 118 Q200 108 222 98"},{t:"a",k:"pass",d:"M212 31 L220 92"},{t:"a",k:"shot",d:"M226 96 L256 92"},{t:"a",k:"run",d:"M190 84 L206 94"},{t:"txt",x:8,y:14,s:"aanspelers op de aanvalshelft"},{t:"txt",x:8,y:174,s:"4 tegen 2 voor het team met de bal"}]}
 ];
 
 const CAT_ORDER=["Warming-up","Snelheid & coördinatie","Balvoering","Passen","Schieten","Keeper","Duels","Omschakelen","Verdedigen","Positiespel","Partijvorm","Spel","Speciale situaties"];
@@ -790,6 +817,9 @@ const PH_LABEL={warm:"Warming-up",kern:"Kern",partij:"Afsluiting"};
 
 /* materiaal per oefening, afhankelijk van aantal spelers n */
 const NEED={
+  "rundlauf":n=>({stick:n,bal:Math.max(10,n),doel:2,hesje:Math.ceil(n/2)}),
+  "schijnschot":n=>({stick:n,bal:Math.max(12,n),doel:1}),
+  "twee-twee-buiten":n=>{const f=Math.max(1,Math.min(2,Math.floor(n/8)));return{stick:n,bal:10*f,doel:2*f,pion:4*f,hesje:Math.ceil(n/2)}},
   "rechthoek-passen":n=>{const d=Math.ceil(n/2);return{stick:n,bal:d,pion:4*d}},
   "balbezit-half":n=>({stick:n,bal:3,pion:4,hesje:Math.ceil(n/2)}),
   "vier-twee-over":n=>({stick:n,bal:4,pion:8,hesje:Math.ceil(n*2/3)}),
@@ -835,7 +865,7 @@ let N=14;
 try{const v=parseInt(localStorage.getItem("o14-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
-const MAAT={"rechthoek-passen":"6 × 4 m per tweetal","balbezit-half":"20 × 20 m","vier-twee-over":"2 vakken van 10 × 10 m, strook van 4 m","roep-duel":"20 × 12 m per veldje","zones-dekken":"20 × 20 m, 4 zones","hoek-doel":"8 × 8 m per hoek","boarding-duel":"halve veld per rij","paal-dribbel":"20 × 20 m per baan, vierkant 4 × 4 m","een-een-schot":"24 × 14 m, vak 5 × 5 m","finten":"20 × 20 m","draaien":"12 × 8 m per drietal","een-een-doeltje":"16 × 8 m per baan","ladder-sprint":"14 m per rij","keeper-draaien":"5–7 m voor het doel","keeper-nummer":"boog op 7–10 m","keeper-uitwerpen":"5–7 m voor het doel","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m","opbouw":"40 × 20 m","partij-klein":"kleinveld","partij-thema":"40 × 20 m","drie-drie":"20 × 10 m per veldje","rebound":"halve cirkel voor het doel"};
+const MAAT={"rundlauf":"24 × 14 m","schijnschot":"20 × 20 m","twee-twee-buiten":"20 × 12 m per veldje","rechthoek-passen":"6 × 4 m per tweetal","balbezit-half":"20 × 20 m","vier-twee-over":"2 vakken van 10 × 10 m, strook van 4 m","roep-duel":"20 × 12 m per veldje","zones-dekken":"20 × 20 m, 4 zones","hoek-doel":"8 × 8 m per hoek","boarding-duel":"halve veld per rij","paal-dribbel":"20 × 20 m per baan, vierkant 4 × 4 m","een-een-schot":"24 × 14 m, vak 5 × 5 m","finten":"20 × 20 m","draaien":"12 × 8 m per drietal","een-een-doeltje":"16 × 8 m per baan","ladder-sprint":"14 m per rij","keeper-draaien":"5–7 m voor het doel","keeper-nummer":"boog op 7–10 m","keeper-uitwerpen":"5–7 m voor het doel","rondo":"10 × 10 m per vak","vierkant":"8 × 8 m per groepje","schot-beweging":"20 × 20 m","rebound":"12 × 20 m","mikko-1":"20 × 20 m","mikko-2":"20 × 20 m","mikko-3":"20 × 20 m","twee-een":"40 × 20 m","drie-twee":"40 × 20 m","drie-drie":"20 × 10 m per veldje","lijnteam":"20 × 10 m","powerplay":"20 × 20 m","partij-thema":"40 × 20 m","duel":"40 × 20 m","drie-doelen":"20 × 20 m","parcours":"40 × 20 m","pionnen-stick":"40 × 20 m","nummer-passen":"20 × 20 m per vak","minuut-passen":"20 × 20 m","opbouw":"40 × 20 m","partij-klein":"kleinveld","partij-thema":"40 × 20 m","drie-drie":"20 × 10 m per veldje","rebound":"halve cirkel voor het doel"};
 EX.forEach(e=>e.maat=MAAT[e.id]);
 const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
@@ -847,6 +877,9 @@ const r1=v=>String(Math.round(v*10)/10).replace(".",",");
 const sq=(c,z)=>{const x=c.cx-z/2,y=c.cy-z/2;return[{t:"zone",x,y,w:z,h:z},{t:"cone",x,y},{t:"cone",x:x+z,y},{t:"cone",x,y:y+z},{t:"cone",x:x+z,y:y+z}]};
 const GOALS=[{t:"goal",x:3.5,y:10,side:"l"},{t:"goal",x:36.5,y:10,side:"r"}];
 const HALL={
+  "rundlauf":()=>({items:[{t:"zone",x:8,y:3,w:24,h:14},{t:"goal",x:8.6,y:10,side:"l"},{t:"goal",x:31.4,y:10,side:"r"},{t:"spot",x:9.5,y:16},{t:"spot",x:30.5,y:4},{t:"spot",x:20,y:10},{t:"lbl",x:10,y:18.6,s:"rij A"},{t:"lbl",x:30,y:2.2,s:"rij B"},{t:"lbl",x:20,y:12.2,s:"aanspeler"}],note:"kleinveld van ongeveer 24 × 14 m met 2 doelen: rijen in twee hoeken schuin tegenover elkaar, aanspeler in het midden"}),
+  "schijnschot":()=>({items:[GOALS[0],{t:"line",x1:20,y1:1,x2:20,y2:19},{t:"spot",x:21.5,y:1.5},{t:"spot",x:11,y:1.5},{t:"lbl",x:24,y:3.4,s:"rij"},{t:"lbl",x:11,y:3.4,s:"tas"},{t:"lbl",x:20,y:19.9,s:"middenlijn"}],note:"halve veld met 1 doel: rij met ballen bij de middenlijn langs de boarding, één speler in de tas halverwege"}),
+  "twee-twee-buiten":n=>{const f=Math.max(1,Math.min(2,Math.floor(n/8))),it=[];[0,20].slice(0,f).forEach(x=>it.push({t:"zone",x:x+.5,y:4,w:19,h:12},{t:"goal",x:x+10,y:4.6,side:"t"},{t:"goal",x:x+10,y:15.4,side:"b"},{t:"spot",x:x+2.5,y:6.5},{t:"spot",x:x+17.5,y:6.5},{t:"spot",x:x+2.5,y:13.5},{t:"spot",x:x+17.5,y:13.5}));return{items:it,note:`${f} ${f===1?"veldje":"veldjes"} van ongeveer 20 × 12 m, aanspelers buiten het veldje langs de lange kanten`}},
   "rechthoek-passen":n=>{const d=Math.ceil(n/2),cols=d<=4?d:Math.ceil(d/2),it=[];gridC(d,cols).forEach(c=>{const x=c.cx-3,y=c.cy-2;it.push({t:"zone",x,y,w:6,h:4},{t:"cone",x,y},{t:"cone",x:x+6,y},{t:"cone",x,y:y+4},{t:"cone",x:x+6,y:y+4})});return{items:it,note:`${d} ${d===1?"rechthoek":"rechthoeken"} van 6 × 4 m, met ruimte eromheen om te lopen`}},
   "balbezit-half":()=>({items:[{t:"zone",x:20.4,y:.4,w:19.2,h:19.2},{t:"cone",x:20.4,y:.4},{t:"cone",x:39.6,y:.4},{t:"cone",x:20.4,y:19.6},{t:"cone",x:39.6,y:19.6}],note:"half veld zonder doelen, of een vak van ongeveer 20 × 20 m"}),
   "vier-twee-over":()=>({items:[{t:"zone",x:7,y:5,w:10,h:10},{t:"cone",x:7,y:5},{t:"cone",x:17,y:5},{t:"cone",x:7,y:15},{t:"cone",x:17,y:15},{t:"zone",x:23,y:5,w:10,h:10},{t:"cone",x:23,y:5},{t:"cone",x:33,y:5},{t:"cone",x:23,y:15},{t:"cone",x:33,y:15},{t:"lbl",x:20,y:4,s:"strook"}],note:"2 vakken van 10 × 10 m met een strook van ongeveer 4 tot 6 m ertussen"}),
@@ -1005,6 +1038,9 @@ function setN(v){v=Math.max(4,Math.min(40,v||0));N=v;try{localStorage.setItem("o
 
 /* animatie per pijl, in volgorde van de pijlen in de tekening: starttijd in seconden */
 const ANIM={
+  "rundlauf":[{at:0},{at:2.2},{at:2.4},{at:3.6},{at:4.6},{at:4.7},{at:4.9}],
+  "schijnschot":[{at:0},{at:.9},{at:1},{at:3.2},{at:4.1}],
+  "twee-twee-buiten":[{at:0},{at:.6},{at:1.4},{at:2.4},{at:.4}],
   "rechthoek-passen":[{at:0},{at:.9},{at:1.2},{at:3.2}],
   "balbezit-half":[{at:0},{at:.4},{at:1.1},{at:1.4},{at:1.6},{at:3}],
   "vier-twee-over":[{at:0},{at:1},{at:1.2},{at:2.4},{at:2.6},{at:2.8}],
@@ -1437,6 +1473,9 @@ function exampleHtml(){const s=VB.sel.filter(v=>EX.some(e=>e.id===v.id)),m=s.red
    Eerste thema in de lijst = hoofdthema van de oefening (krijgt meer kans). Keeperoefeningen doen niet mee. */
 const GEN_THEMES=["Dribbelen","Passen","Schieten","Omschakelen","Verdedigen"];
 const GEN_TAGS={
+  "rundlauf":["Schieten","Omschakelen"],
+  "schijnschot":["Schieten","Passen"],
+  "twee-twee-buiten":["Schieten","Passen","Omschakelen"],
   "rechthoek-passen":["Passen"],
   "balbezit-half":["Passen","Verdedigen","Omschakelen"],
   "vier-twee-over":["Passen","Verdedigen"],

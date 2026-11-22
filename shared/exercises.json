@@ -747,6 +747,24 @@
    "title": "Duel langs de boarding",
    "cat": "Duels",
    "phase": "Kern"
+  },
+  {
+   "id": "rundlauf",
+   "title": "Schieten uit de loop en meteen terugverdedigen",
+   "cat": "Schieten",
+   "phase": "Kern"
+  },
+  {
+   "id": "schijnschot",
+   "title": "Schijnschot en afleggen",
+   "cat": "Schieten",
+   "phase": "Kern"
+  },
+  {
+   "id": "twee-twee-buiten",
+   "title": "2 tegen 2 met aanspelers aan de zijkant",
+   "cat": "Partijvorm",
+   "phase": "Kern"
   }
  ],
  "o18": [
