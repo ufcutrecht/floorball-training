@@ -223,8 +223,12 @@ svg.hall{width:100%;height:auto;display:block}
 .gen-themes{display:flex;flex-wrap:wrap;gap:8px}
 .gen-res{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
 .gen-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.bib-list .gen-list li{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 8px;border:none;border-left:4px solid var(--ph);border-radius:0;padding:2px 0 2px 10px;background:none}
-.gen-list .phase-tag{grid-column:1/-1;font-size:11px;padding:4px 6px}
+.bib-list .gen-list li{display:grid;gap:6px;border:none;border-left:4px solid var(--ph);border-radius:0;padding:4px 0 8px 10px;background:none}
+.gen-list .sum-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gen-list .phase-tag{font-size:11px;padding:4px 6px}
+.gen-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.gen-swap{padding:7px 12px}
+.gen-swap:disabled{opacity:.4;cursor:default}
 .gen-t{font:inherit;font-weight:700;text-align:left;background:none;border:none;color:var(--ink);padding:2px 0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .vast-tag{justify-self:start;background:var(--court);color:var(--surface);font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:5px}
 .btn.warn{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
@@ -1441,11 +1445,24 @@ function genHtml(){
   if(res){const ex=res.sel.reduce((t,v)=>t+v.min,0),ws=(res.sel.length-1)*res.wissel;
     h+=`<div class="gen-res"><div class="slot-head"><strong class="sum-t">${res.naam}</strong><span class="mins">${ex+ws} min</span></div>
       <span class="meta"><span>${nOef(res.sel.length)}</span><span>${ex} min oefenen</span><span>${ws} min wisselen</span></span>
-      <ol class="gen-list">${res.sel.map(v=>{const e=EX[idx(v.id)],ph=phaseOf(e.cat),lab=genRole(e)==="partij"?"Partijvorm":PH_LABEL[ph];
-        return `<li class="ph-${ph}"><span class="phase-tag">${lab}</span><button type="button" class="gen-t" data-open="${e.id}">${e.title}</button><span class="mins">${v.min} min</span></li>`}).join("")}</ol>
+      <ol class="gen-list">${res.sel.map((v,i)=>{const e=EX[idx(v.id)],ph=phaseOf(e.cat),lab=genRole(e)==="partij"?"Partijvorm":PH_LABEL[ph],alt=genAlts(i).length;
+        return `<li class="ph-${ph}"><div class="sum-top"><span class="phase-tag">${i+1} · ${lab}</span><span class="mini">
+          <button type="button" data-gmv="-1" data-gi="${i}" aria-label="${e.title} eerder" ${i?"":"disabled"}>↑</button><button type="button" data-gmv="1" data-gi="${i}" aria-label="${e.title} later" ${i<res.sel.length-1?"":"disabled"}>↓</button></span></div>
+          <button type="button" class="gen-t" data-open="${e.id}">${e.title}</button>
+          <div class="gen-ctl"><div class="tstep"><button type="button" data-gmin="-1" data-gi="${i}" aria-label="${e.title}: 1 minuut korter">−</button><span>${v.min} min</span><button type="button" data-gmin="1" data-gi="${i}" aria-label="${e.title}: 1 minuut langer">+</button></div>
+          <button type="button" class="btn gen-swap" data-gswap="${i}" ${alt?"":"disabled"}>${alt?"Andere oefening":"Geen andere oefening"}</button></div></li>`}).join("")}</ol>
       <div class="actions"><button type="button" class="btn primary" data-load="${GT_NR}">Laden</button></div></div>`}
   return h+`</li></ul>`;
 }
+/* andere oefeningen voor plek i: zelfde rol, past bij het thema (was het een aanvuller zonder thema, dan elke oefening met die rol) */
+function genAlts(i){const r=GEN.res;if(!r)return[];const cur=EX[idx(r.sel[i].id)],role=genRole(cur),used=new Set(r.sel.map(v=>v.id)),
+  fits=e=>(GEN_TAGS[e.id]||[]).includes(r.thema),strict=fits(cur);
+  return EX.filter(e=>genRole(e)===role&&!used.has(e.id)&&(!strict||fits(e)))}
+function genSwap(i){const r=GEN.res,a=genAlts(i);if(!a.length)return;
+  const done=(r.tried=r.tried||{})[i]=(r.tried[i]||[]).concat(r.sel[i].id);
+  let c=a.filter(e=>!done.includes(e.id));if(!c.length){r.tried[i]=[r.sel[i].id];c=a}
+  const e=c[Math.floor(Math.random()*c.length)];r.sel[i]={...r.sel[i],id:e.id};renderLib()}
+function genFocus(sel){const b=document.querySelector(sel);if(b&&!b.disabled)b.focus()}
 function genRun(){
   const inp=document.getElementById("gen-min");if(inp)GEN.min=Math.max(30,Math.min(150,Math.round(Number(inp.value)/5)*5||GEN.min));
   genSave();const r=genMake();GEN.res=r;
@@ -1458,6 +1475,10 @@ document.addEventListener("click",ev=>{
   if(b.dataset.gthema){GEN.thema=b.dataset.gthema;genSave();if(GEN.res)genRun();else renderLib()}
   if(b.id==="gen-mmin"||b.id==="gen-mplus"){GEN.min=Math.max(30,Math.min(150,GEN.min+(b.id==="gen-mplus"?5:-5)));genSave();if(GEN.res)genRun();else renderLib()}
   if(b.id==="gen-go")genRun();
+  if(GEN.res&&b.dataset.gi!==undefined){const i=Number(b.dataset.gi),r=GEN.res;
+    if(b.dataset.gmin){r.sel[i].min=minClamp(r.sel[i].min+Number(b.dataset.gmin));renderLib();genFocus(`[data-gmin="${b.dataset.gmin}"][data-gi="${i}"]`)}
+    if(b.dataset.gmv){const j=i+Number(b.dataset.gmv);if(j>=0&&j<r.sel.length){[r.sel[i],r.sel[j]]=[r.sel[j],r.sel[i]];r.tried={};renderLib();genFocus(`[data-gmv="${b.dataset.gmv}"][data-gi="${j}"]`)}}}
+  if(GEN.res&&b.dataset.gswap!==undefined){const i=Number(b.dataset.gswap);genSwap(i);genFocus(`[data-gswap="${i}"]`)}
 });
 document.addEventListener("change",ev=>{if(ev.target.id==="gen-min"){GEN.min=Math.max(30,Math.min(150,Math.round(Number(ev.target.value)/5)*5||75));genSave();if(GEN.res)genRun();else renderLib()}});
 
