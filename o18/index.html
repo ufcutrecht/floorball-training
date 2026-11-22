@@ -228,8 +228,14 @@ svg.hall{width:100%;height:auto;display:block}
 .gen-wrap{display:grid;gap:12px}
 .gen-over{color:var(--accent);font-weight:800}
 .gen-res{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
-.hdr-links{display:flex;flex-wrap:wrap;gap:6px 22px}
-@media (max-width:440px){.hdr-links{gap:6px 14px}.hdr-links .linkbtn{font-size:15px}}
+.o-row{gap:8px}
+body .o-row .pill{font:inherit;font-size:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:0 14px;min-height:44px;cursor:pointer;margin:0;display:inline-flex;align-items:center;gap:8px}
+body .o-row .pill[aria-expanded="true"],body .o-row .pill[aria-pressed="true"]{border-color:var(--ink)}
+.pill-leg::after{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg)}
+.pill-leg[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}
+.o-legend{margin-block:-4px 14px}
+.o-legend[hidden]{display:none}
+body .o-row .pill[hidden]{display:none}
 .set-body{display:grid;gap:14px}
 #mat #mat-extra{order:1;display:grid;gap:12px;margin-top:18px}
 #mat #mat-extra[hidden]{display:none}
@@ -330,12 +336,12 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
     <div class="eyebrow">Jeugdtraining · 16–18 jaar</div>
     <h1>Floorball training onder 18</h1>
     <p class="lead">Oefeningen voor spelers van 16 tot 18, gericht op tempo, beslissen onder druk en samenspel.</p>
-    <div class="hdr-links"><button type="button" class="linkbtn" id="open-afs">Accenten voor deze leeftijd</button><button type="button" class="linkbtn" id="open-set">Instellingen</button></div>
   </header>
 
 
 
-  <div class="legrow"><details class="legwrap"><summary>Legenda bij de tekeningen</summary><div class="legend" aria-label="Legenda">
+  <div class="legrow o-row"><button type="button" class="pill" id="open-afs">Accenten voor deze leeftijd</button><button type="button" class="pill" id="open-set">Instellingen</button><button type="button" class="pill pill-leg" id="leg-btn" aria-expanded="false" aria-controls="legend">Legenda</button><button type="button" class="pill pause" id="pause" aria-pressed="false">Animatie pauzeren</button></div>
+  <div class="legend o-legend" id="legend" aria-label="Legenda" hidden>
     <span><svg viewBox="0 0 28 12"><circle cx="6" cy="6" r="5" class="c-pa"/></svg>Team A</span>
     <span><svg viewBox="0 0 28 12"><circle cx="6" cy="6" r="5" class="c-pb"/></svg>Team B / verdediging</span>
     <span><svg viewBox="0 0 28 12"><path d="M6 1 L11 11 L1 11Z" class="c-cone"/></svg>Pion</span>
@@ -344,7 +350,7 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
     <span><svg viewBox="0 0 28 12"><line x1="1" y1="6" x2="27" y2="6" class="a-pass"/></svg>Pass</span>
     <span><svg viewBox="0 0 28 12"><line x1="1" y1="6" x2="27" y2="6" class="a-run"/></svg>Loopactie</span>
     <span><svg viewBox="0 0 28 12"><line x1="1" y1="6" x2="27" y2="6" class="a-shot"/></svg>Schot</span>
-    </div></details><button type="button" class="pause" id="pause" aria-pressed="false">Animatie pauzeren</button></div>
+    </div>
 
   <div class="filters" id="filters" role="group" aria-label="Filter op onderdeel"></div>
   <div class="grid" id="grid"></div>
@@ -1748,6 +1754,7 @@ kidsInp.addEventListener("change",()=>{setN(parseInt(kidsInp.value,10));kidsInp.
 /* animatie pauzeren */
 let paused=false;
 const pauseBtn=document.getElementById("pause");
+document.getElementById("leg-btn").addEventListener("click",ev=>{const b=ev.currentTarget,l=document.getElementById("legend"),o=l.hidden;l.hidden=!o;b.setAttribute("aria-expanded",String(o))});
 if(reduceMotion)pauseBtn.hidden=true;
 function applyPause(){document.querySelectorAll("svg.court").forEach(s=>{try{paused?s.pauseAnimations():s.unpauseAnimations()}catch(e){}})}
 pauseBtn.addEventListener("click",()=>{paused=!paused;pauseBtn.setAttribute("aria-pressed",paused);pauseBtn.textContent=paused?"Animatie afspelen":"Animatie pauzeren";applyPause()});
