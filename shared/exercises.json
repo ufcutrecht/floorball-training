@@ -126,13 +126,13 @@
   {
    "id": "koning-vak",
    "title": "Koning van het vak",
-   "cat": "Balbeheersing",
+   "cat": "Dribbelen",
    "phase": "Kern"
   },
   {
    "id": "uitdagen-finten",
    "title": "Uitdagen met schijnbeweging",
-   "cat": "Balbeheersing",
+   "cat": "Dribbelen",
    "phase": "Kern",
    "apps": [
     "training"
@@ -142,43 +142,43 @@
    "id": "een-tegen-een",
    "title": "1 tegen 1 naar de lijn",
    "cat": "Spel",
-   "phase": "Partij"
+   "phase": "Afsluiting"
   },
   {
    "id": "drie-drie",
    "title": "3 tegen 3 op kleine doeltjes",
    "cat": "Spel",
-   "phase": "Partij"
+   "phase": "Afsluiting"
   },
   {
    "id": "lijnbal",
    "title": "Lijnbal",
    "cat": "Spel",
-   "phase": "Partij"
+   "phase": "Afsluiting"
   },
   {
    "id": "vier-doeltjes",
    "title": "Vier doeltjes",
    "cat": "Spel",
-   "phase": "Partij"
+   "phase": "Afsluiting"
   },
   {
    "id": "joker-partij",
    "title": "Partij met joker",
    "cat": "Spel",
-   "phase": "Partij"
+   "phase": "Afsluiting"
   },
   {
    "id": "pionnen-omver",
    "title": "Pionnen omver",
    "cat": "Spel",
-   "phase": "Partij"
+   "phase": "Afsluiting"
   },
   {
    "id": "kast-afbouwen",
    "title": "Kast afbouwen",
    "cat": "Spel",
-   "phase": "Partij"
+   "phase": "Afsluiting"
   },
   {
    "id": "staartjes",
@@ -208,7 +208,7 @@
    "id": "twee-ballen",
    "title": "Partij met twee ballen",
    "cat": "Spel",
-   "phase": "Partij"
+   "phase": "Afsluiting"
   },
   {
    "id": "ligadribbel",
@@ -226,7 +226,7 @@
    "id": "chaosspel",
    "title": "Chaosspel",
    "cat": "Spel",
-   "phase": "Partij"
+   "phase": "Afsluiting"
   },
   {
    "id": "formule1",
@@ -317,7 +317,7 @@
   {
    "id": "hinderbaan",
    "title": "Hindernisbaan met bal",
-   "cat": "Vaardigheid",
+   "cat": "Dribbelen",
    "phase": "Kern",
    "apps": [
     "training"
@@ -326,7 +326,7 @@
   {
    "id": "vaardigheidsproef",
    "title": "Drie vaardigheden",
-   "cat": "Vaardigheid",
+   "cat": "Dribbelen",
    "phase": "Kern",
    "apps": [
     "training"
@@ -673,19 +673,19 @@
   {
    "id": "finten",
    "title": "Schijnbeweging en tempowissel",
-   "cat": "Balvoering",
+   "cat": "Dribbelen",
    "phase": "Kern"
   },
   {
    "id": "draaien",
    "title": "Wegdraaien met de rug naar het doel",
-   "cat": "Balvoering",
+   "cat": "Dribbelen",
    "phase": "Kern"
   },
   {
    "id": "paal-dribbel",
    "title": "Vooruit en achteruit dribbelen met actie bij de paal",
-   "cat": "Balvoering",
+   "cat": "Dribbelen",
    "phase": "Kern"
   },
   {
@@ -933,13 +933,13 @@
   {
    "id": "hoek-een-een",
    "title": "1 tegen 1 uit de hoek",
-   "cat": "Balvoering",
+   "cat": "Dribbelen",
    "phase": "Kern"
   },
   {
    "id": "een-een-schot",
    "title": "1 tegen 1 met schot op goal",
-   "cat": "Balvoering",
+   "cat": "Dribbelen",
    "phase": "Kern"
   },
   {

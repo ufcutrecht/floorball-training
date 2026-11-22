@@ -10,7 +10,7 @@ De gymles-app voor leerkrachten (groep 3–8) staat in [ufcutrecht/floorball-gym
 
 | Map | Programma |
 | --- | --- |
-| `o18/` | O18, 16–18 jaar |
+| `o18/` | O18, 14–18 jaar |
 | `gymles/` | O10, 6–10 jaar (map en interne naam blijven `gymles`) |
 | `o14/`, `o12/` | komen later |
 

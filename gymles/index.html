@@ -327,7 +327,7 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
 
 
 
-  <div class="legrow o-row"><button type="button" class="pill" id="open-set">Instellingen</button><button type="button" class="pill" id="open-afs">Afspraken vooraf</button><button type="button" class="pill pill-leg" id="leg-btn" aria-expanded="false" aria-controls="legend">Legenda</button><button type="button" class="pill pause" id="pause" aria-pressed="false">Animatie pauzeren</button></div>
+  <div class="legrow o-row"><button type="button" class="pill" id="open-set">Instellingen</button><button type="button" class="pill" id="open-afs">Accenten onder 10</button><button type="button" class="pill pill-leg" id="leg-btn" aria-expanded="false" aria-controls="legend">Legenda</button><button type="button" class="pill pause" id="pause" aria-pressed="false">Animatie pauzeren</button></div>
   <div class="legend o-legend" id="legend" aria-label="Legenda" hidden>
     <span><svg viewBox="0 0 28 12"><circle cx="6" cy="6" r="5" class="c-pa"/></svg>Team A</span>
     <span><svg viewBox="0 0 28 12"><circle cx="6" cy="6" r="5" class="c-pb"/></svg>Team B / tikker</span>
@@ -362,21 +362,21 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
     <p class="note">Materiaal gaat mee van oefening naar oefening. Je ziet dus wat de zwaarste oefening tegelijk nodig heeft. Neem 2–3 reserveballen mee.</p></div></div></div>
 </dialog>
 <dialog id="afs" aria-labelledby="afs-title">
-  <div class="dlg-head"><div><div class="num">Voor je begint</div><h2 id="afs-title">Afspraken vooraf</h2></div><button class="close" type="button" data-close aria-label="Sluiten">×</button></div>
+  <div class="dlg-head"><div><div class="num">Voor je begint</div><h2 id="afs-title">Accenten onder 10</h2></div><button class="close" type="button" data-close aria-label="Sluiten">×</button></div>
   <div class="dlg-body"><div class="rules"><ul>
-      <li>Stick blijft onder heuphoogte, ook bij uithalen en schieten.</li>
-      <li>Nooit slaan tegen een stick, been of lichaam van een ander.</li>
-      <li>Bal alleen spelen met de stick, niet met hand of hoofd.</li>
-      <li>Geen duwen of trekken: floorball is een spel zonder contact.</li>
-    </ul></div><p class="note">Bespreek deze afspraken aan het begin van elke training en herhaal ze bij de eerste hoge stick.</p></div>
+      <li>Leg weinig uit en doe het voor: voordoen – nadoen.</li>
+      <li>Herhaal veel, steeds in een andere, speelse vorm.</li>
+      <li>Zorg dat iedereen vaak de bal heeft en veel succes ervaart.</li>
+      <li>Veilig spelen: stick onder heuphoogte, nooit slaan tegen stick, been of lichaam, geen duwen of trekken.</li>
+    </ul></div><p class="note">Benoem bij de start welk accent centraal staat en herhaal de stickregel bij de eerste hoge stick.</p></div>
 </dialog>
 
 <dialog id="set" aria-labelledby="set-title">
-  <div class="dlg-head"><div><div class="num">Kinderen, zaal en wisselen</div><h2 id="set-title">Instellingen</h2></div><button class="close" type="button" data-close aria-label="Sluiten">×</button></div>
+  <div class="dlg-head"><div><div class="num">Spelers, veld en wisselen</div><h2 id="set-title">Instellingen</h2></div><button class="close" type="button" data-close aria-label="Sluiten">×</button></div>
   <div class="dlg-body set-body"><div class="stepwrap">
-        <label for="kids">Aantal kinderen</label>
-        <div class="stepper"><button type="button" id="kids-min" aria-label="Eén kind minder">−</button><input id="kids" type="number" inputmode="numeric" min="4" max="40"><button type="button" id="kids-plus" aria-label="Eén kind meer">+</button></div>
-      </div><p class="note" style="margin:0">Het materiaal en de indeling van de zaal rekenen met dit aantal.</p><div class="wissel-row"><div class="stepwrap"><label for="wissel">Wisseltijd per ombouw (minuten)</label><div class="stepper"><button type="button" id="w-min" aria-label="Eén minuut minder">−</button><input id="wissel" type="number" inputmode="numeric" min="0" max="30" value="4"><button type="button" id="w-plus" aria-label="Eén minuut meer">+</button></div></div><p class="note" style="margin:0;flex:1 1 180px">Telt tussen elke twee oefeningen mee in de totale duur.</p></div><div class="wissel-row zaal-row"><div class="zaal-steps"><div class="stepwrap"><label for="zw">Lengte zaal (m)</label><div class="stepper"><button type="button" id="zw-min" aria-label="Eén meter korter">−</button><input id="zw" type="number" inputmode="decimal" min="10" max="60" step="0.5"><button type="button" id="zw-plus" aria-label="Eén meter langer">+</button></div></div><div class="stepwrap"><label for="zh">Breedte zaal (m)</label><div class="stepper"><button type="button" id="zh-min" aria-label="Eén meter smaller">−</button><input id="zh" type="number" inputmode="decimal" min="6" max="40" step="0.5"><button type="button" id="zh-plus" aria-label="Eén meter breder">+</button></div></div></div><div class="presets" id="presets" role="group" aria-label="Snelkeuze veld"></div></div></div>
+        <label for="kids">Aantal spelers</label>
+        <div class="stepper"><button type="button" id="kids-min" aria-label="Eén minder">−</button><input id="kids" type="number" inputmode="numeric" min="4" max="40"><button type="button" id="kids-plus" aria-label="Eén meer">+</button></div>
+      </div><p class="note" style="margin:0">Het materiaal en de indeling van het veld rekenen met dit aantal.</p><div class="wissel-row"><div class="stepwrap"><label for="wissel">Wisseltijd per ombouw (minuten)</label><div class="stepper"><button type="button" id="w-min" aria-label="Eén minuut minder">−</button><input id="wissel" type="number" inputmode="numeric" min="0" max="30" value="4"><button type="button" id="w-plus" aria-label="Eén minuut meer">+</button></div></div><p class="note" style="margin:0;flex:1 1 180px">Telt tussen elke twee oefeningen mee in de totale duur.</p></div><div class="wissel-row zaal-row"><div class="zaal-steps"><div class="stepwrap"><label for="zw">Lengte veld (m)</label><div class="stepper"><button type="button" id="zw-min" aria-label="Eén meter korter">−</button><input id="zw" type="number" inputmode="decimal" min="10" max="60" step="0.5"><button type="button" id="zw-plus" aria-label="Eén meter langer">+</button></div></div><div class="stepwrap"><label for="zh">Breedte veld (m)</label><div class="stepper"><button type="button" id="zh-min" aria-label="Eén meter smaller">−</button><input id="zh" type="number" inputmode="decimal" min="6" max="40" step="0.5"><button type="button" id="zh-plus" aria-label="Eén meter breder">+</button></div></div></div><div class="presets" id="presets" role="group" aria-label="Snelkeuze veld"></div></div></div>
 </dialog>
 
 <dialog id="gen" aria-labelledby="gen-title">
@@ -493,7 +493,7 @@ const EX = [
    {t:"a",k:"dribble",d:"M32 50 Q55 38 80 40 Q105 62 130 60 Q150 42 175 58 Q200 72 210 80"},
    {t:"a",k:"dribble",d:"M32 130 Q55 142 80 140 Q105 118 130 120 Q150 138 175 122 Q200 108 210 100"},
    {t:"a",k:"shot",d:"M214 78 L268 58"},{t:"a",k:"shot",d:"M214 102 L268 122"}]},
- {id:"koning-vak",cat:"Balbeheersing",title:"Koning van het vak",groep:"5–8",min:8,kids:"hele klas",
+ {id:"koning-vak",cat:"Dribbelen",title:"Koning van het vak",groep:"5–8",min:8,kids:"hele klas",
   mat:["stick en bal per kind","4 pionnen"],
   doel:"Je eigen bal afschermen en tegelijk de ruimte zien.",
   stappen:["Iedereen dribbelt met een bal in het vak.","Probeer de bal van een ander met je stick uit het vak te tikken.","Is jouw bal uit? Doe buiten het vak 5 keer de bal om een pion en kom terug.","Het spel blijft doorlopen. Wie wordt koning?"],
@@ -554,7 +554,7 @@ const EX = [
   fig:[...[[60,40],[110,70],[170,35],[230,60],[80,110],[150,120],[210,105],[250,140],[50,150],[120,160]].map(([x,y])=>({t:"cone",x,y})),
    {t:"p",x:40,y:70,ball:1},{t:"p",x:190,y:80,ball:1},{t:"p",x:100,y:135,ball:1},{t:"p",x:240,y:30,ball:1},
    {t:"a",k:"dribble",d:"M48 72 Q80 60 95 85 Q120 100 140 90"},{t:"a",k:"dribble",d:"M198 84 Q230 95 235 120"},{t:"a",k:"dribble",d:"M108 138 Q135 145 140 105"}]},
- {id:"uitdagen-finten",apps:["training"],cat:"Balbeheersing",title:"Uitdagen met schijnbeweging",groep:"4–8",min:10,kids:"tweetallen",
+ {id:"uitdagen-finten",apps:["training"],cat:"Dribbelen",title:"Uitdagen met schijnbeweging",groep:"4–8",min:10,kids:"tweetallen",
   mat:["stick per kind","1 bal per tweetal","2 pionnen per tweetal als poortje"],
   doel:"Een schijnbeweging maken en een tegenspeler passeren.",
   stappen:["Tweetallen staan tegenover elkaar op ongeveer 8 meter.","Speler A drijft naar B toe, maakt een schijnbeweging en passeert.","Eerst staat B passief: alleen de stick neerzetten.","Daarna mag B de bal proberen te veroveren.","Na 5 pogingen wisselen van rol."],
@@ -897,11 +897,13 @@ const EX = [
    ["gymzaal"] = alleen gymzaal-app. Spelregels voor de keuze staan in CLAUDE.md. */
 const APP_ID=(window.FB_APP&&FB_APP.id)||"training";
 for(let i=EX.length-1;i>=0;i--)if(EX[i].apps&&!EX[i].apps.includes(APP_ID))EX.splice(i,1);
-const CAT_ORDER=["Warming-up","Snelheid & coördinatie","Dribbelen","Passen","Schieten","Balbeheersing","Spel"];
+/* trainersapp: "klas" is schooltaal; daar heet het "groep" (de gymles-app houdt "klas") */
+if(APP_ID!=="gymzaal"){const kl=v=>typeof v==="string"?v.replace(/\bklas\b/g,"groep").replace(/\bKlas\b/g,"Groep"):Array.isArray(v)?v.map(kl):v;EX.forEach(e=>["kids","doel","kern","stappen","tips","makkelijker","moeilijker","mat"].forEach(k=>{if(e[k]!=null)e[k]=kl(e[k])}))}
+const CAT_ORDER=["Warming-up","Snelheid & coördinatie","Dribbelen","Passen","Schieten","Spel"];
 EX.sort((a,b)=>CAT_ORDER.indexOf(a.cat)-CAT_ORDER.indexOf(b.cat));
 const CATS=["Alles",...new Set(EX.map(e=>e.cat))];
 const phaseOf=cat=>cat==="Warming-up"?"warm":cat==="Spel"?"partij":"kern";
-const PH_LABEL={warm:"Warming-up",kern:"Kern",partij:"Partij"};
+const PH_LABEL={warm:"Warming-up",kern:"Kern",partij:"Afsluiting"};
 
 /* materiaal per oefening, afhankelijk van aantal kinderen n */
 const NEED={
@@ -1238,15 +1240,15 @@ function motion(pts){const out=[];pts.forEach(([t,p])=>{t=Math.min(1,Math.max(0,
 const anim=(cyc,body)=>`dur="${r3(cyc)}s" repeatCount="indefinite" ${body}`;
 let filter="Alles";
 /* lesopbouw: vier vaste onderdelen */
-const KERN=["Dribbelen","Passen","Schieten","Balbeheersing"];
+const KERN=["Dribbelen","Passen","Schieten"];
 const SLOTS_OLD=[
   {k:"warmup",label:"Warming-up",cats:["Warming-up"]},
   {k:"kern1",label:"Kern 1",cats:KERN},
   {k:"kern2",label:"Kern 2",cats:KERN},
-  {k:"partij",label:"Partij",cats:["Spel"]}
+  {k:"partij",label:"Afsluiting",cats:["Spel"]}
 ];
 const LVL=[["makkelijker","Makkelijker"],["basis","Basis"],["moeilijker","Moeilijker"]];
-const C={"key": "fb-sel", "oldKey": "fb-les2", "unit": "training", "Unit": "Training", "title": "Mijn training", "inLabel": "In de training", "btnLabel": "Training", "people": "kinderen", "libName": "Training", "hallWord": "zaalindeling", "extra": "Reken 10 minuten extra voor uitleg en afsluiten."};
+const C={"key": "fb-sel", "oldKey": "fb-les2", "unit": "training", "Unit": "Training", "title": "Mijn training", "inLabel": "In de training", "btnLabel": "Training", "people": "spelers", "libName": "Training", "hallWord": "veldindeling", "extra": "Reken 15 minuten extra voor uitleg, drinken en uitlopen."};
 /* Gymles-app (floorball-gymles/loader.js): eigen woorden, bijv. "gymles" in plaats van "training". */
 if(window.FB_APP&&FB_APP.words)Object.assign(C,FB_APP.words);
 C.key=KEY_PRE+C.key;C.oldKey=KEY_PRE+C.oldKey;
@@ -1404,8 +1406,8 @@ function openEx(id){
       <div class="ctl"><button type="button" class="btn primary" id="t-go">Start</button><button type="button" class="btn" id="t-reset">Opnieuw</button></div></div>
     <p style="margin:0"><strong>Doel:</strong> ${e.doel}</p>
     <div class="cols">
-      <div><h4>Materiaal</h4><ul>${e.mat.map(x=>`<li>${x}</li>`).join("")}</ul><p class="for-n"><strong>Voor ${N} kinderen:</strong> ${needText(e.id)}</p></div>
-      <div><h4>Groep</h4><p style="margin:0">${e.kids} · ${e.min} minuten · veld ${e.maat}</p></div>
+      <div><h4>Materiaal</h4><ul>${e.mat.map(x=>`<li>${x}</li>`).join("")}</ul><p class="for-n"><strong>Voor ${N} ${C.people}:</strong> ${needText(e.id)}</p></div>
+      <div><h4>Groepsvorm</h4><p style="margin:0">${e.kids} · ${e.min} minuten · veld ${e.maat}</p></div>
     </div>
     <div><h4>Zo werkt het</h4><ol>${e.stappen.map(x=>`<li>${x}</li>`).join("")}</ol></div>
     ${e.kern?`<div class="box kern"><h4>Belangrijkste aandachtspunt</h4><p style="margin:0">${e.kern}</p></div>`:""}
@@ -1538,7 +1540,7 @@ async function delTraining(b){
 }
 
 /* vast voorbeeld onderaan de bibliotheek */
-const VB={"nr": -1, "naam": "Voorbeeld training", "vast": true, "wissel": 3, "uitleg": "Een complete training van warming-up tot partij.", "sel": [{"id": "stoplicht", "lvl": "basis", "min": 8}, {"id": "pionnenbos", "lvl": "basis", "min": 10}, {"id": "pionnen-omschieten", "lvl": "basis", "min": 10}, {"id": "pionnen-omver", "lvl": "basis", "min": 12}]};
+const VB={"nr": -1, "naam": "Voorbeeld training", "vast": true, "wissel": 4, "uitleg": "Een complete training van warming-up tot partij.", "sel": [{"id": "stoplicht", "lvl": "basis", "min": 8}, {"id": "pionnenbos", "lvl": "basis", "min": 10}, {"id": "pionnen-omschieten", "lvl": "basis", "min": 10}, {"id": "pionnen-omver", "lvl": "basis", "min": 12}]};
 if(APP_ID==="gymzaal")Object.assign(VB,{"uitleg":"Een speelse gymles van tikkertje tot partij, waarin iedereen meedoet.","sel":[{"id":"balletje-tik","lvl":"basis","min":8},{"id":"rollmops","lvl":"basis","min":8},{"id":"aanspeelstations","lvl":"basis","min":10},{"id":"pionnen-omver","lvl":"basis","min":12}]});
 if(window.FB_APP&&FB_APP.words){VB.naam="Voorbeeld "+C.unit;VB.uitleg=VB.uitleg.replace(/training/g,C.unit)}
 function exampleHtml(){const s=VB.sel.filter(v=>EX.some(e=>e.id===v.id)),m=s.reduce((t,v)=>t+v.min,0)+Math.max(0,s.length-1)*VB.wissel;
@@ -1626,7 +1628,7 @@ function genMake(){
 const GT_NR=-2;
 function genHtml(){
   const g=GEN,res=g.res;
-  let h=`<div class="gen-wrap"><p class="note" style="margin:0">Je krijgt warming-up, twee kernoefeningen en een spel die bij het thema passen. Pas daarna de tijd, de volgorde of een oefening aan en tik op Akkoord.</p>
+  let h=`<div class="gen-wrap"><p class="note" style="margin:0">Je krijgt warming-up, twee kernoefeningen en een partijvorm die bij het thema passen. Pas daarna de tijd, de volgorde of een oefening aan en tik op Akkoord.</p>
     <div class="gen-f"><span class="gen-l" id="gen-th-l">Thema</span><div class="gen-themes" role="group" aria-labelledby="gen-th-l">${GEN_THEMES.map(t=>`<button type="button" class="chip" data-gthema="${t}" aria-pressed="${t===g.thema}">${t}</button>`).join("")}</div></div>
     <div class="stepwrap"><label for="gen-min">Tijd in minuten</label><div class="stepper"><button type="button" id="gen-mmin" aria-label="5 minuten minder">−</button><input id="gen-min" type="number" inputmode="numeric" min="30" max="150" step="5" value="${g.min}"><button type="button" id="gen-mplus" aria-label="5 minuten meer">+</button></div></div>
     <p class="note" style="margin:0">Inclusief ${WISSEL} min wisselen tussen de oefeningen (aan te passen bij Instellingen).</p>
@@ -1689,6 +1691,7 @@ document.addEventListener("click",ev=>{
 document.addEventListener("change",ev=>{if(ev.target.id==="gen-min"){GEN.min=Math.max(30,Math.min(150,Math.round(Number(ev.target.value)/5)*5||75));genSave();if(GEN.res)genRun();else renderGen()}});
 
 /* woorden uit C, zodat de gymles-app "gymles" toont */
+if(window.FB_APP&&FB_APP.id==="gymzaal")["open-afs","afs-title"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent="Accenten groep 3–6"});
 [["open-mat",`Maak een ${C.unit}`],["open-gen",`Suggestie voor een ${C.unit}`],["gen-title",`Suggestie voor een ${C.unit}`]].forEach(([id,t])=>{const el=document.getElementById(id);if(el)el.textContent=t});
 document.addEventListener("click",ev=>{if(ev.target.closest("#open-gen")){if(!GEN.res)genRun();else renderGen();genDlg.showModal()}});
 /* print als PDF */

@@ -548,6 +548,11 @@ body #grid .card .body .actions{margin-top:0}
         const mt = document.getElementById("mat-title"), num = mt && mt.previousElementSibling; if (num) num.textContent = W.Unit + "overzicht";
         document.querySelectorAll("header .lead, .note").forEach(el => { el.innerHTML = el.innerHTML.replace(/In de training/g, "In de " + W.unit).replace(/elke training/g, "elke " + W.unit); });
       }
+      if (W && W.people === "kinderen") {                     // venster Instellingen: kinderen en zaal in plaats van spelers en veld
+        set("#set .num", "Kinderen, zaal en wisselen"); set('label[for="kids"]', "Aantal kinderen");
+        set('label[for="zw"]', "Lengte zaal (m)"); set('label[for="zh"]', "Breedte zaal (m)");
+        document.querySelectorAll("#set .note").forEach(el => { el.textContent = el.textContent.replace("de indeling van het veld", "de indeling van de zaal"); });
+      }
       head.querySelectorAll(".fb-home").forEach(a => a.remove());
       if (APP.home) head.insertAdjacentHTML("afterbegin", `<a class="fb-home" href="${APP.home}">← Terug naar startpagina</a>`);
       if (!head.querySelector(".fb-logo")) { head.classList.add("fb-has-logo"); head.insertAdjacentHTML("afterbegin", `<a href="${APP.home || "#"}" class="fb-logo-a" aria-label="Naar de startpagina"><img class="fb-logo" src="${APP.logo}" alt="${esc(APP.logoAlt || "")}"><span class="fb-logo-label">${esc(APP.logoLabel || "training")}</span></a>`); }

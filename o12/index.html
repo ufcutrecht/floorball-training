@@ -566,7 +566,7 @@ const EX = [
    {t:"a",k:"pass",d:"M88 78 L88 40"},{t:"a",k:"pass",d:"M202 88 L232 54"},{t:"a",k:"pass",d:"M244 140 L282 118"},{t:"a",k:"pass",d:"M146 114 L157 152"},
    {t:"a",k:"run",d:"M84 90 Q74 64 84 46"},{t:"a",k:"run",d:"M194 100 Q214 84 226 64"},{t:"a",k:"run",d:"M232 152 Q258 140 272 124"},{t:"a",k:"run",d:"M134 114 Q138 134 150 146"},
    {t:"txt",x:60,y:22,s:"bank"},{t:"txt",x:232,y:18,s:"kast"},{t:"txt",x:258,y:160,s:"muur"},{t:"txt",x:8,y:176,s:"zoveel mogelijk treffers in 2 minuten"}]},
- {id:"hinderbaan",apps:["training"],cat:"Vaardigheid",title:"Hindernisbaan met bal",int:"middel",min:10,kids:"rijen van 3–4",
+ {id:"hinderbaan",apps:["training"],cat:"Dribbelen",title:"Hindernisbaan met bal",int:"middel",min:10,kids:"rijen van 3–4",
   mat:["stick per speler","2 ballen per baan","4 pionnen, een bank, een hoepel en een klein doel per baan"],
   doel:"Balbeheersing met stick en bal onderweg langs verschillende hindernissen.",
   stappen:["Zet per rij een baan uit: een slalom van pionnen, een bank, een hoepel op de grond en aan het eind een klein doel.","Dribbel door de slalom, speel de bal onder de bank door en stap er zelf overheen.","Pak de bal weer op, dribbel door de hoepel en schiet in het kleine doel.","Haal je bal op, loop langs de zijkant terug en tik de volgende aan."],
@@ -579,7 +579,7 @@ const EX = [
    {t:"a",k:"dribble",d:"M38 140 Q55 126 70 130 Q85 152 100 150 Q115 126 130 130 Q145 150 158 142"},{t:"a",k:"pass",d:"M162 138 L194 124"},{t:"a",k:"run",d:"M158 146 Q176 112 196 126"},
    {t:"a",k:"dribble",d:"M198 126 Q214 136 232 128"},{t:"a",k:"shot",d:"M236 124 L270 68"},
    {t:"txt",x:156,y:104,s:"bank"},{t:"txt",x:200,y:110,s:"hoepel"},{t:"txt",x:8,y:14,s:"slalom, onder de bank door, hoepel, schot"}]},
- {id:"vaardigheidsproef",apps:["training"],cat:"Vaardigheid",title:"Drie vaardigheden",int:"laag–middel",min:12,kids:"3 groepjes die doordraaien",
+ {id:"vaardigheidsproef",apps:["training"],cat:"Dribbelen",title:"Drie vaardigheden",int:"laag–middel",min:12,kids:"3 groepjes die doordraaien",
   mat:["stick per speler","ballen per station","10 pionnen","1 klein doel"],
   doel:"Drie basisvaardigheden oefenen die passen bij 10 tot 12 jaar: slalom, passen en schieten op een rollende bal.",
   stappen:["Station 1: dribbel door een slalom van 10 pionnen en weer terug.","Station 2: pass in duo's 20 keer achter elkaar zonder fout, ook met de backhand.","Station 3: een speler rolt de bal aan, de ander schiet van ongeveer 3 meter op een klein doel en mikt bij de paal.","Elke 4 minuten doordraaien naar het volgende station."],
@@ -899,7 +899,7 @@ const EX = [
    ["gymzaal"] = alleen gymzaal-app. Spelregels voor de keuze staan in CLAUDE.md. */
 const APP_ID=(window.FB_APP&&FB_APP.id)||"training";
 for(let i=EX.length-1;i>=0;i--)if(EX[i].apps&&!EX[i].apps.includes(APP_ID))EX.splice(i,1);
-const CAT_ORDER=["Warming-up","Snelheid & coördinatie","Dribbelen","Passen","Vaardigheid","Schieten","Keeper","Duels","Omschakelen","Partijvorm","Spel"];
+const CAT_ORDER=["Warming-up","Snelheid & coördinatie","Dribbelen","Passen","Schieten","Keeper","Duels","Omschakelen","Partijvorm","Spel"];
 EX.sort((a,b)=>CAT_ORDER.indexOf(a.cat)-CAT_ORDER.indexOf(b.cat));
 const CATS=["Alles",...new Set(EX.map(e=>e.cat))];
 const phaseOf=cat=>cat==="Warming-up"?"warm":(cat==="Spel"||cat==="Speciale situaties")?"partij":"kern";
@@ -1304,7 +1304,7 @@ if(window.FB_APP&&FB_APP.words)Object.assign(C,FB_APP.words);
 C.key=KEY_PRE+C.key;C.oldKey=KEY_PRE+C.oldKey;
 const PH_ORD={warm:0,kern:1,partij:2};
 const minClamp=v=>Math.max(1,Math.min(90,Math.round(Number(v))||1));
-let sel=[], WISSEL=3, curNr=null;
+let sel=[], WISSEL=4, curNr=null;
 try{const w=parseInt(localStorage.getItem(C.key+"-wissel"),10);if(w>=0&&w<=30)WISSEL=w}catch(e){}
 function normSel(v){const e=EX.find(x=>x.id===v.id);return{id:v.id,lvl:LVL.some(l=>l[0]===v.lvl)?v.lvl:"basis",min:minClamp(v.min||e.min)}}
 function initSel(){try{
@@ -1442,7 +1442,7 @@ function openEx(id){
       <div class="ctl"><button type="button" class="btn primary" id="t-go">Start</button><button type="button" class="btn" id="t-reset">Opnieuw</button></div></div>
     <p style="margin:0"><strong>Doel:</strong> ${e.doel}</p>
     <div class="cols">
-      <div><h4>Materiaal</h4><ul>${e.mat.map(x=>`<li>${x}</li>`).join("")}</ul><p class="for-n"><strong>Voor ${N} spelers:</strong> ${needText(e.id)}</p></div>
+      <div><h4>Materiaal</h4><ul>${e.mat.map(x=>`<li>${x}</li>`).join("")}</ul><p class="for-n"><strong>Voor ${N} ${C.people}:</strong> ${needText(e.id)}</p></div>
       <div><h4>Groepsvorm</h4><p style="margin:0">${e.kids} · ${e.min} minuten · veld ${e.maat}${e.bron?` · ${e.bron}`:""}</p></div>
     </div>
     <div><h4>Zo werkt het</h4><ol>${e.stappen.map(x=>`<li>${x}</li>`).join("")}</ol></div>
@@ -1576,7 +1576,7 @@ async function delTraining(b){
 }
 
 /* vast voorbeeld onderaan de bibliotheek */
-const VB={"nr": -1, "naam": "Voorbeeld training", "vast": true, "wissel": 3, "uitleg": "Een speelse training van tikkertje tot een kleinveldpartij.", "sel": [{"id": "tikspel", "lvl": "basis", "min": 8}, {"id": "pionnen-stick", "lvl": "basis", "min": 10}, {"id": "twee-een", "lvl": "basis", "min": 12}, {"id": "partij-klein", "lvl": "basis", "min": 20}]};
+const VB={"nr": -1, "naam": "Voorbeeld training", "vast": true, "wissel": 4, "uitleg": "Een speelse training van tikkertje tot een kleinveldpartij.", "sel": [{"id": "tikspel", "lvl": "basis", "min": 8}, {"id": "pionnen-stick", "lvl": "basis", "min": 10}, {"id": "twee-een", "lvl": "basis", "min": 12}, {"id": "partij-klein", "lvl": "basis", "min": 20}]};
 if(APP_ID==="gymzaal")Object.assign(VB,{"uitleg":"Een speelse gymles van tikkertje tot een partij in kleine teams.","sel":[{"id":"tikspel","lvl":"basis","min":8},{"id":"poortjesjacht","lvl":"basis","min":8},{"id":"koningsbal","lvl":"basis","min":12},{"id":"twee-twee-dwars","lvl":"basis","min":12}]});
 if(window.FB_APP&&FB_APP.words){VB.naam="Voorbeeld "+C.unit;VB.uitleg=VB.uitleg.replace(/training/g,C.unit)}
 function exampleHtml(){const s=VB.sel.filter(v=>EX.some(e=>e.id===v.id)),m=s.reduce((t,v)=>t+v.min,0)+Math.max(0,s.length-1)*VB.wissel;
