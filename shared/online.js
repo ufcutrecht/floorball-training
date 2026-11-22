@@ -143,8 +143,8 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
   let starMin = ls.get("fb-starfilter-" + PROGRAM, "all");
   const scoreOf = id => { const s = stats[id]; return s && s.votes ? +s.avg_score : mine[id] || null; };
   function starFilterHtml() {
-    const opts = [["all", "Alle"], ["5", "★★★★★"], ["4", "★★★★ en meer"], ["3", "★★★ en meer"], ["2", "★★ en meer"], ["low", "Onder ★★★"], ["none", "Nog geen score"]];
-    return `<label class="fb-sf">Sterren <select id="fb-starfilter" aria-label="Filter op aantal sterren">${opts.map(([v, l]) => `<option value="${v}"${v === starMin ? " selected" : ""}>${l}</option>`).join("")}</select></label>`;
+    const opts = [["all", "Alle sterren"], ["5", "★★★★★"], ["4", "★★★★ en meer"], ["3", "★★★ en meer"], ["2", "★★ en meer"], ["low", "Onder ★★★"], ["none", "Nog geen score"]];
+    return `<label class="fb-sf"><select id="fb-starfilter" aria-label="Filter op aantal sterren">${opts.map(([v, l]) => `<option value="${v}"${v === starMin ? " selected" : ""}>${l}</option>`).join("")}</select></label>`;
   }
   /* zoeken: titel, doel, uitleg, variaties … alles wat bij de oefening staat */
   let query = "";
@@ -206,8 +206,19 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
     if (ev.target.id !== "fb-starfilter") return;
     starMin = ev.target.value; ls.set("fb-starfilter-" + PROGRAM, starMin); applyStarFilter();
   });
+  /* chips op de telefoon: vervaging rechts zolang er nog meer chips zijn om naartoe te schuiven */
+  function chipFade(fc) {
+    if (!fc) return;
+    if (!fc.querySelector(".fb-fade")) fc.insertAdjacentHTML("beforeend", `<span class="fb-fade" aria-hidden="true"></span>`);
+    fc.classList.toggle("fb-end", fc.scrollLeft + fc.clientWidth >= fc.scrollWidth - 4);
+  }
+  /* lege balk onderin: op de telefoon alleen de knoppen, zonder "0 oefeningen · 0 min" */
+  function barState() {
+    const sum = document.getElementById("les-sum"), bar = sum && sum.closest(".lesbar");
+    if (bar) bar.classList.toggle("fb-empty", /^0\s/.test(sum.textContent.trim()));
+  }
   function decorate() {
-    ensureStarFilter(); decorateShare(); decorateTrainingShare();
+    ensureStarFilter(); decorateShare(); decorateTrainingShare(); chipFade(document.querySelector(".fchips")); barState();
     document.querySelectorAll("#grid article.card").forEach(card => {
       if (card.querySelector(".fb-rate")) return;
       const b = card.querySelector("[data-open]"); if (!b) return;
@@ -223,13 +234,17 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
   const shareUrl = id => location.href.split("#")[0] + "#" + SHARE_KEY + "=" + encodeURIComponent(id);
   function decorateShare() {
     const d = document.getElementById("dlg"), body = document.getElementById("dlg-body");
-    if (!d || !body || !d.dataset.id || body.querySelector(".fb-share")) return;
-    const act = body.querySelector(":scope > .actions:last-child"); if (!act) return;
-    act.insertAdjacentHTML("beforeend", `<button type="button" class="btn fb-share" data-share="${esc(d.dataset.id)}" aria-label="Deel deze oefening via een link">Delen</button><span class="msg fb-share-msg" role="status" aria-live="polite"></span>`);
+    if (!d || !body || !d.dataset.id) return;
+    /* knop Delen bovenin naast de sluitknop, zodat de onderste balk op de telefoon op één regel past */
+    const close = d.querySelector(".dlg-head .close"); let btn = d.querySelector(".dlg-head .fb-share");
+    if (close && !btn) { close.insertAdjacentHTML("beforebegin", `<button type="button" class="btn fb-share" aria-label="Deel deze oefening via een link">Delen</button>`); btn = d.querySelector(".dlg-head .fb-share"); }
+    if (btn) btn.dataset.share = d.dataset.id;
+    const act = body.querySelector(":scope > .actions:last-child");
+    if (act && !act.querySelector(".fb-share-msg")) act.insertAdjacentHTML("beforeend", `<span class="msg fb-share-msg" role="status" aria-live="polite"></span>`);
   }
   async function share(id, btn) {
     const ex = exById(id), url = shareUrl(id), title = ex ? ex.title : "Floorball-oefening";
-    const msg = btn.parentElement.querySelector(".fb-share-msg"), say = t => { if (msg) msg.textContent = t; };
+    const msg = (btn.closest("dialog") || btn.parentElement).querySelector(".fb-share-msg"), say = t => { if (msg) msg.textContent = t; };
     if (navigator.share) {
       try { await navigator.share({ title, text: "Floorball-oefening: " + title, url }); return; }
       catch (e) { if (e && e.name === "AbortError") return; }
@@ -428,6 +443,25 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
 #mat #sum-list{order:1}
 #dlg .dlg-body>.actions:last-child{position:sticky;bottom:0;z-index:2;background:var(--surface);margin:0 -18px -20px;padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
 .print-choice{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+/* UI-review nov 2026: tikvlakken minstens 44 px, Delen bovenin het Uitleg-venster, nette sterrenkeuze */
+.fb-star{width:44px;height:44px}
+.fb-fbtn{min-height:44px}
+.fb-home{min-height:44px;padding:0 14px}
+body .tstep button{width:44px;height:44px}
+body .stepper button{width:46px;height:46px}
+body .dlg-body ol.sum-list{padding-left:0}
+#dlg .dlg-head>div:first-child{flex:1 1 auto;min-width:0}
+#dlg .dlg-head .fb-share{margin-left:0;align-self:flex-start}
+.fb-sf{position:relative}
+.fb-sf select{-webkit-appearance:none;appearance:none;min-height:44px;padding:0 34px 0 14px}
+.fb-sf::after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.fb-search{min-height:44px}
+.legwrap summary{list-style:none}
+.legwrap summary::-webkit-details-marker{display:none}
+.legwrap summary::before{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);margin-right:2px}
+.legwrap[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:no-preference){.legwrap summary::before{transition:transform .15s}}
+.fb-fade{display:none}
 .print-choice[hidden]{display:none}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lesbar{background:var(--surface);color:var(--ink);border-top:1px solid var(--line)}:root:not([data-theme="light"]) .lesbar .btn{border-color:var(--ink);color:var(--ink)}:root:not([data-theme="light"]) .lesbar .btn.light{background:var(--ink);color:var(--surface)}}
 :root[data-theme="dark"] .lesbar{background:var(--surface);color:var(--ink);border-top:1px solid var(--line)}
@@ -442,7 +476,11 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
   .fchips::-webkit-scrollbar{display:none}
   .fchips>*{flex:none}
   .filters .fb-tools{flex:1 1 100%;margin-left:0;flex-wrap:wrap;justify-content:flex-start;row-gap:8px}
-  .filters .fb-search{max-width:none;flex:1 1 100%}
+  .filters .fb-search{max-width:none;flex:1 1 0}
+  .filters .fb-tools{flex-wrap:nowrap}
+  .fchips{position:relative}
+  .fchips .fb-fade{display:block;position:sticky;right:-16px;flex:none;width:48px;margin-left:-48px;margin-right:-16px;background:linear-gradient(to right,transparent,var(--bg) 80%);pointer-events:none;transition:opacity .15s}
+  .fchips.fb-end .fb-fade{opacity:0}
 }
 @media (max-width:700px){
   .lesbar{padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}
@@ -453,6 +491,8 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
   body .lesbar .btn{padding:6px 4px;font-size:14px;white-space:nowrap;text-align:center}
   .lesbar .lg{display:none}
   body{padding-bottom:110px}
+  .lesbar.fb-empty strong{display:none}
+  body:has(.lesbar.fb-empty){padding-bottom:70px}
 }`;
   const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
@@ -465,7 +505,7 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
       if (T.title) document.title = T.title;
       set("header .eyebrow", T.eyebrow); set("header h1", T.h1); set("header .lead", T.lead);
       if (W) {
-        set("#open-mat", W.btnLabel); set("#mat-title", W.title);
+        set("#open-mat", W.btnLabel); set("#mat-title", W.title); set("#bib .num", W.libTitle);
         const mt = document.getElementById("mat-title"), num = mt && mt.previousElementSibling; if (num) num.textContent = W.Unit + "overzicht";
         document.querySelectorAll("header .lead, .note").forEach(el => { el.innerHTML = el.innerHTML.replace(/In de training/g, "In de " + W.unit).replace(/elke training/g, "elke " + W.unit); });
       }
@@ -487,6 +527,10 @@ header.fb-has-logo>:not(.fb-logo-a):not(.fb-home){padding-right:clamp(64px,15vw,
     })();
     openShared();
     addEventListener("hashchange", openShared);
+    const sum = document.getElementById("les-sum");
+    if (sum) new MutationObserver(barState).observe(sum, { childList: true, characterData: true, subtree: true });
+    document.addEventListener("scroll", e => { if (e.target.classList && e.target.classList.contains("fchips")) chipFade(e.target); }, true);
+    addEventListener("resize", () => chipFade(document.querySelector(".fchips")));
     if (HOSTED && "serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register((window.FB_APP && window.FB_APP.sw) || "../sw.js", { scope: (window.FB_APP && window.FB_APP.swScope) || "../" }).catch(() => {});
   }
 

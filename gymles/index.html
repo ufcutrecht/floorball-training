@@ -275,7 +275,7 @@ svg.hall{width:100%;height:auto;display:block}
     <a class="fb-home" href="../">← Terug naar startpagina</a>
     <div class="eyebrow">Jeugdtraining · 6–10 jaar · groep 3–8</div>
     <h1>Floorball training onder 10</h1>
-    <p class="lead">Drieëndertig oefeningen met opstelling, uitleg en variaties.</p>
+    <p class="lead">Oefeningen met opstelling, uitleg en variaties.</p>
     <button type="button" class="linkbtn" id="open-afs">Afspraken vooraf: veilig spelen met de stick</button>
   </header>
 
@@ -1327,7 +1327,7 @@ function setMsg(t){const m=document.getElementById("les-msg");if(m)m.textContent
 function renderLib(){
   const el=document.getElementById("bib-body");if(!el)return;
   const items=[...LIB.items].sort((a,b)=>a.nr-b.nr);
-  const where=libMode==="db"?"Bewaard in je account. Alleen jij ziet deze trainingen.":"Bewaard in deze browser op dit apparaat.";
+  const where=libMode==="db"?`Bewaard in je account. Alleen jij ziet deze ${C.units||"trainingen"}.`:"Bewaard in deze browser op dit apparaat.";
   el.innerHTML=(items.length?`<ul class="bib-list">${items.map(it=>{
       const s=(it.sel||[]).filter(v=>EX.some(e=>e.id===v.id)),w=typeof it.wissel==="number"?it.wissel:4,
         m=s.reduce((t,v)=>t+(v.min||0),0)+Math.max(0,s.length-1)*w;
@@ -1345,7 +1345,7 @@ const sameName=name=>LIB.items.find(x=>normName(itemName(x))===normName(name));
 function saveHint(){const inp=document.getElementById("save-name"),hint=document.getElementById("save-hint"),ok=document.getElementById("save-ok");
   const hit=sameName(inp.value||inp.placeholder);
   ok.textContent=hit?"Overschrijven":"Opslaan";hint.classList.toggle("over",!!hit);
-  hint.textContent=hit?`Er bestaat al een training met de naam ${itemName(hit)}. Tik op Overschrijven om die training te overschrijven.`:"Typ een eigen naam of houd het volgende nummer. Gebruik een bestaande naam om die training te overschrijven."}
+  hint.textContent=hit?`Er bestaat al een ${C.unit} met de naam ${itemName(hit)}. Tik op Overschrijven om die ${C.unit} te overschrijven.`:`Typ een eigen naam of houd het volgende nummer. Gebruik een bestaande naam om die ${C.unit} te overschrijven.`}
 function saveTraining(){
   if(!sel.length){setMsg("Kies eerst oefeningen.");return}
   const row=document.getElementById("save-row"),inp=document.getElementById("save-name");
