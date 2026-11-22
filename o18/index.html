@@ -182,6 +182,10 @@ svg.hall{width:100%;height:auto;display:block}
 .sum-head{color:var(--muted)} .sum-head b{font:800 28px var(--display);color:var(--ink);margin-right:4px}
 .sum-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .sum-list li{display:grid;gap:6px;border:2px solid var(--ph);border-radius:10px;padding:10px 12px}
+.sum-list>li.ob-li{border:1.5px dashed var(--line);background:var(--bg);gap:8px}
+.sum-list .ob-li .ob-step{margin-left:0;padding:0;border:none}
+.sum-list .ob-li .ob-step li{display:flex;border:none;border-radius:0;padding:0}
+.sum-list .ob-li .hallwrap{background:var(--surface)}
 .sum-t{font:800 22px/1.05 var(--display)}
 .sum-list p{margin:0;font-size:15px}
 .adj{color:var(--muted)}
@@ -357,8 +361,7 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
 <dialog id="mat" aria-labelledby="mat-title">
   <div class="dlg-head"><div><div class="num">Trainingsoverzicht</div><h2 id="mat-title">Mijn training</h2></div><button class="close" type="button" data-close aria-label="Sluiten">×</button></div>
   <div class="dlg-body"><div class="les-actions"><button type="button" class="btn primary" id="print-menu" aria-expanded="false" aria-controls="print-choice">Print als pdf</button><button type="button" class="btn" id="do-save">Bewaren</button><div class="print-choice" id="print-choice" hidden><button type="button" class="btn" id="do-print">Alleen oefeningen</button><button type="button" class="btn" id="do-print-all">Oefeningen, materiaal en ombouw</button></div><span class="msg" id="les-msg" role="status" aria-live="polite"></span><form class="save-row" id="save-row" hidden><label for="save-name" style="font-weight:700">Naam</label><input id="save-name" type="text" maxlength="60" autocomplete="off"><button type="submit" class="btn primary" id="save-ok">Opslaan</button><button type="button" class="btn" id="save-cancel">Annuleren</button><p class="hint" id="save-hint"></p></form></div><div id="sum-list"></div><div id="mat-extra"><h3 class="mv-h">Materiaal</h3><div class="kit"><p class="sub" id="kit-scope" style="margin:0"></p><div class="tiles" id="tiles"></div>
-    <p class="note">Materiaal gaat mee van oefening naar oefening. Je ziet dus wat de zwaarste oefening tegelijk nodig heeft. Neem reserveballen en een reservestick mee.</p></div>
-    <h3 class="mv-h">Veld en ombouw</h3><div id="ob-body" style="display:grid;gap:16px"></div></div></div>
+    <p class="note">Materiaal gaat mee van oefening naar oefening. Je ziet dus wat de zwaarste oefening tegelijk nodig heeft. Neem reserveballen en een reservestick mee.</p></div></div></div>
 </dialog>
 <dialog id="afs" aria-labelledby="afs-title">
   <div class="dlg-head"><div><div class="num">Voor je begint</div><h2 id="afs-title">Accenten voor deze leeftijd</h2></div><button class="close" type="button" data-close aria-label="Sluiten">×</button></div>
@@ -929,29 +932,21 @@ function diffLines(prev,next){
   return out;
 }
 const SIGN={plus:"+",min:"−",move:"↻"};
-function renderOmbouw(){
-  const el=document.getElementById("ob-body");
-  if(!sel.length){el.innerHTML=`<p class="empty">Kies eerst oefeningen met + ${C.inLabel} in het hoofdscherm. Dan zie je hier per oefening de ${C.hallWord} en wat je moet ombouwen.</p>`;return}
-  let h=`<p class="sub" style="margin:0">Indeling voor ${N} spelers op een floorballveld van ${r1(ZW)} × ${r1(ZH)} m. Het aantal spelers en de maat van het veld pas je aan bij Instellingen.${sel.length>1?` Ombouwen kost in totaal ${wisselTot()} min.`:""}</p>`;
-  let prev=null;
-  sel.forEach((x,i)=>{const e=EX[idx(x.id)],info=HALL[e.id](N),ph=phaseOf(e.cat);
-    h+=`<div class="ob-step"><h4>${prev?`Ombouwen naar ${e.title}<span class="mins"> · ${WISSEL} min</span>`:`Klaarzetten voor de ${C.unit}`}</h4>
-      <ul>${diffLines(prev,e.id).map(([c,t])=>`<li class="${c}"><span class="sign" aria-hidden="true">${SIGN[c]}</span>${t}</li>`).join("")}</ul></div>
-      <section class="ob ph-${ph}"><div class="slot-head"><span class="phase">${i+1} · ${e.title}</span><span class="mins">${x.min} min</span></div>
-      <div class="hallwrap">${hallSvg(e.id,N)}</div><p class="note">${hallNote(e.id,N)}</p></section>`;
-    prev=e.id});
-  el.innerHTML=h;
-}
+/* ombouw vóór elke oefening: klaarzetten (eerste) of ombouwen vanaf de vorige, met de veldindeling */
+function obBlock(i){const x=sel[i],e=EX[idx(x.id)],prev=i?sel[i-1].id:null,ph=phaseOf(e.cat);
+  return `<li class="ob-li ph-${ph}"><div class="ob-step"><h4>${prev?`Ombouwen naar ${e.title}<span class="mins"> · ${WISSEL} min</span>`:`Klaarzetten voor ${e.title}`}</h4>
+    <ul>${diffLines(prev,e.id).map(([c,t])=>`<li class="${c}"><span class="sign" aria-hidden="true">${SIGN[c]}</span>${t}</li>`).join("")}</ul></div>
+    <div class="hallwrap">${hallSvg(e.id,N)}</div><p class="note">${hallNote(e.id,N)}</p></li>`}
 function renderSum(){
   const el=document.getElementById("sum-list");
   document.getElementById("mat-title").textContent=sheetTitle();
   const ex=document.getElementById("mat-extra");if(ex)ex.hidden=!sel.length;
   if(!sel.length){el.innerHTML=`<p class="empty">Nog geen oefeningen gekozen. Tik op + ${C.inLabel} bij een oefening in het hoofdscherm, of tik op Bedenk een training voor me.</p>`;return}
-  renderTiles();renderOmbouw();
+  renderTiles();
   el.innerHTML=`<div class="sum-head"><b>${totMin()} min</b> ${nOef(sel.length)} · ${exMin()} min oefenen${sel.length>1?` + ${wisselTot()} min wisselen (${WISSEL} min per ombouw)`:""}</div>
-    <p class="note" style="margin:4px 0 10px">${C.extra}</p>
+    <p class="note" style="margin:4px 0 10px">${C.extra} Veld en ombouw zijn voor ${N} ${C.people} op ${r1(ZW)} × ${r1(ZH)} m; aan te passen bij Instellingen.</p>
     <ol class="sum-list">${sel.map((x,i)=>{const e=EX[idx(x.id)],ph=phaseOf(e.cat),lv=lvlLabel(x.lvl);
-      return `<li class="ph-${ph}"><div class="sum-top"><span class="phase-tag">${i+1} · ${PH_LABEL[ph]}</span><span class="mini">
+      return obBlock(i)+`<li class="ph-${ph}"><div class="sum-top"><span class="phase-tag">${i+1} · ${PH_LABEL[ph]}</span><span class="mini">
         <button type="button" data-mv="-1" data-sid="${x.id}" aria-label="${e.title} eerder" ${i?"":"disabled"}>↑</button><button type="button" data-mv="1" data-sid="${x.id}" aria-label="${e.title} later" ${i<sel.length-1?"":"disabled"}>↓</button><button type="button" data-rm="${x.id}" aria-label="${e.title} verwijderen">×</button></span></div>
       <strong class="sum-t">${e.title}</strong>
       <div class="field sum-fig">${svg(e,"s"+i)}</div>
@@ -1680,7 +1675,7 @@ function syncZaal(){["zw","zh"].forEach((k,i)=>{const el=document.getElementById
   const p=document.getElementById("presets");if(p)p.innerHTML=PRESETS.map(([l,w,h,bd])=>`<button type="button" class="chip zaal-chip" data-preset="${w},${h}" aria-pressed="${ZW===w&&ZH===h}"><b>${l}</b><small>${w} × ${h} m</small>${bd?`<small>${bd} boarding</small>`:""}</button>`).join("")}
 function setZaal(w,hh){const c=(v,lo,hi,d)=>{v=Math.round(Number(v)*2)/2;return isFinite(v)&&v?Math.max(lo,Math.min(hi,v)):d};
   ZW=c(w,10,60,HW);ZH=c(hh,6,40,HH);try{localStorage.setItem("u18-zaal",JSON.stringify([ZW,ZH]))}catch(e){}
-  syncZaal();if(obDlg.open)renderOmbouw()}
+  syncZaal();if(lesDlg.open)renderSum()}
 document.addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;
   if(b.id==="open-kit"){renderKit();kitDlg.showModal()}
   if(b.id==="zw-min")setZaal(Math.ceil(ZW)-1,ZH);
