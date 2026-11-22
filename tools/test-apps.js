@@ -90,7 +90,8 @@ async function testPage(browser, p, size) {
       for (const i of [0, 1]) await page.locator("#grid [data-toggle]").nth(i).click();
       const steps = [
         ["#open-mat", async () => { await page.click("#do-save"); await page.waitForTimeout(150); texts.push(await page.inputValue("#save-name"), await page.textContent("#save-hint")); }],
-        ["#open-ob", null],
+        ["#open-ob, #open-set", null],
+        ["#open-gen, #open-bib", async () => { const ok = page.locator("#gen [data-load]"); if (await ok.count()) { await ok.click(); await page.waitForTimeout(250); if (!(await page.locator("#mat[open] #ob-body .ob-step").count())) fail(where, "Akkoord opent geen training met ombouw"); } }],
         ["#open-bib", null],
         ["#grid [data-open]", null],
       ];
