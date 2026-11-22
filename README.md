@@ -1,6 +1,6 @@
 # Floorball training
 
-Floorball-oefeningen met animaties voor trainers en leerkrachten. Kies een programma, stel een training samen, print hem als pdf en geef oefeningen een score van 1 tot 5 sterren.
+Floorball-oefeningen met animaties voor trainers en leerkrachten. Kies een leeftijd, stel je training samen, let op het aandachtspunt per training en bekijk de variaties.
 
 Open de app: **https://ufcutrecht.github.io/floorball-training/**
 
