@@ -217,7 +217,23 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
     const sum = document.getElementById("les-sum"), bar = sum && sum.closest(".lesbar");
     if (bar) bar.classList.toggle("fb-empty", /^0\s/.test(sum.textContent.trim()));
   }
+  /* legenda (kleuren en pijlen) onder de tekening in het Uitleg-venster */
+  function decorateDlgLegend() {
+    const body = document.getElementById("dlg-body"), leg = document.getElementById("legend");
+    if (!body || !leg || body.querySelector(".fb-dlg-leg")) return;
+    const fig = body.querySelector(":scope > .field"); if (!fig) return;
+    fig.insertAdjacentHTML("afterend", `<details class="legwrap fb-dlg-leg"><summary>Legenda</summary><div class="legend">${leg.innerHTML}</div></details>`);
+  }
+  /* onderbalk: lange tekst op breed scherm, korte op de telefoon */
+  function barLabels() {
+    const u = (window.FB_APP && FB_APP.words && FB_APP.words.unit) || "training";
+    [["open-mat", "Maak een " + u, "Mijn " + u], ["open-gen", "Suggestie voor een " + u, "Suggestie"]].forEach(([id, l, k]) => {
+      const b = document.getElementById(id); if (!b || b.querySelector(".fb-l-lbl")) return;
+      b.innerHTML = `<span class="fb-l-lbl">${l}</span><span class="fb-s-lbl">${k}</span>`;
+    });
+  }
   function decorate() {
+    decorateDlgLegend(); barLabels();
     ensureStarFilter(); decorateShare(); decorateTrainingShare(); chipFade(document.querySelector(".fchips")); barState();
     document.querySelectorAll("#grid article.card").forEach(card => {
       if (card.querySelector(".fb-rate")) return;
@@ -297,7 +313,7 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
     if (sel.length && !same && !confirm(`Je hebt al oefeningen gekozen. Wil je die vervangen door de gedeelde ${unitWord()}?`)) return;
     sel = items;
     const w = parseInt(q.get("w"), 10); if (w >= 0 && w <= 30 && has("WISSEL")) { WISSEL = w; try { localStorage.setItem(C.key + "-wissel", w); } catch (e) {} if (typeof syncWissel === "function") syncWissel(); }
-    const n = parseInt(q.get("n"), 10); if (n >= 4 && n <= 40 && has("N")) { N = n; try { localStorage.setItem("fb-n", n); } catch (e) {} const ki = document.getElementById("kids"); if (ki) ki.value = n; }
+    const n = parseInt(q.get("n"), 10); if (n >= 4 && n <= 40 && has("N")) { N = n; try { if (typeof N_KEY !== "undefined") localStorage.setItem(N_KEY, n); } catch (e) {} const ki = document.getElementById("kids"); if (ki) ki.value = n; }
     const z = String(q.get("z") || "").split("x").map(Number); if (z.length === 2 && typeof setZaal === "function") setZaal(z[0], z[1]);
     if (has("curNr")) curNr = null;
     if (typeof saveLes === "function") saveLes();
@@ -496,6 +512,26 @@ button,a,input,select,textarea,summary,label,.chip{touch-action:manipulation}
   body{padding-bottom:110px}
   .lesbar.fb-empty strong{display:none}
   body:has(.lesbar.fb-empty){padding-bottom:70px}
+}
+/* UI-review 22 nov 2026 */
+/* knoppen op een kaart blijven op hun plek als een buurkaart hoger wordt (tijdknop na "In de training") */
+body #grid .card .body .actions{margin-top:0}
+/* legenda ook in het Uitleg-venster */
+.fb-dlg-leg{margin:-4px 0 4px}
+.fb-dlg-leg .legend{margin-block:4px 0}
+/* korte knopteksten in de onderbalk op de telefoon */
+.fb-s-lbl{display:none}
+@media (max-width:700px){
+  .lesbar .btn .fb-l-lbl{display:none}
+  .lesbar .btn .fb-s-lbl{display:inline}
+  body .lesbar .barbtns .btn{white-space:nowrap;font-size:14px;padding:6px 4px}
+  /* kop compacter, knoppen onder de kop op één regel die zijwaarts scrolt */
+  header{padding-block:16px 6px}
+  header .lead{font-size:15px;line-height:1.4}
+  body .o-row{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding-inline:16px;scrollbar-width:none}
+  body .o-row::-webkit-scrollbar{display:none}
+  body .o-row>*{flex:none}
+  body .o-row .pill{min-height:40px;padding:0 12px}
 }`;
   const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 

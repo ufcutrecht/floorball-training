@@ -9,18 +9,18 @@
   --bg:#e8e8e8; --surface:#ffffff; --ink:#262935; --muted:#55596a; --line:#d2d4da;
   --court:#262935; --court-line:#ffffff; --court-floor:#e6e8ee;
   --accent:#2b6db4; --accent-ink:#ffffff; --team-a:#f26a21; --team-b:#1f9d6b; --cone:#f2b705;
-  --ph-warm:#d6336c; --ph-kern:#2f6fdb; --ph-partij:#7c4dbd; --ph-ink:#ffffff;
+  --ph-warm:#d9822b; --ph-kern:#1d7f8c; --ph-partij:#b8325a; --ph-ink:#ffffff;
   --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#1a1c24; --surface:#262935; --ink:#ececef; --muted:#a3a7b6; --line:#383c4d;
   --court:#a3a7b6; --court-line:#d8e4ee; --court-floor:#262935;
-  --accent:#6fa6e4; --accent-ink:#12141b; --team-a:#ff8547; --team-b:#4cc795; --cone:#f2c43a; --ph-warm:#f06595; --ph-kern:#6b9df0; --ph-partij:#b18ae6; --ph-ink:#14181d; color-scheme:dark}}
+  --accent:#6fa6e4; --accent-ink:#12141b; --team-a:#ff8547; --team-b:#4cc795; --cone:#f2c43a; --ph-warm:#f0a65a; --ph-kern:#4fc2cf; --ph-partij:#f0789a; --ph-ink:#14181d; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#1a1c24; --surface:#262935; --ink:#ececef; --muted:#a3a7b6; --line:#383c4d;
   --court:#a3a7b6; --court-line:#d8e4ee; --court-floor:#262935;
-  --accent:#6fa6e4; --accent-ink:#12141b; --team-a:#ff8547; --team-b:#4cc795; --cone:#f2c43a; --ph-warm:#f06595; --ph-kern:#6b9df0; --ph-partij:#b18ae6; --ph-ink:#14181d; color-scheme:dark}
+  --accent:#6fa6e4; --accent-ink:#12141b; --team-a:#ff8547; --team-b:#4cc795; --cone:#f2c43a; --ph-warm:#f0a65a; --ph-kern:#4fc2cf; --ph-partij:#f0789a; --ph-ink:#14181d; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
@@ -320,7 +320,7 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
 <div class="wrap">
   <header>
     <a class="fb-home" href="../">← Terug naar startpagina</a>
-    <div class="eyebrow">Jeugdtraining · 6–10 jaar · groep 3–8</div>
+    <div class="eyebrow">Jeugdtraining · 6–10 jaar · zaal</div>
     <h1>Floorball training onder 10</h1>
     <p class="lead">Oefeningen voor kinderen tot 10 jaar: iedereen tegelijk bezig, veel balcontacten en spelvormen.</p>
   </header>
@@ -945,8 +945,14 @@ const NEED={
   "brandbal":n=>({stick:n,bal:Math.ceil(n/2),fles:8,bank:1,pion:4})
 };
 const ITEMS=[["stick","Sticks","stick","sticks"],["bal","Ballen","bal","ballen"],["pion","Pionnen","pion","pionnen"],["hesje","Hesjes","hesje","hesjes"],["doel","Doeltjes","doeltje","doeltjes"],["bank","Lange banken","lange bank","lange banken",1],["fles","PET-flessen","PET-fles","PET-flessen",1],["grootbal","Grote ballen","grote bal","grote ballen",1],["hoepel","Hoepels","hoepel","hoepels",1],["kast","Zweedse kasten","Zweedse kast","Zweedse kasten",1]];
-let N=26;
-try{const v=parseInt(localStorage.getItem("fb-n"),10);if(v>=4&&v<=40)N=v}catch(e){}
+/* Trainersapp en gymles-app staan op hetzelfde domein: de gymles-app ("gym-") bewaart eigen keuzes, bibliotheek en instellingen.
+   Eenmalig: wat de gymles-app vóór deze scheiding onder de gedeelde namen had bewaard, wordt gekopieerd, zodat bewaarde gymlessen blijven. */
+const KEY_PRE=(window.FB_APP&&FB_APP.id==="gymzaal")?"gym-":"";
+(function(){if(!KEY_PRE)return;try{const done=KEY_PRE+"fb-moved";if(localStorage.getItem(done))return;["fb-sel","fb-sel-lib","fb-sel-wissel","fb-sel-gen","fb-n","fb-zaal"].forEach(k=>{const v=localStorage.getItem(k);if(v!=null&&localStorage.getItem(KEY_PRE+k)==null)localStorage.setItem(KEY_PRE+k,v)});localStorage.setItem(done,"1")}catch(e){}})();
+const N_KEY=KEY_PRE+"fb-n",ZAAL_KEY=KEY_PRE+"fb-zaal";
+/* standaard: clubtraining 20 kinderen, gymles een klas van 26 */
+let N=KEY_PRE?26:20;
+try{const v=parseInt(localStorage.getItem(N_KEY),10);if(v>=4&&v<=40)N=v}catch(e){}
 function needText(id){const r=NEED[id](N);return ITEMS.filter(([k])=>r[k]).map(([k,,s,p])=>`${r[k]} ${r[k]===1?s:p}`).join(", ")}
 
 const MAAT={"schiettent":"hele zaal","brandbal":"hele zaal","formule1":"hele zaal","ligadribbel":"hele zaal","ballensmokkel":"hele zaal","chaosspel":"hele zaal","stoplicht":"15 × 10 m","balletje-tik":"15 × 10 m","schaduw":"15 × 10 m","schatrovers":"20 × 12 m","tweetallen":"6 m per tweetal","driehoek":"zijde 6 m","pionnen-omschieten":"12 × 12 m","dribbel-schiet":"18 × 10 m","koning-vak":"10 × 8 m","een-tegen-een":"10 × 3,5 m per baan","drie-drie":"10 × 6 m per veldje","tikkertje-opdracht":"15 × 10 m","pionnenbos":"11 × 14 m","uitdagen-finten":"8 m per tweetal","lijnbal":"halve of kwart zaal","vier-doeltjes":"halve of kwart zaal","joker-partij":"halve of kwart zaal","pionnen-omver":"halve of kwart zaal","lunapark":"6 m tot de bank","rollmops":"16 × 10 m","fruitsalade":"hele zaal","annemaria":"hele zaal","nest-zoeken":"hele zaal","aanspeelstations":"hele zaal","kegels":"hele zaal","penaltyspel":"veldjes van 14 × 5 m","kast-afbouwen":"hele of halve zaal","staartjes":"15 × 10 m","krokodillen":"hele zaal","poortjes-tellen":"hele zaal","opruimen":"hele zaal","twee-ballen":"halve of kwart zaal"};
@@ -955,7 +961,7 @@ const slotPh=k=>k==="warmup"?"warm":k==="partij"?"partij":"kern";
 
 /* zaalindeling in meters, gymzaal 22 × 14 m */
 const HW=22,HH=14,SC=10,HP=16;const PRESETS=(window.FB_APP&&FB_APP.id)==="gymzaal"?[["Gymzaal",24,14],["Sporthal",44,28]]:[["Kleinveld",24,14,"12 × 5"],["Grootveld",40,20,"20 × 10"]];
-let ZW=HW,ZH=HH;try{const z=JSON.parse(localStorage.getItem("fb-zaal")||"null");if(Array.isArray(z)&&z[0]>=10&&z[0]<=60&&z[1]>=6&&z[1]<=40){ZW=z[0];ZH=z[1]}}catch(e){}
+let ZW=HW,ZH=HH;try{const z=JSON.parse(localStorage.getItem(ZAAL_KEY)||"null");if(Array.isArray(z)&&z[0]>=10&&z[0]<=60&&z[1]>=6&&z[1]<=40){ZW=z[0];ZH=z[1]}}catch(e){}
 const zoneL=(w,h,extra=[])=>{const x=(HW-w)/2,y=(HH-h)/2;return{items:[{t:"zone",x,y,w,h},{t:"cone",x,y},{t:"cone",x:x+w,y},{t:"cone",x,y:y+h},{t:"cone",x:x+w,y:y+h},...extra],note:`1 vak van ${w} × ${h} m`}};
 const gridC=(k,cols)=>{const rows=Math.ceil(k/cols),cw=HW/cols,ch=HH/rows;return Array.from({length:k},(_,i)=>({cx:(i%cols+.5)*cw,cy:(Math.floor(i/cols)+.5)*ch,cw,ch}))};
 const r1=v=>String(Math.round(v*10)/10).replace(".",",");
@@ -1112,7 +1118,7 @@ function renderTiles(){
     const sub=max?`meest bij ${EX[idx(by)].title}`:"niet nodig";
     return `<div class="tile ${max?"":"zero"}"><span class="lbl">${label}</span><b>${max}</b><small>${sub}</small></div>`}).join("");
 }
-function setN(v){v=Math.max(4,Math.min(40,v||0));N=v;try{localStorage.setItem("fb-n",N)}catch(e){}renderKit()}
+function setN(v){v=Math.max(4,Math.min(40,v||0));N=v;try{localStorage.setItem(N_KEY,N)}catch(e){}renderKit()}
 
 /* animatie per pijl, in volgorde van de pijlen in de tekening: starttijd in seconden */
 const ANIM={
@@ -1243,6 +1249,7 @@ const LVL=[["makkelijker","Makkelijker"],["basis","Basis"],["moeilijker","Moeili
 const C={"key": "fb-sel", "oldKey": "fb-les2", "unit": "training", "Unit": "Training", "title": "Mijn training", "inLabel": "In de training", "btnLabel": "Training", "people": "kinderen", "libName": "Training", "hallWord": "zaalindeling", "extra": "Reken 10 minuten extra voor uitleg en afsluiten."};
 /* Gymles-app (floorball-gymles/loader.js): eigen woorden, bijv. "gymles" in plaats van "training". */
 if(window.FB_APP&&FB_APP.words)Object.assign(C,FB_APP.words);
+C.key=KEY_PRE+C.key;C.oldKey=KEY_PRE+C.oldKey;
 const PH_ORD={warm:0,kern:1,partij:2};
 const minClamp=v=>Math.max(1,Math.min(90,Math.round(Number(v))||1));
 let sel=[], WISSEL=4, curNr=null;
@@ -1347,7 +1354,7 @@ function renderGrid(){
       <div class="body">
         <div class="num">${pad(i+1)}${e.cat!==PH_LABEL[ph]?` · ${e.cat}`:""}</div>
         <h3>${e.title}</h3>
-        <div class="meta"><span class="m2">${e.min} min · ${e.kids} · groep ${e.groep}</span></div>
+        <div class="meta"><span class="m2">${e.min} min · ${e.kids}</span></div>
         <p>${e.doel}</p>
         <div class="actions">
           <button type="button" class="btn ${x?"added":"primary"}" data-toggle="${e.id}" aria-pressed="${!!x}">${x?"✓ ":"+ "}${C.inLabel}</button>
@@ -1388,7 +1395,7 @@ const dlg=document.getElementById("dlg"), lesDlg=document.getElementById("mat"),
 function openEx(id){
   const e=EX[idx(id)], i=idx(id), sl=selOf(id), inLes=!!sl;
   dlg.dataset.id=id;stopTimer();tTotal=tLeft=(sl?sl.min:e.min)*60;
-  document.getElementById("dlg-num").textContent=`${PH_LABEL[phaseOf(e.cat)]}${e.cat!==PH_LABEL[phaseOf(e.cat)]?` · ${e.cat}`:""} · groep ${e.groep}`;
+  document.getElementById("dlg-num").textContent=`${PH_LABEL[phaseOf(e.cat)]}${e.cat!==PH_LABEL[phaseOf(e.cat)]?` · ${e.cat}`:""}`;
   dlg.className="ph-"+phaseOf(e.cat);
   document.getElementById("dlg-title").textContent=e.title;
   document.getElementById("dlg-body").innerHTML=`
@@ -1519,7 +1526,7 @@ function loadTraining(nr){
   if(typeof it.wissel==="number")WISSEL=Math.max(0,Math.min(30,it.wissel));
   try{localStorage.setItem(C.key+"-wissel",WISSEL)}catch(e){}
   if(Array.isArray(it.zaal))setZaal(it.zaal[0],it.zaal[1]);
-  if(it.n>=4&&it.n<=40){N=it.n;try{localStorage.setItem("fb-n",N)}catch(e){}}
+  if(it.n>=4&&it.n<=40){N=it.n;try{localStorage.setItem(N_KEY,N)}catch(e){}}
   saveLes();renderGrid();renderBar();curNr=nr;bibDlg.close();if(genDlg.open)genDlg.close();renderSum();setMsg(`${itemName(it)} geladen.`);lesDlg.showModal();
 }
 async function delTraining(b){
@@ -1910,7 +1917,7 @@ function syncZaal(){["zw","zh"].forEach((k,i)=>{const el=document.getElementById
   const r=document.getElementById("zaal-reset");if(r){r.textContent=`Standaard (${HW} × ${HH} m)`;r.hidden=ZW===HW&&ZH===HH}
   const p=document.getElementById("presets");if(p)p.innerHTML=PRESETS.map(([l,w,h,bd])=>`<button type="button" class="chip zaal-chip" data-preset="${w},${h}" aria-pressed="${ZW===w&&ZH===h}"><b>${l}</b><small>${w} × ${h} m</small>${bd?`<small>${bd} boarding</small>`:""}</button>`).join("")}
 function setZaal(w,hh){const c=(v,lo,hi,d)=>{v=Math.round(Number(v)*2)/2;return isFinite(v)&&v?Math.max(lo,Math.min(hi,v)):d};
-  ZW=c(w,10,60,HW);ZH=c(hh,6,40,HH);try{localStorage.setItem("fb-zaal",JSON.stringify([ZW,ZH]))}catch(e){}
+  ZW=c(w,10,60,HW);ZH=c(hh,6,40,HH);try{localStorage.setItem(ZAAL_KEY,JSON.stringify([ZW,ZH]))}catch(e){}
   syncZaal();if(lesDlg.open)renderSum()}
 document.addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;
   if(b.id==="open-kit"){renderKit();kitDlg.showModal()}
@@ -1928,7 +1935,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b
 const kidsInp=document.getElementById("kids");
 document.getElementById("kids-min").addEventListener("click",()=>setN(N-1));
 document.getElementById("kids-plus").addEventListener("click",()=>setN(N+1));
-kidsInp.addEventListener("input",()=>{const v=parseInt(kidsInp.value,10);if(v>=4&&v<=40){N=v;try{localStorage.setItem("fb-n",N)}catch(e){}renderKit()}});
+kidsInp.addEventListener("input",()=>{const v=parseInt(kidsInp.value,10);if(v>=4&&v<=40){N=v;try{localStorage.setItem(N_KEY,N)}catch(e){}renderKit()}});
 kidsInp.addEventListener("change",()=>{setN(parseInt(kidsInp.value,10));kidsInp.value=N});
 
 /* animatie pauzeren */
