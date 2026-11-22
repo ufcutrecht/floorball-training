@@ -458,6 +458,9 @@ body .dlg-body ol.sum-list{padding-left:0}
 .fb-search{min-height:44px}
 .legwrap summary{list-style:none}
 .legwrap summary::-webkit-details-marker{display:none}
+/* niet inzoomen op de telefoon: geen dubbeltik-zoom op knoppen, en invoervelden minstens 16 px (anders zoomt iOS in bij het tikken) */
+button,a,input,select,textarea,summary,label,.chip{touch-action:manipulation}
+.fb-form textarea,.fb-sf select,.fb-search input{font-size:16px}
 .legwrap summary::before{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);margin-right:2px}
 .legwrap[open] summary::before{transform:rotate(45deg)}
 @media (prefers-reduced-motion:no-preference){.legwrap summary::before{transition:transform .15s}}

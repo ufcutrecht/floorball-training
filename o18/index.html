@@ -235,7 +235,7 @@ svg.hall{width:100%;height:auto;display:block}
 #mat-extra .kit{border:none;padding:0;margin:0;background:none}
 @media (max-width:640px){body .lesbar .barbtns .btn{white-space:normal;line-height:1.15;padding:6px 6px;font-size:13.5px}}
 .gen-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.bib-list .gen-list li{display:grid;gap:6px;border:none;border-left:4px solid var(--ph);border-radius:0;padding:4px 0 8px 10px;background:none}
+.gen-list>li{display:grid;gap:6px;border:none;border-left:4px solid var(--ph);border-radius:0;padding:4px 0 8px 10px;background:none}
 .gen-list .sum-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .gen-list .phase-tag{font-size:11px;padding:4px 6px}
 .gen-ctl{display:flex;flex-wrap:nowrap;gap:8px;align-items:center}
@@ -249,6 +249,9 @@ body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
 .gen-menu button:hover{background:var(--bg)}
 .gen-menu small{color:var(--muted);font-size:13px;white-space:nowrap}
 .gen-swap:disabled{opacity:.4;cursor:default}
+.gen-list>li.gen-add-li{border:none;padding:0 0 4px 14px;display:grid;gap:6px}
+.gen-add{font:inherit;font-size:14px;font-weight:700;justify-self:start;background:none;border:1.5px dashed var(--line);border-radius:8px;color:var(--ink);padding:0 12px;height:36px;cursor:pointer}
+.gen-add:disabled{opacity:.4;cursor:default}
 .gen-t{font:inherit;font-weight:700;text-align:left;background:none;border:none;color:var(--ink);padding:2px 0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .vast-tag{justify-self:start;background:var(--court);color:var(--surface);font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:5px}
 .btn.warn{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
@@ -1458,11 +1461,11 @@ function genHtml(){
       <ol class="gen-list">${res.sel.map((v,i)=>{const e=EX[idx(v.id)],ph=genRole(e)==="partij"?"partij":phaseOf(e.cat),lab=genRole(e)==="partij"?"Partijvorm":PH_LABEL[ph],alts=genAlts(i),alt=alts.length,
         same=j=>j>=0&&j<res.sel.length&&genRole(EX[idx(res.sel[j].id)])===genRole(e),open=GEN.menu===i&&alt;
         return `<li class="ph-${ph}"><div class="sum-top"><span class="phase-tag">${i+1} · ${lab}</span><span class="mini">
-          <button type="button" data-gmv="-1" data-gi="${i}" aria-label="${e.title} eerder" ${same(i-1)?"":"disabled"}>↑</button><button type="button" data-gmv="1" data-gi="${i}" aria-label="${e.title} later" ${same(i+1)?"":"disabled"}>↓</button></span></div>
+          <button type="button" data-gmv="-1" data-gi="${i}" aria-label="${e.title} eerder" ${same(i-1)?"":"disabled"}>↑</button><button type="button" data-gmv="1" data-gi="${i}" aria-label="${e.title} later" ${same(i+1)?"":"disabled"}>↓</button>${genRole(e)!=="partij"?`<button type="button" data-grm="${i}" aria-label="${e.title} verwijderen" ${genCount(genRole(e))>1?"":"disabled"}>×</button>`:""}</span></div>
           <button type="button" class="gen-t" data-open="${e.id}">${e.title}</button>
           <div class="gen-ctl"><div class="tstep gen-step"><button type="button" data-gmin="-1" data-gi="${i}" aria-label="${e.title}: 1 minuut korter">−</button><span>${v.min} min</span><button type="button" data-gmin="1" data-gi="${i}" aria-label="${e.title}: 1 minuut langer">+</button></div>
           <button type="button" class="btn gen-swap" data-gswap="${i}" aria-expanded="${!!open}" ${alt?"":"disabled title=\"Geen andere oefening bij dit thema\""}>Wissel ${open?"▴":"▾"}</button></div>
-          ${open?`<div class="gen-menu" role="group" aria-label="Kies een andere oefening">${alts.map(a=>`<button type="button" data-gpick="${a.id}" data-gi="${i}">${a.title}<small>${a.min} min</small></button>`).join("")}</div>`:""}</li>`}).join("")}</ol>
+          ${open?`<div class="gen-menu" role="group" aria-label="Kies een andere oefening">${alts.map(a=>`<button type="button" data-gpick="${a.id}" data-gi="${i}">${a.title}<small>${a.min} min</small></button>`).join("")}</div>`:""}</li>`+genAddRow(i)}).join("")}</ol>
       <div class="actions"><button type="button" class="btn primary" data-load="${GT_NR}">Akkoord</button></div></div>`}
   return h+`</div>`;
 }
@@ -1472,8 +1475,18 @@ function renderGen(){const el=document.getElementById("gen-body");if(el)el.inner
 function genAlts(i){const r=GEN.res;if(!r)return[];const cur=EX[idx(r.sel[i].id)],role=genRole(cur),used=new Set(r.sel.map(v=>v.id)),
   fits=e=>(GEN_TAGS[e.id]||[]).includes(r.thema),strict=fits(cur);
   return EX.filter(e=>genRole(e)===role&&!used.has(e.id)&&(!strict||fits(e)))}
+const genCount=role=>GEN.res?GEN.res.sel.filter(v=>genRole(EX[idx(v.id)])===role).length:0;
+/* oefeningen die je kunt toevoegen: zelfde rol, nog niet gekozen; eerst die bij het thema passen */
+function genAddOpts(role){const r=GEN.res,used=new Set(r.sel.map(v=>v.id)),fits=e=>(GEN_TAGS[e.id]||[]).includes(r.thema),
+  all=EX.filter(e=>genRole(e)===role&&!used.has(e.id));return[...all.filter(fits),...all.filter(e=>!fits(e))]}
+/* na de laatste oefening van warming-up of kern: knop om er een toe te voegen */
+function genAddRow(i){const r=GEN.res,role=genRole(EX[idx(r.sel[i].id)]),nx=r.sel[i+1];
+  if(role==="partij"||(nx&&genRole(EX[idx(nx.id)])===role))return "";
+  const opts=genAddOpts(role),open=GEN.add===role&&opts.length,lab=role==="warm"?"warming-up":"kernoefening",fit=e=>(GEN_TAGS[e.id]||[]).includes(r.thema);
+  return `<li class="gen-add-li"><button type="button" class="gen-add" data-gadd="${role}" aria-expanded="${!!open}" ${opts.length?"":"disabled"}>+ ${lab} toevoegen ${open?"▴":"▾"}</button>
+    ${open?`<div class="gen-menu" role="group" aria-label="Kies een ${lab}">${opts.map(a=>`<button type="button" data-gaddpick="${a.id}" data-grole="${role}">${a.title}<small>${fit(a)?"":"ander thema · "}${a.min} min</small></button>`).join("")}</div>`:""}</li>`}
 function genFocus(sel){const b=document.querySelector(sel);if(b&&!b.disabled)b.focus()}
-function genRun(){GEN.menu=null;
+function genRun(){GEN.menu=null;GEN.add=null;
   const inp=document.getElementById("gen-min");if(inp)GEN.min=Math.max(30,Math.min(150,Math.round(Number(inp.value)/5)*5||GEN.min));
   genSave();const r=genMake();GEN.res=r;
   GEN.msg=r?"":`Te weinig tijd voor vier oefeningen met ${WISSEL} min wisselen. Kies meer minuten.`;
@@ -1489,7 +1502,12 @@ document.addEventListener("click",ev=>{
     if(b.dataset.gmv){const j=i+Number(b.dataset.gmv),ro=k=>genRole(EX[idx(r.sel[k].id)]);
       if(j>=0&&j<r.sel.length&&ro(i)===ro(j)){[r.sel[i],r.sel[j]]=[r.sel[j],r.sel[i]];GEN.menu=null;renderGen();genFocus(`[data-gmv="${b.dataset.gmv}"][data-gi="${j}"]`)}}
     if(b.dataset.gpick){r.sel[i]={...r.sel[i],id:b.dataset.gpick};GEN.menu=null;renderGen();genFocus(`[data-gswap="${i}"]`)}}
-  if(GEN.res&&b.dataset.gswap!==undefined){const i=Number(b.dataset.gswap);GEN.menu=GEN.menu===i?null:i;renderGen();genFocus(GEN.menu===i?`[data-gpick][data-gi="${i}"]`:`[data-gswap="${i}"]`)}
+  if(GEN.res&&b.dataset.grm!==undefined){const i=Number(b.dataset.grm),r=GEN.res;if(genCount(genRole(EX[idx(r.sel[i].id)]))>1){r.sel.splice(i,1);GEN.menu=null;GEN.add=null;renderGen()}}
+  if(GEN.res&&b.dataset.gadd){GEN.add=GEN.add===b.dataset.gadd?null:b.dataset.gadd;GEN.menu=null;renderGen();genFocus(GEN.add?`[data-gaddpick]`:`[data-gadd="${b.dataset.gadd}"]`)}
+  if(GEN.res&&b.dataset.gaddpick){const r=GEN.res,role=b.dataset.grole,e=EX[idx(b.dataset.gaddpick)];
+    let at=0;r.sel.forEach((v,k)=>{if(genRole(EX[idx(v.id)])===role)at=k+1});
+    r.sel.splice(at,0,{id:e.id,lvl:"basis",min:e.min});GEN.add=null;GEN.menu=null;renderGen();genFocus(`[data-gswap="${at}"]`)}
+  if(GEN.res&&b.dataset.gswap!==undefined){GEN.add=null;const i=Number(b.dataset.gswap);GEN.menu=GEN.menu===i?null:i;renderGen();genFocus(GEN.menu===i?`[data-gpick][data-gi="${i}"]`:`[data-gswap="${i}"]`)}
 });
 document.addEventListener("change",ev=>{if(ev.target.id==="gen-min"){GEN.min=Math.max(30,Math.min(150,Math.round(Number(ev.target.value)/5)*5||75));genSave();if(GEN.res)genRun();else renderGen()}});
 
