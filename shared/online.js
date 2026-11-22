@@ -508,7 +508,7 @@ button,a,input,select,textarea,summary,label,.chip{touch-action:manipulation}
       if (T.title) document.title = T.title;
       set("header .eyebrow", T.eyebrow); set("header h1", T.h1); set("header .lead", T.lead);
       if (W) {
-        set("#open-mat", W.btnLabel); set("#mat-title", W.title); set("#bib .num", W.libTitle);
+        set("#open-mat", "Maak een " + W.unit); set("#open-gen", "Suggestie voor een " + W.unit); set("#gen-title", "Suggestie voor een " + W.unit); set("#mat-title", W.title); set("#bib .num", W.libTitle);
         const mt = document.getElementById("mat-title"), num = mt && mt.previousElementSibling; if (num) num.textContent = W.Unit + "overzicht";
         document.querySelectorAll("header .lead, .note").forEach(el => { el.innerHTML = el.innerHTML.replace(/In de training/g, "In de " + W.unit).replace(/elke training/g, "elke " + W.unit); });
       }

@@ -956,7 +956,7 @@ function renderSum(){
   const el=document.getElementById("sum-list");
   document.getElementById("mat-title").textContent=sheetTitle();
   const ex=document.getElementById("mat-extra");if(ex)ex.hidden=!sel.length;
-  if(!sel.length){el.innerHTML=`<p class="empty">Nog geen oefeningen gekozen. Tik op + ${C.inLabel} bij een oefening in het hoofdscherm, of tik op Suggestie voor een training.</p>`;return}
+  if(!sel.length){el.innerHTML=`<p class="empty">Nog geen oefeningen gekozen. Tik op + ${C.inLabel} bij een oefening in het hoofdscherm, of tik op Suggestie voor een ${C.unit}.</p>`;return}
   renderTiles();
   el.innerHTML=`<div class="sum-head"><b>${totMin()} min</b> ${nOef(sel.length)} · ${exMin()} min oefenen${sel.length>1?` + ${wisselTot()} min wisselen (${WISSEL} min per ombouw)`:""}</div>
     <p class="note" style="margin:4px 0 10px">${C.extra} Veld en ombouw zijn voor ${N} ${C.people} op ${r1(ZW)} × ${r1(ZH)} m; aan te passen bij Instellingen.</p>
@@ -1447,7 +1447,7 @@ function genMake(){
   for(const nw of (T>=75?[2,1]:[1])){
     const n=nw+3,E=T-(n-1)*WISSEL;if(E<n*6)continue;
     const used=new Set(),warm=genPick("warm",GEN.thema,nw,used),
-      kern=genPick("kern",GEN.thema,2,used).sort((a,b)=>GEN_INT.indexOf(a.int.split(",")[0])-GEN_INT.indexOf(b.int.split(",")[0])),
+      kern=genPick("kern",GEN.thema,2,used).sort((a,b)=>GEN_INT.indexOf((a.int||"").split(",")[0])-GEN_INT.indexOf((b.int||"").split(",")[0])),
       partij=genPick("partij",GEN.thema,1,used);
     if(warm.length<nw||kern.length<2||!partij.length)return null;
     const wm=Math.max(5,Math.round(E*.2/nw)),km=E>=70?r5(E*.25):Math.max(6,Math.round(E*.25)),pm=E-nw*wm-2*km;
@@ -1522,6 +1522,8 @@ document.addEventListener("click",ev=>{
 });
 document.addEventListener("change",ev=>{if(ev.target.id==="gen-min"){GEN.min=Math.max(30,Math.min(150,Math.round(Number(ev.target.value)/5)*5||75));genSave();if(GEN.res)genRun();else renderGen()}});
 
+/* woorden uit C, zodat de gymles-app "gymles" toont */
+[["open-mat",`Maak een ${C.unit}`],["open-gen",`Suggestie voor een ${C.unit}`],["gen-title",`Suggestie voor een ${C.unit}`]].forEach(([id,t])=>{const el=document.getElementById(id);if(el)el.textContent=t});
 document.addEventListener("click",ev=>{if(ev.target.closest("#open-gen")){if(!GEN.res)genRun();else renderGen();genDlg.showModal()}});
 /* print als PDF */
 const sheetTitle=()=>{const it=curNr===VB.nr?VB:curNr===GT_NR&&GEN.res?GEN.res:curNr&&LIB.items.find(x=>x.nr===curNr);return it?itemName(it):C.title};
