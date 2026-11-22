@@ -226,8 +226,16 @@ svg.hall{width:100%;height:auto;display:block}
 .bib-list .gen-list li{display:grid;gap:6px;border:none;border-left:4px solid var(--ph);border-radius:0;padding:4px 0 8px 10px;background:none}
 .gen-list .sum-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .gen-list .phase-tag{font-size:11px;padding:4px 6px}
-.gen-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.gen-swap{padding:7px 12px}
+.gen-ctl{display:flex;flex-wrap:nowrap;gap:8px;align-items:center}
+.gen-step{border-width:1px;border-radius:7px}
+body .gen-step button{width:30px;height:32px;font-size:16px}
+body .gen-step span{min-width:50px;font-size:15px;padding:0 2px}
+.gen-swap{padding:0 12px;height:34px;font-size:14px;border-width:1px}
+.gen-menu{display:grid;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.gen-menu button{font:inherit;font-size:15px;text-align:left;display:flex;justify-content:space-between;gap:8px;align-items:baseline;background:none;border:none;border-top:1px solid var(--line);color:var(--ink);padding:9px 12px;cursor:pointer}
+.gen-menu button:first-child{border-top:none}
+.gen-menu button:hover{background:var(--bg)}
+.gen-menu small{color:var(--muted);font-size:13px;white-space:nowrap}
 .gen-swap:disabled{opacity:.4;cursor:default}
 .gen-t{font:inherit;font-weight:700;text-align:left;background:none;border:none;color:var(--ink);padding:2px 0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .vast-tag{justify-self:start;background:var(--court);color:var(--surface);font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:5px}
@@ -1445,12 +1453,14 @@ function genHtml(){
   if(res){const ex=res.sel.reduce((t,v)=>t+v.min,0),ws=(res.sel.length-1)*res.wissel;
     h+=`<div class="gen-res"><div class="slot-head"><strong class="sum-t">${res.naam}</strong><span class="mins">${ex+ws} min</span></div>
       <span class="meta"><span>${nOef(res.sel.length)}</span><span>${ex} min oefenen</span><span>${ws} min wisselen</span></span>
-      <ol class="gen-list">${res.sel.map((v,i)=>{const e=EX[idx(v.id)],ph=phaseOf(e.cat),lab=genRole(e)==="partij"?"Partijvorm":PH_LABEL[ph],alt=genAlts(i).length;
+      <ol class="gen-list">${res.sel.map((v,i)=>{const e=EX[idx(v.id)],ph=genRole(e)==="partij"?"partij":phaseOf(e.cat),lab=genRole(e)==="partij"?"Partijvorm":PH_LABEL[ph],alts=genAlts(i),alt=alts.length,
+        same=j=>j>=0&&j<res.sel.length&&genRole(EX[idx(res.sel[j].id)])===genRole(e),open=GEN.menu===i&&alt;
         return `<li class="ph-${ph}"><div class="sum-top"><span class="phase-tag">${i+1} · ${lab}</span><span class="mini">
-          <button type="button" data-gmv="-1" data-gi="${i}" aria-label="${e.title} eerder" ${i?"":"disabled"}>↑</button><button type="button" data-gmv="1" data-gi="${i}" aria-label="${e.title} later" ${i<res.sel.length-1?"":"disabled"}>↓</button></span></div>
+          <button type="button" data-gmv="-1" data-gi="${i}" aria-label="${e.title} eerder" ${same(i-1)?"":"disabled"}>↑</button><button type="button" data-gmv="1" data-gi="${i}" aria-label="${e.title} later" ${same(i+1)?"":"disabled"}>↓</button></span></div>
           <button type="button" class="gen-t" data-open="${e.id}">${e.title}</button>
-          <div class="gen-ctl"><div class="tstep"><button type="button" data-gmin="-1" data-gi="${i}" aria-label="${e.title}: 1 minuut korter">−</button><span>${v.min} min</span><button type="button" data-gmin="1" data-gi="${i}" aria-label="${e.title}: 1 minuut langer">+</button></div>
-          <button type="button" class="btn gen-swap" data-gswap="${i}" ${alt?"":"disabled"}>${alt?"Andere oefening":"Geen andere oefening"}</button></div></li>`}).join("")}</ol>
+          <div class="gen-ctl"><div class="tstep gen-step"><button type="button" data-gmin="-1" data-gi="${i}" aria-label="${e.title}: 1 minuut korter">−</button><span>${v.min} min</span><button type="button" data-gmin="1" data-gi="${i}" aria-label="${e.title}: 1 minuut langer">+</button></div>
+          <button type="button" class="btn gen-swap" data-gswap="${i}" aria-expanded="${!!open}" ${alt?"":"disabled title=\"Geen andere oefening bij dit thema\""}>Wissel ${open?"▴":"▾"}</button></div>
+          ${open?`<div class="gen-menu" role="group" aria-label="Kies een andere oefening">${alts.map(a=>`<button type="button" data-gpick="${a.id}" data-gi="${i}">${a.title}<small>${a.min} min</small></button>`).join("")}</div>`:""}</li>`}).join("")}</ol>
       <div class="actions"><button type="button" class="btn primary" data-load="${GT_NR}">Laden</button></div></div>`}
   return h+`</li></ul>`;
 }
@@ -1458,12 +1468,8 @@ function genHtml(){
 function genAlts(i){const r=GEN.res;if(!r)return[];const cur=EX[idx(r.sel[i].id)],role=genRole(cur),used=new Set(r.sel.map(v=>v.id)),
   fits=e=>(GEN_TAGS[e.id]||[]).includes(r.thema),strict=fits(cur);
   return EX.filter(e=>genRole(e)===role&&!used.has(e.id)&&(!strict||fits(e)))}
-function genSwap(i){const r=GEN.res,a=genAlts(i);if(!a.length)return;
-  const done=(r.tried=r.tried||{})[i]=(r.tried[i]||[]).concat(r.sel[i].id);
-  let c=a.filter(e=>!done.includes(e.id));if(!c.length){r.tried[i]=[r.sel[i].id];c=a}
-  const e=c[Math.floor(Math.random()*c.length)];r.sel[i]={...r.sel[i],id:e.id};renderLib()}
 function genFocus(sel){const b=document.querySelector(sel);if(b&&!b.disabled)b.focus()}
-function genRun(){
+function genRun(){GEN.menu=null;
   const inp=document.getElementById("gen-min");if(inp)GEN.min=Math.max(30,Math.min(150,Math.round(Number(inp.value)/5)*5||GEN.min));
   genSave();const r=genMake();GEN.res=r;
   GEN.msg=r?"":`Te weinig tijd voor vier oefeningen met ${WISSEL} min wisselen. Kies meer minuten.`;
@@ -1477,8 +1483,10 @@ document.addEventListener("click",ev=>{
   if(b.id==="gen-go")genRun();
   if(GEN.res&&b.dataset.gi!==undefined){const i=Number(b.dataset.gi),r=GEN.res;
     if(b.dataset.gmin){r.sel[i].min=minClamp(r.sel[i].min+Number(b.dataset.gmin));renderLib();genFocus(`[data-gmin="${b.dataset.gmin}"][data-gi="${i}"]`)}
-    if(b.dataset.gmv){const j=i+Number(b.dataset.gmv);if(j>=0&&j<r.sel.length){[r.sel[i],r.sel[j]]=[r.sel[j],r.sel[i]];r.tried={};renderLib();genFocus(`[data-gmv="${b.dataset.gmv}"][data-gi="${j}"]`)}}}
-  if(GEN.res&&b.dataset.gswap!==undefined){const i=Number(b.dataset.gswap);genSwap(i);genFocus(`[data-gswap="${i}"]`)}
+    if(b.dataset.gmv){const j=i+Number(b.dataset.gmv),ro=k=>genRole(EX[idx(r.sel[k].id)]);
+      if(j>=0&&j<r.sel.length&&ro(i)===ro(j)){[r.sel[i],r.sel[j]]=[r.sel[j],r.sel[i]];GEN.menu=null;renderLib();genFocus(`[data-gmv="${b.dataset.gmv}"][data-gi="${j}"]`)}}
+    if(b.dataset.gpick){r.sel[i]={...r.sel[i],id:b.dataset.gpick};GEN.menu=null;renderLib();genFocus(`[data-gswap="${i}"]`)}}
+  if(GEN.res&&b.dataset.gswap!==undefined){const i=Number(b.dataset.gswap);GEN.menu=GEN.menu===i?null:i;renderLib();genFocus(GEN.menu===i?`[data-gpick][data-gi="${i}"]`:`[data-gswap="${i}"]`)}
 });
 document.addEventListener("change",ev=>{if(ev.target.id==="gen-min"){GEN.min=Math.max(30,Math.min(150,Math.round(Number(ev.target.value)/5)*5||75));genSave();if(GEN.res)genRun();else renderLib()}});
 
