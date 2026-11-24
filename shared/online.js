@@ -227,7 +227,7 @@ scrollTo(0,0);addEventListener("load",()=>scrollTo(0,0));addEventListener("pages
   /* onderbalk: lange tekst op breed scherm, korte op de telefoon */
   function barLabels() {
     const u = (window.FB_APP && FB_APP.words && FB_APP.words.unit) || "training";
-    [["open-mat", "Maak een " + u, "Mijn " + u], ["open-gen", "Suggestie voor een " + u, "Suggestie"]].forEach(([id, l, k]) => {
+    [["open-mat", "Maak een " + u, "Mijn " + u], ["open-gen", "Suggestie voor een " + u, "Suggestie voor een " + u]].forEach(([id, l, k]) => {
       const b = document.getElementById(id); if (!b || b.querySelector(".fb-l-lbl")) return;
       b.innerHTML = `<span class="fb-l-lbl">${l}</span><span class="fb-s-lbl">${k}</span>`;
     });
@@ -531,6 +531,7 @@ body #grid .card .body .actions{margin-top:0}
   .lesbar .btn .fb-l-lbl{display:none}
   .lesbar .btn .fb-s-lbl{display:inline}
   body .lesbar .barbtns .btn{white-space:nowrap;font-size:14px;padding:6px 4px}
+  body .lesbar .barbtns #open-gen{white-space:normal;line-height:1.15}
   /* kop compacter, knoppen onder de kop op één regel die zijwaarts scrolt */
   header{padding-block:16px 6px}
   header .lead{font-size:15px;line-height:1.4}
