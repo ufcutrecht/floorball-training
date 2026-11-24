@@ -261,10 +261,7 @@
    "id": "baas-en-hond",
    "title": "Baas en hond",
    "cat": "Warming-up",
-   "phase": "Warming-up",
-   "apps": [
-    "training"
-   ]
+   "phase": "Warming-up"
   },
   {
    "id": "vierkant",
@@ -516,10 +513,7 @@
    "id": "zonebal",
    "title": "Zonebal",
    "cat": "Partijvorm",
-   "phase": "Kern",
-   "apps": [
-    "training"
-   ]
+   "phase": "Kern"
   },
   {
    "id": "nummerpassen",
@@ -534,19 +528,13 @@
    "id": "passen-duel",
    "title": "Passen en duelleren",
    "cat": "Duels",
-   "phase": "Kern",
-   "apps": [
-    "training"
-   ]
+   "phase": "Kern"
   },
   {
    "id": "afschermen",
    "title": "Bal afschermen",
    "cat": "Duels",
-   "phase": "Kern",
-   "apps": [
-    "training"
-   ]
+   "phase": "Kern"
   },
   {
    "id": "brandbal",
