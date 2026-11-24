@@ -97,10 +97,7 @@
    "id": "lunapark",
    "title": "Lunapark",
    "cat": "Schieten",
-   "phase": "Kern",
-   "apps": [
-    "training"
-   ]
+   "phase": "Kern"
   },
   {
    "id": "rollmops",
