@@ -1,4 +1,4 @@
-<!doctype html><html lang="nl"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#262935"><link rel="icon" href="../icons/icon-192.png"><link rel="apple-touch-icon" href="../icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Floorball training"><meta name="mobile-web-app-capable" content="yes"><script>window.FB_PROGRAM="gymles"</script><script src="../shared/shim.js"></script><style>:root{--cone-r:#e5484d;--cone-b:#3b82f6;--cone-g:#22a35a;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="nl"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#262935"><link rel="icon" href="../icons/icon-192.png"><link rel="apple-touch-icon" href="../icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Floorball training"><meta name="mobile-web-app-capable" content="yes"><script>window.FB_PROGRAM="gymles"</script><script src="../shared/shim.js"></script><script src="../shared/anim3d.js"></script><style>:root{--cone-r:#e5484d;--cone-b:#3b82f6;--cone-g:#22a35a;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!-- © 2026 UFC Utrecht. Alle rechten voorbehouden. Niet kopiëren zonder toestemming. -->
 <title>Floorball O10 Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -420,17 +420,18 @@ const EX = [
    {t:"a",k:"run",d:"M156 85 L190 58"},{t:"a",k:"run",d:"M96 66 L115 125"},
    {t:"a",k:"dribble",d:"M205 45 Q240 30 255 55"},{t:"a",k:"dribble",d:"M55 125 Q45 95 60 70"}]},
  {id:"schaduw",cat:"Warming-up",title:"Schaduwdribbel",groep:"3–8",min:8,kids:"tweetallen",int:"middel",
-  mat:["stick en bal per kind","4 pionnen voor het vak","lange bank tegen de muur (of de muur zelf)"],
+  mat:["stick en bal per kind","4 pionnen voor het vak","lange bank tegen de muur (of de muur zelf)","3 hoepels, elk rechtop tussen 2 pionnen"],
   doel:"Rondkijken tijdens het dribbelen en bewegingen nadoen.",
-  stappen:["Maak tweetallen, allebei met stick en bal.","De voorste dribbelt door het vak en kiest route en tempo.","De schaduw volgt op twee meter en doet alles na: draaien, stoppen, versnellen.","De voorste doet ook eens iets anders voor: de bal tegen de bank spelen en weer aannemen, de bal door de benen spelen, of links en rechts van het lichaam dribbelen.","Op het fluitsignaal wisselen jullie van rol. Na twee rondes zoek je een nieuw tweetal."],
+  stappen:["Maak tweetallen, allebei met stick en bal.","De voorste dribbelt door het vak en kiest route en tempo.","De schaduw volgt op twee meter en doet alles na: draaien, stoppen, versnellen.","De voorste doet ook eens iets anders voor: de bal tegen de bank spelen en weer aannemen, de bal door een hoepel spelen en er zelf omheen lopen, de bal door de benen spelen, of links en rechts van het lichaam dribbelen.","Op het fluitsignaal wisselen jullie van rol. Na twee rondes zoek je een nieuw tweetal."],
   kern:"Houd twee meter afstand en kijk af en toe op naar je voorganger.",
   tips:["Houd twee meter afstand en kijk af en toe op naar je voorganger.","Voorganger: begin rustig en maak het daarna lastiger.","Veel ruimte? Bal wat verder voor je uit. Druk om je heen? Bal dicht bij je."],
   makkelijker:["Zonder bal, alleen met de stick laag aan de grond.","Alleen wandelen in plaats van rennen."],
   moeilijker:["Voorganger wisselt tussen forehand en backhand.","Schaduw roept hardop wat de voorganger doet.","Jij roept welke beweging de voorgangers moeten doen."],
-  fig:[{t:"zone",x:30,y:20,w:240,h:140},{t:"bank",x:90,y:22,w:80,h:9},
-   {t:"p",x:140,y:62,ball:1},{t:"p",x:85,y:72,team:"b",ball:1},{t:"p",x:170,y:122,ball:1},{t:"p",x:145,y:134,team:"b",ball:1},
-   {t:"a",k:"pass",self:1,d:"M144 57 L156 34 L168 58"},{t:"a",k:"pass",self:1,d:"M89 67 L101 34 L113 68"},
-   {t:"a",k:"dribble",d:"M178 120 Q210 98 245 116"},{t:"a",k:"dribble",d:"M153 132 Q190 112 228 130"}]},
+  fig:[{t:"zone",x:30,y:20,w:240,h:140},{t:"cone",x:30,y:20},{t:"cone",x:270,y:20},{t:"cone",x:30,y:160},{t:"cone",x:270,y:160},{t:"bank",x:140,y:2,w:64,h:4},{t:"hoop",x:225,y:75},
+   {t:"p",x:84,y:140,ball:1},{t:"p",x:54,y:140,team:"b",ball:1},{t:"p",x:72,y:110,ball:1},{t:"p",x:37,y:115,team:"b",ball:1},{t:"p",x:165,y:86,ball:1},{t:"p",x:131,y:80,team:"b",ball:1},
+   {t:"a",k:"dribble",d:"M84 140 L158 140"},{t:"a",k:"dribble",d:"M158 140 L168 140 L179 140 L189 140 L199 140 L209 138 L218 133 L224 126 L228 118 L229 109"},{t:"a",k:"pass",self:1,d:"M226 102 L224 49"},
+   {t:"a",k:"run",d:"M229 109 L231 103 L234 97 L239 91 L241 85 L242 79 L241 72 L237 66 L233 61 L230 55"},{t:"a",k:"dribble",d:"M230 55 L228 47 L225 40 L217 36 L208 36"},{t:"a",k:"pass",self:1,d:"M200 39 L172 6 L145 39"},
+   {t:"a",k:"run",d:"M208 36 L153 36"},{t:"a",k:"dribble",d:"M153 36 L146 36 L138 36 L130 36 L123 39 L119 44 L118 51 L121 57 L128 61 L135 61 L143 61 L150 61 L158 61"},{t:"a",k:"dribble",d:"M54 140 L158 140"}]},
  {id:"schatrovers",cat:"Warming-up",title:"Schatrovers",groep:"3–8",min:8,kids:"4 teams",int:"hoog",
   mat:["stick per kind","12–16 ballen in het midden","pionnen voor 4 hoekvakken"],
   doel:"Snel dribbelen met de bal onder controle en overzicht houden.",
@@ -914,7 +915,7 @@ const NEED={
   "pionnen-omschieten":n=>({stick:n,bal:n,pion:Math.max(8,Math.ceil(n/3))}),
   "dribbel-schiet":n=>({stick:n,bal:Math.ceil(n/2),pion:6,doel:2}),
   "koning-vak":n=>({stick:n,bal:n,pion:6}),
-  "schaduw":n=>({stick:n,bal:n,pion:4,bank:1}),
+  "schaduw":n=>({stick:n,bal:n,pion:10,bank:1,hoepel:3}),
   "schatrovers":n=>({stick:n,bal:Math.max(12,Math.ceil(n/2)),pion:20}),
   "een-tegen-een":n=>{const b=Math.ceil(n/4);return{stick:n,bal:Math.ceil(n/2),pion:4*b}},
   "drie-drie":n=>{const f=Math.max(1,Math.floor(n/6));return{stick:n,bal:f,doel:2*f,hesje:3*f}},
@@ -1126,7 +1127,7 @@ function setN(v){v=Math.max(4,Math.min(40,v||0));N=v;try{localStorage.setItem(N_
 const ANIM={
   "stoplicht":[{at:0},{at:.3},{at:.6}],
   "balletje-tik":[{at:0},{at:.2},{at:.4},{at:.6}],
-  "schaduw":[{at:.3},{at:2.1},{at:.1},{at:.4}],
+  "schaduw":[{at:0},{at:2.2},{at:4.4},{at:4.45},{at:6.3},{at:8.5},{at:8.55},{at:10.4},{at:1.2}],
   "schatrovers":[{at:0},{at:2},{at:.1},{at:2.1}],
   "tikkertje-opdracht":[{at:0},{at:.2},{at:.4}],
   "pionnenbos":[{at:0},{at:.2},{at:.4}],
@@ -1165,10 +1166,12 @@ const ANIM={
 };
 /* vervolgacties: alleen in de animatie, zodat de oefening doorloopt zonder de tekening vol te zetten */
 const EXTRA={
+  "schaduw":[["dribble","M158 140 L168 140 L179 140 L189 140 L199 140 L209 138 L218 133 L224 126 L228 118 L229 109",3.4],["pass","M226 102 L224 49",5.6,1],["run","M229 109 L231 103 L234 97 L239 91 L241 85 L242 79 L241 72 L237 66 L233 61 L230 55",5.65],["dribble","M230 55 L228 47 L225 40 L217 36 L208 36",7.5],["pass","M200 39 L172 6 L145 39",9.7,1],["run","M208 36 L153 36",9.75],["dribble","M153 36 L146 36 L138 36 L130 36 L123 39 L119 44 L118 51 L121 57 L128 61",11.6],
+    ["dribble","M72 110 L110 104",1.1],["dribble","M110 104 Q130 98 120 84",3.3],["dribble","M120 84 L80 78",5.5],["dribble","M80 78 Q62 76 70 96",8.7],["dribble","M70 96 Q76 108 100 100",10.9],["dribble","M100 100 Q112 104 116 118",13.1],["dribble","M37 115 L72 110",0],["dribble","M72 110 L110 104",2.2],["dribble","M110 104 Q130 98 120 84",4.4],["dribble","M120 84 L105 82",6.6],["dribble","M105 82 L80 78 Q62 76 70 96",9.8],["dribble","M70 96 Q74 104 86 103",12.0],
+    ["dribble","M165 86 L198 92",1.7],["dribble","M198 92 Q208 108 192 117",3.9],["dribble","M192 117 L155 120",6.1],["dribble","M155 120 Q138 116 148 102",9.5],["dribble","M148 102 Q154 90 176 96",11.7],["dribble","M176 96 Q192 100 197 113",13.9],["dribble","M131 80 L165 86",0.6],["dribble","M165 86 L186 90",2.8],["dribble","M186 90 L198 92 Q208 108 192 117",5.0],["dribble","M192 117 L180 118",7.2],["dribble","M180 118 L155 120 Q138 116 148 102",10.6],["dribble","M148 102 Q154 90 176 96",12.8]],
   "poortjes-tellen":[["pass","M112 52 L46 52",1.1],["pass","M200 122 L200 60",1.4]],
   "stoplicht":[["dribble","M230 76 Q250 100 222 112",.2],["dribble","M186 128 Q215 150 250 150",.4],["dribble","M135 70 Q120 40 80 40",3],["dribble","M210 62 Q200 95 170 100",3.1],["dribble","M165 130 Q120 100 70 100",3.2]],
   "balletje-tik":[["run","M190 64 Q215 100 226 114",2],["run","M115 125 Q150 110 180 132",2.2],["dribble","M236 126 Q255 150 210 152",2.2],["dribble","M196 134 Q215 110 240 96",2.6]],
-  "schaduw":[["run","M142 64 L166 63",0],["run","M87 74 L111 73",1.8],["dribble","M168 61 Q210 45 248 74",2.5],["dribble","M113 71 Q165 56 220 84",3.7],["dribble","M245 116 Q200 150 140 140",2.7],["dribble","M228 130 Q190 155 130 150",3]],
   "schatrovers":[["run","M44 138 L134 100",1],["run","M256 138 L166 100",1.1],["dribble","M136 96 Q90 110 48 136",3],["dribble","M164 96 Q210 110 252 136",3.1]],
   "tikkertje-opdracht":[["dribble","M206 46 Q240 30 262 50",.6],["dribble","M214 114 Q235 95 244 90",1],["dribble","M188 58 Q170 70 156 48",3]],
   "pionnenbos":[["dribble","M234 34 Q205 22 178 40",.6],["dribble","M140 90 Q170 70 160 45",2.6],["dribble","M235 120 Q210 150 170 140",2.8],["dribble","M140 105 Q110 95 90 115",3]],
@@ -1192,7 +1195,7 @@ const EXTRA={
   "kegels":[["run","M220 60 Q214 50 206 52",1.6],["shot","M226 126 L158 100",2.6],["run","M74 150 Q66 146 62 140",2.4]],
   "kast-afbouwen":[["dribble","M207 126 Q150 142 92 122",4],["run","M146 90 Q110 76 72 70",4.2],["pass","M86 118 L72 78",6.3],["shot","M66 82 L42 90",7.3]]
 };
-EX.forEach(e=>(EXTRA[e.id]||[]).forEach(([k,d,at])=>{e.fig.push({t:"a",k,d,x:1});(ANIM[e.id]=ANIM[e.id]||[]).push({at})}));
+EX.forEach(e=>(EXTRA[e.id]||[]).forEach(([k,d,at,self])=>{e.fig.push(self?{t:"a",k,d,x:1,self:1}:{t:"a",k,d,x:1});(ANIM[e.id]=ANIM[e.id]||[]).push({at})}));
 const SPAN={dribble:2.2,run:1.8,pass:.8,shot:.6};
 const HOLD=.3;
 const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1223,7 +1226,7 @@ function plan(ex){
     }else{
       const from=near(e.start,e.at,p=>p.has);
       if(from){from.has=false;from.tl.push([e.at,0])}else pick(e.start,e.at);
-      const to=near(e.stop,e.end,p=>e.a.self||p!==from);let hide=1;
+      const to=near(e.stop,e.end,p=>e.a.self?p===from:p!==from);   /* self: de speler speelt de bal naar zichzelf (tegen de bank, door de hoepel) */let hide=1;
       if(to&&dist(posAt(to,e.end),e.stop)<16){to.has=true;to.tl.push([e.end,1]);hide=e.end}
       else if(e.a.k==="shot")hide=Math.min(1,r3(e.end+.08));
       const B={d:e.a.d,at:e.at,end:e.end,hide};balls.push(B);if(hide===1&&e.a.k!=="shot")free.push({B,stop:e.stop});
@@ -1401,7 +1404,7 @@ function openEx(id){
   dlg.className="ph-"+phaseOf(e.cat);
   document.getElementById("dlg-title").textContent=e.title;
   document.getElementById("dlg-body").innerHTML=`
-    <div class="field">${svg(e,"d"+i)}</div>
+    ${window.FB3D&&FB3D.has(id)?`<div class="d3-tabs" role="group" aria-label="Weergave"><button type="button" data-d3="1" aria-pressed="true">3D-animatie</button><button type="button" data-d3="0" aria-pressed="false">Tekening</button></div><div class="d3" id="d3box" data-ex="${id}" role="img" aria-label="${FB3D.label(id)}"></div><div class="field" id="d3field" hidden>${svg(e,"d"+i)}</div>`:`<div class="field">${svg(e,"d"+i)}</div>`}
     <div class="timer"><div><div class="num">Timer</div><div class="t" id="t-disp">${fmt(tLeft)}</div></div>
       <div class="ctl"><button type="button" class="btn primary" id="t-go">Start</button><button type="button" class="btn" id="t-reset">Opnieuw</button></div></div>
     <p style="margin:0"><strong>Doel:</strong> ${e.doel}</p>
@@ -1417,8 +1420,10 @@ function openEx(id){
       <div class="box hard"><h4>Moeilijker</h4><ul>${e.moeilijker.map(x=>`<li>${x}</li>`).join("")}</ul></div>
     </div>
     <div class="actions"><button type="button" class="btn ${inLes?"added":"primary"}" data-toggle="${e.id}" aria-pressed="${inLes}">${inLes?`✓ ${C.inLabel}`:`+ Voeg toe aan de ${C.unit}`}</button>${inLes?tStep(sl):""}</div>`;
+  stopD3();if(window.FB3D&&FB3D.has(id)){const b=document.getElementById("d3box");if(b)d3Stop=FB3D.mount(b,id,reduceMotion,()=>paused)}
   if(!dlg.open)dlg.showModal();
 }
+let d3Stop=null;function stopD3(){if(d3Stop){d3Stop();d3Stop=null}}
 document.addEventListener("click",ev=>{
   const b=ev.target.closest("button,[data-close]");if(!b)return;
   if(b.dataset.cat){filter=b.dataset.cat;renderFilters();renderGrid()}
@@ -1443,7 +1448,11 @@ document.addEventListener("click",ev=>{
   if(b.id==="t-go"){if(tInt){stopTimer();b.textContent="Verder"}else{if(tLeft<=0){tLeft=tTotal;document.getElementById("t-disp").classList.remove("done")}tInt=setInterval(tick,1000);b.textContent="Pauze"}}
   if(b.id==="t-reset"){stopTimer();tLeft=tTotal;const d=document.getElementById("t-disp");d.textContent=fmt(tLeft);d.classList.remove("done");document.getElementById("t-go").textContent="Start"}
 });
-dlg.addEventListener("close",stopTimer);
+dlg.addEventListener("close",()=>{stopTimer();stopD3()});
+document.addEventListener("click",ev=>{const b=ev.target.closest("[data-d3]");if(!b)return;const on=b.dataset.d3==="1";
+  document.querySelectorAll("[data-d3]").forEach(x=>x.setAttribute("aria-pressed",String((x.dataset.d3==="1")===on)));
+  const box=document.getElementById("d3box"),f=document.getElementById("d3field");if(f)f.hidden=on;
+  if(on){if(box){box.hidden=false;stopD3();d3Stop=FB3D.mount(box,box.dataset.ex,reduceMotion,()=>paused)}}else{stopD3();if(box)box.hidden=true}});
 
 /* wisseltijd */
 function syncWissel(){const i=document.getElementById("wissel");if(i&&document.activeElement!==i)i.value=WISSEL}
